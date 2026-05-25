@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.local
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Bloat — extracted PowerPoint / .NET package trees not needed for the site
+CaseStudy_extracted/
+bouncycastle/
+itextsharp/
+
+# Large binary source files (PowerPoint, PDFs, etc.) — exceed GitHub size limits
+*.pptx
+*.ppt
+*.pdf
+*.zip
+*.docx
+*.doc
+
+# Source raw notes / private docs
+Resume_Projects_Breakdown.txt
+slides_text.txt
+User Interviews Open Banking complete.txt

@@ -1,0 +1,2082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agentic AI for Shopping — Case Study · Rachele Benjamin, PhD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #EDF2FA;
+    --ink: #1A1A1A;
+    --ink-70: rgba(26,26,26,.70);
+    --ink-60: rgba(26,26,26,.60);
+    --ink-50: rgba(26,26,26,.50);
+    --ink-40: rgba(26,26,26,.40);
+    --ink-30: rgba(26,26,26,.30);
+    --ink-20: rgba(26,26,26,.20);
+    --ink-15: rgba(26,26,26,.15);
+    --ink-10: rgba(26,26,26,.10);
+    --ink-05: rgba(26,26,26,.05);
+
+    --shop: #1d4ed8;
+    --shop-bg: #dbeafe;
+    --agent: #6d28d9;
+    --agent-bg: #ede9fe;
+    --work: #b45309;
+    --work-bg: #fde4cf;
+    --positive: #047857;
+    --positive-bg: #d1fae5;
+    --warn: #b45309;
+    --warn-bg: #fef3c7;
+
+    --font-sans: 'Inter', 'Helvetica Neue', Roboto, Arial, 'Lucida Grande', sans-serif;
+  }
+  /* Global font override: every element uses the Inter sans stack */
+  *, *::before, *::after { font-family: var(--font-sans) !important; }
+
+  /* ── Consistent heading typography ──────────────────────────────────
+     All section titles render at the same large size + bold weight.
+     All sub-headings (h3 + ".rq-subhead .rq-text", etc.) match too. */
+  h1.section-title, h2.section-title {
+    font-size: clamp(36px, 4.5vw, 56px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.02em !important;
+    font-weight: 700 !important;
+  }
+  /* Cover title matches study-name size so the case-study has a single dominant title scale */
+  .cover h1 {
+    font-size: clamp(56px, 8.4vw, 104px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.03em !important;
+    font-weight: 700 !important;
+  }
+  h3.sub-title, 
+  .from-research-heading, .ur-col-h, .ur-bucket-h {
+    font-weight: 700 !important;
+  }
+  h3.sub-title {
+    font-size: clamp(22px, 2.4vw, 30px) !important;
+    line-height: 1.25 !important;
+  }
+  /* Reason card titles (slide 34) — bolder so they read against the orange */
+  .reason .reason-title { font-weight: 700; }
+  .reason .num { font-weight: 700; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .display { font-family: 'Fraunces', Georgia, serif; font-weight: 400; letter-spacing: -0.02em; }
+  .italic { color: var(--work); }
+  .uppercase-mini { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; font-weight: 500; color: var(--ink-50); }
+  .eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 10px; font-weight: 600; color: var(--ink-50); }
+
+  /* ── Header bar ───────────────────────────────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(237,242,250,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ink-10);
+  }
+  .topbar-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar a.home {
+    font-family: 'Fraunces', serif; font-size: 18px;
+    color: var(--ink); text-decoration: none;
+  }
+  .topbar a.home span { color: var(--work); }
+  .topbar .meta {
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink-60);
+  }
+
+  /* ── Slide container ──────────────────────────────────────────────── */
+  .slide {
+    position: relative;
+    padding: 96px 32px;
+    border-bottom: 1px solid var(--ink-10);
+    transition: background-color .35s ease;
+  }
+  /* Section-type tinted backgrounds (applied via data-kind by inline script) */
+  .slide[data-kind="context"]  { background: var(--cream); }
+  .slide[data-kind="method"]   { background: var(--cream); }
+  .slide[data-kind="finding"]  { background: var(--cream); }
+  .slide[data-kind="insight"]  { background: var(--cream); }
+  .slide[data-kind="results"]  { background: var(--cream); }
+  .slide[data-kind="closing"]  { background: var(--cream); }
+  .slide[data-kind="concept"]  { background: var(--cream); }
+  .slide[data-kind="output"]   { background: var(--cream); }
+  .slide[data-kind="future"]   { background: var(--cream); }
+  .slide-inner { max-width: 1100px; margin: 0 auto; }
+  .slide-num {
+    position: absolute; top: 24px; right: 32px;
+    font-family: 'Fraunces', serif; font-size: 14px;
+    color: var(--ink-30);
+    letter-spacing: .05em;
+  }
+  .slide-tag {
+    display: inline-block;
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .slide-tag.Impact {
+    background: var(--work); color: #fff;
+    padding: 6px 14px; border-radius: 999px;
+    letter-spacing: .2em; font-weight: 700;
+  }
+
+  /* ── Embedded outcomes (closing slides) ────────────────── */
+  .outcomes-flow {
+    margin-top: 48px;
+    display: grid; gap: 56px;
+  }
+  .outcomes-flow .outcome-item .outcome-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .28em;
+    color: var(--work); font-weight: 700;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .outcomes-flow .outcome-item .outcome-label::before {
+    content: ''; width: 28px; height: 2px; background: var(--work); display: inline-block;
+  }
+  .outcomes-flow .outcome-item .outcome-text {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.35; letter-spacing: -.005em;
+    color: var(--ink); margin: 0;
+  }
+  .outcomes-flow .outcome-item .outcome-sub {
+    margin: 14px 0 0; padding: 0 0 0 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; line-height: 1.55; color: var(--ink-70);
+  }
+  .outcomes-flow .outcome-item .outcome-sub li { margin-bottom: 6px; }
+
+  /* ── Final conclusion panel (slide 52) ─ entirely orange ──────── */
+  .conclusion {
+    margin-top: 48px;
+    background: var(--work);
+    color: #fff;
+    padding: clamp(48px, 6vw, 80px) clamp(36px, 5vw, 72px);
+    border-radius: 4px;
+    box-shadow: 0 24px 56px rgba(21,128,61,.22);
+  }
+  .conclusion-title {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.08; letter-spacing: -.02em;
+    margin: 0 0 32px; color: #fff;
+    max-width: 22ch;
+  }
+  .conclusion-body {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(19px, 2vw, 26px);
+    line-height: 1.5; color: rgba(255,255,255,.92);
+    margin: 0 0 44px; max-width: 56ch;
+  }
+  .conclusion-body strong { color: #fff; font-weight: 600; font-style: italic; }
+  .conclusion-cta {
+    display: inline-block;
+    padding: 16px 32px;
+    background: #fff; color: var(--work);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+    text-decoration: none; border-radius: 999px;
+    transition: background .2s ease, transform .2s ease, color .2s ease;
+  }
+  .conclusion-cta:hover { background: var(--cream); transform: translateY(-2px); color: #8a3f06; }
+
+  /* ── Scroll-reveal helper (slide 3 lessons, anywhere else) ─────── */
+  .scroll-reveal {
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+  /* ── Image → callout reveal on hover (slide 16 journey) ──────── */
+  .image-callout-group {
+    position: relative;
+    display: block;
+    border-radius: 4px;
+    overflow: visible;
+    outline: none;
+  }
+  .image-callout-group > img { border-radius: 4px; }
+  .image-callout-group img { display: block; width: 100%; height: auto; transition: filter .35s ease; }
+  .image-callout {
+    position: absolute; right: 4%; bottom: 6%;
+    max-width: min(560px, 56%);
+    background: var(--work);
+    color: #fff;
+    padding: 32px 38px;
+    border-radius: 4px;
+    box-shadow: 0 24px 56px rgba(20,20,20,.24);
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .4s ease, transform .4s ease;
+    pointer-events: none;
+  }
+  .image-callout-eyebrow {
+    display: block;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(255,255,255,.82);
+    margin-bottom: 14px;
+  }
+  .image-callout-text {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(20px, 1.8vw, 24px);
+    line-height: 1.4; color: #fff; margin: 0;
+  }
+  .image-callout-group:hover .image-callout,
+  .image-callout-group:focus .image-callout,
+  .image-callout-group:focus-within .image-callout {
+    opacity: 1; transform: translateY(0);
+  }
+  .image-callout-group:hover img,
+  .image-callout-group:focus img,
+  .image-callout-group:focus-within img {
+    filter: brightness(.92);
+  }
+  @media (max-width: 700px) {
+    .image-callout { position: static; max-width: 100%; margin-top: 12px; opacity: 1; transform: none; }
+  }
+
+  /* ── Multi-callout overlay positions (slide 24 chart) ────── */
+  .image-callout.image-callout--top {
+    top: 5%; bottom: auto; right: 4%; left: auto;
+    max-width: min(580px, 58%);
+    padding: 32px 38px;
+  }
+  .image-callout.image-callout--bottom {
+    bottom: 5%; top: auto; right: 4%; left: auto;
+    max-width: min(580px, 58%);
+    padding: 32px 38px;
+    background: var(--work);
+  }
+  /* Right-anchored callout: hangs off the image's right edge by ~55% of its width
+     so the image itself remains visually centered and uncovered. */
+  .image-callout.is-right-anchor {
+    right: 0; left: auto;
+    transform: translate(55%, 12px);
+  }
+  .image-callout-group:hover .image-callout.is-right-anchor,
+  .image-callout-group:focus .image-callout.is-right-anchor,
+  .image-callout-group:focus-within .image-callout.is-right-anchor {
+    transform: translate(55%, 0);
+  }
+  @media (max-width: 980px) {
+    .image-callout.is-right-anchor { transform: translate(20%, 12px); }
+    .image-callout-group:hover .image-callout.is-right-anchor,
+    .image-callout-group:focus .image-callout.is-right-anchor,
+    .image-callout-group:focus-within .image-callout.is-right-anchor { transform: translate(20%, 0); }
+  }
+  @media (max-width: 700px) {
+    .image-callout.is-right-anchor { position: static; transform: none; margin-top: 12px; max-width: 100%; }
+  }
+  .image-callout.image-callout--top .image-callout-text,
+  .image-callout.image-callout--bottom .image-callout-text {
+    font-size: clamp(20px, 1.9vw, 26px);
+    line-height: 1.35;
+  }
+  .image-callout.image-callout--top .image-callout-eyebrow,
+  .image-callout.image-callout--bottom .image-callout-eyebrow {
+    font-size: 14px;
+  }
+  .image-callout.image-callout--bottom .image-callout-eyebrow { color: rgba(255,255,255,.7); }
+  .reactions-cluster.hover-reveal .reaction-stack .bubble {
+    opacity: 0; transform: translateY(10px);
+    transition: opacity .45s ease, transform .45s ease;
+  }
+  .reactions-cluster.hover-reveal .reaction-stack .bubble:nth-child(2) { transition-delay: .1s; }
+  .reactions-cluster.hover-reveal:hover .reaction-stack .bubble,
+  .reactions-cluster.hover-reveal:focus-within .reaction-stack .bubble,
+  .reactions-cluster.hover-reveal.revealed .reaction-stack .bubble {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ── Embedded context + RQ (inside study-hero) ───────────── */
+  .study-hero .context-band,
+  .study-hero .rq-subhead,
+  .cover .cover-context-band {
+    background: transparent; border: none;
+    padding: 0; margin: 0;
+    display: block;
+    max-width: none;
+  }
+  .study-hero .context-band { margin-bottom: 32px; }
+  .study-hero .context-band .label,
+  .study-hero .rq-subhead .rq-label,
+  .cover .cover-context-band .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .28em;
+    color: var(--work); font-weight: 700;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .study-hero .context-band .label::before,
+  .study-hero .rq-subhead .rq-label::before,
+  .cover .cover-context-band .label::before {
+    content: ''; width: 28px; height: 2px; background: var(--work); display: inline-block;
+  }
+  .study-hero .context-band .text,
+  .cover .cover-context-band .text {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.35; letter-spacing: -.005em; color: var(--ink);
+  }
+  .study-hero .rq-subhead .rq-text {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.35; letter-spacing: -.005em; color: var(--ink); margin: 0;
+  }
+
+  /* ── Cover slide ──────────────────────────────────────────────────── */
+  .cover {
+    min-height: 92vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    background: var(--cream);
+    padding: 120px 32px;
+  }
+  .cover h1 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1.02; letter-spacing: -.025em;
+    margin: 0 auto 28px; max-width: 14ch;
+  }
+  .cover h1 .accent { color: var(--work); }
+  .cover .subtitle {
+    font-size: 13px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--ink-50); margin-top: 32px;
+  }
+  .cover .author { margin-top: 56px; font-size: 14px; color: var(--ink-60); }
+  .cover .author strong { font-family: 'Fraunces', serif; font-weight: 500; color: var(--ink); }
+
+  /* ── About / two column ───────────────────────────────────────────── */
+  h2.section-title {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1.08; letter-spacing: -.02em;
+    margin: 0 0 32px;
+  }
+  h3.sub-title {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(24px, 2.8vw, 34px);
+    line-height: 1.2; letter-spacing: -.015em;
+    margin: 0 0 16px;
+  }
+  p.body { font-size: 16px; color: var(--ink-70); line-height: 1.65; margin: 0 0 14px; }
+  p.lead { font-size: 19px; color: var(--ink-70); line-height: 1.6; margin: 0 0 18px; font-weight: 300; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; gap: 40px; } }
+
+  .card {
+    background: #fff; border: 1px solid var(--ink-10);
+    padding: 32px; border-radius: 2px;
+  }
+  .card.ink { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .card.ink .uppercase-mini { color: rgba(245,241,234,.5); }
+
+  /* ── Three pillars (slides 3, 52) ────────────────────────────────── */
+  .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 360px)); gap: 24px; margin-top: 40px; justify-content: center; }
+  @media (max-width: 800px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    padding: 32px 28px;
+    display: flex; flex-direction: column;
+    color: inherit; text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    position: relative;
+  }
+  a.pillar:hover, a.pillar:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(20,20,20,.08);
+    border-color: var(--ink-20, var(--ink-10));
+  }
+  a.pillar:focus-visible { outline: 2px solid var(--work); outline-offset: 3px; }
+  a.pillar::after {
+    content: '→'; position: absolute; top: 24px; right: 24px;
+    font-family: 'DM Sans', sans-serif; font-size: 18px; color: var(--ink-40);
+    transition: transform .2s ease, color .2s ease;
+  }
+  a.pillar:hover::after, a.pillar:focus-visible::after { transform: translateX(4px); color: var(--work); }
+  .pillar .emoji { font-size: 44px; margin-bottom: 16px; line-height: 1; }
+  .pillar .label {
+    font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 12px;
+  }
+  .pillar .lesson { font-size: 14px; color: var(--ink-70); margin-bottom: 16px; line-height: 1.55; }
+  .pillar .study-tag { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--ink-10); font-size: 10px; text-transform: uppercase; letter-spacing: .2em; color: var(--ink-50); }
+  .pillar.shop .emoji-bg { background: var(--shop-bg); color: var(--shop); }
+  .pillar.agent .emoji-bg { background: var(--agent-bg); color: var(--agent); }
+  .pillar.work .emoji-bg { background: var(--work-bg); color: var(--work); }
+
+  /* ── Context callout ──────────────────────────────────────────────── */
+  .context-band {
+    background: #fff; border: 1px solid var(--ink-10);
+    padding: 24px 28px;
+    margin-bottom: 36px;
+    display: flex; gap: 24px; align-items: baseline;
+  }
+  .context-band .label {
+    flex-shrink: 0;
+    font-size: 10px; text-transform: uppercase; letter-spacing: .22em;
+    color: var(--ink-50); font-weight: 600;
+  }
+  .context-band .text { font-size: 16px; color: var(--ink-70); }
+
+  /* ── Question pills (slide 4) ─────────────────────────────────────── */
+  .pill-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .pill {
+    background: #fff; border: 1px solid var(--ink-15);
+    padding: 14px 22px; font-size: 15px; color: var(--ink-70);
+    border-radius: 40px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .pill .q { color: var(--ink-30); font-size: 18px; font-weight: 500; }
+
+  /* ── Study split (slide 5, 18, 32, 38) ────────────────────────────── */
+  .study-split { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 32px; }
+  @media (max-width: 700px) { .study-split { grid-template-columns: 1fr; } }
+  .study-card {
+    background: #fff; border: 1px solid var(--ink-10);
+    padding: 28px;
+  }
+  .study-card .num {
+    font-family: 'Fraunces', serif; font-size: 11px; letter-spacing: .25em;
+    text-transform: uppercase; color: var(--ink-50);
+  }
+  .study-card .name {
+    font-family: 'Fraunces', serif; font-size: 26px; margin-top: 6px;
+    line-height: 1.15;
+  }
+  .study-card .desc { font-size: 14px; color: var(--ink-70); margin-top: 14px; line-height: 1.55; }
+  .study-card .deliverable {
+    margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--ink-10);
+    font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--ink-50);
+  }
+
+  /* ── Insight banner ───────────────────────────────────────────────── */
+  .insight {
+    background: var(--ink); color: var(--cream);
+    padding: 64px 48px;
+    margin: 0 auto;
+  }
+  .insight .label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: .25em;
+    color: rgba(245,241,234,.5); margin-bottom: 14px; display: block;
+    font-weight: 600;
+  }
+  .insight h2 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.15; letter-spacing: -.015em;
+    margin: 0 0 32px; max-width: 28ch;
+  }
+  .insight .quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 28px; }
+  @media (max-width: 700px) { .insight .quotes { grid-template-columns: 1fr; } }
+  .insight blockquote {
+    margin: 0; padding: 20px 0 0;
+    border-top: 1px solid rgba(245,241,234,.2);
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 18px; line-height: 1.5;
+    color: rgba(245,241,234,.92);
+  }
+  .insight cite { display: block; margin-top: 12px; font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: .18em; color: rgba(245,241,234,.55); }
+
+  /* ── Findings cards (slide 9, 12, 24) ─────────────────────────────── */
+  .findings { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 28px; }
+  @media (max-width: 700px) { .findings { grid-template-columns: 1fr; } }
+  .finding {
+    background: #fff; border: 1px solid var(--ink-10);
+    padding: 28px;
+    position: relative;
+  }
+  .finding .icon { font-size: 24px; margin-bottom: 14px; display: block; }
+  .finding .head {
+    font-family: 'Fraunces', serif; font-size: 20px; line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .finding .detail { font-size: 14px; color: var(--ink-70); line-height: 1.6; }
+
+  /* ── User-reaction speech bubbles (slide 9) ─────────────── */
+  .reactions-cluster { margin-top: 36px; }
+  .user-reactions {
+    display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 56px; align-items: center;
+  }
+  @media (max-width: 820px) { .user-reactions { grid-template-columns: 1fr; gap: 32px; } }
+  .user-reactions .anchor-img-wrap {
+    background: #fff; border: 1px solid var(--ink-10);
+    padding: 18px; border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(0,0,0,.04);
+  }
+  .user-reactions .anchor-img-wrap img { display: block; width: 100%; height: auto; }
+  .reaction-stack { display: flex; flex-direction: column; gap: 22px; }
+  .bubble {
+    position: relative;
+    background: var(--work);
+    color: #fff;
+    border-radius: 4px;
+    padding: 24px 28px;
+    box-shadow: 0 20px 48px rgba(20,20,20,.18);
+  }
+  .bubble .icon { font-size: 22px; line-height: 1; display: inline-block; margin-right: 10px; vertical-align: -3px; }
+  .bubble .head {
+    display: inline; font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: clamp(16px, 1.5vw, 20px); line-height: 1.3; color: #fff;
+  }
+  .bubble .detail {
+    margin: 12px 0 0; font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(14px, 1.25vw, 16px); line-height: 1.5; color: rgba(255,255,255,.92);
+  }
+  .bubble .detail strong { color: #fff; font-weight: 600; }
+  .bubble .detail em { font-style: italic; color: #fff; }
+
+  .scroll-hint {
+    margin-top: 28px; font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-40);
+  }
+  .scroll-hint .arrow { display: inline-block; margin-left: 6px; transition: transform .3s ease; }
+  .reactions-cluster:hover .scroll-hint .arrow { transform: translateY(3px); }
+  .emergent-insight {
+    margin-top: 18px;
+    padding: 30px 36px;
+    background: var(--work-bg);
+    border-left: 4px solid var(--work);
+    border-radius: 4px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .45s ease, transform .45s ease;
+    pointer-events: none;
+  }
+  .reactions-cluster:hover .emergent-insight,
+  .reactions-cluster:focus-within .emergent-insight,
+  .emergent-insight.revealed {
+    opacity: 1; transform: translateY(0); pointer-events: auto;
+  }
+  .emergent-insight .ei-label {
+    font-family: 'DM Sans', sans-serif; font-size: 11px;
+    letter-spacing: .25em; text-transform: uppercase;
+    color: var(--work); font-weight: 700;
+  }
+  .emergent-insight .ei-body {
+    margin-top: 10px; font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(20px, 2.1vw, 26px); line-height: 1.3; color: var(--ink);
+  }
+  .emergent-insight .ei-quotes {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+    margin-top: 22px;
+  }
+  @media (max-width: 700px) { .emergent-insight .ei-quotes { grid-template-columns: 1fr; } }
+  .emergent-insight .ei-quotes blockquote {
+    margin: 0; padding: 0 0 0 16px;
+    border-left: 2px solid var(--work);
+    font-family: 'Fraunces', serif; font-size: 15px;
+    line-height: 1.5; color: var(--ink-70); font-style: italic;
+  }
+  .emergent-insight .ei-quotes blockquote cite {
+    display: block; margin-top: 8px; font-style: normal;
+    font-family: 'DM Sans', sans-serif; font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-50);
+  }
+
+  /* ── Participants grid (slide 7, 33, 39) ──────────────────────────── */
+  .participants { margin-top: 28px; }
+  .participant-group { margin-bottom: 32px; }
+  .participant-group .group-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .2em;
+    color: var(--ink-60); font-weight: 600;
+    margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--ink-15);
+  }
+  .participant-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ptag {
+    background: #fff; border: 1px solid var(--ink-15);
+    padding: 8px 14px; font-size: 13px; color: var(--ink-70);
+    border-radius: 3px;
+  }
+  .ptag.detailed {
+    display: flex; flex-direction: column; gap: 2px; align-items: flex-start;
+    padding: 10px 14px;
+  }
+  .ptag .name { font-family: 'Fraunces', serif; font-size: 14px; color: var(--ink); }
+  .ptag .desc { font-size: 11px; color: var(--ink-60); }
+
+  /* ── Journey strip (slide 14, 15, 30, 31) ─────────────────────────── */
+  .journey {
+    display: flex; flex-wrap: wrap; gap: 0;
+    margin-top: 32px;
+    border: 1px solid var(--ink-10);
+    background: #fff;
+  }
+  .journey-step {
+    flex: 1 1 110px;
+    padding: 22px 14px; text-align: center;
+    border-right: 1px solid var(--ink-10);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .journey-step:last-child { border-right: none; }
+  .journey-step .icon { font-size: 26px; line-height: 1; }
+  .journey-step .label { font-size: 12px; color: var(--ink-70); font-weight: 500; }
+  .journey-step.highlight { background: var(--agent-bg); }
+  .journey-note {
+    background: var(--ink-05); padding: 14px 20px; font-size: 13px; color: var(--ink-60);
+    margin-top: 14px; font-style: italic; font-family: 'Fraunces', serif;
+  }
+
+  /* ── JTBD grid (slide 19, 20, 40) ─────────────────────────────────── */
+  .jtbd-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    background: transparent;
+    border: none;
+    margin-top: 32px;
+  }
+  .jtbd-cell {
+    background: #fff;
+    border: 1px solid var(--ink-15);
+    padding: 18px 16px;
+    display: flex; flex-direction: column; gap: 6px;
+    transition: background-color .25s ease, border-color .25s ease;
+    cursor: default;
+  }
+  .jtbd-cell:hover, .jtbd-cell:focus-within { background: var(--work-bg); border-color: var(--work); }
+  .jtbd-cell .term {
+    font-family: 'Fraunces', serif; font-size: 16px; color: var(--ink);
+  }
+  .jtbd-cell .desc {
+    font-size: 12px; color: var(--ink-60); line-height: 1.45;
+    opacity: 0; transform: translateY(2px);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .jtbd-cell:hover .desc, .jtbd-cell:focus-within .desc { opacity: 1; transform: translateY(0); }
+  .jtbd-cell.opportunity { background: var(--positive-bg); }
+  .jtbd-cell.opportunity:hover, .jtbd-cell.opportunity:focus-within { background: var(--positive-bg); }
+  .jtbd-cell.opportunity .term::after {
+    content: '💡'; margin-left: 6px; font-size: 13px;
+  }
+
+  /* ── Ampersand glyph: classic italic serif ─────────────────────── */
+  .amp {
+    font-family: 'Baskerville', 'Hoefler Text', 'Garamond', 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-feature-settings: 'salt' on;
+    padding: 0 .05em;
+  }
+
+  /* ── Embedded finding headline (slides 9, 12) ──────────────────── */
+  .finding-headline {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.12;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    margin: 18px 0 6px;
+    max-width: 30ch;
+  }
+  .finding-headline em { font-style: italic; color: var(--work); }
+  .finding-eyebrow {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--work); font-weight: 700; margin-bottom: 6px;
+  }
+
+  /* ── Data table (slide 21) ────────────────────────────────────────── */
+  .data-table-wrap { margin-top: 32px; overflow-x: auto; }
+  table.data {
+    width: 100%; border-collapse: collapse;
+    background: #fff; border: 1px solid var(--ink-10);
+    font-size: 14px;
+  }
+  table.data th, table.data td {
+    padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--ink-10);
+  }
+  table.data thead th {
+    background: var(--ink-05);
+    font-size: 11px; text-transform: uppercase; letter-spacing: .15em; color: var(--ink-60);
+    font-weight: 600;
+  }
+  table.data tbody td.label { font-family: 'Fraunces', serif; font-size: 16px; }
+  table.data tbody tr.highlight { background: var(--positive-bg); }
+  table.data tbody td.num { font-variant-numeric: tabular-nums; }
+  table.data tbody.heatmap tr { background: transparent; }
+  table.data tbody.heatmap td.num { color: var(--ink); font-weight: 500; transition: background .2s ease; }
+  table.data tbody.heatmap td.num .arrow {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 0.9em;
+    line-height: 1;
+    vertical-align: -1px;
+  }
+
+  .rq-subhead {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--ink-10);
+    max-width: 760px;
+  }
+  .rq-subhead .rq-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--ink-50);
+    margin-bottom: 8px;
+  }
+  .rq-subhead .rq-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  /* ── Opportunity callouts (slide 25, 26) ──────────────────────────── */
+  .opportunity-card {
+    background: #fff; border: 1px solid var(--ink-10);
+    padding: 32px; margin-top: 24px;
+  }
+  .opportunity-card .header {
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    gap: 14px; padding-bottom: 18px; border-bottom: 1px solid var(--ink-10); margin-bottom: 22px;
+  }
+  .opportunity-card .header .name { font-family: 'Fraunces', serif; font-size: 24px; }
+  .opportunity-card .header .punch { font-size: 14px; color: var(--ink-60); font-style: italic; }
+  .opportunity-card .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 700px) { .opportunity-card .grid { grid-template-columns: 1fr; } }
+  .opportunity-card .quotes blockquote {
+    margin: 0 0 14px; padding-left: 14px; border-left: 2px solid var(--ink-20);
+    font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; line-height: 1.5; color: var(--ink-70);
+  }
+  .opportunity-card dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; }
+  .opportunity-card dt { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--ink-50); font-weight: 600; }
+  .opportunity-card dd { margin: 0; font-size: 14px; color: var(--ink-70); }
+  .opportunity-card .signal-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+  .signal {
+    font-size: 12px; padding: 4px 10px; border: 1px solid var(--ink-15);
+    background: var(--cream); color: var(--ink-70);
+  }
+  .signal.up::before { content: '+ '; color: var(--positive); font-weight: 600; }
+
+  /* ── Recommendation + impact (slide 16, 28, 36, 48) ───────────────── */
+  .reco-band { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin-top: 24px; }
+  @media (max-width: 800px) { .reco-band { grid-template-columns: 1fr; } }
+  .reco-card { background: #fff; border: 1px solid var(--ink-10); padding: 32px; }
+  .reco-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .22em; color: var(--ink-50); margin-bottom: 12px; font-weight: 600; }
+  .reco-card .body { font-family: 'Fraunces', serif; font-size: 22px; line-height: 1.35; color: var(--ink); margin-bottom: 14px; }
+  .reco-card ul { margin: 8px 0 0; padding-left: 18px; }
+  .reco-card li { font-size: 14px; color: var(--ink-70); line-height: 1.6; margin-bottom: 6px; }
+  .impact-card { background: var(--ink); color: var(--cream); padding: 32px; }
+  .impact-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .22em; color: rgba(245,241,234,.5); margin-bottom: 14px; font-weight: 600; }
+  .impact-card .body { font-family: 'Fraunces', serif; font-size: 18px; line-height: 1.45; }
+  .impact-card ul { margin: 8px 0 0; padding-left: 18px; }
+  .impact-card li { font-size: 13px; color: rgba(245,241,234,.85); line-height: 1.55; margin-bottom: 6px; }
+
+  /* ── Generic note ────────────────────────────────────────────────── */
+  .placeholder {
+    background: var(--ink-05); border: 1px dashed var(--ink-20);
+    padding: 28px; text-align: center;
+    color: var(--ink-50); font-style: italic; font-size: 14px;
+    font-family: 'Fraunces', serif;
+    margin-top: 24px;
+  }
+
+  /* ── Reasons list (slide 34) ──────────────────────────────────────── */
+  .reasons {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px; margin-top: 28px;
+  }
+  .reason {
+    background: var(--work);
+    border: 1px solid var(--work);
+    padding: 22px; font-family: 'Fraunces', serif; font-size: 18px;
+    line-height: 1.3; color: #fff;
+    transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
+    cursor: default;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .reason:hover, .reason:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(21,128,61,.32);
+    background: #a04708;
+  }
+  .reason .num { display: block; font-size: 10px; letter-spacing: .25em; text-transform: uppercase; color: rgba(255,255,255,.75); margin-bottom: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; transition: color .35s ease; }
+  .reason:hover .num { color: rgba(255,255,255,.95); }
+  .reason .reason-title { display: block; }
+  .reason .desc {
+    font-size: 14px; line-height: 1.45; color: rgba(255,255,255,.92);
+    font-family: 'DM Sans', sans-serif; font-weight: 400;
+    opacity: 0; transform: translateY(2px); margin-top: 2px;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .reason:hover .desc, .reason:focus-within .desc { opacity: 1; transform: translateY(0); }
+
+  /* ── 'From the research' eyebrow heading (above reason cards) ─ */
+  .from-research-heading {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+    margin: 28px 0 12px;
+  }
+
+  /* ── Methods grid (study setup slides) ──────────────── */
+  .methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .method-card {
+    background: #fff;
+    border: 1px solid var(--ink-15);
+    padding: 20px 22px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .method-card .m-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--work); font-weight: 700;
+  }
+  .method-card .m-value {
+    font-family: 'Fraunces', serif;
+    font-size: 18px; line-height: 1.35; color: var(--ink);
+  }
+  .method-card .m-value.placeholder {
+    color: var(--ink-40);
+    font-style: italic;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+  }
+  /* Bare variant — no white cards, sits on cream background */
+  .methods-grid--bare { gap: 48px; margin-top: 48px; }
+  .methods-grid--bare .method-item {
+    display: flex; flex-direction: column; gap: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--ink-15);
+  }
+  .methods-grid--bare .method-item .m-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--work); font-weight: 700;
+  }
+  .methods-grid--bare .method-item .m-value {
+    font-family: 'Fraunces', serif;
+    font-size: 18px; line-height: 1.4; color: var(--ink);
+  }
+
+  /* ── Participants grid (custom UR-style slide) ──────────────────── */
+  .ur-sample-section {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--ink-15);
+  }
+  .ur-sample-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--work); font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .ur-participants { margin-top: 0; display: flex; flex-direction: column; gap: 40px; }
+  .ur-bucket { display: block; }
+  .ur-bucket + .ur-bucket { margin-top: 36px; }
+  .ur-bucket-h {
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--ink); line-height: 1.3;
+    margin-bottom: 14px;
+  }
+  .ur-bucket-h .sub {
+    display: inline; margin-left: 8px;
+    font-family: 'DM Sans', sans-serif; font-weight: 400;
+    font-size: 10px; color: var(--ink-60); letter-spacing: .2em; text-transform: uppercase;
+  }
+  .ur-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 18px 14px; }
+  .ur-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+  .ur-ring {
+    width: 84px; height: 84px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--work-bg); color: var(--work);
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+    box-shadow: inset 0 0 0 1px rgba(21,128,61,.18);
+    overflow: hidden;
+  }
+  .ur-ring img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ur-card.is-s2 .ur-ring {
+    box-shadow: 0 0 0 3px var(--cream), 0 0 0 6px #8534F3;
+  }
+  .ur-name {
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+    font-size: 13px; color: var(--ink); line-height: 1.2;
+  }
+  .ur-meta {
+    font-family: 'DM Sans', sans-serif; font-size: 11px;
+    color: var(--ink-60); line-height: 1.3;
+  }
+  .ur-legend {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px;
+    padding-top: 20px; border-top: 1px solid var(--ink-15);
+  }
+  .ur-legend-pill {
+    font-family: 'DM Sans', sans-serif; font-size: 11px;
+    padding: 6px 12px; border-radius: 999px;
+    background: var(--work-bg); color: var(--work);
+    border: 1px solid rgba(21,128,61,.18);
+  }
+  .ur-legend-pill.is-s2 {
+    background: #fff; color: #8534F3; border-color: rgba(133,52,243,.35);
+  }
+  .ur-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  @media (max-width: 900px) { .ur-columns { grid-template-columns: 1fr; gap: 36px; } }
+  .ur-col-h {
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 12px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--ink); margin-bottom: 18px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--ink-15);
+  }
+
+  /* ── Motivations grid (slide 42) ──────────────────────────────────── */
+  .motiv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+  @media (max-width: 700px) { .motiv-grid { grid-template-columns: 1fr; } }
+  .motiv {
+    background: #fff; border: 1px solid var(--ink-10); padding: 24px;
+  }
+  .motiv .verb {
+    font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 12px; color: var(--ink);
+  }
+  .motiv .for { font-size: 13px; color: var(--ink-60); line-height: 1.55; }
+  .motiv-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .legend-chip { font-size: 11px; padding: 5px 10px; border: 1px solid var(--ink-15); background: var(--cream); color: var(--ink-70); border-radius: 3px; }
+
+  /* ── JTBD framework (slide 41) ────────────────────────────────────── */
+  .framework {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    margin-top: 28px;
+    border: 1px solid var(--ink-10);
+  }
+  @media (max-width: 700px) { .framework { grid-template-columns: 1fr; } }
+  .framework-step {
+    padding: 22px;
+    border-right: 1px solid var(--ink-10);
+    background: #fff;
+  }
+  .framework-step:last-child { border-right: none; }
+  .framework-step .role { font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: var(--ink-50); margin-bottom: 8px; font-weight: 600; }
+  .framework-step .value { font-family: 'Fraunces', serif; font-size: 17px; line-height: 1.4; color: var(--ink); }
+
+  /* ── Julia process flow (slide 46) ────────────────────────────────── */
+  .process-table {
+    margin-top: 28px;
+    border: 1px solid var(--ink-10); background: #fff;
+    overflow-x: auto;
+  }
+  table.process { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.process th, table.process td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--ink-10); border-right: 1px solid var(--ink-10); }
+  table.process th { background: var(--ink-05); font-size: 10px; text-transform: uppercase; letter-spacing: .18em; color: var(--ink-60); font-weight: 600; }
+  table.process td:last-child, table.process th:last-child { border-right: none; }
+  table.process .step-num { font-family: 'Fraunces', serif; font-size: 16px; color: var(--ink-40); }
+  table.process .opp { color: var(--positive); font-weight: 500; }
+  table.process .opp::before { content: '💡 '; }
+
+  /* ── JTBD across roles (slide 45) ─────────────────────────────────── */
+  .role-matrix { margin-top: 28px; overflow-x: auto; }
+  .role-matrix table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid var(--ink-10); }
+  .role-matrix th, .role-matrix td { padding: 12px 14px; border-bottom: 1px solid var(--ink-10); border-right: 1px solid var(--ink-10); text-align: center; }
+  .role-matrix th { background: var(--ink-05); font-size: 10px; text-transform: uppercase; letter-spacing: .15em; color: var(--ink-60); font-weight: 600; }
+  .role-matrix td:first-child, .role-matrix th:first-child { text-align: left; font-family: 'Fraunces', serif; }
+  .role-matrix .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--ink); }
+  .role-matrix .dot.light { background: var(--ink-30); }
+
+  /* ── Thank you ────────────────────────────────────────────────────── */
+  .thanks {
+    min-height: 70vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    background: var(--ink); color: var(--cream);
+  }
+  .thanks h1 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(48px, 8vw, 120px); margin: 0;
+  }
+  .thanks h1 .accent { font-style: italic; font-weight: 300; color: rgba(245,241,234,.7); }
+
+  /* ── TOC ──────────────────────────────────────────────────────────── */
+  .toc {
+    background: var(--work);
+    border: none;
+    padding: 36px 44px;
+    margin-top: 40px;
+    border-radius: 4px;
+    box-shadow: 0 24px 56px rgba(21,128,61,.22);
+    color: #fff;
+  }
+  .toc h4 { margin: 0 0 18px; font-size: 11px; text-transform: uppercase; letter-spacing: .24em; color: rgba(255,255,255,.78); font-weight: 700; }
+  .toc ol { margin: 0; padding-left: 22px; columns: 2; column-gap: 36px; }
+  @media (max-width: 700px) { .toc ol { columns: 1; } }
+  .toc li { font-family: 'Fraunces', serif; font-size: 15px; color: rgba(255,255,255,.92); margin-bottom: 10px; line-height: 1.4; }
+  .toc li::marker { color: rgba(255,255,255,.55); }
+  .toc li a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.4); transition: border-color .2s ease; }
+  .toc li a:hover { color: #fff; border-bottom-color: #fff; }
+
+  /* ── Future direction band ────────────────────────────────────────── */
+  .future-band {
+    background: var(--agent-bg); border: 1px solid var(--ink-10);
+    padding: 32px; margin-top: 28px;
+  }
+  .future-band .label { font-size: 11px; text-transform: uppercase; letter-spacing: .22em; color: var(--agent); font-weight: 700; margin-bottom: 12px; }
+  .future-band .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; margin-top: 16px; }
+  .future-band .skill { background: #fff; padding: 10px 14px; font-size: 13px; border: 1px solid var(--ink-15); }
+
+  /* ── Study hero (big chapter intro) ────────────────── */
+  .study-hero {
+    min-height: 72vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 32px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--ink-10);
+    position: relative;
+  }
+  /* Study 4 hero is text-only — shrink it so it doesn't leave a tall blank gap before the concept slide */
+  #study-4-hero { min-height: auto; padding: 96px 32px 80px; }
+  .study-hero .hero-text-block { text-align: left; }
+  .study-hero > .slide-inner { width: 100%; }
+  .study-hero .hero-text-block .context-band .label,
+  .study-hero .hero-text-block .rq-subhead .rq-label { justify-content: flex-start; }
+  .study-hero .study-eyebrow {
+    font-size: 10px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 600; margin-bottom: 18px;
+  }
+  .study-hero .study-name {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(56px, 8.4vw, 104px);
+    line-height: 1.02; letter-spacing: -.03em;
+    margin: 0 auto; max-width: 22ch;
+  }
+  .study-hero .study-name .accent { color: var(--work); }
+  .study-hero .study-eyebrow {
+    font-size: 12px; letter-spacing: .32em;
+    color: var(--work); font-weight: 700;
+  }
+  /* Big study number motif intentionally hidden — the larger study-name carries the section-break feel */
+  .study-hero .study-num-display { display: none; }
+  .study-hero .hero-features {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 32px; max-width: 1100px;
+    margin: 56px auto 0;
+  }
+  @media (max-width: 820px) { .study-hero .hero-features { grid-template-columns: 1fr; } }
+  .study-hero .hero-feature { margin: 0; }
+  .study-hero .hero-feature img {
+    display: block; width: 100%;
+    border: 1px solid var(--ink-10); border-radius: 4px;
+    box-shadow: 0 4px 18px rgba(26,26,26,.08);
+    background: #fff;
+  }
+  .study-hero .hero-feature figcaption {
+    margin-top: 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-50); text-align: center;
+  }
+
+  /* ── Scene image embed ────────────────────────────── */
+  .scene-img {
+    display: block; width: 100%; max-width: 880px;
+    margin: 32px auto 0;
+    border-radius: 4px;
+  }
+  .scene-img.bordered { border: 1px solid var(--ink-10); box-shadow: 0 2px 14px rgba(26,26,26,.06); }
+  .scene-caption {
+    text-align: center; margin: 14px auto 0; max-width: 720px;
+    font-family: 'Fraunces', serif; font-style: italic; font-size: 14px;
+    color: var(--ink-60);
+  }
+
+  /* ── Cover context block (naked, hierarchy-as-key-takeaways) ───── */
+  .cover-context {
+    max-width: 980px; margin: 72px auto 0;
+    text-align: center;
+  }
+  .cover-context .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .28em;
+    color: var(--ink-50); font-weight: 600; margin-bottom: 18px;
+  }
+  .cover-context .lead-line {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(26px, 3.2vw, 38px);
+    line-height: 1.2; letter-spacing: -.015em;
+    color: var(--ink); margin: 0 auto 36px; max-width: 22ch;
+  }
+  .cover-context .lead-line .italic { color: var(--work); }
+  .cover-context .phrase-grid {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+    column-gap: 36px; row-gap: 18px;
+    margin: 0 auto; max-width: 920px;
+  }
+  .cover-context .phrase {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    background: none; border: 0; padding: 0;
+  }
+  .cover-context .phrase + .phrase::before {
+    content: "•"; color: var(--ink-30); margin-right: 26px;
+    align-self: center; font-size: 12px;
+  }
+  .cover-context .phrase .emoji {
+    font-size: 18px; line-height: 1;
+    filter: grayscale(.1);
+    position: relative; top: 1px;
+  }
+  .cover-context .phrase .text {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(20px, 2vw, 26px);
+    color: var(--ink); line-height: 1.2;
+    letter-spacing: -.005em;
+  }
+  @media (max-width: 720px) {
+    .cover-context .phrase-grid { column-gap: 22px; }
+    .cover-context .phrase + .phrase::before { margin-right: 14px; }
+    .cover-context .phrase .text { font-size: 18px; }
+  }
+  .cover-context .subtext {
+    margin: 44px auto 0; max-width: 56ch;
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: clamp(16px, 1.6vw, 19px); line-height: 1.45;
+    color: var(--ink);
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ── Top bar ───────────────────────────────────────────────────────── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="home" href="/">Rachele <span>Benjamin</span></a>
+    <span class="meta">Case Study: Agentic AI for Shopping· 4 Studies</span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 1 — Cover                                                    -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide cover" id="slide-1">
+  <div class="slide-inner">
+    <div class="eyebrow" style="margin-bottom: 28px;">Case Study</div>
+    <h1>
+      Agentic AI for <span class="accent">Shopping</span>
+    </h1>
+    <div class="subtitle">Microsoft AI Exploration</div>
+    <div class="author">A research narrative by <strong>Rachele Benjamin, PhD</strong></div>
+
+    <div class="toc" style="max-width: 820px; margin: 32px auto 0; text-align: left;">
+      <h4>Inside this case study</h4>
+      <ol>
+        <li><a href="#slide-3">Key Takeaways</a></li>
+        <li><a href="#study-1-2-hero">Studies 1 <span class="amp">&amp;</span> 2 — Agentic Shopping Consent <span class="amp">&amp;</span> First Run Experience</a></li>
+        <li><a href="#study-3-hero">Study 3 — Surfacing Agentic AI Shopping Opportunities</a></li>
+        <li><a href="#study-4-hero">Study 4 — Continue your Journey: Using Journey Cards to Help Users Move from In-Store to Online Shopping</a></li>
+        <li><a href="#slide-52">Outcomes</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 2 — About me                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- About me slide moved to the very end of the deck -->
+<section style="display:none" id="slide-2-moved"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 3 — Three pillars                                            -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-3">
+  <div class="slide-num">03</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Key Takeaways</div>
+    <h2 class="section-title">How to create agentic AI experiences that <span class="italic">support</span> human decision-making instead of replacing it</h2>
+
+    <div class="pillars">
+      <a class="pillar agent" href="#study-1-2-hero">
+        <span class="emoji">🤖</span>
+        <div class="label">Agentic AI</div>
+        <p class="lesson scroll-reveal">Partner with users to streamline complex, multi-step tasks. Qualitative studies.</p>
+        <div class="study-tag">Study 1 <span class="amp">&amp;</span> 2</div>
+      </a>
+      <a class="pillar shop" href="#study-3-hero">
+        <span class="emoji">🛍️</span>
+        <div class="label">Shopping</div>
+        <p class="lesson scroll-reveal">User control means keeping the fun in shopping. Mixed methods (qual and quant)</p>
+        <div class="study-tag">Study 3 <span class="amp">&amp;</span> 4</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 4 — Context: Operator launch                                 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Slide 4 context moved into cover slide -->
+<section style="display:none" id="slide-4-moved"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 5 — Studies 1 & 2 split                                      -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="study-hero" id="study-1-2-hero">
+  <div class="slide-inner">
+    <div class="study-num-display">01 <span class="amp">&amp;</span> 02</div>
+    <div class="study-eyebrow">Study 1 <span class="amp">&amp;</span> Study 2</div>
+    <h2 class="study-name">Agentic Shopping <span class="accent">Consent</span> <span class="amp">&amp;</span> <span class="accent">First Run Experience</span></h2>
+
+    <div class="hero-text-block" style="margin: 24px 0 36px; text-align: left;">
+      <div class="context-band" style="margin: 0;">
+        <div class="label">Context</div>
+        <div class="text">After ChatGPT Operator launches, Microsoft Edge is exploring <span class="italic">Agentic AI</span> that can browse on the user's behalf.</div>
+      </div>
+      <div class="rq-subhead" style="margin-top: 24px;">
+        <div class="rq-label">Study 1 & 2 · Research questions</div>
+        <p class="rq-text">What helps users <span class="italic">comprehend</span> the agentic checkout experience enough to meaningfully give consent?</p>
+      </div>
+      <div class="rq-subhead" style="margin-top: 20px;">
+        <p class="rq-text">What helps users comprehend and <span class="italic">see value</span> in the First Run Experience of the agentic checkout experience?</p>
+      </div>
+    </div>
+
+    <div class="hero-features">
+      <figure class="hero-feature">
+        <img src="/slides/image4.png" alt="Consent dialog: 'Let me browse the web for you' with Allow / Cancel buttons." />
+        <figcaption>Study 1 · The consent dialog · Masked for privacy</figcaption>
+      </figure>
+      <figure class="hero-feature">
+        <img src="/slides/image3.png" alt="First Run Experience: the agent attempting a grocery checkout task in a small window with extra controls." />
+        <figcaption>Study 2 · The First Run Experience · Masked for privacy</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 7 — Method                                             -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-7">
+  <div class="slide-num">07</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 1&2 · Method  </div>
+    <h3 class="sub-title">Using <span class="italic">Dscout</span>, I recruited Copilot Pro and 'Minimum Target' users (medium-low fluency, medium-light Copilot user).</h3>
+
+    <div class="methods-grid methods-grid--bare">
+      <div class="method-item">
+        <span class="m-label">Study type</span>
+        <span class="m-value">Moderated concept evaluations </span>
+      </div>
+      <div class="method-item">
+        <span class="m-label">Approach</span>
+        <span class="m-value">30-minute moderated 1:1 on Dscout.</span>
+      </div>
+    </div>
+
+    <div class="ur-sample-section">
+      <div class="ur-sample-label">Sample</div>
+      
+      <div class="ur-participants">
+      <div class="ur-columns">
+        <div>
+          <div class="ur-col-h">Study 1 &middot; Consent</div>
+          <div class="ur-bucket">
+            <div class="ur-bucket-h">Copilot Pro Users</div>
+            <div class="ur-grid">
+              <div class="ur-card"><div class="ur-ring" data-seed="Michelle" data-gender="female" data-skin="e7a391" data-hair="straightBun" data-haircolor="b9a05f">M</div><div class="ur-name">Michelle</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Manal" data-gender="female" data-skin="623d36" data-hair="curly" data-haircolor="0e0e0e">M</div><div class="ur-name">Manal</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Carlos" data-gender="male" data-skin="92594b" data-hair="shortCombover" data-haircolor="0e0e0e">C</div><div class="ur-name">Carlos</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Jonathan" data-gender="male" data-skin="eeb4a4" data-hair="shortCombover" data-haircolor="cb6820">J</div><div class="ur-name">Jonathan</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Mike" data-gender="male" data-skin="e7a391" data-hair="shortCombover" data-haircolor="6c4545">M</div><div class="ur-name">Mike</div></div>
+            </div>
+          </div>
+          <div class="ur-bucket">
+            <div class="ur-bucket-h">'Minimum Target' Users<span class="sub">low AI fluency, low AI trust</span></div>
+            <div class="ur-grid">
+              <div class="ur-card"><div class="ur-ring" data-seed="Regina" data-gender="female" data-skin="623d36" data-hair="curlyBun" data-haircolor="0e0e0e">R</div><div class="ur-name">Regina</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Kaleigh" data-gender="female" data-skin="eeb4a4" data-hair="bunUndercut" data-haircolor="6c4545">K</div><div class="ur-name">Kaleigh</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Inez" data-gender="female" data-skin="623d36" data-hair="straightBun" data-haircolor="0e0e0e" data-eyes="glasses">I</div><div class="ur-name">Inez</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Zachary" data-gender="male" data-skin="eeb4a4" data-hair="bald" data-haircolor="afafaf">Z</div><div class="ur-name">Zachary</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Robert" data-gender="male" data-skin="d78774" data-hair="shortCombover" data-haircolor="562306">R</div><div class="ur-name">Robert</div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ur-col-h">Study 2 &middot; First Run Experience</div>
+          <div class="ur-bucket">
+            <div class="ur-bucket-h">Copilot Pro Users</div>
+            <div class="ur-grid">
+              <div class="ur-card"><div class="ur-ring" data-seed="Scott" data-gender="male" data-skin="eeb4a4" data-hair="shortCombover" data-haircolor="cb6820">S</div><div class="ur-name">Scott</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Ryan" data-gender="male" data-skin="b16a5b" data-hair="shortCombover" data-haircolor="0e0e0e" data-facial="beardMustache">R</div><div class="ur-name">Ryan</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="John" data-gender="male" data-skin="623d36" data-hair="shortCombover" data-haircolor="0e0e0e">J</div><div class="ur-name">John</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Brian" data-gender="male" data-skin="b16a5b" data-hair="shortComboverChops" data-haircolor="0e0e0e" data-facial="beardMustache">B</div><div class="ur-name">Brian</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Dylan" data-gender="male" data-skin="e5a07e" data-hair="shortCombover" data-haircolor="0e0e0e">D</div><div class="ur-name">Dylan</div></div>
+            </div>
+          </div>
+          <div class="ur-bucket">
+            <div class="ur-bucket-h">'Minimum Target' Users<span class="sub">low AI fluency, low AI trust</span></div>
+            <div class="ur-grid">
+              <div class="ur-card"><div class="ur-ring" data-seed="Joseph" data-gender="male" data-skin="e7a391" data-hair="shortCombover" data-haircolor="6c4545">J</div><div class="ur-name">Joseph</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Amy" data-gender="female" data-skin="623d36" data-hair="curly" data-haircolor="0e0e0e">A</div><div class="ur-name">Amy</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Melissa" data-gender="female" data-skin="e7a391" data-hair="straightBun" data-haircolor="6c4545">M</div><div class="ur-name">Melissa</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Evan" data-gender="male" data-skin="b16a5b" data-hair="shortCombover" data-haircolor="562306">E</div><div class="ur-name">Evan</div></div>
+              <div class="ur-card"><div class="ur-ring" data-seed="Daniel" data-gender="male" data-skin="623d36" data-hair="shortCombover" data-haircolor="0e0e0e" data-eyes="glasses">D</div><div class="ur-name">Daniel</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 8 — Section break                                            -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Section-break removed (Study 1 Findings) -->
+<section style="display:none" id="slide-8-removed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 9 — Users click Allow                                        -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-9" style="padding: 64px 32px;">
+  <div class="slide-num">09</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 1 · Finding</div>
+    <span class="finding-eyebrow">Finding</span>
+    <h2 class="finding-headline">Users would click '<em>Allow</em>' without knowing what it means.</h2>
+
+    <div class="reactions-cluster" tabindex="0">
+      <figcaption style="margin-bottom:14px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-50); font-weight:700; text-align:center;">Hover the image to reveal user reactions</figcaption>
+      <div class="image-callout-group" tabindex="0" style="max-width: 760px; margin: 0 auto;">
+        <img src="/slides/image4.png" alt="Consent dialog from the Copilot agent: 'Let me browse the web for you' with Allow / Cancel buttons." />
+        <div class="image-callout image-callout--top is-right-anchor" role="note" style="top: 35%; max-width: 540px;">
+          <span class="image-callout-eyebrow">😬 Unsure what's included in their profile</span>
+          <p class="image-callout-text">They <strong>assumed</strong> email, location, and browsing history would be included — but <strong>not</strong> financial information.</p>
+        </div>
+        <div class="image-callout image-callout--bottom is-right-anchor" role="note" style="bottom: 26%; max-width: 540px;">
+          <span class="image-callout-eyebrow">😬 Weak mental model of &lsquo;browse for you&rsquo;</span>
+          <p class="image-callout-text">Users don't know what <em>happens</em> after clicking &lsquo;Allow.&rsquo;</p>
+        </div>
+      </div>
+      <div class="emergent-insight" role="note" aria-label="Insight">
+        <div class="ei-label">Insight</div>
+        <div class="ei-body">Agentic AI is unfamiliar, so users need clarity: what actions the product takes and exactly what personal data is used.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 10 — Insight (absorbed into slide 9 emergent treatment)      -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section style="display:none" id="slide-10-absorbed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 11 — Section break                                           -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Section-break removed (Study 2 Findings) -->
+<section style="display:none" id="slide-11-removed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 12 — Adding complexity                                       -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-12" style="padding: 64px 32px;">
+  <div class="slide-num">12</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 2 · Finding</div>
+    <span class="finding-eyebrow">Finding</span>
+    <h2 class="finding-headline">We're adding complexity to the task instead of making users' lives easier.</h2>
+
+    <div class="reactions-cluster" tabindex="0">
+      <figcaption style="margin-bottom:14px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-50); font-weight:700; text-align:center;">Hover the image to reveal user reactions</figcaption>
+      <div class="image-callout-group" tabindex="0" style="max-width: 900px; margin: 0 auto;">
+        <img src="/slides/image3.png" alt="First Run Experience showing the agent attempting a grocery checkout task in a small window with extra controls." />
+        <div class="image-callout image-callout--top is-right-anchor" role="note" style="top: 26%; max-width: 540px;">
+          <span class="image-callout-eyebrow">😬 Why these bells and whistles?</span>
+          <p class="image-callout-text">The small window and extra buttons felt like overkill.</p>
+        </div>
+        <div class="image-callout image-callout--bottom is-right-anchor" role="note" style="bottom: 14%; max-width: 540px;">
+          <span class="image-callout-eyebrow">😬 Other solutions are more convenient</span>
+          <p class="image-callout-text">Auto-populating in the browser already does the job for most simple cases.</p>
+        </div>
+      </div>
+      <div class="emergent-insight" role="note" aria-label="Insight">
+        <div class="ei-label">Insight</div>
+        <div class="ei-body">AI delivers the most value when the task is <em>complex</em>.</div>
+        <div class="ei-quotes">
+          <blockquote>“It's new, but it's not revolutionary. When it has original thoughts… that's revolutionary.”<cite>— Dylan, Copilot Pro user</cite></blockquote>
+          <blockquote>“It's more of a partner than an assistant to me. I wouldn't use it this way.”<cite>— Brian, Copilot Pro user</cite></blockquote>
+        </div>
+      </div>
+    </div>
+
+    <div class="journey-coda" style="margin-top: 64px;">
+      <div class="image-callout-group" tabindex="0" style="max-width: 1100px; margin: 0 auto;">
+        <img class="scene-img bordered" src="/slides/study2-journey-deck.png" alt="Hand-drawn shopping journey from 'identify a need' through compare, deals, and purchase, with a curved purple dashed line annotating the opportunity for AI to guide users through complexity before and after checkout." style="max-width: 100%; margin: 0;" />
+        <div class="image-callout" role="note" style="max-width: min(560px, 52%);">
+          <span class="image-callout-eyebrow">A bigger journey to design for</span>
+          <p class="image-callout-text">Picture a 10K race‑planning shopping journey. There's so much more complexity here than add to cart <span class="amp">&amp;</span> check out. How to plan for that complexity?</p>
+        </div>
+      </div>
+      <p class="scene-caption">Original sketch from the deck — the opportunity isn't just at checkout, it's in guiding users through the complexity that comes before and after.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 13 — Insight (absorbed into slide 12 emergent treatment)      -->
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<section style="display:none" id="slide-13-absorbed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 13 — Insight + quotes                                        -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-13-old" style="display:none;"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 14 — Journey (mid)                                           -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section style="display:none" id="slide-14-merged"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 15 — Journey extended                                        -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Slide 15 (extended journey) removed per request -->
+<section style="display:none" id="slide-15-removed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 16 — Recommendations + impact                                -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide merged-no-border" id="slide-16" style="border-top: none;">
+  <div class="slide-num">16</div>
+  <div class="slide-inner">
+    <div class="slide-tag outcomes">Studies 1 <span class="amp">&amp;</span> 2 · Impact</div>
+    <h2 class="section-title">From consent friction to <span class="italic">partnered</span> agentic AI</h2>
+    <div class="outcomes-flow">
+      <div class="outcome-item">
+        <div class="outcome-label">Recommendation</div>
+        <p class="outcome-text">Extend consent with tooltips, and build agentic AI that partners with users to help them navigate complex decisions.</p>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-label">Outcome</div>
+        <p class="outcome-text">Designers made rapid iterative changes in the short term, and workstreams initiated foundational research in the long term.</p>
+      </div>
+    </div>
+
+    <div class="journey-coda" style="margin-top: 64px; display: none;">
+      <div class="image-callout-group" tabindex="0" style="max-width: 1100px; margin: 0 auto;">
+        <img class="scene-img bordered" src="/slides/study2-journey-deck.png" alt="Hand-drawn shopping journey from 'identify a need' through compare, deals, and purchase, with a curved purple dashed line annotating the opportunity for AI to guide users through complexity before and after checkout." style="max-width: 100%; margin: 0;" />
+        <div class="image-callout" role="note" style="max-width: min(560px, 52%);">
+          <span class="image-callout-eyebrow">A bigger journey to design for</span>
+          <p class="image-callout-text">Picture a 10K race‑planning shopping journey. There's so much more complexity here than add to cart <span class="amp">&amp;</span> check out. How to plan for that complexity?</p>
+        </div>
+      </div>
+      <p class="scene-caption">Original sketch from the deck — the opportunity isn't just at checkout, it's in guiding users through the complexity that comes before and after. <span style="color:var(--work); font-weight:600;"></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 17 — Context Study 3                                          -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="study-hero" id="study-3-hero">
+  <div class="slide-inner">
+    <div class="study-num-display">03</div>
+    <div class="study-eyebrow">Study 3</div>
+    <h2 class="study-name">Surfacing <span class="accent">Agentic AI</span> Shopping Opportunities</h2>
+
+    <div class="hero-text-block" style="margin: 24px 0 36px; text-align: left;">
+      <div class="context-band" style="margin: 0;">
+        <div class="label">Context</div>
+        <div class="text">April 2025 — the Shopping workstream plans early for the holidays.</div>
+      </div>
+      <div class="rq-subhead" style="margin-top: 24px;">
+        <div class="rq-label">Study 3 · Research question</div>
+        <p class="rq-text">Which moments in the shopping journey create the <span class="italic">strongest opportunities</span> for agentic AI?</p>
+      </div>
+    </div>
+    <div class="hero-features" style="grid-template-columns: 1fr;">
+      <figure class="hero-feature">
+        <img src="/slides/image10.png" alt="Cozy holiday-themed illustration introducing the AI Shopping Assistant concept." />
+        <figcaption>Holiday illustration — AI Shopping Assistant concept</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 17 folded into the Study 3 hero -->
+<section style="display:none" id="slide-17-folded"></section>
+
+<!-- Slide 18 (standalone Study 3 RQ) folded into the Study 3 hero -->
+<section style="display:none" id="slide-18-removed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 18 — Study 3 RQ                                              -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-18" style="display:none">
+  <div class="slide-num">18</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3 · Research question (folded into slide 17)</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 19 — Method · Study 3                                        -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-19-method">
+  <div class="slide-num">19</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3 · Method</div>
+    <h3 class="sub-title">A mixed-methods study to find the highest-leverage <span class="italic">shopping jobs</span> for agentic AI</h3>
+
+    <div class="methods-grid methods-grid--bare">
+      <div class="method-item">
+        <span class="m-label">Study type</span>
+        <span class="m-value">Mixed methods — qualitative Jobs to Be Done synthesis + quantitative survey</span>
+      </div>
+      <div class="method-item">
+        <span class="m-label">Sample</span>
+        <span class="m-value"><strong>1,533</strong> US online shoppers</span>
+      </div>
+      <div class="method-item">
+        <span class="m-label">Approach</span>
+        <span class="m-value">Opportunity scoring (importance × dissatisfaction) crossed with AI openness to surface high-leverage jobs.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 20 — JTBD with definitions                                   -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-20">
+  <div class="slide-num">20</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3 · Jobs to Be Done</div>
+    <h3 class="sub-title">I identified high-level Jobs to Be Done</h3>
+
+    <div class="jtbd-grid">
+      <div class="jtbd-cell" tabindex="0"><span class="term">🔄 Restock</span><span class="desc">Keep tabs on household stuff to buy and restock.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">✨ Inspiration</span><span class="desc">Find shopping inspiration.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">⚖️ Compare</span><span class="desc">Compare similar products on price, quality, shipping costs, etc.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">💖 Wishlist</span><span class="desc">Save different product options for later.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">🏷️ Deals</span><span class="desc">Find deals on products that meet my needs.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">💬 Communicate</span><span class="desc">Communicate with sellers and Customer Support.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">⭐ Reviews</span><span class="desc">Interpret customer and/or expert reviews.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">⏱️ Timing</span><span class="desc">Monitor my finances and price fluctuations to decide when to buy.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">📍 Location</span><span class="desc">Find the best location to make an in-store purchase.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">🛒 Purchase</span><span class="desc">Apply discounts and complete the purchase.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">📦 Track</span><span class="desc">Keep track of when and how my order will arrive.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">✍️ Write</span><span class="desc">Write a product review.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">🔁 Subscribe</span><span class="desc">Manage a subscription.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">↩️ Exchange</span><span class="desc">Make an exchange or return.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">🔍 Find</span><span class="desc">Find products that meet my needs and wants.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">🤝 Negotiate</span><span class="desc">Negotiate a price with sellers.</span></div>
+      <div class="jtbd-cell" tabindex="0"><span class="term">💰 Budget</span><span class="desc">Interpret finances and product options to decide on a budget.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 21 — Data table                                              -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-21">
+  <div class="slide-num">21</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3 · Quant results</div>
+    <h3 class="sub-title">Top Opportunities: Job satisfaction is relatively lower and importance is higher.</h3>
+
+    <div class="data-table-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>Job</th><th>Important</th><th>Satisfied</th><th>Frequency</th><th>AI Open</th></tr>
+        </thead>
+        <tbody class="heatmap">
+          <tr><td class="label">🔍 Find</td><td class="num" style="background:rgba(21,128,61,.70)">4.51</td><td class="num" style="background:rgba(21,128,61,.56)">4.22</td><td class="num" style="background:rgba(21,128,61,.45)">4.01</td><td class="num" style="background:rgba(21,128,61,.50)">4.11</td></tr>
+          <tr><td class="label">🛒 Purchase</td><td class="num" style="background:rgba(21,128,61,.64)">4.39</td><td class="num" style="background:rgba(21,128,61,.50)">4.10</td><td class="num" style="background:rgba(21,128,61,.32)">3.74</td><td class="num" style="background:rgba(21,128,61,.45)">4.00</td></tr>
+          <tr><td class="label">📦 Track</td><td class="num" style="background:rgba(21,128,61,.64)">4.38</td><td class="num" style="background:rgba(21,128,61,.61)">4.33</td><td class="num" style="background:rgba(21,128,61,.30)">3.70</td><td class="num" style="background:rgba(21,128,61,.57)"><span class="arrow">▲</span>4.25</td></tr>
+          <tr><td class="label">🏷️ Deals</td><td class="num" style="background:rgba(21,128,61,.63)">4.37</td><td class="num" style="background:rgba(21,128,61,.47)">4.05</td><td class="num" style="background:rgba(21,128,61,.37)">3.85</td><td class="num" style="background:rgba(21,128,61,.63)"><span class="arrow">▲</span>4.36</td></tr>
+          <tr><td class="label">⚖️ Compare</td><td class="num" style="background:rgba(21,128,61,.62)">4.35</td><td class="num" style="background:rgba(21,128,61,.46)">4.03</td><td class="num" style="background:rgba(21,128,61,.42)"><span class="arrow">▲</span>3.94</td><td class="num" style="background:rgba(21,128,61,.66)"><span class="arrow">▲</span>4.42</td></tr>
+          <tr><td class="label">⏱️ Timing</td><td class="num" style="background:rgba(21,128,61,.59)">4.29</td><td class="num" style="background:rgba(21,128,61,.45)">4.00</td><td class="num" style="background:rgba(21,128,61,.15)">3.41</td><td class="num" style="background:rgba(21,128,61,.11)"><span class="arrow">▼</span>3.31</td></tr>
+          <tr><td class="label">💰 Budget</td><td class="num" style="background:rgba(21,128,61,.56)">4.22</td><td class="num" style="background:rgba(21,128,61,.49)">4.09</td><td class="num" style="background:rgba(21,128,61,.09)">3.28</td><td class="num" style="background:rgba(21,128,61,.05)"><span class="arrow">▼</span>3.20</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title" style="margin-top: 48px;">Interactive output to help <span class="italic">stakeholders decide</span></h2>
+    <img class="scene-img bordered" src="/slides/image13.png" alt="Interactive opportunity dashboard — explorable matrix of importance × satisfaction × AI openness across shopping jobs." />
+  </div>
+</section>
+
+<!-- Slide 22 (Interactive output) merged into slide 21 -->
+<section style="display:none" id="slide-22-merged"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 23 — Future direction                                        -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Slide 23 (Study 3 Future direction) removed per request -->
+<section style="display:none" id="slide-23-removed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 24 — Automation spectrum                                     -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-24">
+  <div class="slide-num">24</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3 · Finding</div>
+    <h2 class="section-title">Activities require more vs. less <span class="italic">automation</span></h2>
+
+    <div class="reactions-cluster hover-reveal" tabindex="0">
+      <figcaption style="margin-bottom:14px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-50); font-weight:700;">Hover the chart to reveal the findings</figcaption>
+      <div class="image-callout-group" tabindex="0" style="max-width: 1200px; margin: 0 auto;">
+        <img src="/slides/_pdf_pages/page_19.png" alt="Stacked-bar chart showing automation preferences across shopping activities: Track, Compare, Purchase rank highest for full automation; Timing and Budget lean toward 'Ideas and suggestions only.'" />
+        <div class="image-callout image-callout--top" role="note" style="top: 14%; right: 3%; max-width: min(560px, 50%);">
+          <p class="image-callout-text"><span style="font-size:1.2em;">🤖</span> AI should take the reigns a bit more — for <strong>Track</strong>, <strong>Compare</strong>, and <strong>Purchase</strong>, users welcome higher automation.</p>
+        </div>
+        <div class="image-callout image-callout--bottom" role="note" style="max-width: min(560px, 50%);">
+          <p class="image-callout-text"><span style="font-size:1.2em;">💡</span> AI should offer ideas and suggestions only — for <strong>Timing</strong> and <strong>Budget</strong>, users are concerned that AI will absorb tasks they would rather handle themselves.</p>
+        </div>
+      </div>
+      <p class="body" style="margin-top: 22px; font-size: 13px; color: var(--ink-50); font-style: italic;">Participants chose one of: AI should complete all of this activity for me · AI should complete part of this activity for me · AI should only offer ideas and suggestions · AI shouldn't help me with this activity at all.</p>
+
+      <div class="opportunity-pair" style="display:flex; flex-direction: column; gap: 48px; margin-top: 56px;">
+        <figure style="margin:0;">
+          <div class="opportunity-label" style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--work); font-weight:700; margin-bottom:10px;">From the original deck · the opportunity · Compare</div>
+          <img class="scene-img bordered" src="/slides/opportunity-compare.png" alt="Compare opportunity slide — quotes, signals, demographics, and recommendation that AI take the reins on product comparisons." style="width: 100%; max-width: 1200px; display: block; margin: 0 auto;" />
+        </figure>
+        <figure style="margin:0;">
+          <div class="opportunity-label" style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--work); font-weight:700; margin-bottom:10px;">From the original deck · the opportunity · Deals</div>
+          <img class="scene-img bordered" src="/slides/opportunity-deals.png" alt="Deals opportunity slide — quotes, signals, and recommendation that AI notify users of deals without acting on them." style="width: 100%; max-width: 1200px; display: block; margin: 0 auto;" />
+        </figure>
+      </div>
+
+      <div class="emergent-insight" role="note" aria-label="Insight">
+        <div class="ei-label">Insight & New Discovery</div>
+        <div class="ei-body">Keep the <em>fun</em> in shopping. Automation threatens to take that away.</div>
+        <div class="ei-quotes">
+          <blockquote>“I enjoy browsing and discovering new things, especially when I'm shopping for something fun.”<cite>— User, 23, Texas</cite></blockquote>
+          <blockquote>“Searching for the best deal is almost like being on a treasure hunt.”<cite>— User, 40, Illinois</cite></blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 25 — Compare opportunity                                     -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section style="display:none" id="slide-25-merged"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 26 — Deals opportunity                                       -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section style="display:none" id="slide-26-merged"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 27 — Insight: keep the fun                                   -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-27-absorbed" style="display:none;"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 28 — Recommendations & impact                                -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-28">
+  <div class="slide-num">28</div>
+  <div class="slide-inner">
+    <div class="slide-tag outcomes">Study 3 · Impact</div>
+    <h2 class="section-title">Where agentic AI can <span class="italic">earn</span> shopper trust</h2>
+    <div class="outcomes-flow">
+      <div class="outcome-item">
+        <div class="outcome-label">Recommendation</div>
+        <p class="outcome-text">Seize AI opportunities like finding the right product, finding deals, comparing options, and timing a purchase — with user control.</p>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-label">Outcome</div>
+        <p class="outcome-text">Designers developed concepts to explore these opportunities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 29 — Study 4 setup                                           -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="study-hero" id="study-4-hero">
+  <div class="slide-inner">
+    <div class="study-num-display">04</div>
+    <div class="study-eyebrow">Study 4</div>
+    <h2 class="study-name">Continue your Journey: Using <span class="accent">Journey Cards</span> to help users move from in-store to online shopping</h2>
+
+    <div class="hero-text-block" style="margin: 24px 0 36px; text-align: left;">
+      <div class="context-band" style="margin: 0;">
+        <div class="label">Context</div>
+        <div class="text">Following a Design Sprint, there were 13 0-to-1 concepts that needed to be evaluated. Here's the story of one of those concepts.</div>
+      </div>
+      <div class="rq-subhead" style="margin-top: 24px;">
+        <div class="rq-label">Study 4 · Research question</div>
+        <p class="rq-text">What helps users <span class="italic">continue where they left off</span> after in-person shopping?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-29">
+  <div class="slide-num">29</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 4 · Concept</div>
+    <div class="concept-embed" style="margin-top: 8px;">
+      <div class="concept-label" style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.25em; text-transform:uppercase; color:var(--work); font-weight:700; margin-bottom:14px;">Concept · Continue Journey</div>
+      <h3 class="sub-title" style="margin-top: 0; max-width: 32ch;">Uses an existing pattern (Journey Cards on the New Tab Page) to help users get back into Shopping.</h3>
+      <div class="jobs-addressed" style="margin-top: 28px;">
+        <div class="jobs-label" style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-50); font-weight:700; margin-bottom:12px;">Jobs addressed</div>
+        <div class="jobs-list" style="display:flex; flex-wrap:wrap; gap:24px; font-family:'Fraunces',serif; font-size:22px; color:var(--ink);">
+          <span>⚖️ Compare</span>
+          <span>🏷️ Deals</span>
+          <span>⏱️ Timing</span>
+        </div>
+      </div>
+    </div>
+    <img class="scene-img bordered" src="/slides/image21.png" alt="Continue Journey card concept — a New Tab Page card that helps users resume an in-store shopping journey online." style="margin-top: 36px;" />
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 30 — Journey: in-person to online                            -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Slide 30 (synthesized scenario journey) removed — no original in deck; assumption journey on slide 31 covers it -->
+<section style="display:none" id="slide-30-removed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 31 — Assumption journey                                      -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section style="display:none" id="slide-31-absorbed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 32 — Study 4 RQ                                              -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Slide 32 (standalone Study 4 RQ) folded into slide 29 -->
+<section style="display:none" id="slide-32-removed"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 33 — Participants Study 4                                    -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-33">
+  <div class="slide-num">33</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 4 · Method</div>
+    <h3 class="sub-title">To turn this study around within 1 week, I rapidly recruited Edge users from <span class="italic">UserTesting</span> who move between online and in-person shopping</h3>
+
+    <div class="methods-grid methods-grid--bare">
+      <div class="method-item">
+        <span class="m-label">Study type</span>
+        <span class="m-value">Moderated remote UserTesting sessions</span>
+      </div>
+      <div class="method-item">
+        <span class="m-label">Approach</span>
+        <span class="m-value">Concept evaluation of Journey Card prototypes; 1:1 sessions probing in-store → online shopping handoffs</span>
+      </div>
+    </div>
+
+    <div class="ur-sample-section">
+      <div class="ur-sample-label">Sample</div>
+      <div class="ur-participants">
+      <div class="ur-bucket">
+        <div class="ur-bucket-h">Edge users · cross-channel shoppers</div>
+        <div class="ur-grid">
+          <div class="ur-card"><div class="ur-ring" data-seed="Matt" data-gender="male" data-skin="e7a391" data-hair="shortCombover" data-haircolor="6c4545">M</div><div class="ur-name">Matt</div></div>
+          <div class="ur-card"><div class="ur-ring" data-seed="Stephanie" data-gender="female" data-skin="eeb4a4" data-hair="straightBun" data-haircolor="b9a05f">S</div><div class="ur-name">Stephanie</div></div>
+          <div class="ur-card"><div class="ur-ring" data-seed="Andrea" data-gender="female" data-skin="d78774" data-hair="bunUndercut" data-haircolor="6c4545">A</div><div class="ur-name">Andrea</div></div>
+          <div class="ur-card"><div class="ur-ring" data-seed="Onika" data-gender="female" data-skin="623d36" data-hair="bunUndercut" data-haircolor="0e0e0e">O</div><div class="ur-name">Onika</div></div>
+          <div class="ur-card"><div class="ur-ring" data-seed="Hanson" data-gender="male" data-skin="e5a07e" data-hair="shortCombover" data-haircolor="0e0e0e">H</div><div class="ur-name">Hanson</div></div>
+          <div class="ur-card"><div class="ur-ring" data-seed="Heather" data-gender="female" data-skin="e7a391" data-hair="straightBun" data-haircolor="6c4545">H</div><div class="ur-name">Heather</div></div>
+          <div class="ur-card"><div class="ur-ring" data-seed="Liam" data-gender="male" data-skin="e7a391" data-hair="shortCombover" data-haircolor="b9a05f">L</div><div class="ur-name">Liam</div></div>
+          <div class="ur-card"><div class="ur-ring" data-seed="Genevieve" data-gender="female" data-skin="623d36" data-hair="extraLong" data-haircolor="0e0e0e">G</div><div class="ur-name">Genevieve</div></div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 34 — Reasons for switching                                   -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-34">
+  <div class="slide-num">34</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 4 · Finding</div>
+    <h2 class="section-title">Users switch from in-store to online for <span class="italic">different reasons</span></h2>
+
+    <div class="reactions-cluster" tabindex="0">
+      <div class="user-reactions" style="grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 56px; align-items: center;">
+        <div class="anchor-img-wrap">
+          <img src="/slides/study4-assumption.png" alt="Hand-drawn assumption diagram: users move from in-store to online to find a better deal, with an orange dashed arc showing AI finding the best deal, applying it, and guiding the user through checkout." />
+          <figcaption style="margin-top:10px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-50); font-weight:700;">Assumption · from in-store to online</figcaption>
+        </div>
+        <div class="reasons" style="margin-top: 0; grid-template-columns: 1fr; gap: 16px;">
+          <div class="from-research-heading" style="margin-top: 0;">From the research:</div>
+          <div class="reason" tabindex="0" style="font-size: clamp(18px, 1.6vw, 22px); padding: 22px 26px;"><span class="num">Reason 01</span><span class="reason-title">💵 Finding a better price</span><span class="desc">As hypothesized, the most common reason to move from in‑store to online is to find a better price.</span></div>
+          <div class="reason" tabindex="0" style="font-size: clamp(18px, 1.6vw, 22px); padding: 22px 26px;"><span class="num">Reason 02</span><span class="reason-title">🎨 Variety seeking</span><span class="desc">Users want the same brand in more designs, colors, and styles than the store carries.</span></div>
+          <div class="reason" tabindex="0" style="font-size: clamp(18px, 1.6vw, 22px); padding: 22px 26px;"><span class="num">Reason 03</span><span class="reason-title">🛑 Controlling impulses</span><span class="desc">Some participants shop online to slow down and avoid impulse buys.</span></div>
+          <div class="reason" tabindex="0" style="font-size: clamp(18px, 1.6vw, 22px); padding: 22px 26px;"><span class="num">Reason 04</span><span class="reason-title">🔍 Conducting more research</span><span class="desc">Participants want to read up on a product before committing to it.</span></div>
+        </div>
+      </div>
+
+      <div class="emergent-insight" role="note" aria-label="Insight">
+        <div class="ei-label">Insight</div>
+        <div class="ei-body">We need to know <em>when</em> and <em>why</em> users are switching to online so we can tailor the experience.</div>
+        <div class="ei-quotes">
+          <blockquote>“If it was Nike or Adidas, I might want the best price. But if it's just a normal shoes, I might be looking for variety.”<cite>— Matt, Edge user</cite></blockquote>
+          <blockquote>“I think it would also be nice to see the customer reviews right alongside the deal.”<cite>— Andrea, Edge user</cite></blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 35 — Insight                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-35-absorbed" style="display:none;"></section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 36 — Reco + impact                                           -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-36">
+  <div class="slide-num">36</div>
+  <div class="slide-inner">
+    <div class="slide-tag outcomes">Study 4 · Impact</div>
+    <h2 class="section-title">One action, <span class="italic">many intents</span></h2>
+    <div class="outcomes-flow">
+      <div class="outcome-item">
+        <div class="outcome-label">Recommendation</div>
+        <p class="outcome-text">The same action can signal different Jobs to Be Done — deal-hunting, finding the right item, or seeking inspiration. Build for different intents.</p>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-label">Outcome</div>
+        <p class="outcome-text">High-level concept enters the next stage in the product development cycle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Study 5 (Browser for Work) omitted in this shopping-only edition -->
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 52 — Summary                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-52">
+  <div class="slide-num">52</div>
+  <div class="slide-inner">
+    <div class="slide-tag outcomes">In Summary</div>
+
+    <div class="conclusion">
+      <h2 class="conclusion-title">Creating agentic AI experiences that support human decision-making.</h2>
+      <p class="conclusion-body">
+        Across four shopping studies — from agentic consent and first-run, to surfacing opportunities, to journey continuity — two threads held. <strong>Agentic AI</strong> earns trust by partnering with users on complex, multi-step tasks, and by making strong suggestions by detecting user in. <strong>Shopping</strong> demands user control because finances are sensitive and shopping is fun.
+      </p>
+      <a class="conclusion-cta" href="/#contact">Email me for the full story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 53 — Thank you                                               -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide thanks" id="slide-53" style="border-bottom: none;">
+  <div class="slide-num" style="color: rgba(245,241,234,.3);">53</div>
+  <div class="slide-inner">
+    <h1>Thank you, & ask me about my <span class="accent"> vibe-coded </span> case study!</h1>
+  </div>
+</section>0
+
+<!-- Appendix: About me (moved from front of deck per request) -->
+<section class="slide" id="slide-about-me">
+  <div class="slide-num">A</div>
+  <div class="slide-inner">
+    <div class="slide-tag">About me</div>
+    <h2 class="section-title">Mixed methods researcher who thrives on <span class="italic">variety</span></h2>
+
+    <div class="two-col" style="margin-top: 40px;">
+      <div class="card">
+        <div class="uppercase-mini">Microsoft (MAI)</div>
+        <h3 class="sub-title" style="margin-top: 12px;">UX Researcher</h3>
+        <p class="body">Led 35 studies across Edge (Consumer, Enterprise), Shopping, Copilot, GroupMe, Character, Read aloud, Bing, and more.</p>
+      </div>
+      <div class="card">
+        <div class="uppercase-mini">PhD in Social Psychology</div>
+        <h3 class="sub-title" style="margin-top: 12px;">Academic research</h3>
+        <p class="body">Defining <span class="amp">&amp;</span> explaining 'uncanny' feelings.</p>
+        <p class="body">Attitudes towards democracy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Tag each .slide with a data-kind derived from its .slide-tag text so CSS
+  // can tint the background per section type (context / method / finding /
+  // insight / results / closing / concept / output / future).
+  (function () {
+    var KIND_PATTERNS = [
+      { kind: 'context',  re: /context|timing/i },
+      { kind: 'method',   re: /method|participants|jobs to be done|jtbd/i },
+      { kind: 'finding',  re: /finding|reasons|scenario|assumption/i },
+      { kind: 'insight',  re: /insight|key takeaways/i },
+      { kind: 'results',  re: /quant|results|output|data/i },
+      { kind: 'closing',  re: /closing|recommendation|outcome|future|summary/i },
+      { kind: 'concept',  re: /concept|research question/i }
+    ];
+    document.querySelectorAll('section.slide').forEach(function (sec) {
+      if (sec.classList.contains('cover')) return;
+      var tag = sec.querySelector('.slide-tag');
+      if (!tag) return;
+      var txt = tag.textContent || '';
+      for (var i = 0; i < KIND_PATTERNS.length; i++) {
+        if (KIND_PATTERNS[i].re.test(txt)) {
+          sec.setAttribute('data-kind', KIND_PATTERNS[i].kind);
+          break;
+        }
+      }
+    });
+  })();
+
+  // Reveal `.emergent-insight` panels when their `.reactions-cluster` scrolls
+  // into view, in addition to the existing hover/focus triggers.
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reactions-cluster, .scroll-reveal, .emergent-insight').forEach(function (c) {
+        c.classList.add('revealed');
+      });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.35, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.reactions-cluster').forEach(function (c) {
+      io.observe(c);
+    });
+    // Per-insight reveal: each emergent-insight fades up when it scrolls
+    // into view, independent of its reactions-cluster parent.
+    var ioInsight = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          ioInsight.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -25% 0px' });
+    document.querySelectorAll('.emergent-insight').forEach(function (el) {
+      ioInsight.observe(el);
+    });
+    // Generic scroll-reveal elements (e.g. slide-3 lessons)
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          io2.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.scroll-reveal').forEach(function (el) {
+      io2.observe(el);
+    });
+  })();
+</script>
+
+<script>
+  // Render diverse cartoon avatars in participant rings via DiceBear (personas).
+  // Each .ur-ring[data-seed] gets an <img> swapped in immediately; if the request fails
+  // we restore the initial letter so the circle is never empty.
+  (function () {
+    var rings = document.querySelectorAll('.ur-ring[data-seed]');
+    rings.forEach(function (el) {
+      var d = el.dataset;
+      var initial = el.textContent;
+      var params = new URLSearchParams({
+        seed: d.seed,
+        backgroundColor: 'fde4cf'
+      });
+      if (d.skin) params.set('skinColor', d.skin);
+      if (d.hair) params.set('hair', d.hair);
+      if (d.haircolor) params.set('hairColor', d.haircolor);
+      if (d.eyes) params.set('eyes', d.eyes);
+      if (d.facial) params.set('facialHair', d.facial);
+      // Exclude the 'pacifier' mouth option by enumerating allowed mouths
+      // as repeated query params (DiceBear v9 expects arrays this way).
+      ['smile', 'bigSmile', 'lips', 'smirk'].forEach(function (m) { params.append('mouth', m); });
+      var url = 'https://api.dicebear.com/9.x/personas/svg?' + params.toString();
+      var img = document.createElement('img');
+      img.alt = d.seed;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.onerror = function () { el.textContent = initial; };
+      el.textContent = '';
+      el.appendChild(img);
+      img.src = url;
+    });
+  })();
+</script>
+
+<button id="scroll-top" type="button" aria-label="Scroll to top">↑</button>
+<style>
+  #scroll-top {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--work); color: #fff; border: none;
+    font-size: 22px; font-weight: 700; line-height: 1; cursor: pointer;
+    box-shadow: 0 10px 28px rgba(0,0,0,.22);
+    opacity: 0; transform: translateY(8px); pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease, background .2s ease;
+    z-index: 200;
+  }
+  #scroll-top.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  #scroll-top:hover, #scroll-top:focus-visible { background: #92400e; outline: none; }
+</style>
+<script>
+  (function () {
+    var btn = document.getElementById('scroll-top');
+    if (!btn) return;
+    var toggle = function () {
+      if (window.scrollY > 400) btn.classList.add('is-visible');
+      else btn.classList.remove('is-visible');
+    };
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>
