@@ -153,7 +153,7 @@
     content: ''; width: 28px; height: 2px; background: var(--work); display: inline-block;
   }
   .outcomes-flow .outcome-item .outcome-text {
-    font-family: 'Fraunces', serif; font-weight: 400;
+    font-family: 'Fraunces', serif; font-weight: 500;
     font-size: clamp(22px, 2.4vw, 30px);
     line-height: 1.35; letter-spacing: -.005em;
     color: var(--ink); margin: 0;
@@ -175,7 +175,7 @@
     box-shadow: 0 24px 56px rgba(21,128,61,.22);
   }
   .conclusion-title {
-    font-family: 'Fraunces', serif; font-weight: 400;
+    font-family: 'Fraunces', serif; font-weight: 600;
     font-size: clamp(36px, 5vw, 60px);
     line-height: 1.08; letter-spacing: -.02em;
     margin: 0 0 32px; color: #fff;
@@ -332,12 +332,12 @@
   }
   .study-hero .context-band .text,
   .cover .cover-context-band .text {
-    font-family: 'Fraunces', serif; font-weight: 400;
+    font-family: 'Fraunces', serif; font-weight: 500;
     font-size: clamp(22px, 2.4vw, 30px);
     line-height: 1.35; letter-spacing: -.005em; color: var(--ink);
   }
   .study-hero .rq-subhead .rq-text {
-    font-family: 'Fraunces', serif; font-weight: 400;
+    font-family: 'Fraunces', serif; font-weight: 500;
     font-size: clamp(22px, 2.4vw, 30px);
     line-height: 1.35; letter-spacing: -.005em; color: var(--ink); margin: 0;
   }
@@ -351,7 +351,7 @@
     padding: 120px 32px;
   }
   .cover h1 {
-    font-family: 'Fraunces', serif; font-weight: 400;
+    font-family: 'Fraunces', serif; font-weight: 700;
     font-size: clamp(48px, 7vw, 96px);
     line-height: 1.02; letter-spacing: -.025em;
     margin: 0 auto 28px; max-width: 14ch;
@@ -366,14 +366,14 @@
 
   /* ── About / two column ───────────────────────────────────────────── */
   h2.section-title {
-    font-family: 'Fraunces', serif; font-weight: 400;
+    font-family: 'Fraunces', serif; font-weight: 700;
     font-size: clamp(36px, 4.5vw, 56px);
     line-height: 1.08; letter-spacing: -.02em;
     margin: 0 0 32px;
   }
   h3.sub-title {
-    font-family: 'Fraunces', serif; font-weight: 400;
-    font-size: clamp(24px, 2.8vw, 34px);
+    font-family: 'Fraunces', serif; font-weight: 700;
+    font-size: clamp(22px, 2.4vw, 30px);
     line-height: 1.2; letter-spacing: -.015em;
     margin: 0 0 16px;
   }
@@ -416,7 +416,7 @@
   a.pillar:hover::after, a.pillar:focus-visible::after { transform: translateX(4px); color: var(--work); }
   .pillar .emoji { font-size: 44px; margin-bottom: 16px; line-height: 1; }
   .pillar .label {
-    font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 12px;
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; margin-bottom: 12px;
   }
   .pillar .lesson { font-size: 14px; color: var(--ink-70); margin-bottom: 16px; line-height: 1.55; }
   .pillar .study-tag { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--ink-10); font-size: 10px; text-transform: uppercase; letter-spacing: .2em; color: var(--ink-50); }
@@ -481,7 +481,7 @@
     font-weight: 600;
   }
   .insight h2 {
-    font-family: 'Fraunces', serif; font-weight: 400;
+    font-family: 'Fraunces', serif; font-weight: 600;
     font-size: clamp(28px, 4vw, 44px);
     line-height: 1.15; letter-spacing: -.015em;
     margin: 0 0 32px; max-width: 28ch;
@@ -575,7 +575,7 @@
     color: var(--work); font-weight: 700;
   }
   .emergent-insight .ei-body {
-    margin-top: 10px; font-family: 'Fraunces', serif; font-weight: 400;
+    margin-top: 10px; font-family: 'Fraunces', serif; font-weight: 500;
     font-size: clamp(20px, 2.1vw, 26px); line-height: 1.3; color: var(--ink);
   }
   .emergent-insight .ei-quotes {
@@ -683,8 +683,8 @@
   /* ── Embedded finding headline (slides 9, 12) ──────────────────── */
   .finding-headline {
     font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 700;
+    font-size: clamp(28px, 3.6vw, 44px);
     line-height: 1.12;
     letter-spacing: -.02em;
     color: var(--ink);
@@ -1020,6 +1020,38 @@
   }
   .thanks h1 .accent { font-style: italic; font-weight: 300; color: rgba(245,241,234,.7); }
 
+  /* ── Cover pitch card ─────────────────────────────────────────────── */
+  .cover-pitch {
+    margin: 48px auto 0;
+    max-width: 820px;
+    text-align: left;
+    background: var(--ink);
+    color: #fff;
+    padding: clamp(32px, 4vw, 48px) clamp(28px, 4vw, 56px);
+    border-radius: 4px;
+    border-left: 6px solid var(--work);
+    box-shadow: 0 24px 56px rgba(26,26,26,.22);
+  }
+  .cover-pitch .cover-pitch-eyebrow {
+    font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+    font-weight: 700; color: var(--work); margin-bottom: 18px;
+  }
+  .cover-pitch .cover-pitch-text {
+    margin: 0; font-size: clamp(20px, 2.1vw, 26px);
+    line-height: 1.4; font-weight: 500; color: #fff;
+    letter-spacing: -.005em;
+  }
+  .cover-pitch .cover-pitch-text em { font-style: italic; color: var(--work); font-weight: 700; }
+  .cover-pitch .cover-pitch-text strong { font-weight: 700; color: #fff; }
+  .cover-pitch .cover-pitch-text--sub {
+    margin-top: 22px;
+    font-size: clamp(16px, 1.6vw, 19px);
+    color: rgba(255,255,255,.88);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .cover-pitch .cover-pitch-text--sub strong { color: #fff; }
+
   /* ── TOC ──────────────────────────────────────────────────────────── */
   .toc {
     background: var(--work);
@@ -1033,7 +1065,7 @@
   .toc h4 { margin: 0 0 18px; font-size: 11px; text-transform: uppercase; letter-spacing: .24em; color: rgba(255,255,255,.78); font-weight: 700; }
   .toc ol { margin: 0; padding-left: 22px; columns: 2; column-gap: 36px; }
   @media (max-width: 700px) { .toc ol { columns: 1; } }
-  .toc li { font-family: 'Fraunces', serif; font-size: 15px; color: rgba(255,255,255,.92); margin-bottom: 10px; line-height: 1.4; }
+  .toc li { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 10px; line-height: 1.4; }
   .toc li::marker { color: rgba(255,255,255,.55); }
   .toc li a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.4); transition: border-color .2s ease; }
   .toc li a:hover { color: #fff; border-bottom-color: #fff; }
@@ -1068,7 +1100,7 @@
     color: var(--ink-50); font-weight: 600; margin-bottom: 18px;
   }
   .study-hero .study-name {
-    font-family: 'Fraunces', serif; font-weight: 400;
+    font-family: 'Fraunces', serif; font-weight: 700;
     font-size: clamp(56px, 8.4vw, 104px);
     line-height: 1.02; letter-spacing: -.03em;
     margin: 0 auto; max-width: 22ch;
@@ -1189,6 +1221,18 @@
     <div class="subtitle">Microsoft AI Exploration</div>
     <div class="author">A research narrative by <strong>Rachele Benjamin, PhD</strong></div>
 
+    <aside class="cover-pitch" aria-label="The research brief">
+      <div class="cover-pitch-eyebrow">What is agentic AI?</div>
+      <p class="cover-pitch-text">
+        AI that <em>acts</em> — not just answers. Agentic AI can browse, compare, add to cart, and check out on your behalf.
+      </p>
+      <p class="cover-pitch-text cover-pitch-text--sub">
+      </p>
+      <p class="cover-pitch-text cover-pitch-text--sub" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.55); font-size: clamp(14px, 1.35vw, 16px);">
+        <strong>Agentic AI</strong> refers to AI systems that autonomously plan and execute multi-step tasks — as distinct from conversational AI, which responds to prompts but takes no independent action.
+      </p>
+    </aside>
+
     <div class="toc" style="max-width: 820px; margin: 32px auto 0; text-align: left;">
       <h4>Inside this case study</h4>
       <ol>
@@ -1221,13 +1265,13 @@
       <a class="pillar agent" href="#study-1-2-hero">
         <span class="emoji">🤖</span>
         <div class="label">Agentic AI</div>
-        <p class="lesson scroll-reveal">Partner with users to streamline complex, multi-step tasks. Qualitative studies.</p>
+        <p class="lesson scroll-reveal">Partner with users to streamline complex, multi-step tasks./p>
         <div class="study-tag">Study 1 <span class="amp">&amp;</span> 2</div>
       </a>
       <a class="pillar shop" href="#study-3-hero">
         <span class="emoji">🛍️</span>
         <div class="label">Shopping</div>
-        <p class="lesson scroll-reveal">User control means keeping the fun in shopping. Mixed methods (qual and quant)</p>
+        <p class="lesson scroll-reveal">User control means keeping the fun in shopping.</p>
         <div class="study-tag">Study 3 <span class="amp">&amp;</span> 4</div>
       </a>
     </div>
@@ -1750,7 +1794,7 @@
     <div class="slide-tag">Study 4 · Concept</div>
     <div class="concept-embed" style="margin-top: 8px;">
       <div class="concept-label" style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.25em; text-transform:uppercase; color:var(--work); font-weight:700; margin-bottom:14px;">Concept · Continue Journey</div>
-      <h3 class="sub-title" style="margin-top: 0; max-width: 32ch;">Uses an existing pattern (Journey Cards on the New Tab Page) to help users get back into Shopping.</h3>
+      <h3 class="sub-title" style="margin-top: 0;">Uses an existing pattern (Journey Cards on the New Tab Page) to help users get back into Shopping.</h3>
       <div class="jobs-addressed" style="margin-top: 28px;">
         <div class="jobs-label" style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-50); font-weight:700; margin-bottom:12px;">Jobs addressed</div>
         <div class="jobs-list" style="display:flex; flex-wrap:wrap; gap:24px; font-family:'Fraunces',serif; font-size:22px; color:var(--ink);">
