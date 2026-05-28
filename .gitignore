@@ -39,7 +39,7 @@ itextsharp/
 # Large binary source files (PowerPoint, PDFs, etc.) — exceed GitHub size limits
 *.pptx
 *.ppt
-*.pdf
+
 *.zip
 *.docx
 *.doc
