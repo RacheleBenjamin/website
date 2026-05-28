@@ -1686,10 +1686,10 @@
 
     <!-- Zoom toggle -->
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
-      <button id="opp-zoom-btn" style="display:inline-flex;align-items:center;gap:6px;background:var(--cream);border:1px solid var(--ink-15);border-radius:9999px;padding:7px 16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--ink-60);cursor:pointer;transition:background .15s,color .15s;" aria-pressed="false">
-        <span id="opp-zoom-icon" style="font-size:13px;">🔍</span> <span id="opp-zoom-label">Zoom in</span>
+      <button id="opp-zoom-btn" style="display:inline-flex;align-items:center;gap:6px;background:var(--work);border:1px solid var(--work);border-radius:9999px;padding:7px 16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#fff;cursor:pointer;transition:background .15s,color .15s;" aria-pressed="true">
+        <span id="opp-zoom-icon" style="font-size:13px;">×</span> <span id="opp-zoom-label">View opportunity space</span>
       </button>
-      <span id="opp-zoom-hint" style="font-size:11px;color:var(--ink-40);letter-spacing:.08em;">Shows data range only</span>
+      <span id="opp-zoom-hint" style="font-size:11px;color:var(--ink-40);letter-spacing:.08em;">Showing data range ≈ 3.7–4.5 sat, 4.1–4.7 imp</span>
     </div>
 
     <div style="display:flex;align-items:stretch;gap:0;">
@@ -1719,7 +1719,7 @@
           <div style="position:absolute;left:75%;top:0;bottom:0;width:1px;background:var(--ink-10);pointer-events:none;"></div>
 
           <!-- Quadrant labels -->
-          <div style="position:absolute;top:10px;left:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(180,83,9,.6);font-weight:700;pointer-events:none;">Opportunity zone</div>
+          <div id="opp-zone-label" style="position:absolute;top:10px;left:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(180,83,9,.6);font-weight:700;pointer-events:none;">Opportunity zone</div>
           <div style="position:absolute;top:10px;right:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-25,rgba(26,26,26,.25));font-weight:600;pointer-events:none;">Must Have</div>
           <div style="position:absolute;bottom:10px;left:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-20);font-weight:600;pointer-events:none;">Low Priority</div>
           <div style="position:absolute;bottom:10px;right:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-20);font-weight:600;pointer-events:none;">Nice to Have</div>
@@ -1848,7 +1848,7 @@
   var zoomBtn   = document.getElementById('opp-zoom-btn');
   var zoomLabel = document.getElementById('opp-zoom-label');
   var zoomHint  = document.getElementById('opp-zoom-hint');
-  var zoomed = false;
+  var zoomed = true;
 
   /* Axis ranges: [satMin, satMax, impMin, impMax] */
   var FULL = [1, 5, 1, 5];
@@ -1898,6 +1898,10 @@
     plot.querySelectorAll('.opp-dot').forEach(function (d) {
       d.style.transition = 'left .4s ease, top .4s ease, transform .15s ease, background .15s ease, outline .1s ease';
     });
+    /* initialise in zoomed state */
+    positionDots(ZOOM);
+    var zoneLabel = document.getElementById('opp-zone-label');
+    if (zoneLabel) zoneLabel.style.opacity = '0';
     zoomBtn.addEventListener('click', function () {
       zoomed = !zoomed;
       positionDots(zoomed ? ZOOM : FULL);
@@ -1906,8 +1910,10 @@
       zoomBtn.style.color          = zoomed ? '#fff'                  : 'var(--ink-60)';
       zoomBtn.style.borderColor    = zoomed ? 'var(--work)'          : 'var(--ink-15)';
       document.getElementById('opp-zoom-icon').textContent  = zoomed ? '×' : '🔍';
-      zoomLabel.textContent = zoomed ? 'Reset view' : 'Zoom in';
+      zoomLabel.textContent = zoomed ? 'View opportunity space' : 'Zoom in';
       zoomHint.textContent  = zoomed ? 'Showing data range ≈ 3.7–4.5 sat, 4.1–4.7 imp' : 'Shows data range only';
+      var zoneLabel = document.getElementById('opp-zone-label');
+      if (zoneLabel) zoneLabel.style.opacity = zoomed ? '0' : '1';
     });
   }
 })();
