@@ -15,25 +15,24 @@ const researchLinks = [
 
 function SocialIcons() {
   return (
-    <div className="flex items-center gap-4 text-ink/60">
+    <div className="flex items-center gap-6 sm:gap-8 text-ink/60">
       <a
         href="https://scholar.google.com/citations?user=J8PNDCwAAAAJ&hl=en"
         target="_blank"
         rel="noreferrer"
         aria-label="Google Scholar"
-        className="hover:text-ink transition-colors text-xs tracking-wider-2 uppercase"
+        className="hover:text-ink transition-colors text-[11px] sm:text-xs tracking-wider-2 uppercase font-medium inline-flex items-center gap-1"
       >
-        Scholar
+        Scholar<span className="text-[9px] opacity-50">↗</span>
       </a>
-      <span className="w-px h-3 bg-ink/20" />
       <a
         href="https://linkedin.com/in/"
         target="_blank"
         rel="noreferrer"
         aria-label="LinkedIn"
-        className="hover:text-ink transition-colors text-xs tracking-wider-2 uppercase"
+        className="hover:text-ink transition-colors text-[11px] sm:text-xs tracking-wider-2 uppercase font-medium inline-flex items-center gap-1"
       >
-        LinkedIn
+        LinkedIn<span className="text-[9px] opacity-50">↗</span>
       </a>
     </div>
   )
@@ -107,7 +106,6 @@ export default function Nav({ variant = 'home' }) {
               )
             })}
           </ul>
-          <span className="hidden sm:block w-px h-4 bg-ink/20" />
           <SocialIcons />
         </div>
       </div>
