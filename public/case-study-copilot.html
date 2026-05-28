@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>From Solo to Social AI — Copilot · Rachele Benjamin, PhD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream:    #EDF2FA;
+    --ink:      #1A1A1A;
+    --ink-70:   rgba(26,26,26,.70);
+    --ink-60:   rgba(26,26,26,.60);
+    --ink-50:   rgba(26,26,26,.50);
+    --ink-40:   rgba(26,26,26,.40);
+    --ink-30:   rgba(26,26,26,.30);
+    --ink-20:   rgba(26,26,26,.20);
+    --ink-15:   rgba(26,26,26,.15);
+    --ink-10:   rgba(26,26,26,.10);
+    --ink-05:   rgba(26,26,26,.05);
+
+    /* ── Microsoft Copilot brand ── */
+    --primary:      #7461C5;   /* Copilot purple — text accents, borders */
+    --primary-bg:   #EDE9FE;   /* light lavender fill */
+    --secondary:    #1E1B4B;   /* deep indigo — filled dark cards */
+
+    --font-sans: 'Inter', 'Helvetica Neue', Roboto, Arial, sans-serif;
+  }
+  *, *::before, *::after { font-family: var(--font-sans) !important; }
+
+  h1.section-title, h2.section-title {
+    font-size: clamp(36px, 4.5vw, 56px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.02em !important;
+    font-weight: 700 !important;
+  }
+  .cover h1 {
+    font-size: clamp(56px, 8.4vw, 104px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.03em !important;
+    font-weight: 700 !important;
+  }
+  h3.sub-title { font-weight: 700 !important; font-size: clamp(22px, 2.4vw, 30px) !important; line-height: 1.25 !important; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .italic { color: var(--primary); }
+  .eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 10px; font-weight: 600; color: var(--ink-50); }
+
+  /* ── Header bar ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(237,242,250,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ink-10);
+  }
+  .topbar-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar a.home { font-size: 18px; font-weight: 600; color: var(--ink); text-decoration: none; }
+  .topbar a.home span { color: var(--primary); }
+  .topbar .meta { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-60); }
+
+  /* ── Slide container ── */
+  .slide { position: relative; padding: 96px 32px; border-bottom: 1px solid var(--ink-10); background: var(--cream); }
+  .slide-inner { max-width: 1100px; margin: 0 auto; }
+  .slide-num { position: absolute; top: 24px; right: 32px; font-size: 14px; color: var(--ink-30); letter-spacing: .05em; }
+  .slide-tag {
+    display: inline-block;
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 600; margin-bottom: 18px;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    min-height: 92vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; background: var(--cream); padding: 120px 32px;
+  }
+  .cover h1 { font-weight: 700; margin: 0 auto 28px; max-width: 16ch; }
+  .cover h1 .accent { color: var(--primary); }
+  .cover .subtitle { font-size: 13px; letter-spacing: .25em; text-transform: uppercase; color: var(--ink-50); margin-top: 32px; }
+  .cover .author { margin-top: 40px; font-size: 14px; color: var(--ink-60); }
+  .cover .author strong { font-weight: 600; color: var(--ink); }
+
+  /* ── Cover pitch card ── */
+  .cover-pitch {
+    margin: 48px auto 0; max-width: 920px; text-align: left;
+    background: var(--secondary); color: #fff;
+    padding: clamp(32px, 4vw, 48px) clamp(28px, 4vw, 56px);
+    border-radius: 4px; border-left: 6px solid var(--primary);
+    box-shadow: 0 24px 56px rgba(30,27,75,.28);
+  }
+  .cover-pitch .cover-pitch-eyebrow {
+    font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+    font-weight: 700; color: var(--primary); margin-bottom: 18px;
+  }
+  .cover-pitch .cover-pitch-text {
+    margin: 0; font-size: clamp(20px, 2.1vw, 26px);
+    line-height: 1.4; font-weight: 500; color: #fff; letter-spacing: -.005em;
+  }
+  .cover-pitch .cover-pitch-text em { font-style: italic; color: var(--primary); font-weight: 700; }
+  .cover-pitch .cover-pitch-text strong { font-weight: 700; color: #fff; }
+  .cover-pitch .cover-pitch-text--sub {
+    margin-top: 22px; font-size: clamp(16px, 1.6vw, 19px);
+    color: rgba(255,255,255,.88); font-weight: 400; line-height: 1.5;
+  }
+  .cover-pitch .cover-pitch-text--sub strong { color: #fff; }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--primary-bg); border: 1px solid rgba(116,97,197,.18);
+    padding: 36px 44px; margin-top: 40px; border-radius: 4px;
+    box-shadow: 0 18px 40px rgba(30,27,75,.10); color: var(--ink);
+    max-width: 820px; margin-left: auto; margin-right: auto; text-align: left;
+  }
+  .toc h4 { margin: 0 0 18px; font-size: 11px; text-transform: uppercase; letter-spacing: .24em; color: var(--secondary); font-weight: 700; }
+  .toc ol { margin: 0; padding-left: 22px; }
+  .toc li { font-size: 15px; color: var(--ink); margin-bottom: 10px; line-height: 1.4; }
+  .toc li a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(116,97,197,.35); transition: border-color .2s ease, color .2s ease; }
+  .toc li a:hover { border-bottom-color: var(--secondary); color: var(--secondary); }
+
+  /* ── Headings ── */
+  h2.section-title { margin: 0 0 32px; }
+  h3.sub-title { margin: 0 0 16px; }
+  p.body { font-size: 16px; color: var(--ink-70); line-height: 1.65; margin: 0 0 14px; }
+  p.lead { font-size: 19px; color: var(--ink-70); line-height: 1.6; margin: 0 0 18px; font-weight: 300; }
+
+  /* ── Study hero ── */
+  .study-hero {
+    min-height: 72vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 32px; background: var(--cream);
+    border-bottom: 1px solid var(--ink-10); position: relative;
+  }
+  .study-hero .hero-text-block { text-align: left; }
+  .study-hero > .slide-inner { width: 100%; }
+  .study-hero .study-eyebrow {
+    font-size: 12px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--primary); font-weight: 700; margin-bottom: 18px;
+  }
+  .study-hero .study-name {
+    font-weight: 700; font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.02; letter-spacing: -.03em; margin: 0 auto; max-width: 22ch;
+  }
+  .study-hero .study-name .accent { color: var(--primary); }
+  .study-hero .context-band, .study-hero .rq-subhead { background: transparent; border: none; padding: 0; margin: 0; display: block; max-width: none; }
+  .study-hero .context-band { margin-bottom: 32px; }
+  .study-hero .context-band .label,
+  .study-hero .rq-subhead .rq-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .28em;
+    color: var(--primary); font-weight: 700; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px; justify-content: flex-start;
+  }
+  .study-hero .context-band .label::before,
+  .study-hero .rq-subhead .rq-label::before {
+    content: ''; width: 28px; height: 2px; background: var(--primary); display: inline-block;
+  }
+  .study-hero .context-band .text,
+  .study-hero .rq-subhead .rq-text {
+    font-weight: 500; font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.35; letter-spacing: -.005em; color: var(--ink); margin: 0;
+  }
+
+  /* ── PDF page clip ── */
+  .pdf-clip {
+    display: block; width: 100%; margin: 32px auto 0;
+    border-radius: 4px; border: 1px solid var(--ink-10);
+    box-shadow: 0 6px 24px rgba(26,26,26,.08); background: #fff;
+  }
+  .scene-caption {
+    text-align: center; margin: 14px auto 0; max-width: 720px;
+    font-style: italic; font-size: 14px; color: var(--ink-60);
+  }
+  .hover-hint {
+    margin-bottom: 14px; font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 700; text-align: center;
+  }
+
+  /* ── Image clip + callouts ── */
+  .image-callout-group {
+    position: relative; display: block; border-radius: 4px; overflow: visible; outline: none;
+  }
+  .image-callout-group > img { border-radius: 4px; border: 1px solid var(--ink-10); box-shadow: 0 2px 14px rgba(26,26,26,.06); }
+  .image-callout-group img { display: block; width: 100%; height: auto; transition: filter .35s ease; background: #fff; }
+  .image-callout {
+    position: absolute; right: 4%; bottom: 6%;
+    max-width: min(520px, 52%);
+    background: var(--secondary); color: #fff;
+    padding: 28px 32px; border-radius: 4px;
+    box-shadow: 0 24px 56px rgba(20,20,20,.24);
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .4s ease, transform .4s ease;
+    pointer-events: none;
+  }
+  .image-callout-eyebrow {
+    display: block; font-size: 13px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(255,255,255,.82); margin-bottom: 12px;
+  }
+  .image-callout-text { font-weight: 500; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.4; color: #fff; margin: 0; }
+  .image-callout-text strong { font-weight: 700; }
+  .image-callout-group:hover .image-callout,
+  .image-callout-group:focus .image-callout,
+  .image-callout-group:focus-within .image-callout { opacity: 1; transform: translateY(0); }
+  .image-callout-group:hover img,
+  .image-callout-group:focus img,
+  .image-callout-group:focus-within img { filter: brightness(.92); }
+  .image-callout.image-callout--top { top: 4%; bottom: auto; right: 4%; left: auto; max-width: min(540px, 54%); }
+  .image-callout.is-right-anchor { right: 0; left: auto; transform: translate(52%, 12px); }
+  .image-callout-group:hover .image-callout.is-right-anchor,
+  .image-callout-group:focus .image-callout.is-right-anchor,
+  .image-callout-group:focus-within .image-callout.is-right-anchor { transform: translate(52%, 0); }
+  @media (max-width: 1100px) {
+    .image-callout.is-right-anchor { transform: translate(20%, 12px); }
+    .image-callout-group:hover .image-callout.is-right-anchor,
+    .image-callout-group:focus .image-callout.is-right-anchor,
+    .image-callout-group:focus-within .image-callout.is-right-anchor { transform: translate(20%, 0); }
+  }
+  @media (max-width: 760px) {
+    .image-callout, .image-callout.is-right-anchor { position: static; transform: none; max-width: 100%; margin-top: 12px; opacity: 1; }
+  }
+
+  /* ── Finding eyebrow + headline ── */
+  .finding-eyebrow {
+    display: block; font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--primary); font-weight: 700; margin-bottom: 6px;
+  }
+  .finding-headline {
+    font-weight: 700; font-size: clamp(28px, 3.6vw, 44px);
+    line-height: 1.15; letter-spacing: -.02em; color: var(--ink);
+    margin: 18px 0 6px; max-width: 30ch;
+  }
+  .finding-headline em { font-style: italic; color: var(--primary); }
+
+  /* ── Big insight card ── */
+  .big-insight {
+    margin-top: 40px; padding: 48px clamp(28px, 5vw, 64px);
+    background: var(--secondary); color: #fff;
+    border-radius: 4px; box-shadow: 0 24px 56px rgba(30,27,75,.30);
+  }
+  .big-insight .big-eyebrow {
+    font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(255,255,255,.78); font-weight: 700; margin-bottom: 18px;
+  }
+  .big-insight .big-text {
+    font-size: clamp(28px, 3.4vw, 44px); font-weight: 700;
+    line-height: 1.15; letter-spacing: -.02em; margin: 0; color: #fff;
+  }
+  .big-insight .big-text em { font-style: italic; color: var(--primary); }
+  .big-insight .big-sub { margin-top: 22px; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.92); }
+
+  /* ── Findings collapsible cards ── */
+  .findings {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px;
+  }
+  @media (max-width: 900px) { .findings { grid-template-columns: 1fr; } }
+  .findings--collapsible .finding { cursor: pointer; user-select: none; }
+  .findings--collapsible .finding .head::after { content: ' +'; font-size: 13px; color: var(--ink-30); font-weight: 400; }
+  .findings--collapsible .finding.is-open .head::after { content: ' −'; }
+  .findings--collapsible .finding .detail { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .25s ease; }
+  .findings--collapsible .finding.is-open .detail { max-height: 600px; opacity: 1; }
+  .findings--collapsible .finding .seg-chips { display: none; }
+  .findings--collapsible .finding.is-open .seg-chips { display: block; }
+  .finding {
+    background: #fff; border: 1px solid var(--ink-10); padding: 28px; position: relative;
+  }
+  .finding .icon { font-size: 24px; margin-bottom: 14px; display: block; }
+  .finding .head {
+    font-weight: 700; font-size: 16px; line-height: 1.3;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--primary); margin-bottom: 16px;
+  }
+  .finding .detail { font-size: 15px; color: var(--ink-70); line-height: 1.55; }
+  .finding .detail p { margin: 0 0 12px; }
+  .finding .detail p:last-child { margin-bottom: 0; }
+  .finding .detail ul { margin: 0; padding-left: 18px; }
+  .finding .detail li { margin-bottom: 6px; }
+
+  /* ── Segment chips ── */
+  .seg-chips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--ink-15);
+  }
+  .seg-chips-label { width: 100%; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-50); font-weight: 700; margin-bottom: 4px; }
+  .seg-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 11px; background: var(--primary-bg); color: var(--primary);
+    font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    border-radius: 999px; position: relative; cursor: help; border: none; font-family: inherit;
+  }
+  .seg-chip:focus { outline: none; }
+  .seg-chip:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .seg-chip .seg-chip-tip {
+    position: absolute; bottom: 100%; left: 50%;
+    transform: translateX(-50%) translateY(-2px);
+    background: var(--secondary); color: #fff;
+    padding: 12px 14px; border-radius: 4px;
+    font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none;
+    width: 240px; line-height: 1.45; opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease; z-index: 20;
+    box-shadow: 0 14px 32px rgba(0,0,0,.22); text-align: left;
+  }
+  .seg-chip:hover .seg-chip-tip,
+  .seg-chip:focus-visible .seg-chip-tip { opacity: 1; transform: translateX(-50%) translateY(-8px); }
+
+  /* ── Participant / stat cards ── */
+  .participant-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-top: 32px;
+  }
+  .participant-card {
+    padding: 22px; background: #fff; border: 1px solid var(--ink-10);
+    border-top: 3px solid var(--primary); text-align: center;
+  }
+  .participant-card .p-emoji { font-size: 32px; display: block; margin-bottom: 8px; }
+  .participant-card .p-count { font-size: 36px; font-weight: 700; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+  .participant-card .p-name { font-size: 13px; font-weight: 700; color: var(--primary); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+  .participant-card .p-detail { font-size: 12px; color: var(--ink-60); line-height: 1.4; }
+
+  .stat-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px; margin-top: 28px; padding: 28px 0;
+    border-top: 1px solid var(--ink-10); border-bottom: 1px solid var(--ink-10);
+  }
+  .stat-row .stat-item { text-align: center; }
+  .stat-row .stat-num { font-size: clamp(34px, 4vw, 48px); font-weight: 700; color: var(--primary); line-height: 1; margin-bottom: 6px; }
+  .stat-row .stat-text { font-size: 13px; color: var(--ink-70); line-height: 1.4; }
+
+  /* ── Opportunity cards (2x2 grid) ── */
+  .opp-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 36px;
+  }
+  @media (max-width: 720px) { .opp-grid { grid-template-columns: 1fr; } }
+  .opp-card {
+    padding: 32px; background: #fff; border: 1px solid var(--ink-10);
+    border-top: 4px solid var(--primary); position: relative;
+  }
+  .opp-card .opp-direction {
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 700; margin-bottom: 10px;
+  }
+  .opp-card .opp-title {
+    font-size: clamp(18px, 1.8vw, 22px); font-weight: 700; line-height: 1.25;
+    color: var(--ink); margin-bottom: 14px;
+  }
+  .opp-card .opp-title em { font-style: italic; color: var(--primary); }
+  .opp-card .opp-concepts {
+    list-style: none; margin: 14px 0 0; padding: 14px 0 0;
+    display: flex; flex-wrap: wrap; gap: 6px;
+    border-top: 1px solid var(--ink-10);
+  }
+  .opp-concepts-label {
+    width: 100%; font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 700; margin-bottom: 6px;
+  }
+  .opp-chip {
+    display: inline-flex; align-items: center;
+    padding: 5px 11px; background: var(--primary-bg); color: var(--primary);
+    font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    border-radius: 999px; position: relative; cursor: help;
+    border: none; font-family: inherit;
+  }
+  .opp-chip:focus { outline: none; }
+  .opp-chip:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .opp-chip .opp-chip-tip {
+    position: absolute; bottom: 100%; left: 50%;
+    transform: translateX(-50%) translateY(-2px);
+    background: var(--primary); color: #fff;
+    padding: 10px 12px; border-radius: 4px;
+    font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none;
+    width: 220px; line-height: 1.45;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+    z-index: 20; box-shadow: 0 10px 24px rgba(0,0,0,.2);
+    text-align: left; white-space: normal;
+  }
+  .opp-chip:hover .opp-chip-tip,
+  .opp-chip:focus-visible .opp-chip-tip {
+    opacity: 1; transform: translateX(-50%) translateY(-8px);
+  }
+
+  /* ── Verbatim quote ── */
+  .verbatim {
+    margin: 18px 0; padding: 18px 22px;
+    border-left: 3px solid var(--primary); background: var(--cream);
+    font-size: 14px; line-height: 1.55; color: var(--ink-70);
+  }
+  .verbatim p { margin: 0 0 8px; font-style: italic; }
+  .verbatim cite {
+    display: block; font-style: normal; font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--primary); font-weight: 700;
+  }
+
+  /* ── Emergent insight (scroll-reveal) ── */
+  .emergent-insight {
+    margin-top: 36px;
+    padding: clamp(28px, 3.4vw, 40px) clamp(28px, 3.4vw, 44px);
+    background: var(--primary-bg); border-left: 4px solid var(--secondary);
+    border-radius: 4px;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .emergent-insight.revealed { opacity: 1; transform: translateY(0); }
+  .emergent-insight .ei-label {
+    font-size: 11px; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--secondary); font-weight: 700;
+  }
+  .emergent-insight .ei-body {
+    margin-top: 14px; font-size: clamp(19px, 1.9vw, 24px);
+    line-height: 1.4; color: var(--ink); font-weight: 500; letter-spacing: -.005em;
+  }
+  .emergent-insight .ei-body em { font-style: italic; color: var(--secondary); font-weight: 700; }
+  .emergent-insight .ei-body strong { color: var(--ink); font-weight: 700; }
+
+  /* ── User story cards ── */
+  .story-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 36px; }
+  .story-card { background: #fff; border: 1px solid var(--ink-10); padding: 28px; }
+  .story-card .story-persona {
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--primary); font-weight: 700; margin-bottom: 10px;
+  }
+  .story-card .story-title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
+  .story-card .story-behavior { font-size: 13px; color: var(--ink-60); margin-bottom: 16px; font-style: italic; }
+  .story-card .story-row { display: flex; gap: 10px; margin-bottom: 10px; }
+  .story-card .story-tag {
+    flex-shrink: 0; width: 80px; font-size: 10px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+  }
+  .story-card .story-tag.go { color: var(--primary); }
+  .story-card .story-tag.stop { color: #b91c1c; }
+  .story-card .story-body { font-size: 14px; color: var(--ink-70); line-height: 1.5; }
+
+  /* ── Trust circles list ── */
+  .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 32px; }
+  .trust-item {
+    padding: 20px 22px; background: #fff; border: 1px solid var(--ink-10);
+    border-left: 3px solid var(--primary);
+  }
+  .trust-item .trust-q { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; font-style: italic; }
+  .trust-item .trust-need { font-size: 12px; color: var(--ink-60); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+
+  /* ── Data table ── */
+  .data-table-wrap { margin-top: 32px; overflow-x: auto; }
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--ink-10); font-size: 14px; }
+  table.data th, table.data td {
+    padding: 14px 16px; text-align: left; vertical-align: top;
+    border-bottom: 1px solid var(--ink-10); border-right: 1px solid var(--ink-10);
+  }
+  table.data th:last-child, table.data td:last-child { border-right: none; }
+  table.data thead th { background: var(--ink-05); font-size: 11px; text-transform: uppercase; letter-spacing: .15em; color: var(--ink-60); font-weight: 700; }
+  table.data tbody td.lob { font-weight: 700; color: var(--primary); font-size: 15px; white-space: nowrap; }
+  table.data tbody td ul { margin: 0; padding-left: 16px; }
+  table.data tbody td li { margin-bottom: 4px; color: var(--ink-70); }
+  table.data tbody td li:last-child { margin-bottom: 0; }
+
+  /* ── Conclusion ── */
+  .conclusion {
+    margin-top: 48px; background: var(--secondary); color: #fff;
+    padding: clamp(48px, 6vw, 80px) clamp(36px, 5vw, 72px);
+    border-radius: 4px; box-shadow: 0 24px 56px rgba(30,27,75,.30);
+  }
+  .conclusion-title {
+    font-weight: 700; font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.1; letter-spacing: -.02em; margin: 0 0 24px; color: #fff; max-width: 22ch;
+  }
+  .conclusion-body {
+    font-weight: 300; font-size: clamp(17px, 1.7vw, 22px);
+    line-height: 1.5; color: rgba(255,255,255,.92); margin: 0 0 32px; max-width: 60ch;
+  }
+  .conclusion-body strong { color: #fff; font-weight: 600; font-style: italic; }
+  .conclusion-cta {
+    display: inline-block; padding: 14px 28px; background: #fff; color: var(--primary);
+    font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    text-decoration: none; border-radius: 999px;
+    transition: background .2s ease, transform .2s ease, color .2s ease;
+  }
+  .conclusion-cta:hover { background: var(--cream); transform: translateY(-2px); color: var(--secondary); }
+
+  /* ── Scroll-to-top ── */
+  #scroll-top {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--secondary); color: #fff; border: none;
+    font-size: 22px; font-weight: 700; line-height: 1; cursor: pointer;
+    box-shadow: 0 10px 28px rgba(0,0,0,.22);
+    opacity: 0; transform: translateY(8px); pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease, background .2s ease; z-index: 200;
+  }
+  #scroll-top.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  #scroll-top:hover, #scroll-top:focus-visible { background: #13102e; outline: none; }
+  .amp { font-family: 'Baskerville','Hoefler Text','Garamond','Georgia','Times New Roman', serif !important; font-style: italic; font-weight: 400; padding: 0 .05em; }
+
+  /* role-note removed — replaced with emergent-insight block */
+
+  /* ── Thank you & About me ── */
+  .thanks {
+    min-height: 70vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    background: var(--ink); color: var(--cream);
+  }
+  .thanks h1 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(48px, 8vw, 120px); margin: 0;
+  }
+  .thanks h1 .accent { font-style: italic; font-weight: 300; color: rgba(245,241,234,.7); }
+  .uppercase-mini { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; font-weight: 500; color: var(--ink-50); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; gap: 40px; } }
+  .card { background: #fff; border: 1px solid var(--ink-10); padding: 32px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ── Top bar ── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="home" href="/">Rachele <span>Benjamin</span></a>
+    <span class="meta">Case Study: Social AI · Microsoft Copilot · MAI Discovery Research</span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- COVER                                                          -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide cover" id="slide-1">
+  <div>
+    <h1>From Solo</span> to <span class="accent">Social</span> AI</h1>
+    <p class="subtitle">Designing Copilot for Social Spread &amp; Engagement · MAI Discovery Research</p>
+    <p class="author">Rachele Benjamin &amp; Ming-Li Chai · May 2026</p>
+
+    <aside class="cover-pitch" aria-label="The research brief">
+      <div class="cover-pitch-eyebrow">Researcher-driven study</div>
+      <p class="cover-pitch-text">
+        AI is already spreading person to person — with few <em>designed tools</em> to support it.
+             <p class="cover-pitch-text">
+
+        Working closely with a Principal Researcher at MAI, I set out to understand how, and what Microsoft Copilot could do about it.
+      </p>
+      </p>
+      <p class="cover-pitch-text cover-pitch-text--sub">
+      </p>
+      <p class="cover-pitch-text cover-pitch-text--sub"
+         style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.18);
+                color: rgba(255,255,255,.55); font-size: clamp(14px, 1.35vw, 16px);">
+        <strong>Social AI</strong> refers to AI that is used not in isolation, but in ways that involve sharing,
+        collaborating, or creating joint outcomes with others.
+      </p>
+    </aside>
+
+    <div class="toc" style="margin-top: 40px;">
+      <h4>Inside this case study</h4>
+      <ol>
+        <li><a href="#slide-method">Method — Two-stream research design</a></li>
+        <li><a href="#slide-already-social">Finding — AI is already social (88.5% are hacking it)</a></li>
+        <li><a href="#slide-diffusion-loop">The Solo→Social AI Diffusion Loop</a></li>
+        <li><a href="#slide-barriers">Finding — What stops people from sharing AI</a></li>
+        <li><a href="#slide-trust">Finding — Trust in solo is a pre-condition for social</a></li>
+        <li><a href="#slide-where">Where social AI already happens</a></li>
+        <li><a href="#slide-opportunities">Opportunity framework — 4 value plays</a></li>
+        <li><a href="#slide-continued">Impact</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Why Social AI?                                         -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="study-hero" id="slide-why">
+  <div class="slide-inner">
+    <div class="study-eyebrow">The brief</div>
+    <h2 class="study-name">The next frontier: from solo to <span class="accent">social</span> AI</h2>
+    <div class="hero-text-block" style="margin: 36px 0 0; max-width: 100%;">
+      <div class="context-band">
+        <div class="label">Why Microsoft cares</div>
+        <div class="text">Social use is a growth, engagement, and brand opportunity — and no one has claimed it yet.</div>
+      </div>
+      <div class="rq-subhead">
+        <div class="rq-label">Research questions</div>
+        <p class="rq-text"><strong>1.</strong> How does AI use spread from <span class="italic">one to many?</span></p>
+        <p class="rq-text" style="margin-top: 16px;"><strong>2.</strong> How might AI help groups become <span class="italic">better together?</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Method                                                 -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-method">
+  <div class="slide-num">01</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Method · Two-stream research design</div>
+    <h2 class="section-title">Two-stream research design</h2>
+    <aside class="emergent-insight" aria-label="Researcher's role" style="margin-top: 20px;">
+      <div class="ei-label">My Role</div>
+      <p class="ei-body">I oversaw the quantitative portion of the study, from recruiting to analysis, and co-created the research design for the qualitative portion, leading half of the 1:1 sessions. We both contributed to analysis and storytelling.</p>
+    </aside>
+
+    <div class="participant-grid">
+      <div class="participant-card">
+        <span class="p-emoji">📊</span>
+        <div class="p-count">1,045</div>
+        <div class="p-name">Quant participants</div>
+        <div class="p-detail">UserTesting + Qualtrics Panels<br>30-min survey · US &amp; Japan</div>
+      </div>
+      <div class="participant-card">
+        <span class="p-emoji">🇺🇸</span>
+        <div class="p-count">465</div>
+        <div class="p-name">US respondents</div>
+        <div class="p-detail">AI users &amp; digital group members<br>Medium AI fluency (M = 3.43/5)</div>
+      </div>
+      <div class="participant-card">
+        <span class="p-emoji">🇯🇵</span>
+        <div class="p-count">550</div>
+        <div class="p-name">Japan respondents</div>
+        <div class="p-detail">AI users &amp; digital group members<br>Same fluency criteria</div>
+      </div>
+      <div class="participant-card">
+        <span class="p-emoji">🎙️</span>
+        <div class="p-count">20</div>
+        <div class="p-name">Qual participants</div>
+        <div class="p-detail">Dscout + UserTesting interviews<br>75-min sessions · US only<br>Medium-high AI fluency</div>
+      </div>
+    </div>
+
+    <p class="body" style="max-width: 70ch; margin-top: 28px;">AI use doesn't stay solo for long. Each stage — Use, Consider, Prepare, React, Interact, Collaborate, Share — represents a distinct moment where solo AI becomes social. These moments are where Copilot can intervene with designed support.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — AI is already social                                   -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-already-social" style="padding-top: 60px;">
+  <div class="slide-num">02</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Finding · Current behavior</div>
+    <span class="finding-eyebrow">Finding</span>
+    <h2 class="finding-headline">AI is <em>already</em> social — people are hacking it without designed tools</h2>
+
+    <div class="big-insight">
+      <div class="big-eyebrow">Headline finding</div>
+      <p class="big-text"><em>88.5%</em> of AI users are already sharing or using AI socially.</p>
+      <p class="big-sub">Two-thirds are using designed solutions. But 88.5% are "hacking" it — screenshotting, copy-pasting, verbal retelling — losing context, tone, and interactivity every time. The demand is real. The tools aren't there yet.</p>
+    </div>
+
+    <img class="pdf-clip" style="max-width: 880px; margin: 32px auto 0;"
+         src="slides/copilot/page_06.png"
+         alt="Slide 6: Bar chart showing 88.5% of participants are hacking social AI, 66.5% using designed solutions. Various social AI behaviors from high to low frequency." />
+    <p class="scene-caption">N = 1,045. The gap between "hacking" (88.5%) and "designed" (66.5%) is the opportunity space.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Diffusion Loop                                         -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-diffusion-loop">
+  <div class="slide-num">04</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Synthesis · Framework</div>
+    <span class="finding-eyebrow">Framework</span>
+    <h2 class="finding-headline">The <em>Solo→Social AI </em> Diffusion Loop</h2>
+    <p class="body" style="max-width: 65ch; margin-top: 12px;">
+      AI use doesn't stay solo for long. Each stage — Use, Consider, Prepare, React, Interact, Collaborate, Share — represents a distinct moment where solo AI becomes social.
+      These moments are where Copilot can intervene with designed support.
+    </p>
+
+    <div class="image-callout-group" tabindex="0" style="max-width: 880px; margin: 32px auto 0;">
+      <img src="slides/copilot/page_08.png" alt="Slide 8: The Solo→Social AI Diffusion Loop. Two loops: the Solo Loop (Use, Consider, Prepare) and the Social Loop (React, Collaborate, Interact, Share), with arrows showing the flow between them." />
+      <div class="image-callout image-callout--top is-right-anchor" role="note">
+        <span class="image-callout-eyebrow">The transition point</span>
+        <p class="image-callout-text">The moment between <strong>Prepare</strong> and <strong>Share</strong> is where friction is highest — and where designed tools have the biggest leverage.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Barriers                                               -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-barriers" style="padding-top: 60px;">
+  <div class="slide-inner">
+
+    <h2 class="finding-headline" style="margin-bottom: 32px;">Preventing movement <em>across the loop</em></h2>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="icon">😬</span>
+        <div class="head">Social Discomfort</div>
+        <div class="detail">
+          <p>Fear of judgment, stigma of using AI.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="icon">🔧</span>
+        <div class="head">Tool Friction</div>
+        <div class="detail">
+          <p>Users take screenshots that effectively flatten otherwise dynamic conversations.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="icon">🎭</span>
+        <div class="head">Inauthenticity</div>
+        <div class="detail">
+          <p>AI output doesn't sound like “me.”</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="icon">📭</span>
+        <div class="head">Lack of Response</div>
+        <div class="detail">
+          <p>People need social feedback to validate that sharing AI was worthwhile.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="icon">💬</span>
+        <div class="head">Difficult Social Discourse</div>
+        <div class="detail">
+          <p>People need social feedback to validate that sharing AI was worthwhile.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Trust                                                  -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-trust">
+  <div class="slide-inner">
+
+    <div class="image-callout-group" tabindex="0" style="max-width: 880px; margin: 32px auto 0;">
+      <img src="slides/copilot/page_10.png" alt="Slide 10: Trust in solo is a pre-condition for trust in social. Six user concerns mapped to permission and design needs." />
+      <div class="image-callout image-callout--top is-right-anchor" role="note">
+        <span class="image-callout-eyebrow">Pre-condition</span>
+        <p class="image-callout-text">Before anyone will bring AI into a shared space, they need to feel confident it represents them accurately, protects their information, and won't undermine them in front of others.</p>
+      </div>
+    </div>
+    <p class="scene-caption">Trust is a layered need — personal trust in AI must precede group-level trust.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Who & what                                             -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-where" style="padding-top: 60px;">
+  <div class="slide-num">07</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Finding · Context &amp; scenarios</div>
+    <span class="finding-eyebrow">Finding</span>
+    <h2 class="finding-headline">Social AI is already happening — <em>with partners, for travel and food</em></h2>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 32px;">
+      <div>
+        <img class="pdf-clip" style="margin: 0;" src="slides/copilot/page_12.png"
+             alt="Slide 12: Bar chart — closer ties (partners, family, friends) produce higher comfort with social AI. Service providers and classrooms produce lowest comfort." />
+        <p class="scene-caption" style="margin-top: 10px;">Comfort correlates with relationship closeness.</p>
+      </div>
+      <div>
+        <img class="pdf-clip" style="margin: 0;" src="slides/copilot/page_13.png"
+             alt="Slide 13: Bar chart — lighter topics (travel, food, entertainment) produce highest comfort. Finance and health topics produce lowest comfort." />
+        <p class="scene-caption" style="margin-top: 10px;">Comfort correlates with topic weight.</p>
+      </div>
+    </div>
+
+    <aside class="emergent-insight" aria-label="Quantitative pattern">
+      <div class="ei-label">Quantitative pattern</div>
+      <p class="ei-body"><strong>Closer relationships and lighter topics</strong> unlock social AI comfort. Partners and family create the highest comfort zones; finance and health topics create the most hesitation.</p>
+    </aside>
+
+    <h3 class="sub-title" style="margin-top: 48px;">Top social AI scenarios by group type</h3>
+
+    <div class="data-table-wrap">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Top 3 topics</th>
+            <th>Signature scenarios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="lob">👫 Partners</td>
+            <td>Travel Planning, Food &amp; Meals, Life Organization</td>
+            <td>Garden project, Family trip, Real estate research</td>
+          </tr>
+          <tr>
+            <td class="lob">👥 Friends</td>
+            <td>Travel Planning, News &amp; Events, Food &amp; Meals</td>
+            <td>Road trip, Dinner out, Sports chat</td>
+          </tr>
+          <tr>
+            <td class="lob">👨‍👩‍👧 Family</td>
+            <td>Food &amp; Meals, Health, Productivity</td>
+            <td>Meal planning, Health queries, Household logistics</td>
+          </tr>
+          <tr>
+            <td class="lob">💼 Teams</td>
+            <td>Productivity &amp; Projects, Learning, News</td>
+            <td>Work presentation, Study group, Volunteer crew</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Opportunity Framework                                  -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-opportunities">
+  <div class="slide-num">08</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Opportunity · Value-based experience framework</div>
+    <span class="finding-eyebrow">Opportunity</span>
+    <h2 class="finding-headline">Four value plays for <em>social Copilot</em></h2>
+    <p class="body" style="max-width: 65ch; margin-top: 12px;">
+      Each opportunity addresses a distinct moment in the diffusion loop. Together they form a coherent experience strategy.
+    </p>
+
+
+    <div class="opp-grid">
+      <div class="opp-card">
+        <div class="opp-direction">Me → You · Put it out there</div>
+        <div class="opp-title">Share Better: Help me <em>express &amp; influence</em> with confidence</div>
+        <ul class="opp-concepts">
+          <li class="opp-concepts-label">Concepts</li>
+          <li><button class="opp-chip">Controlled Curation<span class="opp-chip-tip">Users work with the AI to decide what's shareable (and what's not)</span></button></li>
+          <li><button class="opp-chip">Social-able Artifact<span class="opp-chip-tip">Content- and audience-aware artifact (e.g., TikTok-style video)</span></button></li>
+          <li><button class="opp-chip">Authentic Voice<span class="opp-chip-tip">AI never hides — it expresses uncertainty and the user can fill in the gaps</span></button></li>
+          <li><button class="opp-chip">Ubiquitous Share<span class="opp-chip-tip">Cross-platform AI sharing to minimize frictions</span></button></li>
+        </ul>
+      </div>
+      <div class="opp-card">
+        <div class="opp-direction">Many → Me · Focus attention</div>
+        <div class="opp-title">Sense Better: Help me <em>tune in</em> to what's important</div>
+        <ul class="opp-concepts">
+          <li class="opp-concepts-label">Concepts</li>
+          <li><button class="opp-chip">Get the TL;DR<span class="opp-chip-tip">Quickly catch up</span></button></li>
+          <li><button class="opp-chip">Theme Buckets<span class="opp-chip-tip">Smart content categorization</span></button></li>
+          <li><button class="opp-chip">Timely AMA<span class="opp-chip-tip">In-the-moment AI support</span></button></li>
+          <li><button class="opp-chip">Proactive Discovery<span class="opp-chip-tip">AI makes contact first — no more sifting through long forums</span></button></li>
+        </ul>
+      </div>
+      <div class="opp-card">
+        <div class="opp-direction">Me → You · Give and take</div>
+        <div class="opp-title">Interact Better: Help us <em>appreciate everyone's</em> perspective</div>
+        <ul class="opp-concepts">
+          <li class="opp-concepts-label">Concepts</li>
+          <li><button class="opp-chip">Level-headed 3rd Party<span class="opp-chip-tip">AI as a conflict resolution tool</span></button></li>
+          <li><button class="opp-chip">Tiered Participation<span class="opp-chip-tip">From lurker to leader, AI to help group members find their voice</span></button></li>
+        </ul>
+      </div>
+      <div class="opp-card">
+        <div class="opp-direction">We → Outcome · Better together</div>
+        <div class="opp-title">Collaborate Better: Help us <em>accomplish a shared</em> outcome</div>
+        <ul class="opp-concepts">
+          <li class="opp-concepts-label">Concepts</li>
+          <li><button class="opp-chip">Group Coordination<span class="opp-chip-tip">Turn-taking for better collaboration</span></button></li>
+          <li><button class="opp-chip">Family Planner<span class="opp-chip-tip">Think 'notes on the fridge' — everyone's in the know</span></button></li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Conclusion                                             -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-continued" style="border-bottom: none;">
+  <div class="slide-inner">
+    <div class="conclusion">
+      <h2 class="conclusion-title">Impact</h2>
+      <p class="conclusion-body">
+        We gave MAI a research-backed framework — the Solo→Social AI Diffusion Loop — with four clearly scoped opportunity areas.
+        <p>This research was conducted across US and Japan markets, making it the first cross-cultural baselines for social AI behavior within Microsoft.
+      </p>
+      <a class="conclusion-cta" href="mailto:9rachelebenjamin@gmail.com?subject=Copilot%20Social%20AI%20case%20study">Email me for the full story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- Thank you                                                      -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide thanks" id="slide-thanks" style="border-bottom: none;">
+  <div class="slide-num" style="color: rgba(245,241,234,.3);">✦</div>
+  <div class="slide-inner">
+    <h1>Thank you, &amp; ask me about my <span class="accent"> vibe-coded </span> case study!</h1>
+  </div>
+</section>
+
+<!-- Appendix: About me -->
+<section class="slide" id="slide-about-me">
+  <div class="slide-num">A</div>
+  <div class="slide-inner">
+    <div class="slide-tag">About me</div>
+    <h2 class="section-title">Mixed methods researcher who thrives on <span class="italic">variety</span></h2>
+    <div class="two-col" style="margin-top: 40px;">
+      <div class="card">
+        <div class="uppercase-mini">Microsoft (MAI)</div>
+        <h3 class="sub-title" style="margin-top: 12px;">UX Researcher</h3>
+        <p class="body">Led 35 studies across Edge (Consumer, Enterprise), Shopping, Copilot, GroupMe, Character, Read aloud, Bing, and more.</p>
+      </div>
+      <div class="card">
+        <div class="uppercase-mini">PhD in Social Psychology</div>
+        <h3 class="sub-title" style="margin-top: 12px;">Academic research</h3>
+        <p class="body">Defining <span class="amp">&amp;</span> explaining 'uncanny' feelings.</p>
+        <p class="body">Attitudes towards democracy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<button id="scroll-top" type="button" aria-label="Scroll to top">↑</button>
+
+<script>
+(function () {
+  /* ── Finding card expand/collapse ── */
+  document.querySelectorAll('.findings--collapsible .finding').forEach(function (el) {
+    var toggle = function () {
+      var open = el.classList.toggle('is-open');
+      el.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    el.addEventListener('click', toggle);
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
+
+  /* ── Scroll-reveal emergent insights ── */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.emergent-insight').forEach(function (el) {
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.emergent-insight').forEach(function (el) {
+      el.classList.add('revealed');
+    });
+  }
+
+  /* ── Scroll-to-top ── */
+  var btn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', function () {
+    btn.classList.toggle('is-visible', window.scrollY > 400);
+  });
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

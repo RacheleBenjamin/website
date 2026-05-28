@@ -1,0 +1,1657 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Open Banking — Discovery Interviews · Rachele Benjamin, PhD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #EDF2FA;
+    --ink: #1A1A1A;
+    --ink-70: rgba(26,26,26,.70);
+    --ink-60: rgba(26,26,26,.60);
+    --ink-50: rgba(26,26,26,.50);
+    --ink-40: rgba(26,26,26,.40);
+    --ink-30: rgba(26,26,26,.30);
+    --ink-20: rgba(26,26,26,.20);
+    --ink-15: rgba(26,26,26,.15);
+    --ink-10: rgba(26,26,26,.10);
+    --ink-05: rgba(26,26,26,.05);
+
+    --shop: #1d4ed8;
+    --shop-bg: #dbeafe;
+    --agent: #6d28d9;
+    --agent-bg: #ede9fe;
+    --work: #54B848;          /* TD Bank Green — primary text accent */
+    --work-bg: #dcf0d6;       /* Soft TD-green tint */
+    --bright: #003F2D;        /* TD Bank Dark Green — deep filled bg */
+    --bright-ink: #003F2D;    /* readable text on bright bg */
+    --positive: #047857;
+    --positive-bg: #d1fae5;
+
+    --font-sans: 'Inter', 'Helvetica Neue', Roboto, Arial, 'Lucida Grande', sans-serif;
+  }
+  *, *::before, *::after { font-family: var(--font-sans) !important; }
+
+  h1.section-title, h2.section-title {
+    font-size: clamp(36px, 4.5vw, 56px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.02em !important;
+    font-weight: 700 !important;
+  }
+  .cover h1 {
+    font-size: clamp(56px, 8.4vw, 104px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.03em !important;
+    font-weight: 700 !important;
+  }
+  h3.sub-title { font-weight: 700 !important; font-size: clamp(22px, 2.4vw, 30px) !important; line-height: 1.25 !important; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .italic { color: var(--work); }
+  .eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: 10px; font-weight: 600; color: var(--ink-50); }
+
+  /* ── Header bar ─────────────────────────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(237,242,250,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ink-10);
+  }
+  .topbar-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar a.home { font-size: 18px; font-weight: 600; color: var(--ink); text-decoration: none; }
+  .topbar a.home span { color: var(--work); }
+  .topbar .meta {
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-60);
+  }
+
+  /* ── Slide container ────────────────────────────────────────── */
+  .slide {
+    position: relative;
+    padding: 96px 32px;
+    border-bottom: 1px solid var(--ink-10);
+    background: var(--cream);
+  }
+  .slide-inner { max-width: 1100px; margin: 0 auto; }
+  .slide-num {
+    position: absolute; top: 24px; right: 32px;
+    font-size: 14px; color: var(--ink-30); letter-spacing: .05em;
+  }
+  .slide-tag {
+    display: inline-block;
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 600;
+    margin-bottom: 18px;
+  }
+
+  /* ── Cover ───────────────────────────────────────────────────── */
+  .cover {
+    min-height: 92vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    background: var(--cream);
+    padding: 120px 32px;
+  }
+  .cover h1 { font-weight: 700; margin: 0 auto 28px; max-width: 14ch; }
+  .cover h1 .accent { color: var(--work); }
+  .cover .subtitle {
+    font-size: 13px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--ink-50); margin-top: 32px;
+  }
+  .cover .author { margin-top: 56px; font-size: 14px; color: var(--ink-60); }
+  .cover .author strong { font-weight: 600; color: var(--ink); }
+
+  /* ── Cover pitch card (the headline ask of the case study) ───── */
+  .cover-pitch {
+    margin: 48px auto 0;
+    max-width: 920px;
+    text-align: left;
+    background: var(--bright);
+    color: #fff;
+    padding: clamp(32px, 4vw, 48px) clamp(28px, 4vw, 56px);
+    border-radius: 4px;
+    border-left: 6px solid var(--work);
+    box-shadow: 0 24px 56px rgba(0, 63, 45, .28);
+  }
+  .cover-pitch .cover-pitch-eyebrow {
+    font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+    font-weight: 700; color: var(--work); margin-bottom: 18px;
+  }
+  .cover-pitch .cover-pitch-text {
+    margin: 0; font-size: clamp(20px, 2.1vw, 26px);
+    line-height: 1.4; font-weight: 500; color: #fff;
+    letter-spacing: -.005em;
+  }
+  .cover-pitch .cover-pitch-text em { font-style: italic; color: var(--work); font-weight: 700; }
+  .cover-pitch .cover-pitch-text strong { font-weight: 700; color: #fff; }
+  .cover-pitch .cover-pitch-text--sub {
+    margin-top: 22px;
+    font-size: clamp(16px, 1.6vw, 19px);
+    color: rgba(255,255,255,.88);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .cover-pitch .cover-pitch-text--sub strong { color: #fff; }
+
+  /* ── TOC ─────────────────────────────────────────────────────── */
+  .toc {
+    background: var(--work-bg);
+    border: 1px solid rgba(0, 63, 45, .12);
+    padding: 36px 44px;
+    margin-top: 40px;
+    border-radius: 4px;
+    box-shadow: 0 18px 40px rgba(0, 63, 45, .12);
+    color: var(--ink);
+    max-width: 820px;
+    margin-left: auto; margin-right: auto;
+    text-align: left;
+  }
+  .toc h4 { margin: 0 0 18px; font-size: 11px; text-transform: uppercase; letter-spacing: .24em; color: var(--bright); font-weight: 700; }
+  .toc ol { margin: 0; padding-left: 22px; }
+  .toc li { font-size: 15px; color: var(--ink); margin-bottom: 10px; line-height: 1.4; }
+  .toc li a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(0, 63, 45, .35); transition: border-color .2s ease, color .2s ease; }
+  .toc li a:hover { border-bottom-color: var(--bright); color: var(--bright); }
+
+  /* ── Headings ───────────────────────────────────────────────── */
+  h2.section-title { margin: 0 0 32px; }
+  h3.sub-title { margin: 0 0 16px; }
+  p.body { font-size: 16px; color: var(--ink-70); line-height: 1.65; margin: 0 0 14px; }
+  p.lead { font-size: 19px; color: var(--ink-70); line-height: 1.6; margin: 0 0 18px; font-weight: 300; }
+
+  .amp {
+    font-family: 'Baskerville','Hoefler Text','Garamond','Georgia','Times New Roman', serif !important;
+    font-style: italic; font-weight: 400; padding: 0 .05em;
+  }
+
+  /* ── Study hero (chapter intro) ──────────────────────────── */
+  .study-hero {
+    min-height: 72vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 32px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--ink-10);
+    position: relative;
+  }
+  .study-hero .hero-text-block { text-align: left; }
+  .study-hero > .slide-inner { width: 100%; }
+  .study-hero .study-eyebrow {
+    font-size: 12px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--work); font-weight: 700; margin-bottom: 18px;
+  }
+  .study-hero .study-name {
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.02; letter-spacing: -.03em;
+    margin: 0 auto; max-width: 22ch;
+  }
+  .study-hero .study-name .accent { color: var(--work); }
+
+  /* Context band + RQ inside study hero */
+  .study-hero .context-band,
+  .study-hero .rq-subhead {
+    background: transparent; border: none;
+    padding: 0; margin: 0;
+    display: block; max-width: none;
+  }
+  .study-hero .context-band { margin-bottom: 32px; }
+  .study-hero .context-band .label,
+  .study-hero .rq-subhead .rq-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .28em;
+    color: var(--work); font-weight: 700;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px; justify-content: flex-start;
+  }
+  .study-hero .context-band .label::before,
+  .study-hero .rq-subhead .rq-label::before {
+    content: ''; width: 28px; height: 2px; background: var(--work); display: inline-block;
+  }
+  .study-hero .context-band .text,
+  .study-hero .rq-subhead .rq-text {
+    font-weight: 500;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.35; letter-spacing: -.005em;
+    color: var(--ink); margin: 0;
+  }
+
+  /* ── Image clip + callouts ────────────────────────────────── */
+  .image-callout-group {
+    position: relative;
+    display: block;
+    border-radius: 4px;
+    overflow: visible;
+    outline: none;
+  }
+  .image-callout-group > img { border-radius: 4px; border: 1px solid var(--ink-10); box-shadow: 0 2px 14px rgba(26,26,26,.06); }
+  .image-callout-group img { display: block; width: 100%; height: auto; transition: filter .35s ease; background: #fff; }
+  .image-callout {
+    position: absolute; right: 4%; bottom: 6%;
+    max-width: min(560px, 56%);
+    background: var(--bright);
+    color: #fff;
+    padding: 28px 32px;
+    border-radius: 4px;
+    box-shadow: 0 24px 56px rgba(20,20,20,.24);
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .4s ease, transform .4s ease;
+    pointer-events: none;
+  }
+  .image-callout-eyebrow {
+    display: block;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(255,255,255,.82);
+    margin-bottom: 12px;
+  }
+  .image-callout-text {
+    font-weight: 500;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.4; color: #fff; margin: 0;
+  }
+  .image-callout-text strong { font-weight: 700; }
+  .image-callout-group:hover .image-callout,
+  .image-callout-group:focus .image-callout,
+  .image-callout-group:focus-within .image-callout {
+    opacity: 1; transform: translateY(0);
+  }
+  .image-callout-group:hover img,
+  .image-callout-group:focus img,
+  .image-callout-group:focus-within img {
+    filter: brightness(.92);
+  }
+  @media (max-width: 700px) {
+    .image-callout { position: static; max-width: 100%; margin-top: 12px; opacity: 1; transform: none; }
+  }
+  /* Top / middle / bottom positions for stacked callouts on the same image */
+  .image-callout.image-callout--top {
+    top: 4%; bottom: auto; right: 4%; left: auto;
+    max-width: min(540px, 54%);
+  }
+  .image-callout.image-callout--middle {
+    top: 50%; bottom: auto; right: 4%; left: auto;
+    max-width: min(540px, 54%);
+    transform: translateY(-50%) translateY(12px);
+  }
+  .image-callout-group:hover .image-callout.image-callout--middle,
+  .image-callout-group:focus .image-callout.image-callout--middle,
+  .image-callout-group:focus-within .image-callout.image-callout--middle {
+    transform: translateY(-50%);
+  }
+  .image-callout.image-callout--bottom {
+    bottom: 4%; top: auto; right: 4%; left: auto;
+    max-width: min(540px, 54%);
+  }
+  /* When middle callout is also right-anchored, combine X translate + Y centering */
+  .image-callout.image-callout--middle.is-right-anchor {
+    transform: translate(55%, -50%) translateY(12px);
+  }
+  .image-callout-group:hover .image-callout.image-callout--middle.is-right-anchor,
+  .image-callout-group:focus .image-callout.image-callout--middle.is-right-anchor,
+  .image-callout-group:focus-within .image-callout.image-callout--middle.is-right-anchor {
+    transform: translate(55%, -50%);
+  }
+  @media (max-width: 1100px) {
+    .image-callout.image-callout--middle.is-right-anchor { transform: translate(25%, -50%) translateY(12px); }
+    .image-callout-group:hover .image-callout.image-callout--middle.is-right-anchor,
+    .image-callout-group:focus .image-callout.image-callout--middle.is-right-anchor,
+    .image-callout-group:focus-within .image-callout.image-callout--middle.is-right-anchor { transform: translate(25%, -50%); }
+  }
+  @media (max-width: 760px) {
+    .image-callout.image-callout--middle.is-right-anchor { transform: none; }
+  }
+  /* Right-anchored callouts hang off the image's right edge so the page is still visible */
+  .image-callout.is-right-anchor {
+    right: 0; left: auto;
+    transform: translate(55%, 12px);
+  }
+  .image-callout-group:hover .image-callout.is-right-anchor,
+  .image-callout-group:focus .image-callout.is-right-anchor,
+  .image-callout-group:focus-within .image-callout.is-right-anchor {
+    transform: translate(55%, 0);
+  }
+  @media (max-width: 1100px) {
+    .image-callout.is-right-anchor { transform: translate(25%, 12px); }
+    .image-callout-group:hover .image-callout.is-right-anchor,
+    .image-callout-group:focus .image-callout.is-right-anchor,
+    .image-callout-group:focus-within .image-callout.is-right-anchor { transform: translate(25%, 0); }
+  }
+  @media (max-width: 760px) {
+    .image-callout.is-right-anchor { position: static; transform: none; margin-top: 12px; max-width: 100%; }
+  }
+  .hover-hint {
+    margin-bottom: 14px;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 700; text-align: center;
+  }
+
+  /* ── PDF page clip (wholesale) ─────────────────────────────── */
+  .pdf-clip {
+    display: block; width: 100%;
+    margin: 32px auto 0;
+    border-radius: 4px;
+    border: 1px solid var(--ink-10);
+    box-shadow: 0 6px 24px rgba(26,26,26,.08);
+    background: #fff;
+  }
+  .scene-caption {
+    text-align: center; margin: 14px auto 0; max-width: 720px;
+    font-style: italic; font-size: 14px;
+    color: var(--ink-60);
+  }
+
+  /* ── Workstream grid (no white box) ────────────────────────── */
+  .workstream-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .workstream {
+    padding: 18px 6px 18px 20px;
+    border-left: 3px solid var(--work);
+    background: transparent;
+  }
+  .workstream .ws-label {
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--work); font-weight: 700; margin-bottom: 6px;
+  }
+  .workstream .ws-name {
+    font-weight: 600; font-size: 18px; line-height: 1.3; color: var(--ink);
+  }
+
+  /* ── Orange annotation box (deep, matches image-callout hover) ── */
+  .annotation-box {
+    margin-top: 36px;
+    padding: 28px 32px;
+    background: var(--work);
+    border-radius: 4px;
+    box-shadow: 0 24px 56px rgba(20,20,20,.18);
+    color: #fff;
+  }
+  .annotation-box .label {
+    font-size: 13px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(255,255,255,.82); margin-bottom: 12px;
+  }
+  .annotation-box .text {
+    font-weight: 500;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.4; color: #fff; margin: 0;
+  }
+  .annotation-box .text strong { font-weight: 700; color: #fff; }
+
+  /* ── Methods grid (bare, study-setup slides) ─────────────── */
+  .methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .methods-grid--bare { gap: 48px; margin-top: 48px; }
+  .methods-grid--bare .method-item {
+    display: flex; flex-direction: column; gap: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--ink-15);
+  }
+  .methods-grid--bare .method-item .m-label {
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--work); font-weight: 700;
+  }
+  .methods-grid--bare .method-item .m-value {
+    font-size: 18px; line-height: 1.4; color: var(--ink); font-weight: 500;
+  }
+  .methods-grid--bare .method-item .m-value.placeholder {
+    color: var(--ink-40); font-style: italic; font-size: 14px; font-weight: 400;
+  }
+
+  /* ── Segment card grid (Phase 1 synthesis) ─────────────── */
+  .segment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 32px;
+  }
+  .segment-card {
+    padding: 18px 22px 20px 22px;
+    border-left: 3px solid var(--work);
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: background .2s ease;
+  }
+  .segment-card:hover,
+  .segment-card:focus-within,
+  .segment-card.is-open {
+    background: var(--cream);
+  }
+  .segment-card:focus { outline: none; }
+  .segment-card:focus-visible { outline: 2px solid var(--work); outline-offset: 2px; }
+  .segment-card .seg-label {
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--work); font-weight: 700;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .segment-card .seg-toggle {
+    font-size: 18px; line-height: 1; color: var(--work);
+    font-weight: 400; letter-spacing: 0;
+    transition: transform .2s ease;
+  }
+  .segment-card:hover .seg-toggle,
+  .segment-card:focus-within .seg-toggle,
+  .segment-card.is-open .seg-toggle { transform: rotate(45deg); }
+  .segment-card .seg-reveal {
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: max-height .35s ease, opacity .25s ease, margin-top .25s ease;
+    margin-top: 0;
+  }
+  .segment-card:hover .seg-reveal,
+  .segment-card:focus-within .seg-reveal,
+  .segment-card.is-open .seg-reveal {
+    max-height: 600px; opacity: 1; margin-top: 10px;
+  }
+  .segment-card .seg-name {
+    font-weight: 600; font-size: 16px; line-height: 1.4; color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .segment-card .seg-concepts {
+    margin: 0; padding-left: 18px;
+    font-size: 14px; color: var(--ink-70); line-height: 1.55;
+  }
+  .segment-card .seg-concepts li { margin-bottom: 4px; }
+
+  /* ── Findings cards ─────────────────────────────────────────── */
+  .findings {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    margin-top: 32px;
+  }
+  @media (max-width: 900px) { .findings { grid-template-columns: 1fr; } }
+  /* Collapsible finding cards */
+  .findings--collapsible .finding { cursor: pointer; user-select: none; }
+  .findings--collapsible .finding .head::after { content: ' +'; font-size: 13px; color: var(--ink-30); font-weight: 400; }
+  .findings--collapsible .finding.is-open .head::after { content: ' −'; }
+  .findings--collapsible .finding .detail { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .25s ease; }
+  .findings--collapsible .finding.is-open .detail { max-height: 600px; opacity: 1; }
+  .findings--collapsible .finding .seg-chips { display: none; }
+  .findings--collapsible .finding.is-open .seg-chips { display: block; }
+  .finding {
+    background: #fff; border: 1px solid var(--ink-10);
+    padding: 28px; position: relative;
+  }
+  .finding .icon { font-size: 24px; margin-bottom: 14px; display: block; }
+  .finding .head {
+    font-weight: 700; font-size: 16px; line-height: 1.3;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--work); margin-bottom: 16px;
+  }
+  .finding .detail {
+    font-size: 15px; color: var(--ink-70); line-height: 1.55;
+  }
+  .finding .detail p { margin: 0 0 12px; }
+  .finding .detail p:last-child { margin-bottom: 0; }
+  .finding .detail ul { margin: 0; padding-left: 18px; }
+  .finding .detail li { margin-bottom: 6px; }
+
+  .finding-eyebrow {
+    display: block;
+    font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--work); font-weight: 700; margin-bottom: 6px;
+  }
+  .finding-headline {
+    font-weight: 700;
+    font-size: clamp(28px, 3.6vw, 44px);
+    line-height: 1.15; letter-spacing: -.02em;
+    color: var(--ink);
+    margin: 18px 0 6px;
+    max-width: 30ch;
+  }
+  .finding-headline em { font-style: italic; color: var(--work); }
+
+  /* ── Data table (page 10 finding) ───────────────────────────── */
+  .data-table-wrap { margin-top: 32px; overflow-x: auto; }
+  table.data {
+    width: 100%; border-collapse: collapse;
+    background: #fff; border: 1px solid var(--ink-10);
+    font-size: 14px;
+  }
+  table.data th, table.data td {
+    padding: 14px 16px; text-align: left; vertical-align: top;
+    border-bottom: 1px solid var(--ink-10);
+    border-right: 1px solid var(--ink-10);
+  }
+  table.data th:last-child, table.data td:last-child { border-right: none; }
+  table.data thead th {
+    background: var(--ink-05);
+    font-size: 11px; text-transform: uppercase; letter-spacing: .15em;
+    color: var(--ink-60); font-weight: 700;
+  }
+  table.data tbody td.lob {
+    font-weight: 700; color: var(--work); font-size: 15px;
+    background: rgba(180,83,9,.04);
+    white-space: nowrap;
+  }
+  table.data tbody td.segments { font-weight: 500; color: var(--ink); }
+  table.data tbody td ul { margin: 0; padding-left: 16px; }
+  table.data tbody td li { margin-bottom: 4px; color: var(--ink-70); }
+  table.data tbody td.segments li { color: var(--ink); }
+  table.data tbody td li:last-child { margin-bottom: 0; }
+
+  /* ── Conclusion / next ──────────────────────────────────────── */
+  .conclusion {
+    margin-top: 48px;
+    background: var(--bright);
+    color: #fff;
+    padding: clamp(48px, 6vw, 80px) clamp(36px, 5vw, 72px);
+    border-radius: 4px;
+    box-shadow: 0 24px 56px rgba(21,128,61,.22);
+  }
+  .conclusion-title {
+    font-weight: 700;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.1; letter-spacing: -.02em;
+    margin: 0 0 24px; color: #fff;
+    max-width: 22ch;
+  }
+  .conclusion-body {
+    font-weight: 300;
+    font-size: clamp(17px, 1.7vw, 22px);
+    line-height: 1.5; color: rgba(255,255,255,.92);
+    margin: 0 0 32px; max-width: 60ch;
+  }
+  .conclusion-body strong { color: #fff; font-weight: 600; font-style: italic; }
+  .conclusion-cta {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #fff; color: var(--work);
+    font-size: 13px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+    text-decoration: none; border-radius: 999px;
+    transition: background .2s ease, transform .2s ease, color .2s ease;
+  }
+  .conclusion-cta:hover { background: var(--cream); transform: translateY(-2px); color: var(--bright); border-color: var(--bright); }
+
+  /* ── Primer prose (text-only intro) ──────────────────── */
+  .primer-prose {
+    margin-top: 36px;
+    max-width: 100%;
+  }
+  .primer-prose .primer-lede {
+    font-size: clamp(22px, 2.3vw, 28px);
+    line-height: 1.4;
+    color: var(--ink);
+    font-weight: 500;
+    margin: 0 0 24px;
+    letter-spacing: -.01em;
+  }
+  .primer-prose .primer-lede strong { color: var(--work); font-weight: 700; }
+  .primer-prose .primer-body {
+    font-size: clamp(16px, 1.4vw, 18px);
+    line-height: 1.6;
+    color: var(--ink-70);
+    margin: 0 0 22px;
+  }
+  .primer-prose .primer-body strong { color: var(--ink); font-weight: 700; }
+  .primer-prose .primer-subhead {
+    margin: 36px 0 14px;
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--bright);
+  }
+  .primer-prose .primer-problem {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 2px solid var(--work);
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .primer-prose .primer-problem em {
+    font-style: italic;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  /* ── Segment chips (hover tooltips with segment-specific insights) ── */
+  .seg-chips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px dashed var(--ink-15);
+  }
+  .seg-chips-label {
+    width: 100%;
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .seg-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 11px;
+    background: var(--work-bg); color: var(--work);
+    font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    border-radius: 999px;
+    position: relative;
+    cursor: help;
+    border: none;
+    font-family: inherit;
+  }
+  .seg-chip .seg-chip-emoji { font-size: 13px; }
+  .seg-chip:focus { outline: none; }
+  .seg-chip:focus-visible { outline: 2px solid var(--work); outline-offset: 2px; }
+  .seg-chip .seg-chip-tip {
+    position: absolute; bottom: 100%; left: 50%;
+    transform: translateX(-50%) translateY(-2px);
+    background: var(--bright); color: #fff;
+    padding: 12px 14px; border-radius: 4px;
+    font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none;
+    width: 240px; line-height: 1.45;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+    z-index: 20;
+    box-shadow: 0 14px 32px rgba(0,0,0,.22);
+    text-align: left;
+  }
+  .seg-chip:hover .seg-chip-tip,
+  .seg-chip:focus-visible .seg-chip-tip {
+    opacity: 1; transform: translateX(-50%) translateY(-8px);
+  }
+
+  /* ── Participant cards (Phase 2 method) ────────────────── */
+  .participant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .participant-card {
+    padding: 22px;
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-top: 3px solid var(--work);
+    text-align: center;
+  }
+  .participant-card .p-emoji { font-size: 32px; display: block; margin-bottom: 8px; }
+  .participant-card .p-count {
+    font-size: 36px; font-weight: 700; color: var(--ink);
+    line-height: 1; margin-bottom: 4px;
+  }
+  .participant-card .p-name {
+    font-size: 13px; font-weight: 700; color: var(--work);
+    letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .participant-card .p-detail {
+    font-size: 12px; color: var(--ink-60); line-height: 1.4;
+  }
+
+  /* ── Characteristic stat row ──────────────────────────── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    margin-top: 28px;
+    padding: 28px 0;
+    border-top: 1px solid var(--ink-10);
+    border-bottom: 1px solid var(--ink-10);
+  }
+  .stat-row .stat-item { text-align: center; }
+  .stat-row .stat-num {
+    font-size: clamp(34px, 4vw, 48px);
+    font-weight: 700; color: var(--work); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-row .stat-text {
+    font-size: 13px; color: var(--ink-70); line-height: 1.4;
+  }
+
+  /* ── Big banner insight (slide 59 hero) ─────────────────── */
+  .big-insight {
+    margin-top: 40px;
+    padding: 48px clamp(28px, 5vw, 64px);
+    background: var(--bright);
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 24px 56px rgba(20,20,20,.22);
+  }
+  .big-insight .big-eyebrow {
+    font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(255,255,255,.78); font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .big-insight .big-text {
+    font-size: clamp(28px, 3.4vw, 44px);
+    font-weight: 700; line-height: 1.15; letter-spacing: -.02em;
+    margin: 0; color: #fff;
+  }
+  .big-insight .big-text em { font-style: italic; color: var(--work); }
+  .big-insight .big-sub {
+    margin-top: 22px;
+    font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.92);
+  }
+
+  /* ── Verbatim quote block ─────────────────────────────── */
+  .verbatim {
+    margin: 18px 0;
+    padding: 18px 22px;
+    border-left: 3px solid var(--work);
+    background: var(--cream);
+    font-size: 14px; line-height: 1.55;
+    color: var(--ink-70);
+  }
+  .verbatim p { margin: 0 0 8px; font-style: italic; }
+  .verbatim cite {
+    display: block;
+    font-style: normal; font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--work); font-weight: 700;
+  }
+
+  /* ── Adoption tally ──────────────────────────────────── */
+  .tally-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .tally-cell {
+    padding: 24px 20px;
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    text-align: center;
+  }
+  .tally-cell.is-most { border-top: 3px solid var(--work); }
+  .tally-cell .tally-num {
+    font-size: 44px; font-weight: 700; color: var(--work); line-height: 1;
+  }
+  .tally-cell .tally-label {
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-60); font-weight: 700;
+    margin-top: 10px;
+  }
+  .tally-cell .tally-examples {
+    font-size: 12px; color: var(--ink-50); line-height: 1.4;
+    margin-top: 8px; font-style: italic;
+  }
+
+  /* ── Adoption continuum (horizontal spectrum) ─────────── */
+  .continuum {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    position: relative;
+  }
+  .continuum::before {
+    content: '';
+    position: absolute;
+    left: 8%; right: 8%;
+    top: 28px;
+    height: 6px; border-radius: 3px;
+    background: linear-gradient(90deg, var(--work) 0%, var(--work) 25%, #b5d7a6 50%, var(--ink-15) 100%);
+    z-index: 0;
+  }
+  .continuum-stop {
+    position: relative; z-index: 1;
+    padding: 0 14px;
+    text-align: center;
+  }
+  .continuum-stop .dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--work);
+    border: 4px solid var(--cream);
+    margin: 22px auto 0;
+    box-shadow: 0 0 0 2px var(--work);
+  }
+  .continuum-stop.is-mid .dot { background: #b5d7a6; box-shadow: 0 0 0 2px #b5d7a6; }
+  .continuum-stop.is-rare .dot { background: var(--ink-15); box-shadow: 0 0 0 2px var(--ink-15); }
+  .continuum-stop .eyebrow {
+    margin-top: 22px;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; color: var(--work);
+  }
+  .continuum-stop.is-mid .eyebrow { color: var(--ink); }
+  .continuum-stop.is-rare .eyebrow { color: var(--ink-60); }
+  .continuum-stop .title {
+    margin-top: 10px;
+    font-size: clamp(16px, 1.5vw, 19px);
+    font-weight: 700; color: var(--ink);
+    line-height: 1.35;
+  }
+  .continuum-stop .body-text {
+    margin-top: 10px;
+    font-size: 14px; color: var(--ink-70);
+    line-height: 1.55;
+  }
+  .continuum-stop .count {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 10px;
+    background: var(--work-bg);
+    color: var(--bright);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    border-radius: 999px;
+  }
+  .continuum-axis {
+    margin-top: 18px;
+    display: flex; justify-content: space-between;
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink-50); font-weight: 700;
+  }
+
+  /* ── Scroll-revealed emergent insight (ported from shopping deck) ── */
+  .scroll-reveal { opacity: 0; transform: translateY(14px); transition: opacity .45s ease, transform .45s ease; }
+  .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+  .emergent-insight {
+    margin-top: 36px;
+    padding: clamp(28px, 3.4vw, 40px) clamp(28px, 3.4vw, 44px);
+    background: var(--work-bg);
+    border-left: 4px solid var(--bright);
+    border-radius: 4px;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .emergent-insight.revealed { opacity: 1; transform: translateY(0); }
+  .emergent-insight .ei-label {
+    font-size: 11px; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--bright); font-weight: 700;
+  }
+  .emergent-insight .ei-body {
+    margin-top: 14px;
+    font-size: clamp(19px, 1.9vw, 24px);
+    line-height: 1.4; color: var(--ink); font-weight: 500;
+    letter-spacing: -.005em;
+  }
+  .emergent-insight .ei-body em { font-style: italic; color: var(--bright); font-weight: 700; }
+  .emergent-insight .ei-body strong { color: var(--ink); font-weight: 700; }
+
+  /* Scroll-to-top */
+  #scroll-top {
+    font-size: 22px; font-weight: 700; line-height: 1; cursor: pointer;
+    box-shadow: 0 10px 28px rgba(0,0,0,.22);
+    opacity: 0; transform: translateY(8px); pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease, background .2s ease;
+    z-index: 200;
+  }
+  #scroll-top.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  #scroll-top:hover, #scroll-top:focus-visible { background: #002a1e; outline: none; }
+
+  /* ── Thank you & About me ── */
+  .thanks {
+    min-height: 70vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    background: var(--ink); color: var(--cream);
+  }
+  .thanks h1 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(48px, 8vw, 120px); margin: 0;
+  }
+  .thanks h1 .accent { font-style: italic; font-weight: 300; color: rgba(245,241,234,.7); }
+  .uppercase-mini { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; font-weight: 500; color: var(--ink-50); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; gap: 40px; } }
+  .card { background: #fff; border: 1px solid var(--ink-10); padding: 32px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ── Top bar ───────────────────────────────────────────────────── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="home" href="/">Rachele <span>Benjamin</span></a>
+    <span class="meta">Case Study: Open Banking · TD Bank · 2 Phases</span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 1 — Cover                                                -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide cover" id="slide-1">
+  <div class="slide-inner">
+    <div class="eyebrow" style="margin-bottom: 28px;">Case Study</div>
+    <h1>Enterprise-wide collaboration to plan for  <span class="accent">Open Banking</span></h1>
+    <div class="subtitle">TD Bank · Discovery Interviews</div>
+    <div class="author">A research narrative by <strong>Rachele Benjamin, PhD</strong></div>
+
+    <aside class="cover-pitch" aria-label="The pitch">
+      <div class="cover-pitch-eyebrow">The pitch</div>
+      <p class="cover-pitch-text">
+        TD Bank didn't have an <em> Open Banking  </em> design strategy — so we pitched research and got funding from an Enterprise team.
+      </p>
+      <p class="cover-pitch-text cover-pitch-text--sub">
+        This study was an exercise in getting <strong>buy-in from leaders across the bank</strong>, and creating a <strong>repeatable framework</strong> for HCD to collaborate on Enterprise-level work.
+      </p>
+      <p class="cover-pitch-text cover-pitch-text--sub" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.55); font-size: clamp(14px, 1.35vw, 16px);">
+        <strong>Open Banking</strong> is a framework for sharing financial data across institutions through secure APIs — with the customer's explicit consent.
+      </p>
+    </aside>
+
+    <div class="toc">
+      <h4>Inside this case study</h4>
+      <ol>
+        <li><a href="#phase-1-hero">Phase 1 — Scoping the research with internal stakeholders</a></li>
+        <li><a href="#slide-three-inputs">Two inputs to direct our primary research</a></li>
+        <li><a href="#slide-task-force-takeaways">Finding — What our Task Force was curious about</a></li>
+        <li><a href="#slide-sme-findings">Finding — Our SMEs shared their plans for Open Banking</a></li>
+        <li><a href="#slide-strategic-segments">Synthesis — Strategic segments we scoped to</a></li>
+        <li><a href="#phase-2-hero">Phase 2 — From the bank to the customer</a></li>
+        <li><a href="#slide-participants">Our participants</a></li>
+        <li><a href="#phase-2-findings">Headline opportunity — Bigger banks are safer places to share data</a></li>
+        <li><a href="#slide-managing-money">Finding — The pains of managing multiple Financial Institutions</a></li>
+        <li><a href="#slide-adoption-patterns">Finding — How people adopt a technology or tool</a></li>
+        <li><a href="#slide-workstream-needs-1">Line of business needs &amp; Open Banking concepts</a></li>
+        <li><a href="#slide-continued">Impact</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- PHASE 1 HERO                                                   -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="study-hero" id="phase-1-hero">
+  <div class="slide-inner">
+    <div class="study-eyebrow">Phase 1</div>
+    <h2 class="study-name">Scoping the research with <span class="accent">internal stakeholders</span></h2>
+
+    <div class="hero-text-block" style="margin: 36px 0 0; max-width: 100%;">
+      <div class="context-band">
+        <div class="label">Context</div>
+        <div class="text">Summer 2024 — We need an enterprise-wide user-first Open Banking strategy.</div>
+      </div>
+      <div class="rq-subhead">
+        <div class="rq-label">Phase 1 · Research question</div>
+        <p class="rq-text">What does the <span class="italic">bank</span> need to know before it can seize Open Banking opportunities?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Three inputs (page 5 clip + 2 annotations)             -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-three-inputs">
+  <div class="slide-num">02</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 1 · Method · Context gathering</div>
+    <h2 class="section-title">Two inputs to direct our <span class="italic">primary research</span></h2>
+
+    <div class="image-callout-group" tabindex="0" style="max-width: 860px; margin: 24px auto 0;">
+      <img src="slides/open-banking/page_05.png" alt="Slide 5: 'We used these two inputs to direct our primary research' — Task Force Workshops with Journey UX Design Strategists, and SME Interviews with key LOB decision-makers." />
+      <div class="image-callout image-callout--top is-right-anchor" role="note">
+        <span class="image-callout-eyebrow">🧭 Task Force workshops</span>
+        <p class="image-callout-text"><strong>Task Force workshops</strong> with embedded <strong>design professionals</strong>.</p>
+      </div>
+      <div class="image-callout image-callout--middle is-right-anchor" role="note">
+        <span class="image-callout-eyebrow">🗣️ SME interviews</span>
+        <p class="image-callout-text"><strong>SME interviews</strong> with key decision-makers across LOBs.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- PHASE 1 — FINDINGS divider (anchor)                           -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="phase-1-findings" style="padding: 80px 32px 40px;">
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 1 · Findings</div>
+    <h2 class="section-title">What we learned <span class="italic">before</span> we ever spoke to a customer</h2>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Task Force takeaways (page 8 findings)                 -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-task-force-takeaways" style="padding-top: 60px;">
+  <div class="slide-num">05</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 1 · Finding · Task Force</div>
+    <span class="finding-eyebrow">Finding</span>
+    <h2 class="finding-headline">What our <em>Task Force</em> was curious about</h2>
+
+    <p class="body" style="margin-top: 18px; max-width: 60ch;">We consulted with <strong>8 HCD Strategists and Design Leads</strong> working across the bank's Journeys.</p>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="icon">🧠</span>
+        <div class="head">Hypothesis</div>
+        <div class="detail">
+          <p>People <strong>don't really care</strong> about how their data is handled when they're getting convenient solutions.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <span class="icon">❓</span>
+        <div class="head">Knowledge gaps</div>
+        <div class="detail">
+            <p></p>What's worth the safety /risk trade-off?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — SME 1:1 findings table (page 10)                       -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-sme-findings">
+  <div class="slide-num">06</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 1 · Finding · Subject Matter Experts</div>
+    <span class="finding-eyebrow">Finding</span>
+    <h2 class="finding-headline">Our <em>SMEs</em> shared their plans for Open Banking</h2>
+
+    <p class="body" style="margin-top: 18px; max-width: 60ch;">We interviewed <strong>9 experts</strong> and key decision-makers across the bank's workstreams in Canada and the US.</p>
+
+    <div class="data-table-wrap">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>The LOB</th>
+            <th>Key segments</th>
+            <th>Their Open Banking Strategy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="lob">Credit Cards<br><span style="font-weight:400;color:var(--ink-50);font-size:12px;"></span><br><span style="font-weight:400;color:var(--ink-50);font-size:12px;"></span></td>
+            <td class="segments">N2C with credit outside Canada</td>
+            <td>
+              <ul>
+                <li>Loyalty programs to keep customers with us</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="lob">Everyday Advice Journey</td>
+            <td class="segments">
+              <ul style="padding-left:0;list-style:none;">
+                <li>Youth</li>
+                <li>N2C with credit outside Canada</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Smoother authentication, better advice</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="lob">TD Direct Investing</td>
+            <td class="segments">Mass Affluent</td>
+            <td>
+              <ul>
+                <li>Easier cash transfer to TD</li>
+                <li>Insights about optimizing funds</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="lob">Wealth Advice Journey</td>
+            <td class="segments">High-net-worth clients</td>
+            <td>
+              <ul>
+                <li>Efficient wealth referrals</li>
+              </ul>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ --><!-- SLIDE — Strategic segments synthesis (page 12 reimagined)      -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-strategic-segments">
+  <div class="slide-num">07</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 1 · Synthesis · Strategic segments</div>
+    <span class="finding-eyebrow">Synthesis</span>
+    <h2 class="finding-headline">We scoped our research to focus on these strategic segments our SMEs <em>called out</em></h2>
+
+    <div class="segment-grid">
+      <div class="segment-card" tabindex="0" role="button" aria-expanded="false">
+        <div class="seg-label"><span>🌏 Newcomer to Canada from India</span><span class="seg-toggle" aria-hidden="true">+</span></div>
+        <div class="seg-reveal">
+          <div class="seg-name">2&ndash;4 years into the country, no credit history in Canada.</div>
+          <ul class="seg-concepts">
+            <li>Better advice</li>
+            <li>Credit card shopping</li>
+          </ul>
+        </div>
+      </div>
+      <div class="segment-card" tabindex="0" role="button" aria-expanded="false">
+        <div class="seg-label"><span>🍁 CAD Mass Market</span><span class="seg-toggle" aria-hidden="true">+</span></div>
+        <div class="seg-reveal">
+          <div class="seg-name">People just starting out who need advice and credit access.</div>
+          <ul class="seg-concepts">
+            <li>Better advice</li>
+            <li>Credit card shopping</li>
+          </ul>
+        </div>
+      </div>
+      <div class="segment-card" tabindex="0" role="button" aria-expanded="false">
+        <div class="seg-label"><span>💎 CAD Mass Affluent</span><span class="seg-toggle" aria-hidden="true">+</span></div>
+        <div class="seg-reveal">
+          <div class="seg-name">Self-directed investors who are hungry for insights.</div>
+          <ul class="seg-concepts">
+            <li>Direct Investing tools</li>
+          </ul>
+        </div>
+      </div>
+      <div class="segment-card" tabindex="0" role="button" aria-expanded="false">
+        <div class="seg-label"><span>🗽 American</span><span class="seg-toggle" aria-hidden="true">+</span></div>
+        <div class="seg-reveal">
+          <div class="seg-name">A more data-mature landscape with deeper data aggregation.</div>
+          <ul class="seg-concepts">
+            <li>Direct Investing tools</li>
+            <li>Better advice</li>
+            <li>Credit card shopping</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ --><!-- PHASE 2 HERO                                                   -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="study-hero" id="phase-2-hero">
+  <div class="slide-inner">
+    <div class="study-eyebrow">Phase 2</div>
+    <h2 class="study-name">From the bank to the <span class="accent">customer</span></h2>
+
+    <div class="hero-text-block" style="margin: 36px 0 0; max-width: 100%;">
+      <div class="context-band">
+        <div class="label">Context</div>
+        <div class="text">Our SMEs and Task Force had an idea of what customers need. We made it our mission to <span class="italic">test their hypotheses.</span></div>
+      </div>
+      <div class="rq-subhead">
+        <div class="rq-label">Phase 2 · Research questions</div>
+        <p class="rq-text"><strong>1.</strong> What pain points do users with multiple FIs experience?</p>
+        <p class="rq-text" style="margin-top: 16px;"><strong>2.</strong> In what situations would those users decide that the <span class="italic">risk is worth the benefit</span> of sharing personal data?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Method · Participants (page 16 recreation)             -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-participants">
+  <div class="slide-num">08</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 2 · Method · Participants</div>
+    <h3 class="sub-title">Our participants, recruited with Canada Market Research:</h3>
+
+    <div class="participant-grid">
+      <div class="participant-card">
+        <span class="p-emoji">🌏</span>
+        <div class="p-count">5</div>
+        <div class="p-name">Newcomers to Canada</div>
+        <div class="p-detail">From India</div>
+      </div>
+      <div class="participant-card">
+        <span class="p-emoji">🍁</span>
+        <div class="p-count">5</div>
+        <div class="p-name">Mass Market (CA)</div>
+        <div class="p-detail">Investable assets under 100K</div>
+      </div>
+      <div class="participant-card">
+        <span class="p-emoji">💎</span>
+        <div class="p-count">5</div>
+        <div class="p-name">Mass Affluent (CA)</div>
+        <div class="p-detail">Investable assets over 100K</div>
+      </div>
+      <div class="participant-card">
+        <span class="p-emoji">🗽</span>
+        <div class="p-count">5</div>
+        <div class="p-name">American</div>
+        <div class="p-detail">From around the US</div>
+      </div>
+    </div>
+
+    <p class="body" style="margin-top: 28px; max-width: 70ch; font-size: 13px; color: var(--ink-50);">We also screened for behaviors that let us speak to workstream-specific concepts:</p>
+    <table style="margin-top: 8px; border-collapse: collapse; font-size: 13px; color: var(--ink-70); max-width: 700px;">
+      <tbody>
+        <tr><td style="padding: 5px 20px 5px 0; font-weight: 700; font-size: 15px; color: var(--ink); white-space: nowrap;">20</td><td style="padding: 5px 0;">Chequing and savings accounts at multiple FIs</td></tr>
+        <tr><td style="padding: 5px 20px 5px 0; font-weight: 700; font-size: 15px; color: var(--ink); white-space: nowrap;">17</td><td style="padding: 5px 0;">Using or have used a fintech company</td></tr>
+        <tr><td style="padding: 5px 20px 5px 0; font-weight: 700; font-size: 15px; color: var(--ink); white-space: nowrap;">12</td><td style="padding: 5px 0;">Have previously dealt with fraud</td></tr>
+        <tr><td style="padding: 5px 20px 5px 0; font-weight: 700; font-size: 15px; color: var(--ink); white-space: nowrap;">19</td><td style="padding: 5px 0;">Credit card users <span style="color: var(--ink-40);">· Credit Cards (US and Canada)</span></td></tr>
+        <tr><td style="padding: 5px 20px 5px 0; font-weight: 700; font-size: 15px; color: var(--ink); white-space: nowrap;">12</td><td style="padding: 5px 0;">Self-directed investors, 4 trading at least monthly <span style="color: var(--ink-40);">· TD Direct Investing</span></td></tr>
+        <tr><td style="padding: 5px 20px 5px 0; font-weight: 700; font-size: 15px; color: var(--ink); white-space: nowrap;">3</td><td style="padding: 5px 0;">Applied for a mortgage within the last year <span style="color: var(--ink-40);">· Everyday Advice Journey Credit Risk</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- PHASE 2 — FINDINGS divider + BIG INSIGHT (slide 59)            -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="phase-2-findings" style="padding: 80px 32px 60px;">
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 2 · Findings</div>
+    <h2 class="section-title">What customers told us about <span class="italic">money &amp; data sharing</span></h2>
+
+    <div class="big-insight">
+      <div class="big-eyebrow">Headline Opportunity</div>
+      <p class="big-text">How TD could win: Bigger banks are <em>safer</em> places to share data</p>
+      <blockquote class="big-sub" style="border-left: 3px solid rgba(255,255,255,.3); margin: 16px 0 0; padding-left: 20px; font-style: italic;">"I trust bigger establishments, and bigger banks. I figure these guys have millions of customers, they've been doing this a long time. And they have a reputation. They have a microscope on them, and if they play around with that, they're going to suffer the consequences."<br><cite style="font-style: normal; font-size: .85em; opacity: .7; margin-top: 8px; display: block;">— P3, 51 yo, USA Mass Market</cite></blockquote>
+      <p class="big-sub" style="margin-top: 16px;">Reputation and scale are TD's advantage — customers assume big banks face more scrutiny and therefore behave more responsibly with their data.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Managing money across FIs                              -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-managing-money" style="padding-top: 60px;">
+  <div class="slide-num">10</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 2 · Findings · Account Management &amp; Investing</div>
+    <h2 class="finding-headline">The pains of managing multiple <span class="italic">Financial Institutions</span></h2>
+
+    <div class="big-insight">
+      <div class="big-eyebrow">Insight</div>
+      <p class="big-text">Most Canadians don't realize how many accounts they're actually juggling.</p>
+      <p class="big-sub">Our participants juggled multiple credit cards and investing platforms. People hold accounts at multiple banks for three reasons: <strong>product-seeking</strong> (a better offer elsewhere), <strong>diversification</strong> (spreading risk), or <strong>rejection</strong> (getting a loan at a new institution).</p>
+    </div>
+
+    <h3 class="sub-title" style="margin-top: 48px;">Pain points</h3>
+    <div class="findings findings--collapsible">
+      <div class="finding" role="button" tabindex="0" aria-expanded="false">
+        <span class="icon">⚠️</span>
+        <div class="head">Budgeting struggles</div>
+        <div class="detail">
+          <p><strong>No easy overview.</strong> People use spreadsheets and manual tracking.</p>
+        </div>
+        <div class="seg-chips">
+          <span class="seg-chips-label">Key segments</span>
+          <button type="button" class="seg-chip" tabindex="0">
+            <span class="seg-chip-emoji">🌏</span> Newcomer to Canada
+            <span class="seg-chip-tip">Credit history gaps make a consolidated overview especially critical.</span>
+        </div>
+      </div>
+      <div class="finding" role="button" tabindex="0" aria-expanded="false">
+        <span class="icon">💳</span>
+        <div class="head">Credit card overload</div>
+        <div class="detail">
+          <p>There are <strong>way too many credit cards</strong> to choose from.</p>
+        </div>
+        <div class="seg-chips">
+          <span class="seg-chips-label">Key segments</span>
+          <button type="button" class="seg-chip" tabindex="0">
+            <span class="seg-chip-emoji">🍁</span> Mass Market
+            <span class="seg-chip-tip">Needs low fees and help finding cards they're eligible for.</span>
+          </button>
+          <button type="button" class="seg-chip" tabindex="0">
+            <span class="seg-chip-emoji">💎</span> Mass Affluent
+            <span class="seg-chip-tip">Wants smarter, more customized loyalty rewards.</span>
+          </button>
+        </div>
+      </div>
+      <div class="finding" role="button" tabindex="0" aria-expanded="false">
+        <span class="icon">📅</span>
+        <div class="head">Bill payment chaos</div>
+        <div class="detail">
+          <p>Tracking payment schedules across multiple institutions is a constant struggle.</p>
+        </div>
+      </div>
+      <div class="finding" role="button" tabindex="0" aria-expanded="false">
+        <span class="icon">🔓</span>
+        <div class="head">Borrowing transparency</div>
+        <div class="detail">
+          <p>Loan and mortgage approvals feel arbitrary. People don't understand why one bank approves and another rejects.</p>
+        </div>
+      </div>
+      <div class="finding" role="button" tabindex="0" aria-expanded="false">
+        <span class="icon">📱</span>
+        <div class="head">Too many apps</div>
+        <div class="detail">
+          <p>Jumping between Questrade, Wealthsimple, and others for different markets creates friction — and missed opportunities.</p>
+        </div>
+        <div class="seg-chips">
+          <span class="seg-chips-label">Key segments</span>
+          <button type="button" class="seg-chip" tabindex="0">
+            <span class="seg-chip-emoji">🌏</span> Newcomer to Canada
+            <span class="seg-chip-tip">Newcomers familiar with international markets are a natural fit for cross-platform investing tools.</span>
+          </button>
+        </div>
+      </div>
+      <div class="finding" role="button" tabindex="0" aria-expanded="false">
+        <span class="icon">👁️</span>
+        <div class="head">Visibility gap</div>
+        <div class="detail">
+          <p>People want one consolidated view of total wealth across all platforms.</p>
+        </div>
+        <div class="seg-chips">
+          <span class="seg-chips-label">Key segments</span>
+          <button type="button" class="seg-chip" tabindex="0">
+            <span class="seg-chip-emoji">💎</span> Mass Affluent
+            <span class="seg-chip-tip">Those nearing retirement or managing family finances need a full picture.</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Embedded slide 24 verbatim insight — moved here from the Direct Investing slide -->
+    <p class="hover-hint" style="margin-top: 48px;">Embedded from the original deck — slide 24, "Managing accounts"</p>
+    <img class="pdf-clip" style="max-width: 880px; margin-left: auto; margin-right: auto;" src="slides/open-banking/page_24.png" alt="Slide 24: People's solution to managing multiple accounts involves limiting their activities to one institution, which in turn limits their ability to discover opportunities to grow their wealth. Quote from P5, 54 yo, Canada MA." />
+    <p class="scene-caption">Original insight: by limiting themselves to one institution, customers also limit their opportunities to grow wealth.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Budgeting and financial visibility                     -->
+<!-- (Budgeting & Visibility slide removed per request) -->
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Credit cards, bills, borrowing                         -->
+<!-- (Credit Cards, Bills & Borrowing slide removed per request) -->
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Adoption patterns (slide 47 image + slide 48 tally)    -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-adoption-patterns">
+  <div class="slide-num">14</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 2 · Finding · Adoption Patterns</div>
+    <span class="finding-eyebrow">Finding</span>
+    <h2 class="finding-headline">How people adopt a <em>technology or tool</em></h2>
+
+    <p class="body" style="max-width: 70ch;">We asked participants to sort three specific data-sharing behaviours. The pattern wasn't random — each behaviour lives at a different stage of public acceptance, and the middle is exactly where Open Banking sits today.</p>
+
+    <div class="continuum">
+      <div class="continuum-stop">
+        <div class="dot"></div>
+        <div class="eyebrow">Everyone</div>
+        <div class="title">Keeping a card on file at a favourite store</div>
+        <p class="body-text">It feels low stakes, but customers remember when they hesitated to do it.</p>
+      </div>
+      <div class="continuum-stop is-mid">
+        <div class="dot"></div>
+        <div class="eyebrow">Split — this is Open Banking</div>
+        <div class="title">Granting permission for your bank to access data at another bank</div>
+        <p class="body-text">Opinions divided sharply. Americans more open.</p>
+      </div>
+      <div class="continuum-stop is-rare">
+        <div class="dot"></div>
+        <div class="eyebrow">Very few</div>
+        <div class="title">Sharing personal info with ChatGPT</div>
+        <p class="body-text">Most said “never” — that pattern's already changed in the time since this study (2024).</p>
+      </div>
+    </div>
+    <div class="continuum-axis"><span>Mainstream today</span><span>Emerging</span><span>Future behaviour</span></div>
+
+    <!-- Sharing-with-banks: 2 insights + 4 conditions for adoption -->
+    <div style="margin-top: 56px;">
+      <aside class="emergent-insight" aria-label="Future-self watch-out">
+        <div class="ei-label">Watch-out</div>
+        <p class="ei-body">People don't judge their <strong>future selves</strong> accurately. People's stated discomfort isn't a permanent barrier.</p>
+      </aside>
+
+      <aside class="emergent-insight" aria-label="Cross-geography insight">
+        <div class="ei-label">Cross-geography insight</div>
+        <p class="ei-body">In India and the United States, sharing financial data across institutions (even with unsafe screen-scraping tools) is already normalized. These participants were more open to the concepts.</p>
+      </aside>
+
+      <h3 class="sub-title" style="margin-top: 56px;">What helps people decide it's <span class="italic">safe to share</span></h3>
+
+      <div class="findings findings--collapsible" style="grid-template-columns: 1fr 1fr;">
+        <div class="finding" role="button" tabindex="0" aria-expanded="false">
+          <span class="icon">🧪</span>
+          <div class="head">Performing a lower-stakes activity</div>
+          <div class="detail">
+            <p>People test the waters with throwaway data before committing to the real thing.</p>
+            <div class="verbatim">
+              <p>"I did go through the process [moving money from CIBC to Tangerine] a couple of times without — entering fake information to see, OK, well, what do they need? And then becoming comfortable with that process before I said, OK, go."</p>
+              <cite>P4 · 49 yo · Canada Mass Affluent</cite>
+            </div>
+          </div>
+        </div>
+        <div class="finding" role="button" tabindex="0" aria-expanded="false">
+          <span class="icon">🔍</span>
+          <div class="head">Doing the research</div>
+          <div class="detail">
+            <p>Reviews, forum threads, Reddit — people audit the social trust signals before trying something new.</p>
+            <div class="verbatim">
+              <p>"I think the confidence comes from — what's the fall-back plan? What happens if I get breached? So I look at the whole picture to sort of get that confidence in it."</p>
+              <cite>P16 · 42 yo · Canada Mass Market</cite>
+            </div>
+          </div>
+        </div>
+        <div class="finding" role="button" tabindex="0" aria-expanded="false">
+          <span class="icon">👥</span>
+          <div class="head">It's already been widely adopted</div>
+          <div class="detail">
+            <p>Mass usage is the safety net — people defer to the crowd.</p>
+            <div class="verbatim">
+              <p>"The amount of people using [UPI] shows me that the confidence in that system is huge. So if I was hesitant, I would just look at tens of thousands of people using it with no issues."</p>
+              <cite>P16 · 42 yo · Canada Mass Market</cite>
+            </div>
+          </div>
+        </div>
+        <div class="finding" role="button" tabindex="0" aria-expanded="false">
+          <span class="icon">🤝</span>
+          <div class="head">Savvy friends &amp; family vouch for it</div>
+          <div class="detail">
+            <p>Trust ladders through people whose judgement they already respect.</p>
+            <div class="verbatim">
+              <p>"I have certain people in my life where I'm like, oh, okay, if he's using that thing or that app, then it must be okay… My brother is an audio engineer so if he bought those headphones, they're good… If he was using a specific app, I would probably think it was okay."</p>
+              <cite>P20 · 36 yo · USA Mass Market</cite>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- (Late Adopters slide merged into Getting Comfortable per request) -->
+<!-- (Future-self watch-out moved into Adoption Patterns per request) -->
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Future-self watch-out (slide 52 image)                  -->
+<!-- (Future-self watch-out moved into Adoption Patterns slide removed per request) -->
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — Open Banking may not be for everyone (slide 68)         -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+
+
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- SLIDE — User needs &amp; concepts (slide 29 recreation)         -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-workstream-needs-1" style="padding-top: 60px;">
+  <div class="slide-num">20</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Phase 2 · Line of Business Insights</div>
+    <h2 class="section-title">We identified how line of business can take advantage of Open Banking by  <span class="italic">matching concepts to unmet needs</span></h2>
+
+    <div class="data-table-wrap" style="margin-top: 32px;">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Unmet needs</th>
+            <th>Open Banking concept</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="lob">Budgeting</td>
+            <td>Smart insights about spending habits and a financial bird's-eye view</td>
+            <td>An aggregated spending and saving view that connects accounts across institutions.<br>
+              <button type="button" class="seg-chip" tabindex="0" style="margin-top:10px;">Wealth Advice Journey<span class="seg-chip-tip" style="width:280px;">To own better advice for High Net Worth customers</span></button>
+              <button type="button" class="seg-chip" tabindex="0" style="margin-top:6px;">Everyday Advice Journey<span class="seg-chip-tip" style="width:220px;">To own budgeting tools</span></button>
+            </td>
+          </tr>
+          <tr>
+            <td class="lob">Paying Bills</td>
+            <td>Help managing bill payment schedules across multiple institutions</td>
+            <td>A bill calendar that consolidates payment due dates across all institutions.<br>
+              <button type="button" class="seg-chip" tabindex="0" style="margin-top:10px;">⭐ New concept<span class="seg-chip-tip" style="width:280px;">No existing line of business owns it yet</span></button>
+            </td>
+          </tr>
+          <tr>
+            <td class="lob">Direct Investing</td>
+            <td>Manage and grow investments across multiple platforms without the friction</td>
+            <td>A unified portfolio view with seamless cross-platform money movement.<br>
+              <button type="button" class="seg-chip" tabindex="0" style="margin-top:10px;">TD Direct Investing<span class="seg-chip-tip" style="width:280px;">To redesign the Direct Investing platform</span></button>
+            </td>
+          </tr>
+          <tr>
+            <td class="lob">Credit Cards</td>
+            <td>A shopping experience that helps maximize rewards and minimize fees</td>
+            <td>A portal to match people to the right card (internal and external) for their spending pattern.<br>
+              <button type="button" class="seg-chip" tabindex="0" style="margin-top:10px;">Credit Cards (US and Canada)<span class="seg-chip-tip" style="width:280px;">Can integrate loyalty programs to keep customers with TD</span></button>
+            </td>
+          </tr>
+          <tr>
+            <td class="lob">Borrowing</td>
+            <td>Faster applications and transparency in how banks make approval decisions</td>
+            <td>A multi-lender overview that makes approval logic transparent and applications faster.<br>
+              <button type="button" class="seg-chip" tabindex="0" style="margin-top:10px;">Everyday Advice Journey<span class="seg-chip-tip" style="width:280px;">To own smoother borrowing and borrowing advice</span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- CONCLUSION (work-in-progress placeholder)                      -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-continued" style="border-bottom: none;">
+  <div class="slide-inner">
+    <div class="conclusion">
+      <h2 class="conclusion-title">Impact</span></h2>
+      <p class="conclusion-body">
+        We unblocked designs for Open Banking by establishing foundational principles so the workstreams could continue to build. More importantly, we made contact with Enterprise teams and helped HCD move the needle on generative and foundational research.<br><br>
+      </p>
+      <a class="conclusion-cta" href="mailto:9rachelebenjamin@gmail.com?subject=Open%20Banking%20case%20study">Email me for the full story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- Thank you                                                      -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<section class="slide thanks" id="slide-thanks" style="border-bottom: none;">
+  <div class="slide-num" style="color: rgba(245,241,234,.3);">✦</div>
+  <div class="slide-inner">
+    <h1>Thank you, &amp; ask me about my <span class="accent"> vibe-coded </span> case study!</h1>
+  </div>
+</section>
+
+<!-- Appendix: About me -->
+<section class="slide" id="slide-about-me">
+  <div class="slide-num">A</div>
+  <div class="slide-inner">
+    <div class="slide-tag">About me</div>
+    <h2 class="section-title">Mixed methods researcher who thrives on <span class="italic">variety</span></h2>
+    <div class="two-col" style="margin-top: 40px;">
+      <div class="card">
+        <div class="uppercase-mini">TD Bank (former)</div>
+        <h3 class="sub-title" style="margin-top: 12px;">Senior Design Researcher</h3>
+        <p class="body">Led research on open banking, investing vehicles (GICs, ETFs), and estate settlement — from generative discovery through co-design with users and banking executives.</p>
+      </div>
+      <div class="card">
+        <div class="uppercase-mini">PhD in Social Psychology</div>
+        <h3 class="sub-title" style="margin-top: 12px;">Academic research</h3>
+        <p class="body">Defining <span class="amp">&amp;</span> explaining 'uncanny' feelings.</p>
+        <p class="body">Attitudes towards democracy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<button id="scroll-top" type="button" aria-label="Scroll to top">↑</button>
+<script>
+  (function () {
+    var cards = document.querySelectorAll('.segment-card');
+    cards.forEach(function (card) {
+      var toggle = function () {
+        var open = card.classList.toggle('is-open');
+        card.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+  })();
+
+  (function () {
+    document.querySelectorAll('.findings--collapsible .finding').forEach(function (card) {
+      var toggle = function () {
+        var open = card.classList.toggle('is-open');
+        card.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+  })();
+
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.scroll-reveal, .emergent-insight').forEach(function (el) { el.classList.add('revealed'); });
+      return;
+    }
+    var ioInsight = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); ioInsight.unobserve(e.target); }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -25% 0px' });
+    document.querySelectorAll('.emergent-insight').forEach(function (el) { ioInsight.observe(el); });
+    var ioReveal = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); ioReveal.unobserve(e.target); }
+      });
+    }, { threshold: 0.4, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.scroll-reveal').forEach(function (el) { ioReveal.observe(el); });
+  })();
+
+  (function () {
+    var btn = document.getElementById('scroll-top');
+    if (!btn) return;
+    var toggle = function () {
+      if (window.scrollY > 400) btn.classList.add('is-visible');
+      else btn.classList.remove('is-visible');
+    };
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+</body>
+</html>
