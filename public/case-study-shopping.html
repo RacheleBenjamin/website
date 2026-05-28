@@ -1646,7 +1646,7 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 21 — Data table                                              -->
+<!-- SLIDE 21 — Sortable data table + Opportunity matrix                -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-21">
   <div class="slide-num">21</div>
@@ -1654,27 +1654,172 @@
     <div class="slide-tag">Study 3 · Quant results</div>
     <h3 class="sub-title">Top Opportunities: Job satisfaction is relatively lower and importance is higher.</h3>
 
+    <!-- Sortable table -->
     <div class="data-table-wrap">
-      <table class="data">
+      <p style="font-size:11px;color:var(--ink-40);margin:0 0 10px;letter-spacing:.12em;text-transform:uppercase;">Click any column header to sort</p>
+      <table class="data" id="jtbd-table">
         <thead>
-          <tr><th>Job</th><th>Important</th><th>Satisfied</th><th>Frequency</th><th>AI Open</th></tr>
+          <tr>
+            <th class="th-s" data-col="0" data-type="text" style="cursor:pointer;user-select:none;">Job <span class="s-caret">↕</span></th>
+            <th class="th-s th-s-desc" data-col="1" data-type="num" style="cursor:pointer;user-select:none;">Important <span class="s-caret" style="color:var(--work);">↓</span></th>
+            <th class="th-s" data-col="2" data-type="num" style="cursor:pointer;user-select:none;">Satisfied <span class="s-caret">↕</span></th>
+            <th class="th-s" data-col="3" data-type="num" style="cursor:pointer;user-select:none;">Frequency <span class="s-caret">↕</span></th>
+            <th class="th-s" data-col="4" data-type="num" style="cursor:pointer;user-select:none;">AI Open <span class="s-caret">↕</span></th>
+          </tr>
         </thead>
-        <tbody class="heatmap">
-          <tr><td class="label">🔍 Find</td><td class="num" style="background:rgba(21,128,61,.70)">4.51</td><td class="num" style="background:rgba(21,128,61,.56)">4.22</td><td class="num" style="background:rgba(21,128,61,.45)">4.01</td><td class="num" style="background:rgba(21,128,61,.50)">4.11</td></tr>
-          <tr><td class="label">🛒 Purchase</td><td class="num" style="background:rgba(21,128,61,.64)">4.39</td><td class="num" style="background:rgba(21,128,61,.50)">4.10</td><td class="num" style="background:rgba(21,128,61,.32)">3.74</td><td class="num" style="background:rgba(21,128,61,.45)">4.00</td></tr>
-          <tr><td class="label">📦 Track</td><td class="num" style="background:rgba(21,128,61,.64)">4.38</td><td class="num" style="background:rgba(21,128,61,.61)">4.33</td><td class="num" style="background:rgba(21,128,61,.30)">3.70</td><td class="num" style="background:rgba(21,128,61,.57)"><span class="arrow">▲</span>4.25</td></tr>
-          <tr><td class="label">🏷️ Deals</td><td class="num" style="background:rgba(21,128,61,.63)">4.37</td><td class="num" style="background:rgba(21,128,61,.47)">4.05</td><td class="num" style="background:rgba(21,128,61,.37)">3.85</td><td class="num" style="background:rgba(21,128,61,.63)"><span class="arrow">▲</span>4.36</td></tr>
-          <tr><td class="label">⚖️ Compare</td><td class="num" style="background:rgba(21,128,61,.62)">4.35</td><td class="num" style="background:rgba(21,128,61,.46)">4.03</td><td class="num" style="background:rgba(21,128,61,.42)"><span class="arrow">▲</span>3.94</td><td class="num" style="background:rgba(21,128,61,.66)"><span class="arrow">▲</span>4.42</td></tr>
-          <tr><td class="label">⏱️ Timing</td><td class="num" style="background:rgba(21,128,61,.59)">4.29</td><td class="num" style="background:rgba(21,128,61,.45)">4.00</td><td class="num" style="background:rgba(21,128,61,.15)">3.41</td><td class="num" style="background:rgba(21,128,61,.11)"><span class="arrow">▼</span>3.31</td></tr>
-          <tr><td class="label">💰 Budget</td><td class="num" style="background:rgba(21,128,61,.56)">4.22</td><td class="num" style="background:rgba(21,128,61,.49)">4.09</td><td class="num" style="background:rgba(21,128,61,.09)">3.28</td><td class="num" style="background:rgba(21,128,61,.05)"><span class="arrow">▼</span>3.20</td></tr>
+        <tbody class="heatmap" id="jtbd-tbody">
+          <tr data-vals="🔍 Find|4.51|4.22|4.01|4.11"><td class="label">🔍 Find</td><td class="num" style="background:rgba(21,128,61,.70)">4.51</td><td class="num" style="background:rgba(21,128,61,.56)">4.22</td><td class="num" style="background:rgba(21,128,61,.45)">4.01</td><td class="num" style="background:rgba(21,128,61,.50)">4.11</td></tr>
+          <tr data-vals="🛒 Purchase|4.39|4.10|3.74|4.00"><td class="label">🛒 Purchase</td><td class="num" style="background:rgba(21,128,61,.64)">4.39</td><td class="num" style="background:rgba(21,128,61,.50)">4.10</td><td class="num" style="background:rgba(21,128,61,.32)">3.74</td><td class="num" style="background:rgba(21,128,61,.45)">4.00</td></tr>
+          <tr data-vals="📦 Track|4.38|4.33|3.70|4.25"><td class="label">📦 Track</td><td class="num" style="background:rgba(21,128,61,.64)">4.38</td><td class="num" style="background:rgba(21,128,61,.61)">4.33</td><td class="num" style="background:rgba(21,128,61,.30)">3.70</td><td class="num" style="background:rgba(21,128,61,.57)"><span class="arrow">▲</span>4.25</td></tr>
+          <tr data-vals="🏷️ Deals|4.37|4.05|3.85|4.36"><td class="label">🏷️ Deals</td><td class="num" style="background:rgba(21,128,61,.63)">4.37</td><td class="num" style="background:rgba(21,128,61,.47)">4.05</td><td class="num" style="background:rgba(21,128,61,.37)">3.85</td><td class="num" style="background:rgba(21,128,61,.63)"><span class="arrow">▲</span>4.36</td></tr>
+          <tr data-vals="⚖️ Compare|4.35|4.03|3.94|4.42"><td class="label">⚖️ Compare</td><td class="num" style="background:rgba(21,128,61,.62)">4.35</td><td class="num" style="background:rgba(21,128,61,.46)">4.03</td><td class="num" style="background:rgba(21,128,61,.42)"><span class="arrow">▲</span>3.94</td><td class="num" style="background:rgba(21,128,61,.66)"><span class="arrow">▲</span>4.42</td></tr>
+          <tr data-vals="⏱️ Timing|4.29|4.00|3.41|3.31"><td class="label">⏱️ Timing</td><td class="num" style="background:rgba(21,128,61,.59)">4.29</td><td class="num" style="background:rgba(21,128,61,.45)">4.00</td><td class="num" style="background:rgba(21,128,61,.15)">3.41</td><td class="num" style="background:rgba(21,128,61,.11)"><span class="arrow">▼</span>3.31</td></tr>
+          <tr data-vals="💰 Budget|4.22|4.09|3.28|3.20"><td class="label">💰 Budget</td><td class="num" style="background:rgba(21,128,61,.56)">4.22</td><td class="num" style="background:rgba(21,128,61,.49)">4.09</td><td class="num" style="background:rgba(21,128,61,.09)">3.28</td><td class="num" style="background:rgba(21,128,61,.05)"><span class="arrow">▼</span>3.20</td></tr>
         </tbody>
       </table>
     </div>
 
-    <h2 class="section-title" style="margin-top: 48px;">Interactive output to help <span class="italic">stakeholders decide</span></h2>
-    <img class="scene-img bordered" src="slides/image13.png" alt="Interactive opportunity dashboard — explorable matrix of importance × satisfaction × AI openness across shopping jobs." />
+    <!-- Opportunity Matrix -->
+    <h2 class="section-title" style="margin-top:56px;">Opportunity matrix: <span class="italic">Frequency × Importance</span></h2>
+    <p style="font-size:13px;color:var(--ink-50);margin:0 0 28px;line-height:1.6;">Upper-left = high importance, low frequency — strongest opportunity for AI to step in. <strong>Hover</strong> each emoji to reveal the job.</p>
+
+    <div style="display:flex;align-items:stretch;gap:0;">
+      <!-- Y-axis label -->
+      <div style="display:flex;align-items:center;justify-content:center;width:28px;flex-shrink:0;">
+        <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-40);white-space:nowrap;">Importance ↑</span>
+      </div>
+      <!-- Plot + x-axis -->
+      <div style="flex:1;min-width:0;">
+        <div id="opp-plot" style="position:relative;height:420px;background:#fafaf8;border:1px solid var(--ink-10);border-radius:6px;overflow:hidden;">
+
+          <!-- Quadrant backgrounds -->
+          <div style="position:absolute;top:0;left:0;width:50%;height:100%;background:rgba(180,83,9,.035);pointer-events:none;"></div>
+
+          <!-- Quadrant labels -->
+          <div style="position:absolute;top:10px;left:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(180,83,9,.55);font-weight:700;pointer-events:none;">Opportunity zone</div>
+          <div style="position:absolute;top:10px;right:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-25,rgba(26,26,26,.25));font-weight:600;pointer-events:none;">Must Have</div>
+          <div style="position:absolute;bottom:10px;left:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-20);font-weight:600;pointer-events:none;">Low Priority</div>
+          <div style="position:absolute;bottom:10px;right:14px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-20);font-weight:600;pointer-events:none;">Nice to Have</div>
+
+          <!-- Grid lines at midpoints -->
+          <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:var(--ink-15);pointer-events:none;"></div>
+          <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--ink-15);pointer-events:none;"></div>
+
+          <!--
+            Axis ranges used for positioning:
+              X (Frequency):  3.10 → 4.20  (range 1.10)
+              Y (Importance):  4.10 → 4.60  (range 0.50)
+            Formula:
+              left% = (freq  - 3.10) / 1.10 * 100
+              top%  = (4.60  - imp ) / 0.50 * 100
+          -->
+
+          <!-- 🔍 Find  freq=4.01 imp=4.51 → left=83% top=18% -->
+          <button class="opp-dot" style="left:calc(83% - 18px);top:calc(18% - 18px);" data-job="🔍 Find" data-freq="4.01" data-imp="4.51" aria-label="Find — Frequency 4.01, Importance 4.51">🔍</button>
+          <!-- 🛒 Purchase  freq=3.74 imp=4.39 → left=58% top=42% -->
+          <button class="opp-dot" style="left:calc(58% - 18px);top:calc(42% - 18px);" data-job="🛒 Purchase" data-freq="3.74" data-imp="4.39" aria-label="Purchase — Frequency 3.74, Importance 4.39">🛒</button>
+          <!-- 📦 Track  freq=3.70 imp=4.38 → left=55% top=44% (offset slightly to reduce overlap) -->
+          <button class="opp-dot" style="left:calc(55% - 18px);top:calc(52% - 18px);" data-job="📦 Track" data-freq="3.70" data-imp="4.38" aria-label="Track — Frequency 3.70, Importance 4.38">📦</button>
+          <!-- 🏷️ Deals  freq=3.85 imp=4.37 → left=68% top=46% -->
+          <button class="opp-dot" style="left:calc(68% - 18px);top:calc(46% - 18px);" data-job="🏷️ Deals" data-freq="3.85" data-imp="4.37" aria-label="Deals — Frequency 3.85, Importance 4.37">🏷️</button>
+          <!-- ⚖️ Compare  freq=3.94 imp=4.35 → left=76% top=50% -->
+          <button class="opp-dot" style="left:calc(76% - 18px);top:calc(50% - 18px);" data-job="⚖️ Compare" data-freq="3.94" data-imp="4.35" aria-label="Compare — Frequency 3.94, Importance 4.35">⚖️</button>
+          <!-- ⏱️ Timing  freq=3.41 imp=4.29 → left=28% top=62% -->
+          <button class="opp-dot" style="left:calc(28% - 18px);top:calc(62% - 18px);" data-job="⏱️ Timing" data-freq="3.41" data-imp="4.29" aria-label="Timing — Frequency 3.41, Importance 4.29">⏱️</button>
+          <!-- 💰 Budget  freq=3.28 imp=4.22 → left=16% top=76% -->
+          <button class="opp-dot" style="left:calc(16% - 18px);top:calc(76% - 18px);" data-job="💰 Budget" data-freq="3.28" data-imp="4.22" aria-label="Budget — Frequency 3.28, Importance 4.22">💰</button>
+
+          <!-- Tooltip -->
+          <div id="opp-tip" style="display:none;position:absolute;background:var(--ink);color:var(--cream);padding:7px 14px;border-radius:4px;font-size:12px;font-weight:500;white-space:nowrap;pointer-events:none;z-index:20;transform:translate(-50%,-120%);"></div>
+        </div>
+        <!-- X-axis -->
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 4px 0;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);">
+          <span>← Low Frequency</span>
+          <span style="font-size:10px;color:var(--ink-50);font-weight:500;letter-spacing:.18em;">Frequency</span>
+          <span>High Frequency →</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
+
+<style>
+  .th-s { cursor:pointer; user-select:none; }
+  .th-s:hover { background:rgba(21,128,61,.07); }
+  .s-caret { font-size:10px; opacity:.5; margin-left:3px; }
+  .opp-dot {
+    position:absolute; width:36px; height:36px;
+    font-size:20px; display:flex; align-items:center; justify-content:center;
+    background:transparent; border:none; cursor:pointer; border-radius:50%;
+    transition:transform .15s ease, background .15s ease, outline .1s ease;
+    line-height:1; padding:0;
+  }
+  .opp-dot:hover, .opp-dot:focus {
+    transform:scale(1.45);
+    background:rgba(255,255,255,.95);
+    outline:2px solid var(--work);
+    z-index:5;
+  }
+</style>
+<script>
+(function () {
+  /* ── Sortable table ── */
+  var table  = document.getElementById('jtbd-table');
+  var tbody  = document.getElementById('jtbd-tbody');
+  var sortState = { col: 1, asc: false };
+  if (table && tbody) {
+    table.querySelectorAll('.th-s').forEach(function (th) {
+      th.addEventListener('click', function () {
+        var col  = parseInt(th.dataset.col, 10);
+        var type = th.dataset.type;
+        if (sortState.col === col) { sortState.asc = !sortState.asc; }
+        else { sortState.col = col; sortState.asc = (type === 'text'); }
+        /* update caret indicators */
+        table.querySelectorAll('.th-s').forEach(function (h) {
+          var c = h.querySelector('.s-caret');
+          c.textContent = '↕'; c.style.color = ''; c.style.opacity = '.5';
+        });
+        var caret = th.querySelector('.s-caret');
+        caret.textContent = sortState.asc ? '↑' : '↓';
+        caret.style.color   = 'var(--work)';
+        caret.style.opacity = '1';
+        /* sort rows */
+        var rows = Array.from(tbody.querySelectorAll('tr'));
+        rows.sort(function (a, b) {
+          var va = a.dataset.vals.split('|')[col];
+          var vb = b.dataset.vals.split('|')[col];
+          if (type === 'num') { va = parseFloat(va); vb = parseFloat(vb); }
+          return sortState.asc ? (va < vb ? -1 : va > vb ? 1 : 0)
+                               : (va > vb ? -1 : va < vb ? 1 : 0);
+        });
+        rows.forEach(function (r) { tbody.appendChild(r); });
+      });
+    });
+  }
+
+  /* ── Opportunity matrix tooltip ── */
+  var plot = document.getElementById('opp-plot');
+  var tip  = document.getElementById('opp-tip');
+  if (plot && tip) {
+    plot.querySelectorAll('.opp-dot').forEach(function (dot) {
+      dot.addEventListener('mouseenter', function () {
+        var pr   = plot.getBoundingClientRect();
+        var dr   = dot.getBoundingClientRect();
+        var cx   = dr.left - pr.left + dr.width  / 2;
+        var cy   = dr.top  - pr.top;
+        tip.textContent = dot.dataset.job + '  ·  freq ' + dot.dataset.freq + '  imp ' + dot.dataset.imp;
+        tip.style.left    = cx + 'px';
+        tip.style.top     = cy + 'px';
+        tip.style.display = 'block';
+      });
+      dot.addEventListener('mouseleave', function () { tip.style.display = 'none'; });
+      dot.addEventListener('focus',      function () { dot.dispatchEvent(new Event('mouseenter')); });
+      dot.addEventListener('blur',       function () { tip.style.display = 'none'; });
+    });
+  }
+})();
+</script>
 
 <!-- Slide 22 (Interactive output) merged into slide 21 -->
 <section style="display:none" id="slide-22-merged"></section>
