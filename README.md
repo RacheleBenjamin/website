@@ -2,7 +2,7 @@
 
 Rachele Benjamin's UX research case-study deck — built with Vite + React.
 
-**Live site:** https://RacheleBenjamin.github.io/case-study-presentation/
+**Live site:** https://RacheleBenjamin.github.io/website/
 
 ## Local development
 
