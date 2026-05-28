@@ -10,8 +10,7 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-xs tracking-wider-3 uppercase text-cream/50">Say Hello</span>
-          <h2 className="mt-4 font-display text-5xl sm:text-7xl leading-[1.05] tracking-tight">
+          <h2 className="font-display text-5xl sm:text-7xl leading-[1.05] tracking-tight">
             Let's work<br />
             <span className="text-work">together.</span>
           </h2>
