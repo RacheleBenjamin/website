@@ -1265,7 +1265,7 @@
       <a class="pillar agent" href="#study-1-2-hero">
         <span class="emoji">🤖</span>
         <div class="label">Agentic AI</div>
-        <p class="lesson scroll-reveal">Partner with users to streamline complex, multi-step tasks./p>
+        <p class="lesson scroll-reveal">Partner with users to streamline complex, multi-step tasks.
         <div class="study-tag">Study 1 <span class="amp">&amp;</span> 2</div>
       </a>
       <a class="pillar shop" href="#study-3-hero">
@@ -1660,11 +1660,11 @@
       <table class="data" id="jtbd-table">
         <thead>
           <tr>
-            <th class="th-s" data-col="0" data-type="text" style="cursor:pointer;user-select:none;">Job <span class="s-caret">↕</span></th>
-            <th class="th-s th-s-desc" data-col="1" data-type="num" style="cursor:pointer;user-select:none;">Important <span class="s-caret" style="color:var(--work);">↓</span></th>
-            <th class="th-s" data-col="2" data-type="num" style="cursor:pointer;user-select:none;">Satisfied <span class="s-caret">↕</span></th>
-            <th class="th-s" data-col="3" data-type="num" style="cursor:pointer;user-select:none;">Frequency <span class="s-caret">↕</span></th>
-            <th class="th-s" data-col="4" data-type="num" style="cursor:pointer;user-select:none;">AI Open <span class="s-caret">↕</span></th>
+            <th class="th-s" data-col="0" data-type="text" style="cursor:pointer;user-select:none;">Job</th>
+            <th class="th-s th-s-desc" data-col="1" data-type="num" style="cursor:pointer;user-select:none;">Important</th>
+            <th class="th-s" data-col="2" data-type="num" style="cursor:pointer;user-select:none;">Satisfied</th>
+            <th class="th-s" data-col="3" data-type="num" style="cursor:pointer;user-select:none;">Frequency</th>
+            <th class="th-s" data-col="4" data-type="num" style="cursor:pointer;user-select:none;">AI Open</th>
           </tr>
         </thead>
         <tbody class="heatmap" id="jtbd-tbody">
@@ -1680,7 +1680,7 @@
     </div>
 
     <!-- Opportunity Matrix -->
-    <h2 class="section-title" style="margin-top:56px;">Interactive matrix to help stakeholders decide</h2>
+    <h3 class="sub-title" style="margin-top:56px;">Interactive matrix to help stakeholders decide</h3>
     <p style="font-size:15px;font-style:italic;color:var(--ink-60);margin:6px 0 4px;line-height:1.5;">Users are relatively satisfied with shopping jobs — all scores cluster in the upper right.</p>
     <p style="font-size:13px;color:var(--ink-50);margin:0 0 16px;line-height:1.6;">Upper-left = high importance, low satisfaction — strongest opportunity for AI to step in. Axes scaled 1–5. <strong>Hover</strong> each emoji to reveal the job.</p>
 
@@ -1803,12 +1803,10 @@
         /* update caret indicators */
         table.querySelectorAll('.th-s').forEach(function (h) {
           var c = h.querySelector('.s-caret');
-          c.textContent = '↕'; c.style.color = ''; c.style.opacity = '.5';
+          if (c) { c.textContent = '↕'; c.style.color = ''; c.style.opacity = '.5'; }
         });
         var caret = th.querySelector('.s-caret');
-        caret.textContent = sortState.asc ? '↑' : '↓';
-        caret.style.color   = 'var(--work)';
-        caret.style.opacity = '1';
+        if (caret) { caret.textContent = sortState.asc ? '↑' : '↓'; caret.style.color = 'var(--work)'; caret.style.opacity = '1'; }
         /* sort rows */
         var rows = Array.from(tbody.querySelectorAll('tr'));
         rows.sort(function (a, b) {
