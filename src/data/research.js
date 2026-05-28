@@ -129,6 +129,13 @@ export const press = [
     url: 'https://www.issep.org/spotlights/benjamin',
     description: '2020 Innovation in Existential Psychology Research Award winner discusses constructing a psychometric scale of uncanny feelings and its applications.',
   },
+  {
+    title: 'Uncertainty, Spooky Robots, and the Uncanny Valley',
+    outlet: 'Brain Buzz Podcast — Episode 12',
+    year: 2018,
+    url: 'https://brainbuzzpod.com/episodes/2018/6/28/uncertainty-spooky-robots-and-the-uncanny-valley-with-rachele-benjamin',
+    description: 'What is the uncanny valley and why do humanlike robots feel so unsettling? A conversation on uncertainty, meaning, and what makes things spooky.',
+  },
 ]
 
 // Aggregate citation count for display in hero
