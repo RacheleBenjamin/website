@@ -45,7 +45,7 @@ export default function CaseStudy() {
         >
           <span className="text-xs tracking-wider-3 uppercase text-ink/50">Portfolio</span>
           <h2 className="mt-4 font-display text-5xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
-            Research <span className="text-work">at Scale</span>
+            Case <span className="text-work">Studies</span>
           </h2>
           <p className="mt-6 text-base text-ink/60 max-w-2xl mx-auto leading-relaxed">
             Generative and evaluative research shaping products for millions of users.

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { scrollToAnchor } from '../hooks/scrollToAnchor'
 
 const homeLinks = [
-  { label: 'Case Studies', href: '#case-study' },
+  { label: 'Portfolio', href: '#case-study' },
   { label: 'Academic Research', href: '#/research' },
   { label: 'Contact', href: '#contact' },
 ]
