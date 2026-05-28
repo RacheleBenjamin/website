@@ -26,7 +26,7 @@ function SocialIcons() {
         Scholar<span className="text-[9px] opacity-50">↗</span>
       </a>
       <a
-        href="https://linkedin.com/in/"
+        href="https://www.linkedin.com/in/rachelebenjamin/"
         target="_blank"
         rel="noreferrer"
         aria-label="LinkedIn"

@@ -155,7 +155,7 @@ export default function CaseStudy() {
                       </div>
                       <div className="hidden sm:flex col-span-4 items-baseline justify-end">
                         <a
-                          href="mailto:"
+                          href={`mailto:9rachelebenjamin@gmail.com?subject=${encodeURIComponent('Interest in ' + study.title)}`}
                           className="inline-flex items-center gap-2 border border-ink/30 text-ink/70 px-5 py-2.5 text-xs tracking-wider-2 uppercase font-medium hover:bg-ink hover:text-cream hover:border-ink transition-all duration-300"
                         >
                           Email me for the case study
@@ -165,7 +165,7 @@ export default function CaseStudy() {
                     {/* Mobile email button */}
                     <div className="sm:hidden px-4 pb-8">
                       <a
-                        href="mailto:"
+                        href={`mailto:9rachelebenjamin@gmail.com?subject=${encodeURIComponent('Interest in ' + study.title)}`}
                         className="inline-flex items-center gap-2 border border-ink/30 text-ink/70 px-5 py-2.5 text-xs tracking-wider-2 uppercase font-medium hover:bg-ink hover:text-cream hover:border-ink transition-all duration-300"
                       >
                         Email me for the case study

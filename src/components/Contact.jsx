@@ -26,7 +26,7 @@ export default function Contact() {
               Email
             </a>
             <a
-              href="https://linkedin.com/in/"
+              href="https://www.linkedin.com/in/rachelebenjamin/"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 border border-cream/30 text-cream px-7 py-3.5 rounded-full text-xs tracking-wider-2 uppercase font-medium hover:bg-cream hover:text-ink transition-colors"
