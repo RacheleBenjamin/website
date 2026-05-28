@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { academicProfile, researchThemes, publications, totalCitations } from '../data/research'
 
@@ -12,6 +13,19 @@ const itemVariants = {
 }
 
 export default function Research() {
+  const [activeTheme, setActiveTheme] = useState('all')
+
+  const themeFilters = [
+    { id: 'all', label: 'All' },
+    { id: 'uncanny', label: 'Defining the Uncanny' },
+    { id: 'meaning', label: 'Meaning Maintenance' },
+    { id: 'tmt', label: 'Terror Management' },
+    { id: 'democracy', label: 'Democracy' },
+  ]
+
+  const visiblePubs = activeTheme === 'all'
+    ? publications
+    : publications.filter(p => p.theme === activeTheme)
   return (
     <div>
       {/* Hero */}
@@ -24,7 +38,7 @@ export default function Research() {
         >
           <a
             href="#/"
-            className="inline-flex items-center gap-2 text-[10px] tracking-wider-3 uppercase text-ink/50 hover:text-ink transition-colors mb-10"
+            className="flex items-center gap-2 text-[10px] tracking-wider-3 uppercase text-ink/50 hover:text-ink transition-colors mb-10"
           >
             <span aria-hidden>←</span> Back to portfolio
           </a>
@@ -32,17 +46,11 @@ export default function Research() {
           <span className="text-xs tracking-wider-3 uppercase text-ink/50">Academic Research</span>
           <h1 className="mt-4 font-display text-5xl sm:text-7xl lg:text-8xl leading-[0.98] tracking-tight">
             Social<br />
-            <span className="italic font-light">Psychology.</span>
+            <span className="text-work">Psychology.</span>
           </h1>
-          <p className="mt-8 text-base sm:text-lg text-ink/60 max-w-xl mx-auto leading-relaxed font-light">
+          <p className="mt-8 text-base sm:text-lg text-ink/60 max-w-xl mx-auto leading-relaxed">
             My doctoral research at the University of British Columbia explores how people make meaning under uncertainty — from the uncanny valley to political attitudes.
           </p>
-
-          <div className="mt-12 flex justify-center gap-12 sm:gap-16">
-            <Stat value={publications.length} label="Publications" />
-            <Stat value={`${totalCitations}+`} label="Citations" />
-            <Stat value="PhD" label="UBC Psychology" />
-          </div>
 
           <div className="mt-12">
             <a
@@ -70,7 +78,7 @@ export default function Research() {
           >
             <span className="text-xs tracking-wider-3 uppercase text-ink/50">Themes</span>
             <h2 className="mt-4 font-display text-4xl sm:text-5xl tracking-tight">
-              Four lines of <span className="italic font-light">inquiry</span>
+              Four lines of <span className="text-work">inquiry</span>
             </h2>
           </motion.div>
 
@@ -93,7 +101,7 @@ export default function Research() {
                 <h3 className="mt-4 font-display text-2xl sm:text-3xl tracking-tight leading-tight">
                   {theme.title}
                 </h3>
-                <p className="mt-4 text-sm text-ink/60 leading-relaxed font-light">
+                <p className="mt-4 text-sm text-ink/60 leading-relaxed">
                   {theme.description}
                 </p>
               </motion.div>
@@ -110,22 +118,44 @@ export default function Research() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="text-center mb-20"
+            className="text-center mb-12"
           >
             <span className="text-xs tracking-wider-3 uppercase text-ink/50">Publications</span>
             <h2 className="mt-4 font-display text-4xl sm:text-5xl tracking-tight">
-              Selected <span className="italic font-light">work</span>
+              Selected <span className="text-work">work</span>
             </h2>
           </motion.div>
 
+          {/* Filter tabs */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {themeFilters.map(f => (
+              <button
+                key={f.id}
+                onClick={() => setActiveTheme(f.id)}
+                className={`px-4 py-2 text-[10px] tracking-wider-2 uppercase transition-colors border bg-transparent focus:outline-none ${
+                  activeTheme === f.id
+                    ? 'text-ink border-ink font-semibold'
+                    : 'text-ink/60 border-ink/20 hover:border-ink/40 hover:text-ink'
+                }`}
+              >
+                {f.label}
+                {f.id !== 'all' && (
+                  <span className="ml-1.5 text-ink/30">
+                    ({publications.filter(p => p.theme === f.id).length})
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+
           <motion.div
+            key={activeTheme}
             className="space-y-px bg-ink/10 border-y border-ink/10"
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
+            animate="visible"
           >
-            {publications.map((pub) => (
+            {visiblePubs.map((pub) => (
               <motion.a
                 key={pub.title}
                 variants={itemVariants}
@@ -142,7 +172,7 @@ export default function Research() {
                     <h3 className="font-display text-xl sm:text-2xl leading-snug tracking-tight">
                       {pub.title}
                     </h3>
-                    <p className="mt-2 text-xs text-ink/60 group-hover:text-cream/70 transition-colors italic font-light">
+                    <p className="mt-2 text-xs text-ink/60 group-hover:text-cream/70 transition-colors italic">
                       {pub.authors}
                     </p>
                     <p className="mt-2 text-[10px] tracking-wider-2 uppercase text-ink/50 group-hover:text-cream/60 transition-colors">
@@ -162,32 +192,6 @@ export default function Research() {
             ))}
           </motion.div>
         </div>
-      </section>
-
-      {/* Interests */}
-      <section className="py-24 px-6 border-t border-ink/10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl mx-auto"
-        >
-          <span className="text-xs tracking-wider-3 uppercase text-ink/50">Topics I Study</span>
-          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 font-display text-2xl sm:text-3xl">
-            {academicProfile.interests.map((interest, i) => (
-              <span key={interest} className={i % 2 === 0 ? '' : 'italic font-light'}>
-                {interest}
-                {i < academicProfile.interests.length - 1 && (
-                  <span className="text-ink/30 ml-6">·</span>
-                )}
-              </span>
-            ))}
-          </div>
-          <p className="mt-10 text-xs tracking-wider-2 uppercase text-ink/50">
-            {academicProfile.affiliation}
-          </p>
-        </motion.div>
       </section>
 
       {/* Footer */}

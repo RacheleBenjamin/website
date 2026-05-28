@@ -13,16 +13,16 @@ export default function Contact() {
           <span className="text-xs tracking-wider-3 uppercase text-cream/50">Say Hello</span>
           <h2 className="mt-4 font-display text-5xl sm:text-7xl leading-[1.05] tracking-tight">
             Let's work<br />
-            <span className="italic font-light">together.</span>
+            <span className="text-work">together.</span>
           </h2>
-          <p className="mt-8 text-cream/60 max-w-lg mx-auto leading-relaxed font-light">
+          <p className="mt-8 text-cream/60 max-w-lg mx-auto leading-relaxed">
             Interested in my research or want to collaborate? I'd love to hear from you.
           </p>
 
           <div className="mt-12 flex flex-wrap justify-center gap-3">
             <a
               href="mailto:"
-              className="inline-flex items-center gap-2 bg-cream text-ink px-7 py-3.5 rounded-full text-xs tracking-wider-2 uppercase font-medium hover:bg-cream/90 transition-colors"
+              className="inline-flex items-center gap-2 border border-cream/30 text-cream px-7 py-3.5 rounded-full text-xs tracking-wider-2 uppercase font-medium hover:bg-cream hover:text-ink transition-colors"
             >
               Email
             </a>

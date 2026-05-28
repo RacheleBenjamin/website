@@ -4,7 +4,7 @@ import { scrollToAnchor } from '../hooks/scrollToAnchor'
 
 const homeLinks = [
   { label: 'Case Studies', href: '#case-study' },
-  { label: 'Research', href: '#/research' },
+  { label: 'Academic Research', href: '#/research' },
   { label: 'About / Contact', href: '#contact' },
 ]
 
@@ -67,7 +67,7 @@ export default function Nav({ variant = 'home' }) {
           href={variant === 'home' ? '#hero' : '#/'}
           className="font-display text-xl sm:text-2xl tracking-tight text-ink"
         >
-          Rachele <span className="italic font-light">Benjamin</span>
+          Rachele <span className="text-work">Benjamin</span>
         </a>
 
         {/* Links + socials row */}

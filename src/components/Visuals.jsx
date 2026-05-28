@@ -34,9 +34,9 @@ export default function Visuals() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease, delay: 0.08 }}
-            className="mt-6 font-display font-light text-[12vw] sm:text-[8vw] lg:text-[7rem] leading-[0.95] tracking-tight"
+            className="mt-6 font-display text-[12vw] sm:text-[8vw] lg:text-[7rem] leading-[0.95] tracking-tight"
           >
-            Artifacts <span className="italic font-extralight">from the field</span>
+            Artifacts <span className="text-work">from the field</span>
           </motion.h1>
 
           <motion.p
@@ -78,7 +78,7 @@ export default function Visuals() {
             <p className="text-[11px] tracking-wider-3 uppercase text-ink/60 font-medium">
               Continue
             </p>
-            <h2 className="mt-4 font-display font-light text-4xl sm:text-6xl leading-[1.05]">
+            <h2 className="mt-4 font-display text-4xl sm:text-6xl leading-[1.05]">
               See the <span className="italic">case study</span> behind the visuals.
             </h2>
           </div>
@@ -127,7 +127,7 @@ function VisualRow({ visual, index }) {
             </span>
           </div>
 
-          <h3 className="mt-6 font-display font-light text-4xl sm:text-5xl leading-[1.05]">
+          <h3 className="mt-6 font-display text-4xl sm:text-5xl leading-[1.05]">
             {visual.title}
           </h3>
 

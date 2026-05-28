@@ -1,0 +1,346 @@
+[
+  {
+    "page": 1,
+    "text": "Open Banking\nDiscovery Interviews\nWhat users need and want when it\ncomes to data sharing between\nfinancial institutions\nHCD Research Contributors\nJuly 2024 Ewa Plonka, Rachele Benjamin\nInternal use only"
+  },
+  {
+    "page": 2,
+    "text": "Agenda\n01 Our approach\n01.1 Context Gathering\n01.2 Method\n02 Insights\n02.1 Managing money across multiple FIs\n02.2 Understanding user needs\n02.3 How people adopt a technology or tool\n02.4 Data sharing attitudes and beliefs\n02.5 Sharing data with banks and fintech companies\n02.6 What's the difference Canada and India\nOpen Banking Discovery Interviews Pg 2"
+  },
+  {
+    "page": 3,
+    "text": "Our Approach\nHow we did the research\nPg 3"
+  },
+  {
+    "page": 4,
+    "text": "Approach\nContext gathering\nBefore we kicked off, we learned about existing Open Banking concepts and the\nbusiness needs\nPg 4"
+  },
+  {
+    "page": 5,
+    "text": "We used these three inputs to\nContext gathering\ndirect our primary research:\nTask Force Workshops SME Interviews Secondary Research\nWith Journey UX Design Strategists With key LOB decision -makers Collecting national survey data from\n3 geographies\n5"
+  },
+  {
+    "page": 6,
+    "text": "Task Force\nContext gathering\nWe consulted with 8 HCD Strategists and\nDesign Leads working in the Journeys to\ndecide how Open Banking could be\nleveraged to help users\nSIJ RMB TDW US Credit\nBreena Gormley Ana Hulshof Robert Tu\nCards\nKate Winbaum\nEAJ HOJ PRJ\nEkaterina Nikiforova Meagan Terrel Susan Juvet\nSue McCloskey\nThe Task Force consulted on strategic directions for Open\nBanking, knowledge gaps , research questions, and segments\nto target\n6"
+  },
+  {
+    "page": 7,
+    "text": "Task Force\nContext gathering\nOur Task Force participated in a series of\nfour workshops including one about key\nuser groups:\n7"
+  },
+  {
+    "page": 8,
+    "text": "Task Force\nContext gathering\nKey takeaways from our Task Force:\nWhat we assume Knowledge gaps Priority groups\nTheir focus right now\nWhen would we lose their trust N2C (EAJ, PRJ, SIJ, TDW, HOJ)\nPeople don't really care about the\nWhere do people draw the line Students and postgrads (EAJ)\nsecurity of their data\nwhen it comes to unsavory data First time homebuyers (HOJ)\nAt least, not when they're getting\nsharing practices? New & experienced investors (TDW)\nto perform tasks more\nconveniently. The Task Force\nWhat's worth the trade -off Open Banking priorities\nhypothesized that people don't\nWhat kind of experience is worth Fintech users and non -users\nthink about data sharing when\nthe risk of sharing more data All ages (more Gen Z & Millennial)\nthey're having a good experience.\nwith TD? Range in investable assets\nDisadvantaged groups\nMoney held overseas\n8"
+  },
+  {
+    "page": 9,
+    "text": "Subject Matter Experts\nContext gathering\nWe interviewed 9 experts and key decision -\nmakers for Open Banking:\nDigital Performance (US) Credit Cards (CA) TD Direct Investing (CA)\nTodd Copeland (SVP) Rinelda Nanushi (Product Group Owner) Matthew Ladzik (Product Manager)\nEAJ Credit Risk (CA) Small Business Banking (US)\nKimberley Menezes (PO, Digital Buying) Ali Mohsin (Senior Manager) Nolan Glynn (Senior Manager)\nSmall Business Banking (CA)\nCredit Cards (CA) Wealth Advice Journey\nIra Weisman (PO, Data as a Product)\nIsabel Giraldo (AVP, Data & Analytics) Parik Malik (Senior Manager)\nWe asked our Subject Matter Experts how their line of business was\nstrategically planning for Open Banking , who are their users , and\nknowledge gaps when it came to what users need and want\n9"
+  },
+  {
+    "page": 10,
+    "text": "Subject Matter Experts\nContext gathering\nHere's what we learned from our 1:1 interviews:\nThe LOB Key segments The need The concepts\nMore information on customers\nSmoother approval processes\nCredit cards (US & CA) N2C with credit outside Canada\nLoyalty programs to bring\nBetter loyalty programs\ncustomers in / push other products\nPeople without a strong credit\nYouth\nEnable smoother authentication,\nEAJ history in Canada need help\nN2C with credit outside Canada\nfunding, safe advice\ngrow their wealth\nEasier cash transfer to TD\nHelp people invest strategically Insights about optimizing funds\nDirect Investing Mass Affluent by showing them the right Viewing hard to borrow OFI stocks\ninsights, advice, and products Holistic view of portfolio\nLoyalty programs, e.g., OneTD\nDeepenin g relationships with Efficient wealth referrals\nWealth advice High net worth clients so we can offer the right Setting customers up with advice\nproducts, investing or otherwise across all services\nSmall business owners need to\nBusiness owners with a\nA one -stop shop for business\nSmall business banking do their own admin, be their\nsecondary card holder\nowners\nown accountants\n10"
+  },
+  {
+    "page": 11,
+    "text": "Approach Context gathering\nOur Subject Matter Experts had an idea of what customers need.\nWe made it our mission to test their hypotheses and validate\ntheir assumptions with research\nPg 11"
+  },
+  {
+    "page": 12,
+    "text": "Method\nStrategic segments\nHere is what our Task Force and Subject\nMatter Experts were calling out:\nSegment Task Force Subject Matter Experts Relevant concepts\nPeople who are 2 -4 years into the Credit cards | We need to support people who don't Budgeting tools\ncountry are more likely to have products have credit history in Canada Bill payments\nwith multiple FIs and are less entrenched Borrowing help\nN2C from India EAJ | We need to authenticate them more efficiently\nwith any of them, making them an\nso we can grow market share\nopportunity group for OB\nOpen Banking can help people apply for\nEAJ | People who are just starting out and need help Application help\nloans, access the right advice and\nwith the approval process; students, postgrads, etc.; Budgeting tools\nguidance, understand spending and\nwill benefit from an easier approval process Credit card shopping\nCAD Mass Market saving habits, and more\nTD DI | This group is actively growing their wealth\nDirect Investing tools\nThe business is thinking more seriously\nand doing it themselves, so they could use insights,\nabout how to create tools for HNW and\ntips & tricks, and help managing money across\nCAD Mass Affluent those who will become HNW soon\nplatforms\nDigital Performance | Canada and the US have very Budgeting tools\nIn the US there is a longer tradition of different landscapes. In the US there is more data Bill payments\ndata sharing, attitudes towards data aggregation. Anticipating these differences is key. Direct Investing tools\nAmerican sharing may differ in the US vs. in Canda Credit card shopping\nTD DI | The US is already exploring connected\nBorrowing help\nbanking for investing. How is it looking?\nPg 12"
+  },
+  {
+    "page": 13,
+    "text": "Approach\nMethod\nResearch plan, question, and participants\nPg 13"
+  },
+  {
+    "page": 14,
+    "text": "The HCD Process\nMethod\nWe conduct primary user research at the\ndiscovery phase. Lines of business can\nleverage what we find to better meet user\nneeds with their Open Banking concepts.\nConcept\nIdeate\nA visual representation\nIdea generation\nof the idea\nResearch\nDiscover unmet,\nunarticulated needs &\nproblems to solve\nEvaluate\nLearn the usefulness\nof the concept\nOur research methodology\n20 remote video interviews from 4\nparticipant groups, 60 minutes each\n14"
+  },
+  {
+    "page": 15,
+    "text": "Research Questions\nMethod\nOur three broad questions for this round\nof research:\nQuestion 1 Question 2 Question 3\nWhat needs do users of In what situations would What notable differences are\ndifferent ages, income, and users of different ages, there between users of\nrisk appetite, with multiple income, and risk appetite different ages, income, and\nFIs have that can be solved decide that the risk is worth risk appetite in how they\nby linking data to TD? the benefit of sharing evaluate the risks of\nWhat’s missing now / what personal data given the sharing data with banks?\npain points can be solved service they’re using?\nwith Open Banking?\n15"
+  },
+  {
+    "page": 16,
+    "text": "Participants\nMethod\nOur participants had qualities that helped\nus validate the assumptions of different\nparts of the business:\n5 N2C 5 Mass Market (CA) 5 Mass Affluent (CA) 5 American\nFrom India Investable assets under 100K Investable assets over 100K From around the US\nAnother breakdown | With our sample we were\nalso able to test hypotheses about age\ninfluencing tech adoption:\n4 Gen Z 9 Millennial 5 Gen X 2 Boomer\n16"
+  },
+  {
+    "page": 17,
+    "text": "Characteristics\nMethod\nHCD ensures its participants have relevant\nbehaviors and experiences to speak to the\nconcepts we want to test. To that end, we\nrecruited for these characteristics:\n20 chequing and 17 using or have used a\n12 previously have dealt\nsavings accounts at fintech company\nwith fraud\nmultiple FIs\nMore behaviors | to support individual LOBs:\n12 self -directed 3 applied for a\n19 credit card users\ninvestors, 4 trading at mortgage within the\nJourney | PRJ least once per month last year\nJourney | TD DI Journey | HOJ\n17"
+  },
+  {
+    "page": 18,
+    "text": "Planned phase 2\nMethod\nA second planned round of research will focus\non business owners:\nSB owners Canada (5)\nSB owners USA (5)\nWe're dedicating another round of research to learning as\nmuch as we can about these key segments\nPg 18"
+  },
+  {
+    "page": 19,
+    "text": "Insights\nPg 19"
+  },
+  {
+    "page": 20,
+    "text": "Insights\nManaging money\nacross multiple FIs\nHow people stay on top of managing money across multiple FIs, important\nmoments, and key pain points\nPg 20"
+  },
+  {
+    "page": 21,
+    "text": "Watch - out Managing accounts\nThe understanding that Canadians\nhave 2 FIs may not be true\nSurveys find that Canadians on average have 2 FIs1.\nMany of our participants under -reported how many FIs they deal with. We\nsuspect Canadians have a specific mental model of what counts as a financial\ninstitution that doesn't include, for example, PC Financial. We noticed that people\ndon't report having a PC Optimum card until we press for more details.\nThe typical Canadian customer may not be sharing their complete financial\npicture with us. As we continue to plan for an Open Banking future, we may\nuncover more diversification than Canadians are currently reporting.\n1Online Survey on Financial Data Sharing and Financial Security (Government of Canada, 2021)\nPg 21"
+  },
+  {
+    "page": 22,
+    "text": "Why add another bank Managing accounts\nWe uncovered a range of reasons why people seek out an\nadditional financial institution:\nSearching for something Word of mouth and Wanting to diversify\nKey Segments\nspecific media financial institutions\nAlmost half of our About half mentioned they Having multiple institutions\nparticipants sought out other opened accounts outside of helped them feel secure\ninstitutions because they their primary institutions on because they felt they\nwere looking for a specific someone else's advice. needed to avoid having their\nPrevious research suggests N2C people who\nproducts. eggs in one basket.\nhave been here 2 -4 years diversify by seeking\nout products at other institutions. Our study\nrevealed a similar pattern.\nNew to Canada participants were heavily\nDenied something Looking for a deal Wanting more separation influenced by word of mouth, but also chose\nof funds to diversify based on missing product needs\nnot met by their first Financial Institution.\nSome people started at a People look outside their A few participants noted that\nsecondary institutions primary institution to avoid they preferred the level of\nbecause they were denied a fees they felt were separation which they\nloan at their primary bank. unnecessary accomplished by having\nmoney in different\ninstitutions.\nPg 22"
+  },
+  {
+    "page": 23,
+    "text": "Staying on top of their money Managing accounts\nHow people manage accounts across multiple institutions:\nChecking less Checking more\nPeople who have\nFunneling everything\nSegments\nexperienced fraud\nthrough one FI\nA few participants\nPeople channel all their\nmentioned cases where\npayments from one main\ntheir monitoring habits\naccount and have partial\nGen Z and Millennials will pay less attention\nshifted because of fraud\noverview of their total money in\nto registered accounts (e.g., RRSPs) because\nincidences, prompting a\nand out.\nthey feel far off in the future. If those\nneed for a better overview\naccounts are housed outside their main FI,\nof their financial situation.\nthey may lose out on opportunities to plan\nand monitor appropriately.\nActive (vs. passive)\nGoals that feel distant\ninvestors track their\nactivities more\nRegistered accounts like\nRRSPs only get attention if\npeople have active goals Active investors check\nthey are working towards trading platforms frequently\nwhereas passive investors\nwon't go to the effort of\nlogging in\nPg 23"
+  },
+  {
+    "page": 24,
+    "text": "Managing accounts\nInsight\nPeople's solution is to\n\"[Are you budgeting?] Yeah, I guess sort of, but not\nmanaging multiple\nin a formal way… Even though I have a lot of credit\naccounts involves\ncards, I don't use them all, all the time. I have an\nAmazon card only for Amazon purchases, if I\nlimiting their activities\nhaven't bought anything there's no balance on\nto one institution, which\nthat card.\"\nin turn limits their ability – P5, 54 yo, Canada MA\nto discover opportunities\nto grow their wealth\nPg 24"
+  },
+  {
+    "page": 25,
+    "text": "Pain points Managing accounts\nNearly half of participants indicated no pain points\nregarding having multiple institutions. However, many\npeople experienced minor frustrations: Key Segments\nIt's just inconvenient One -stop overview Moving money is a\nproblem\nN2C customers may have trouble getting loans\nThough it's not a major pain People want an overview of Many people find that the\nif they have less credit in Canada.\npoint, it's inconvenient to their accounts on the same biggest hurdle is moving\nlog into several apps screen so they could make money between\nmore informed decisions. institutions. They were\nconcerned about delays and\nmissing funds.\nMass market customers are more likely to face\nscenarios where they need money sooner than\nlater, and delays can be catastrophic.\nNo easy way to share Confusing applications Unable to consolidate\nwith household\nPeople feel they have no People felt it was difficult to Participants recalled\neasy way to have an get approved for credit and moments where they\noverview of the entire loan products (ex. wanted to consolidate or People who financially plan with members of\nhousehold's financial Mortgages) because simply move an account to their household (e.g., in a later life stage) may\npicture. They use manual institutions were unable to a different institution but need more support planning joint finances.\ntechniques like spreadsheets see their full financial found that transferring was\nto achieve this. picture. There was also too difficult to bother.\nuncertainty about why some\ninstitutions approved and\nsome rejected their\napplications.\nPg 25"
+  },
+  {
+    "page": 26,
+    "text": "Managing accounts\nWatch -out\n\"[What has it been like keeping an eye across\nPeople may not need or multiple institutions?] Oh, simple. Because I have\nall the apps on my phone, so I just go in one at a\nexpect a one -stop shop. Most\ntime on the apps… I only look when I know when\nof our participants said that\nthe billing dates are because I have reminders in\nlogging into several apps is\nmy phone to check each account.\"\ninconvenient but not\n–P5, 54, Canada, Mass Affluent\ndifficult and they are willing\nto continue this habit.\nPg 26"
+  },
+  {
+    "page": 27,
+    "text": "Insights\nUnderstanding\nuser needs\nHow well do peoples' needs align with our plans for Open Banking\nBudgeting Paying bills Direct Credit cards Borrowing\nInvesting\nPg 27"
+  },
+  {
+    "page": 28,
+    "text": "Approach Understanding needs\nAn aim of our research was to validate that the Open Banking\nconcepts Journeys are exploring match user needs. This\nsection outlines user needs and how they match with what we\nplan to build.\nPg 28"
+  },
+  {
+    "page": 29,
+    "text": "Understanding needs\nUser needs and concepts (pt 1)\nWe collected user needs so we could validate Open Banking concepts lines of\nbusiness are considering. Here is an overview of what we learned:\nTask Unmet needs Open Banking concept\nA one -stop shop for managing\nSmart insights about spending habits\nspending and saving that connects\nConvenient calculations\naccounts across institutions\nFinancial birds -eye view\nBudgeting\nSIJ | HCD contact Breena Gormley\nA centralized hub enabling customers\nHelp managing bill payments across\nto see and plan around different bill\nmultiple FIs\npayment schedules\nPaying bills\nThis is a new concept idea\ngenerated by our primary\nresearch\nHaving more investing options within a Enable people to monitor their entire\nsingle self -directed platform portfolio in one smooth experience,\nManaging multiple investments in a way help people move their money cross -\nthat is painless platform\nDirect\nTD DI | HCD contact Robert Tu,\nInvesting\nbusiness contact Matthew Ladzik\nPg 29"
+  },
+  {
+    "page": 30,
+    "text": "Understanding needs\nUser needs and concepts (pt 2)\nWe collected user needs so we could validate Open Banking concepts lines of\nbusiness are considering. Here is an overview of what we learned:\nTask Unmet needs Open Banking concept\nCredit card shopping experience that\nLoyalty program that connects people\ntakes the guess work out of maximizing\nto more cards, more products (One TD)\nrewards / minimizing fees\nPRJ | HCD contact Susan Juvet,\nCredit cards\nbusiness contact Rinelda Nanushi\nCustomers may want a\nsmarter loyalty program with\nmore customization than\nInformation in one place for quicker what we're planning for them\ndecisions from lenders\nInformation in one place for speedier\nMore transparency in how banks vary in\napplications\nthe approval process\nBorrowing PRJ | HCD contact Meagan Terrel\nOne -stop shop to help customers\nmanage multiple mortgages\nA surprise finding: customers\nmay be less interested in\nTD may not be thinking\nspeed than in exposure to\nabout these needs yet\nmultiple lenders at a time\nPg 30"
+  },
+  {
+    "page": 31,
+    "text": "Budgeting Understanding needs\nPeople who aren't using budgeting apps rely on strategies\nand tools\nKey Segments\nTheir challenges Tools and strategies Unmet needs\nSpreadsheets and PDFs\nSmart insights about\nhelp customers organize\nBudgeting is a lot of work\nspending habits,\n\"It's not an app, it's a PDF. convenient calculations, The US is ahead when it comes to budgeting\n\"[Budgeting is] something\nSimpli's . They're called a financial overview apps that link accounts across financial\nI've always wanted to do,\nSteph and Dan. I found it on institutions. People will have specific\nbut it's a lot of time, a lot of\nTik Tok. It works.\" –P1, 22 expectations of how bank tools for budgeting\nheadache… just sitting\nyo, MM \"Ideally I would have a should look and feel.\ndown and doing it, I'm not a\ndashboard that gives me all\nmath person. It sounds\nthe investments, what is my\nawful.\" –P20, 36 yo, USA\nBank tools\nfinancial health today , what\nMM\ncan you do better with this, or\n\"Bank of America has good\n\"[My spreadsheet] is doing tools tell you on average is there an avenue where you\nthe job, I started it when I how much you're spending… could invest... Sometimes you\nBoth Mass Affluent and Mass Market segments\nwas travelling... I wish it just put purchases off but that\none thing that's not good\nuse budgets to keep track of their spending and\nlinked to some of my bank dashboard would give me a\nabout it, if it's a credit card,\ntheir saving.\naccount so I didn't have to birds eye view of how I'm\nit says, 'hey you just spent\nput in certain things or doing financially, a snapshot,\nmoney on credit cards… it\nguess certain things.\" –P4, doesn't have the data to and my decision -making\n49 yo, Canada MA break it down.\" –P17, 51 yo, becomes that much easier.\"\n–P16, 42 yo, Canada MM\nUSA MM\nPg 31"
+  },
+  {
+    "page": 32,
+    "text": "Understanding needs\nInsight\nAmericans already use\n\"It's called Monarch money… you can just look at\nbudgeting tools that\nall your transaction history in one place. I'm not\nconnect accounts across necessarily logging in separately to Chase bank, I\nsee it all the time, there's a widget at the top that\ntheir institutions so their\nhas a summary\".\nexpectations will be\n–P15, 49, USA & Mass Affluent\nanchored to these tools\nPg 32"
+  },
+  {
+    "page": 33,
+    "text": "Understanding needs\nInsight\nAmericans value \"I wanted to categorize some spending as Max (our\ndog's name). I wanted it to come out of his budget,\nbudgeting tools that\nnot our spending budget.\"\noffer customizable –P15, 49, USA & Mass Affluent\nspending categories\nPg 33"
+  },
+  {
+    "page": 34,
+    "text": "Understanding needs\nOpportunity\n\"I don't want to have a bunch of apps so I had to\nopen all this stuff. I would prefer it if TD or\nBanks have the edge on\nTangerine had this stuff so that I could still just use\nthose two apps which I use all the time anyway.\nfintech companies for\nThough I like opening apps, it gets to be just overkill\npeople who don't want to\nsometimes.\"\nadd yet another app –P13, 27 yo, Canada MM\nPg 34"
+  },
+  {
+    "page": 35,
+    "text": "Understanding needs\nWatch -out\n\"I still write down stuff on paper because that's just\nPeople want to connect my generation. I've used some apps like Mint where\nyou can combine everything… some accounts you\naccounts for budgeting\ncouldn't attach to it and I didn't want to keep going\nthrough the firewalls.\"\npurposes but will\n–P15, 49, USA & Mass Affluent\nabandon experiences\nthat make it too difficult\nPg 35"
+  },
+  {
+    "page": 36,
+    "text": "Understanding needs\nWatch -out\n\"[For budgeting] I use pen and paper method. I've\nThough automatic tools\ntried it on a computer, but, there's something about\npen and paper that makes it feel mzore real… I think\ncan be more efficient,\nI pay attention, it's giving me greater sense of\nrituals involving pen and\ncontrol.\"\npaper make finances – P2, 35 yo, Canada MM\nfeel more tangible\nPg 36"
+  },
+  {
+    "page": 37,
+    "text": "Bill payments Understanding needs\nPeople with multiple FIs must keep track of different bill\npayment schedules across institutions\nTheir challenge Actions taken Unmet need\nKey Segments\nStaying on top of multiple\nCalendar reminders\nbill payment schedules\n\"I have a repeating thing in\n\"if I miss a payment, then\nwhat's going to end up my calendar… I might keep it\nHelp people with multiple\nhappening is now I have to there for a couple of days,\nEveryone regardless of wealth could\nFIs manage bill payments\npay bank fees, admin fees, but usually I [pay that bill]\nbenefit from help managing bill\nyou know, each let's say a right away… some companies\npayments across different platforms.\ncheck gets returned, that's send a reminder that your\nanother $45.00. You know, statement is available, it's for\nit's so expensive.\" the ones that don't.\n–P5, 54 yo, Canada MA\n–P5, 42 yo, Canada MM\nPg 37"
+  },
+  {
+    "page": 38,
+    "text": "Investing (pt 1) Understanding needs\nPeople need to access more investing products than are\navailable on any single platform\nKey Segments\nTheir challenges Actions taken Unmet needs\nNeeding more options for\nKeep it simple by limiting\ninvesting than one People who want to grow their wealth\ntheir activity on different\nplatform can offer need access to different investing\ninvesting accounts\noptions beyond what a single platform\nI'd rather one unified banking Having more investing can offer\nservice, but that's not \"Let's say with joining options within a single\npossible for investing in Questrade, one of the biggest self -directed platform\ndifferent markets at least. factors why I don't want to is\n–P6, 19 yo, N2C because having a third\naccount I'm going to be\nOur direct investors skewed younger\nManaging multiple\n\"I researched and found dealing with, I don't even\nanother app called Quest… I know how you'd log into investments in a way that\ndo have an active acount them. If it's one account, if is painless\nit's two factor\nwith Wealthsimple …With\nWealthsimple their authentication, it's the People who are familiar with other\nconversion fees is a bit convenience of having markets (e.g., N2C) may be actively\nhigher when you trade in the everything in one spot.\" seeking ways to invest internationally\nUS stocks compared to the –P10, 29 yo, Canada MA\ndifferent other app, where\nthey don't have any charges.\"\n–P7, 28 yo, N2C\nPg 38"
+  },
+  {
+    "page": 39,
+    "text": "Investing (pt 2) Understanding needs\nPeople need to keep an eye on their total wealth so they\ncan make the right decisions\nKey Segments\nTheir challenges Actions taken Unmet needs\nKeeping track of all their\ninvesting manually\nHelp viewing their total\nPeople who want to grow their wealth\nwealth and making the need access to different investing\nUnderstanding their\n\"I do keep an eye on [long -\nright decisions options beyond what a single platform\ntotal wealth term investing] just so I have\ncan offer\nan idea of what our savings\nlook like for retirement . I do If I had a dashboard… it's\n\"In an ideal world , I would\nhave a spreadsheet, I track sort of what I want to see…\nwant to see how my financial\nour kid's RESP because suggestions of… is there an\nhealth is… you know, what\nthat's part of it, just so that it avenue where you can\nI'm worth in terms of my\ncan all be on one page and I invest. On that dashboard,\nassets. It gives me\nPeople planning for a family or closer to\ncan just go through the you'd expect to see the\nconfidence, especially\nretirement may need more of a birds -\ndifferent [investing] tools… health of my investments. I\nbecause I'm a business\neye view on their investments so they\nyou get a better view of what think it just gives me peace\nowner, it gives me confidence\ncan plan accordingly\nyour totals look like when it's of mind, it shows me where\nto make decisions.\"\nall on one page. [It's I'm at financially .\n–P16, 42 yo, Canada MM\nimportant because] I'm –P16, 42 yo, Canada MM\ncloser to retirement than\nstarting my work life.\"\n–P11, 50 yo, Canada MA\nPg 39"
+  },
+  {
+    "page": 40,
+    "text": "Understanding needs\nOpportunity\nSupport customers whose\nfinancial goals feel distant\n\"…The Mackenzie Financial [app], I almost never\nor irrelevant. By increasing\nopen because it's really hard to log in and I don't\nvisibility of investments\nhave the patience or care to do that. And it's an\nRSP for very far in the future, I'm only 27. \"\nand registered accounts,\nOpen Banking can –P13, 27, Canada, Mass Market\nencourage customers to\nmonitor their habits.\nPg 40"
+  },
+  {
+    "page": 41,
+    "text": "Understanding needs\nInsight\nA dashboard can help me find an avenue where I\nhave passive income, all these assets. What if\nCustomers are picturing\nsomething pops up and says 'hey this is an avenue\ninvesting advice as a for investing that we think is a best option.' Let's\nsay Tangerine pops up and says, hey, we give you\nfeature in a one -stop\n7000 if you put money into our account. Then,\ndecision -making is with a snap of a finger.\nshop for managing\nfinancial wellness\n–P16, 42 yo, Canada & MM\nPg 41"
+  },
+  {
+    "page": 42,
+    "text": "Credit cards (pt 1) Understanding needs\nPeople are looking for cards that meet their unique needs\nKey Segments\nTheir challenge Actions taken Unmet need\nCredit card shopping hubs\nFinding a card with the People with less wealth may be\n\"There's a website called\nright interest and rewards interested in cards with low fees\nCredit Card Genius … They\n\"There's way too many credit do all the research for you\nCredit card shopping\ncard options, way too many and then give you the\nexperience that takes the\ncompanies that offer credit highlights of each card, and\nguess work out of\ncards, it's funny because the they even rank them for you,\ninternet is supposed to help so you don't have to do all maximizing rewards /\nPeople with more wealth may be\nyou and sometimes it's just that work, which I used to minimizing fees, and\nlooking for cards that earn them\nway too much time… I'm have to do before… it takes\ngetting accepted\nrewards at specific locations\ngetting to the point where it's the thinking out of it because\nlike, OK, I just need to focus it tells you what your income\non what it is that I want other needs to be, it tells you\nthan this card.\" –P11, 50 yo, everything before you even\nCanada MA apply and could get\nrejected.\" –P4, 49 yo, People with less credit history may need\nCanada MA help finding cards they're eligible for\nPg 42"
+  },
+  {
+    "page": 43,
+    "text": "Credit cards (pt 2) Understanding needs\nPeople need to manage multiple accounts and stay on top of\ncredit card debt\nKey Segments\nTheir challenge Actions taken Unmet need\nUnable to cancel or\nWorkarounds to manage\nconsolidate cards\npayments across People who are concerned about their\ndifferent institutions credit scores will be hesitant to close\n\"At the time [in college]\nunwanted accounts.\npeople shopped at\n\"I like the ease of transferring\ndepartment stores, but now I\nfrom checking to my TD\nA credit card management\njust keep [my Macy's card]\ncredit card. I don't want\nalive by putting a recurring hub that helps people view\npayments to take 3 days. For\ntransaction on it just so I and pay off credit cards in\nexample, from Tangerine, I\ndon't lose that credit history, one smooth action\ncould transfer a bill payment\nwhen my credit score is over\nSome people may carry a balance on\nto my TD credit card, but why\n800 I don't want to cancel a\ntheir credit card and won't be able to\nwould I do that if I could do it\nbunch of cards and tank my\nconsolidate accounts. A one -stop shop\ninstantly by e -transferring\nscore. Ideally I want to\nfor credit card payments can help them\nand then putting it from\ncancel it… it's just less to\nstay on top of managing debt.\nchecking into my credit\nworry about, I have to think\ncard.\" –P13, 27 yo, Canada\nabout using it.\"\nMA\n–P19, 36 yo, USA MA\nPg 43"
+  },
+  {
+    "page": 44,
+    "text": "Borrowing Understanding needs\nPeople with multiple FIs need to keep track of different bill\npayment schedules\nKey Segments\nTheir challenges Unmet needs\nMany mortgages A one -stop shop to help\nCustomers looking for mortgage loans\ncustomers manage multiple\n\"I'm trying to consolidate to one bank,\nbenefit from quicker decision -making\nmortgages across institutions\nbut I do have three mortgages with\non applications, and a central hub for\nthree different banks so I have to run\nshopping for a mortgage\nwith them.\"\n– P3, 38 yo, Canada MM\nYour information in one place Customers with many mortgages would\nfor quicker loan decisions benefit from managing loans in a\nMoving a mortgage\ncentralized hub that can offer them\n\"We moved a mortgage from Manulife “If in the future I'm applying for a strategic insights about loan payments\nto TD. It was extremely painful. We had mortgage, I can apply at one bank\nto basically find every piece of paper and everybody could have the\nknown to man to be able to do that. It information… getting rid of broker\ntook probably over a month to make fees… saving time…\"\nthat transfer.\" – P4, 49 yo, Canada MA\nNewcomers would benefit from more\n– P11, 50 yo, Canada MA\ntransparency in the loan application\nprocess and the ability to share\nMysterious approval process Transparent process making it\ncomplex documents only once\neasy to discover how banks\n\"I went to BMO first… it didn't go\ndiffer in the approval process\nthrough… we gave a mortgage broker\nat CIBC exactly the same documents,\nand it was approved.\"\n– P3, 38 yo, Canada MM\nPg 44"
+  },
+  {
+    "page": 45,
+    "text": "Understanding their needs\nFuture direction\n\"Oh, this is what I didn't like about Rocket, you\nPeople are creating their\ncouldn't share it with your household… you could\nonly see your stuff, unless my husband gave me like\nown solutions to joining\nhis, you know, username and log login info, but\ntheir finances and goals\nthat's not really helpful for you to get like a full\npicture of everything…\"\nwith a household. Open\n–P19, 36, USA Mas Affluent\nBanking can fill this gap\nwith less pain and more\naccuracy.\nPg 45"
+  },
+  {
+    "page": 46,
+    "text": "Insights\nHow people adopt a\ntechnology or tool\nEspecially when it requires putting their privacy at risk\nPg 46"
+  },
+  {
+    "page": 47,
+    "text": "Adoption patterns\nParticipants sorted some online data\nsharing activities into categories\nWe learned that most people take risks with their data:\nPg 47"
+  },
+  {
+    "page": 48,
+    "text": "Adoption patterns\nHere are some common ways participants\nsorted the items:\nKeeping a card on file with Granting permission for your bank to Share personal information\nyour favorite store access your data at another bank with ChatGPT\n18 people: 7 people: 7 people: 10 people:\nCurrently doing Have done in the past Will do someday Will never do\nAmericans were more likely to say Americans were slightly less\nthey've taken specific actions, like likely to sort some items into\ngranting permission for a bank to 'Will Never Do' compared to\naccess data at another bank Canadians\nPg 48"
+  },
+  {
+    "page": 49,
+    "text": "Adoption patterns\nInsight\nDo you recall what got you on board with\nkeeping a card on file?\nPeople describe a\nconvenience tradeoff that\n\"Well, convenience, actually. Just because I'm\nalways using this to buy things, it just made it easier\nhelps them decide when to\nto keep the card there than having to keep inputting\ntake a potentially risky\nit every time.\"\naction online –P15, 49 yo, USA MA\nPg 49"
+  },
+  {
+    "page": 50,
+    "text": "Getting comfortable Adoption patterns\nThese are the activities and rituals that help people decide\nwhether to share their data using a service or technology:\nPerforming a lower stakes activity\n\"I did go through the process [moving money from CIBC to Tangerine] a couple of times without - Key Segments\nentering fake information to see, OK, well, what do they need? And then becoming comfortable with\nthat process before I said, OK, go.\" –P4, 49 yo, Canada MA\n\"[Apple Wallet] For me, I just caved in at some point. I put in my husband's card and it was so easy. I\nknow that doesn't make sense because it's all joint accounts, but some things just make you In this round of research, we did not observe a\n[comfortable].\" –P4, 38 yo, Canada MM generational difference in which participants\nwere more vs. less risk -taking.\nDoing the research\n\"Usually I'll check the reviews. Or, there might be stuff that I heard… about different companies, if\nI've heard something bad about them or concerns about security or whatever, then maybe I wouldn't\nshare.\" –P4, 49 yo, Canada MA\n\"[do you remember how you got on board with Google home?] I think just reading, hearing people's\nstories. I'm on most of the forum boards, I'm a huge Reddit guy… I think the confidence comes from,\nwhat's the fall-back plan? What happens if I get breached? So I look at the whole picture to sort of\nget that confidence in it. Once I have it, the only other thing that can shake it is if something happens\ndown the road.\" –P16, 42 yo, Canada MM\nPg 50"
+  },
+  {
+    "page": 51,
+    "text": "Late adopters Data sharing\nPeople might wait for these cues before they decide if a\ntechnology or service is safe to use:\nIt's already been widely adopted\nKey Segments\n\"Once I feel like I'm missing out, then I'll do my research into it and weigh pros and cons and\nbenefits, or just see if I'm comfortable with it.\" –P10, 29 yo, Canada MA\n\"I think the amount of people that are using [UPI] shows me that the confidence in that system is\nhuge. So if I was hesitant, I would just look at tens of thousands of people using it with no issues. My In this round of research we did not observe a\nresearch would be so quick; hey, you know what, I can ask Tom, Harry, whomever, how it's doing, generational difference in who behaved like a\nand get so much information.\" –P16, 42 yo, Canada MM late vs. early adopter.\nSavvy friends and family tell you it's okay to use\n\"I have certain people in my life where I'm like, oh, okay, if he's using that thing or that app, then it\nmust be okay… My brother is an audio engineer so if he bought those headphones, they're good. If\nmy cousin bought that tool, I know it's good. I don't think I have anyone specific for banking, but I\nwould say my brother for instance is pretty savvy and plays it safe with that kind of thing. If he\nwas using a specific app or something, I would probably think it was okay.\" –P20, 36 yo, USA MM\nPg 51"
+  },
+  {
+    "page": 52,
+    "text": "Adoption patterns\nWatch -out\nI mean, 10 years ago maybe if you would have told\nPeople don't judge their\nme, I would have Alexa devices in every room, that\nhave a microphone on that can hear me at any\nfuture selves accurately.\ntime , I would have said, Oh no, I'm not going to do\nPeople who are\nthat. But now it's like it's the most helpful thing in\nuncomfortable sharing the world.\"\ndata now may be open to –P20, 36 yo, USA MM\nit in the future.\nPg 52"
+  },
+  {
+    "page": 53,
+    "text": "Insights\nData sharing\nattitudes and beliefs\nWhat are people think and feel about protecting their data\nPg 53"
+  },
+  {
+    "page": 54,
+    "text": "Data sharing\n\"Right now I don't think you have a choice. With\nFlow they have your menstrual cycle , with budgets\nInsight\nthey have your money , with the bank they have\nyour money, with Instagram they have your\npictures . With Apple, when you take a picture, it\nMany people are resigned\nshows you where it was taken. They have your\nto the idea that their data\nlocation … with Amazon, they check what you're\nis already out there, so buying , with Facebook they have the history of\nyour life … when Facebook came out, everybody\nthey won't change their\nwas just putting a bunch of information and didn't\nbehavior to keep their\nhave a care in the world… maybe because I'm using\ninformation private Apple, I feel like everything is just in my account\nsettings.\"\n–P3, 38 yo, Canada MM\nPg 54"
+  },
+  {
+    "page": 55,
+    "text": "\"It depends on what I need it for. I feel like if it were something\nData sharing\nlike, how I use TD Budgeting and Tangerine separately, if they\ncould talk to each other and make it one and then I don't need to\ndownload Mint or another stupid app, I would like it and I would\ngive them all my stuff because it would make my life easier.\"\nWatch -out\n–P13, 27 yo, Canada MM\nEven if sharing data is\nunavoidable, people\n\"[Granting permission to share data] totally depends on the\ndon't blindly consent\nsituation… definitely when we purchase our first home … small\ntransactions you can do via app, you don't need to grant\nunless they see a benefit\npermission to the bank.\"\nor a purpose. We must\n–P9, 35 yo, N2C MM\nshow them what they'll\nget out of signing up for\n\"I would go to the bank, tell them what they need to know for us\nan Open Banking\nto do business together, but beyond that, no. And you never know\nexperience\nwhen they're going beyond that line, you have to give so much\ninformation now to get an account of any kind.\"\n–P17, 60 yo, USA MM\nPg 55"
+  },
+  {
+    "page": 56,
+    "text": "Protections from fraud and theft Data sharing\nWhen it comes to sharing financial data, people take\nadditional precautions\nBeing selective about the company\nI would be more inclined to share my data with the big [companies]… I'd probably go with the\nmore popular name brands, for example Apple, Samsung, as opposed to [another] wallet I don't Key Segments\nknow anything about. I've used it, I trust the technology, probably the less popular one or more used\nones I'd probably go with the one I know more.\" –P3, 38 yo, Canada MM\nBeing selective about what data to share\n\"With Amazon [I would share] nothing. Just my credit card and address, because I am only buying\nIn this round of research we did not observe a\nfrom them, they don't need to know anything else about me … Facebook, same things. It's just\ngenerational difference in how people protect\ngeneral information. I don't think it even has my birthday.\" –P4, 49 yo, Canada MA\nthemselves online while sharing financial data.\nAdding only one card to a website\n\"Because I keep my card on file at Amazon and that's all I use that card for, it's easy for me to flag\nwhen there's an issue.\" –P5, 54 yo, Canada MA\nManual entry helps them steer clear of fraud\n\"If I wanted to use that app, let's say Amazon, I will add my card, do the transaction, and then will\nremove the card… just to make sure, if my card is there, there won't be any fraud transaction. \" –P5,\n54 yo, Canada MA\nPg 56"
+  },
+  {
+    "page": 57,
+    "text": "Expectations of data sharing practices Data sharing\nPeople hold companies to different standards when it\ncomes to protect their data\nSome people only care that Some people want their data to\ncompanies meet basic standards to be treated as sacred:\nprotect them from fraud:\nKey Segments\n\"See, I'm a customer of Apple and I don't\n\"I guess maybe if Amazon workers could\nwant my data to be shared for various\nsee my entire card number or something\nreasons. It's okay if they are doing it for\nlike that, or if I find out [my information] is\nsome research or something, but with\nout there on the dark web, or the obvious\ncompanies like Facebook, your data is\nthings, like that, just a lack of basic We observed a small pattern where\neverywhere… if you think you can just have\nsecurity. I don't even have super high Americans seemed to hold companies to a\nthe authority to share our data without\nexpectations… \" –P20, 36 yo, USA MM lower standard than Canadians when it\nasking us it's not right.\" -P8, 29 yo, N2C\ncomes to sharing their data\nMM\n\"If someone steals my information, I\nwould say that's a violation of privacy… \"Sharing how I'm using my cards with any\nthat actually happened to me a few years other company, I would not want that…\nago… but luckily the user experience [is unless they ask my permission for it, I\ngood], Apple really thinks a lot of stuff that don’t think my usage details should go\nother companies don't, I ended up turning anywhere.\" –P4, 49 yo, Canada MA\non advanced fraud protection.\" –P19, 36\nyo, USA MA\nPg 57"
+  },
+  {
+    "page": 58,
+    "text": "Insights\nWhat people think of\nsharing their data with\nbanks and fintech\nWhat attitudes, beliefs, and values do people have with respect\nto data sharing between financial institutions?\nPg 58"
+  },
+  {
+    "page": 59,
+    "text": "Insight Sharing with banks\nNone of our participants had heard of\nOpen Banking before\nPeople don't know about the good or the bad of Open Banking. If we want\ncustomers to understand the difference between screen scraping and sharing via\nAPIs, we will need to educate them.\nConsumer -directed finance might not be a reality until we educate the public.\nPeople won't realize the full potential of Open Banking to help them take charge of\ntheir data unless we equip them to\nPg 59"
+  },
+  {
+    "page": 60,
+    "text": "Banks vs. companies Sharing with banks\nWhen it comes to data sharing, here's how banks compare\nto other companies:\n=\nKey Segment\nSafer No different Less safe\nBanks have the Banks, like other Banks have higher risk\ninfrastructure to keep companies, are out to information than other\ninformation safe make a profit organizations Whereas Canadians trust bank infrastructure\nlike CDIC insurance, Americans are more\nlikely to use other cues that a bank is\ntrustworthy, e.g., size or reputation.\nWhat makes you feel like \"There's probably no \"The information you share\nyour banking information difference [from sharing with banks is a lot more\nwill be kept a secret, data with a company]. A consequential than what you\nregulated by like the company's a company, share on social media.\ngovernment, is the CDIC right? Companies are out to Because with banks, you're\nhere in Canada. It just feels make a profit… I just assume sharing stuff that affects\nlike it's like a house made of that everybody's using your day to day life, you're\nbrick versus a house made information for something.\" sharing your identity, your\nof straw. –P2, 35 yo, Canada –P5, 54 yo, Canada MA ID card.\" –P6, 19yo, Canada\nMM MM\nPg 60"
+  },
+  {
+    "page": 61,
+    "text": "Sharing with banks\nOpportunity\n\"I trust bigger establishments, and bigger banks. I\nfigure these guys have millions of customers,\nPeople think bigger banks\nthey've been doing this a long time. And they have a\nreputation. They have a microscope on them, and\nare less risky to share their\nif they play around with that, they're going to\ndata with because they are suffer the consequences.\"\n–P3, 51 yo, USA MM\nheld to a higher standard\nPg 61"
+  },
+  {
+    "page": 62,
+    "text": "Sharing with banks\n\"I mean, you have to give information if you want to\nWatch -out get a credit card. You can be reluctant but then\nyou're not getting whatever it is you're seeking.\"\n–P5, 54 yo, Canada MA\nThe mindset is that banks\nneed their data whereas\n“to be honest there's like three people I can share\nthings with, without, you know, over thinking it. It's\ncompanies want their\nmy family, the government, family, the bank, and\nthe doctors... things I can’t live without.\ndata . The challenge will\n–P3, 38 yo, Canada MM\nbe convincing customers\n\"I am still fairly uncomfortable with it. I never\nto elect to share data for\nvoluntarily share information with Equifax and\nTransUnion but because that's just the way the\nopportunities that go\nindustry works, I can't do anything about it.\"\nbeyond essentials\n–P6, 19 yo, N2C MM\nPg 62"
+  },
+  {
+    "page": 63,
+    "text": "Sharing with banks\nOpportunity\n\"If it's a smaller bank, they may have a parent\ncompany or something… so you know, Freedom\nPeople think bigger\nshares with Shaw, Shaw belongs to Rogers, that\nkind of thing… if you can pay your [Fido] bill at\nbanks are less risky to\nRogers, you know they're sharing data. That's the\nproblem I have with smaller companies… there is\nshare their data with\nmore likely to be a leak.\"\nbecause they have\n–P3, 38 yo, Canada MM\nfewer sharing partners\nPg 63"
+  },
+  {
+    "page": 64,
+    "text": "Sharing with banks\n\"I'm looking at alternatives like smaller banks\nWatch -out\nbecause I feel like they have my best interests in\nmind… compared to bigger banks that are already\nThough big banks may be grown, they don't really care about the smaller\npeople to be honest. But smaller banks want to\nsafer, people think smaller\ngrow so they want to do better. Something like\nWealthsimple … I don't know if they're small, they\nbanks have their best\njust feel small to me.\"\ninterest at heart\n–P1, 22 yo, Canada MM\nPg 64"
+  },
+  {
+    "page": 65,
+    "text": "Sharing with banks\n\"If it's a US bank, I trust it more, definitely, versus an\nWatch -out\ninternational bank I don't trust, or if it has a lot of\nbranches outside the US I'd be more cautious about\nit… I feel like if they're based in the US, most of their\nAmericans may feel that\nbranches are based in the US, I have a little bit\nmore control in terms of my data. It's not all over\ninternational banks are\nthe world, just limited to one country.\"\nless safe\n–P17, 51 yo, USA MM\nPg 65"
+  },
+  {
+    "page": 66,
+    "text": "Banks vs. fintech companies Sharing with banks\nWhen it comes to handling data, people have some\nassumptions about banks vs. fintech companies:\n=\nSafer No different Less safe\nKey Segments\nThere is more Banks, like other Budgeting apps give you\ngovernance with banks companies, are out to more control over who\nthan with fintech make a profit does vs. doesn't see\ncompanies your data\nThere was a small pattern where Americans\nseemed more likely than Canadians to equate\n\"It's protected in that \"[Monarch and Ally Bank] \"This budgeting app would\ncompanies and banks in terms of what they\nsomeone has your back, are probably the same, as have to be secure… but for\nwere vs. were not allowed to do with data.\nversus Wise or Mint, they're long as it's secure, that's me only, and the banks\nnot on the Government of always the biggest would not have access to\nCanada's website, there's no concern… no one's immune any information contained\nprotection layer there. If the to it, but are companies there… [If I use an app and\nbank went bankrupt and you taking the right steps to not a bank] I would be the\nlost your money or in this ensure your data secure? ... only one that has the\ncase your information was If tomorrow Ally Bank access to the budgeting\nstolen, what will they do for offered me the same exact app\"… –P4, 49 yo, Canada\nyou?\" –P2, 35 yo, Canada thing as Monarch, sure, I'll MA\nMM use Ally.\" –P19, 36 yo, USA\nMA\nPg 66"
+  },
+  {
+    "page": 67,
+    "text": "Sharing with banks\nWatch -out\nWhat's the difference between your budgeting\napp and the Wise app?\nThings like budgeting apps\nThe budgeting app doesn't have the access or\nseem to have less control\nability to touch my bank accounts , whereas it\nseems like Wise app, it would have to. You're giving\nover your accounts, which\nit some authority or control over your actual bank\nmay create safety that a\naccount, Monarch doesn't. It's just reading my data.\nbank can't offer –P19, 36 yo, USA MA\nPg 67"
+  },
+  {
+    "page": 68,
+    "text": "Open Banking may not be for everyone Sharing with banks\nWhen it comes to connecting accounts, this is what might\nget in our way:\nPeople want to squirrel some money away\n\"I don't want to know how much I have. I feel like seeing is believing… it's like a safety thingy. I\nwant something to fall back on… if you do all [your spending] and you still have 2000, you can\nKey Segments\nrelax.\" –P1, 22, Canada MM\nPeople feel comfortable when there is some separation between institutions\n\"I know all the banks report to the Canadian government, so there's somebody who knows People who have exposure to markets where\neverything. But I don't like each bank knowing everything. I don't know if it's fear, or connecting accounts is more common (e.g.,\ndiscomfort, but I just like that separation a bit … I would prefer the government didn't know India, America) may feel less hesitant about\neither, but I don't have control over that. This I have control over.\" –P4, 49 yo, Canada MA a future with Open Banking.\nPeople assume a bank can use your other banking information against you\n\"If I share my data, all the data and account information to other bank, they might find out 'oh, I\nhave this [product] and I feel that it could cause trouble for me , or I don't know, it just feels risky\nfor some reason.\" –P7, 28 yo, N2C MM\n\"I think I'd probably decline [to connect banks] since I'm with this other institutions for a certain\npurpose . I wouldn't want to rock the boat, so to speak, it might require some hard thinking.\" –\nP3, 38 yo, Canada MM\nPg 68"
+  },
+  {
+    "page": 69,
+    "text": "Insights\nWhat's different here\nin Canada?\nWe heard from 5 participants who were New to Canada from\nIndia (2 -4 years in the country)\nPg 69"
+  },
+  {
+    "page": 70,
+    "text": "How India and Canada compare Different in Canada\nPeople coming from India will have specific expectations\nabout how data sharing looks\nKey Segments\nUPI in India is an example of how Open Banking might look here\n\"Yes, I think the way we handle payments back home, UPI, if you are familiar with UPI payment\nmethod, is very convenient over there and which is not over here. I feel in that way India is a bit\nadvanced because we have different wallets which we can use the UPI thing . It's mostly for People coming from India and other\npayments right now, like not ten years ago, but right now UPI is very convenient in India and that countries where Open Banking is more\nis something which was not here. So that was a bit, I won't say it was challenging, but it, it is mature may have a mental model of what\nvery different.\" – P7, 28, N2C MM the experience will look like. In India, that\nmental model is UPI, which is perceived as\nsafe and efficient payments.\nPeople observe differences in how banks handle data in Canada and India\nPeople coming from India expect the\nCanadian system to be safer in some\n\"India doesn't have data protection laws as of yet. So, there's no framework that companies\nrespects (e.g., companies compliant with\nabide by. You just have to trust in what like product they're using. Whereas I do know there's\ndata sharing regultaions ) which may draw\nData Protections and Security Act in Canada, so that gives me a bit more faith in the\nthem to Open Banking here vs. back home.\nCanadian system. But at the same time, I do know that laws stop people like from really\nexploiting data per se. So, it doesn't stop people from exploiting data, but it can stop\ninstitutional exploitation, like it stops big companies from doing it, but you obviously have\nunlawful actors that will end up doing it anyway. So, I'd say have more faith in Canadian\ncompanies to use my data like in a more secure manner.\" – P6, 19 yo, N2C MM\nPg 70"
+  },
+  {
+    "page": 71,
+    "text": "Contributors\nEwa Plonka, Rachele Benjamin"
+  },
+  {
+    "page": 72,
+    "text": "Appendix\nOpen Banking Discovery Interviews"
+  },
+  {
+    "page": 73,
+    "text": "Any FI Second Using Self - Recently\nParticipant Employment Race / Lived Outside Primary Primary Bank ary Secondary Bank Fintechs Tech and Risk Dealt With Directed Trades in Avg Applied For Recent\nnumber Segment Age Gender Status Ethnicity Location Country Currently Used FIs Bank Accounts Bank Accounts Used Relationship Fraud Investing Year MTG Student\nChecking, KOHO,\nSavings, Credit Wealthsimple\nPart-time/Full - Black/African RBC, CIBC, EQ Bank, Wealthsimpl Card, Mutual , PayPal,\n1 Canada MM 22 F time Student American Ontario No Wealthsimple e Checking, Savings CIBC Funds Credit Karma Medium Yes Yes, at one FI 0 - 12 No Yes\nRBC, EQ Bank,\nTangerine, Wealthsimple\nWealthsimple, Neo Checking, Savings, Neo Savings, Credit , Neo\n2 Canada MM 35 M Full Time White Ontario No Financial Tangerine Credit Card Financial Card Financial Medium No Yes, at one FI 13 - 80 No No\nChecking,\nChecking, Savings, Savings, Credit\nBlack/African TD, BMO, Creditcard, Line of Card, Line of Does not use I have never Does not use\n3 Canada MM 38 F Full Time American Ontario Unsure Scotiabank, CIBC BMO Credit TD Credit, Mortgage Fintech High No used DI self-directed No No\nSavings, Credit\nCard, Line of\nCredit,\nChecking, Credit Mortgage, Yes, at multi\n4 Canada MA 49 F Full Time Asian Ontario No TD, CIBC, Tangerine TD Card, Line of Credit CIBC Mutual Funds Paypal Medium Yes FIs 0 - 12 No No\nRBC, Educators\nFinancial Group, Checking, Credit Does not use I have never Does not use\n5 Canada MA 54 F Full Time White Ontario Yes Simplii, CIBC Simplii Checking, Savings CIBC Card Fintech Medium Yes used DI self-directed No No\nChecking,\n6 N2C 19 M Student Asian Ontario Yes RBC, CIBC RBC Checking, Savings CIBC Savings Paypal High Yes Yes, at one FI 0 - 12 No No\nChecking, Savings,\nCredit Card, Direct KOHO,\nTD, Scotia, Manulife, Investing, Mutual Checking, Wealthsimple\n7 N2C 28 F Full Time Asian Ontario Yes Wealthsimple Scotia Funds, GICs TD Savings , PayPal High Yes Yes, at one FI >80 Yes Yes\nChecking, Savings, Checking, Wealthsimple\nCredit Card, Mutual Savings, Mutual , Paypal, Used in the\n8 N2C 29 F Part-time Asian Ontario Yes Scotia, ICICI Scotia Funds ICICI Funds Credit Karma High Yes past 0 - 12 No No\nChecking, Credit\nChecking, Savings, Card, Line of Wealthsimple\n9 N2C 35 M Full Time Asian Alberta Yes RBC, Scotia RBC Credit Card Scotia Credit , Paypal Medium Yes Yes, at one FI 13 - 80 Yes Yes\nChecking, Savings, Checking,\nCredit Card, Line of Savings, Credit Does not use Yes, at multi\n10 Canada MA 29 M Full Time White Ontario No RBC, TD TD Credit, DI, GICs RBC Card Fintech Medium Yes FIs 13 - 80 No No\nParticipants page 1 Pg 73"
+  },
+  {
+    "page": 74,
+    "text": "Any FI Second Using Self - Recently\nParticipant Employment Race / Lived Outside Primary Primary Bank ary Secondary Bank Fintechs Tech and Risk Dealt With Directed Trades in Avg Applied For Recent\nnumber Segment Age Gender Status Ethnicity Location Country Currently Used FIs Bank Accounts Bank Accounts Used Relationship Fraud Investing Year MTG Student\nChecking,\nMortgage, Direct\n11 Canada MA 50 F Full Time White Ontario No TD, Manulife, Simplii TD Investing Manulife Line of Credit Paypal Medium No Yes, at one FI 0 - 12 Yes No\nKOHO,\nPart-time/Full - RBC, Scotia, Checking, Credit Checking, Credit Wealthsimple Does not use\n12 N2C 22 M time Student Asian Ontario Yes Wealthsimple RBC Card Scotia Card , PayPal High No Yes, at one FI self-directed No No\nChecking, Wealthsimple\nSavings, Credit , PayPal,\nBritish Checking, Savings, Card, Mutual Borrow Well,\n13 Canada MM 27 F Full Time White Columbia No TD, Tangerine Tangerine Credit Card TD Funds Mint High Yes Yes, at one FI 0 - 12 No No\nCIBC, EQ, Checking, Credit\nTangerine, Simplii Checking, Savings, Card, Line of Used in the\n14 Canada MA 60 M Retired White Nova Scotia No Financial Simplii Line of Credit CIBC Credit Paypal Medium Yes past 0 - 12 No No\nChecking, Savings,\nAmerican Express, Credit Card, Debit\nBank of America, Card, Mortgage, Checking,\nCapital One, Wells Investing, Ally Savings, Credit\nBlack/African Fargo, Ally Credit Certificate of Credit Card, Debit\n15 USA MA 49 F Full Time American Texas No Union Wells Fargo Deposit Union Card, Investing Paypal High Yes 0 - 12 Yes No No\nChecking,\nChecking, Savings, Savings, Credit Wealthsimple\nCredit Card, Line of Tangerin Card, Line of , Paypal,\n16 Canada MM 42 M Full Time Asian Alberta No RBC, Tangerine RBC Credit e Credit Credit Karma Medium Yes Yes, at one FI 0 - 12 No No\nAmerican Express,\nBank of America, Checking, Savings,\nBlack/African Chase, Citibank, Bank of Credit Card, Debit Checking,\n17 USA MM 51 M Full Time American California No PNC America Card Chase Savings Venmo High No 13 - 80 Yes No No\nAmerican Express,\nWells Fargo, Texas Texas Credit\n18 USA MM 60 M Part-time White Texas No Credit Union, Vio Union Savings, ATM Card Vio Savings Paypal High No 0 - 12 Yes No No\nGoldman Sachs, Ally Checking, Savings, UW Checking,\nBank, UW Credit Debit Card, ATM Credit Savings, Debit Does not use\n19 USA MA 36 F Full Time White Wisconsin No Union Ally Bank Card Union Card, ATM Card Venmo High No self-directed No No No\nBank of America,\nCapital One, Chase,\nGoldman Sachs, Bank of Checking, Debit Capital Checking, Credit Does not use\n20 USA MM 36 M Full Time White California No Synchrony Bank America Card One Card, Debit Card Paypal High No self-directed No No Yes\nParticipants page 2 Pg 74"
+  },
+  {
+    "page": 75,
+    "text": "Participants\nMethod\nHere is what we hoped to learn about\nthese segments:\nSegment -Specific Research Questions Key OB concepts\nSegment\nBy year 2 -4 N2C customers have products with multiple Fis 1. And,\nIndia is ahead of Canada in terms of connected banking. (1) Do Budgeting tools\nN2C customers need help managing multiple accounts, and Bill payments\nN2C from India\n(2) do they expect connected banking experiences that reflect Borrowing help\nthe Indian banking system?\nA key user need that Open Banking helped people in the UK\nBudgeting tools\nmeet is Personal Finance Management. Does the average\nCredit card shopping\nCanadian need help managing their spending and\nCAD Mass Market\nsaving?\nThis segment wants to grow their wealth and is more likely\nto do DIY investing. Are they seeking help making strategic Direct Investing tools\ndecisions about their money?\nCAD Mass Affluent\nBudgeting tools\nMore Americans link financial accounts than Canadians Bill payments\n(81% vs. 77%) 2. Are Americans less worried about data Direct Investing tools\nprivacy and security than Canadians? Credit card shopping\nAmerican\nBorrowing help\n1N2C Families Discovery Research (Girgis & Plonka, 2024)\nPg 75\n2The Rise of open Banking in North America (Mastercard, 2021)"
+  },
+  {
+    "page": 76,
+    "text": "Research phase 1 coverage\nHCD Research\nJune 2024\nHere is how we will align with HCD lobal segments:\nPg 76"
+  },
+  {
+    "page": 77,
+    "text": "More on our approach\nHCD Research\nJune 2024\nHCD recruits based on customer actions , not on bank -\ndefined categorization\nWe anticipate that users belonging to different bank segments can share a goal,\ndepending on the context. With each new context, we consider the behaviors that matter\nto us so we can learn the right things.\nAll these segments are looking for a mortgage right now\nHNW Mass affluent Mass market\n$1 million $250K <$250K\ninvestable investable investable\nassets assets assets\nPg 77"
+  },
+  {
+    "page": 78,
+    "text": "More on our approach\nHCD Research\nJune 2024\nHCD recruits based on customer actions , not on bank -\ndefined categorization (cont'd)\nRecruits are tailored to what decisions we're trying to make. Here are examples of\nrecruiting criteria for HOJ (left) and for US credit cards (right):\nHOJ US credit cards\nD2C-Discovery and Concept Evaluation_Concept Evaluation_2023\nCDPP Application Flow Mobile_Usability testing_2023\nPg 78"
+  },
+  {
+    "page": 79,
+    "text": "More on our approach\nHCD Research\nJune 2024\nHCD artifacts for segments, personas, and archetypes\nare often very specific to the LOB\nClick here for a list of HCD segments, personas, archetypes\nPg 79"
+  },
+  {
+    "page": 80,
+    "text": "About HNW vs. Mass Affluent\nHCD Research\nJune 2024\nPg 80"
+  },
+  {
+    "page": 81,
+    "text": "Proposal: what we initially wanted to learn\nThe Why\nUnderstanding How can Open Beliefs, Security &\nof Open Banking Banking help attitudes, and privacy\nmotivation requirements\nExplore how users' Determine how users structure\nunderstanding and mental their finances when banking\nUncover users' values and Understand users' safety and\nmodels of Open Banking are with multiple institutions, what\nattitudes as they relate to security concerns to\nthe same or different amongst challenges they face when\nOpen Banking, and their determine how to help\nkey segments. Determine how managing multiple banking\nassumed benefits and risks of them feel more in control over\nthis can be implemented products and services, and\nparticipating. Determine what their data.\nacross Open Banking use understand user needs that\nwould motivate users to opt\ncases. can/should be addressed\ninto, or opt out of, Open\nthrough Open Banking\nBanking use cases .\nsolutions.\nPg 81\nIINNTTEERRNNAALL || HHCCDD RREESSEEAARRCCHH"
+  },
+  {
+    "page": 82,
+    "text": "Research Outcomes The How\nExpected outcomes & contributions\nInsights derived from this research with U.S. and Canadian participants will be able to be\napplied across journeys and platforms to inform strategy and design of open -banking use\ncases.\nPotential outcomes and contributions may include the following:\nDiscover ways to enhance Identify archetypes of user\nEstablish new use cases comprehension, manage groups with different Increase adoption and\nfor Open Banking that are expectations, and needs and mental models engagement by collecting\ngrounded in user needs anticipate attitudes relating to Open Banking user requirements for\ntowards Open Banking to so we can tailor solutions safety and security\ndrive adoption to them\nPg 82\nIINNTTEERRNNAALL || HHCCDD RREESSEEAARRCCHH"
+  },
+  {
+    "page": 83,
+    "text": "Empowering\nThe What\njourneys and\nplatforms\nPg 83\nINTERNAL | HCD RESEARCH"
+  },
+  {
+    "page": 84,
+    "text": "The What\nPg 84\nINTERNAL | HCD RESEARCH"
+  },
+  {
+    "page": 85,
+    "text": "Ideal Methods for Addressing Key Questions\nThe How\nQuestion Suggested Research Method\nGeneral Assessment Questions\nOn average, how many FIs does the typical US/Canadian consumer bank with (e.g., deposit account,\nKnowledge harvest User survey\ninvestment account, credit card, loan, mortgage etc.)? How does this differ based on age?\nOn average, how many FIs does the typical newcomer/immigrant bank with overseas?\nKnowledge harvest User survey\nHow can Open Banking Help\nWhat sort of challenges do consumers face when they bank with multiple financial institutions? How does this\nUser interviews\ndiffer in the US vs. Canada?\nWhen managing multiple banking products and services, how do consumers attempt overcome these\nUser interviews\nchallenges (e.g., turn to fintech apps, develop a workaround etc.)?\nWhat sort of challenges/friction points do consumers face when applying for a product or service at a new FI?\nUser interviews\nWhat can FIs do to make banking easier when a consumer banks with multiple financial institutions?\nUser interviews\nBeliefs, Attitudes, and Motivation\nWhat sort of experiences would motivate users to consent/permission to share their data? How does this differ\nUser interviews Participatory design\nin the US vs. Canada?\nDo consumers see value in the ability to share their financial information with a FI (e.g., FI account balances,\nUser interviews\ntransactions etc.)? How does this differ in the US vs. Canada?\nUnderstanding of Open Banking\nHow do users' mental models of what Open Banking is and how it works differ between the US and Canada?\nUser interviews Participatory design\nHow does it differ for newcomers/immigrants?\nPg 85"
+  },
+  {
+    "page": 86,
+    "text": "User Interviews\nA form of data collection that allows researchers to ask people open - Key Characteristics\nended questions about their experiences.\n• They are flexible and iterative in nature, and are best suited for\nexploratory research questions .\n• Offers deep exploration of participant thoughts and experiences,\nas they are given the space to express their opinions, ideas,\nfeelings, and attitudes.\n• Gathers information from people who can provide insight on a\nparticular topic.\n• They often involve questions (or conversational exercises) that\nallow for participants to express their thoughts and feelings,\nwhile addressing the study’s topic or area of focus.\nSparkes & Smith, 2014; Smith & Sparkes, 2019\nHumans are conversational creatures, and through conversation we\ncan get to know other people. Participants can reveal much more\nabout the meanings they attach to their experiences, providing the\ninterviewer with deeper knowledge than can be gleaned through\nother methods such as surveys.\nSources: Sparkes & Smith, 2014; Smith & Sparkes, 2019 Pg 86\nIINNTTEERRNNAALL || HHCCDD RREESSEEAARRCCHH"
+  }
+]

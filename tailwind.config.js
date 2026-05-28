@@ -7,12 +7,20 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['DM Sans', 'system-ui', 'sans-serif'],
-        display: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['Inter', 'Helvetica Neue', 'Roboto', 'Arial', 'Lucida Grande', 'sans-serif'],
+        display: ['Inter', 'Helvetica Neue', 'Roboto', 'Arial', 'Lucida Grande', 'sans-serif'],
       },
       colors: {
-        cream: '#F5F1EA',
+        cream: '#EDF2FA',
         ink: '#1A1A1A',
+        work: '#b45309',
+        'work-bg': '#fde4cf',
+        shop: '#1d4ed8',
+        'shop-bg': '#dbeafe',
+        agent: '#6d28d9',
+        'agent-bg': '#ede9fe',
+        positive: '#047857',
+        'positive-bg': '#d1fae5',
       },
       letterSpacing: {
         'wider-2': '0.2em',

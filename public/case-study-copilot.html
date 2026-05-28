@@ -171,6 +171,20 @@
     line-height: 1.35; letter-spacing: -.005em; color: var(--ink); margin: 0;
   }
 
+  /* ── Lightbox ── */
+  #img-lightbox {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(10,10,10,.88); display: none;
+    align-items: center; justify-content: center;
+    cursor: zoom-out; padding: 24px;
+  }
+  #img-lightbox.open { display: flex; }
+  #img-lightbox img {
+    max-width: min(92vw, 1200px); max-height: 90vh;
+    border-radius: 4px; box-shadow: 0 32px 80px rgba(0,0,0,.5);
+    object-fit: contain;
+  }
+
   /* ── PDF page clip ── */
   .pdf-clip {
     display: block; width: 100%; margin: 32px auto 0;
@@ -537,7 +551,7 @@
   <div>
     <h1>From Solo</span> to <span class="accent">Social</span> AI</h1>
     <p class="subtitle">Designing Copilot for Social Spread &amp; Engagement · MAI Discovery Research</p>
-    <p class="author">Rachele Benjamin &amp; Ming-Li Chai · May 2026</p>
+    <p class="author">Rachele Benjamin &amp; Ming-Li C · May 2026</p>
 
     <aside class="cover-pitch" aria-label="The research brief">
       <div class="cover-pitch-eyebrow">Researcher-driven study</div>
@@ -762,14 +776,14 @@
     <span class="finding-eyebrow">Finding</span>
     <h2 class="finding-headline">Social AI is already happening — <em>with partners, for travel and food</em></h2>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 32px;">
+    <div style="display: flex; flex-direction: column; gap: 32px; margin-top: 32px; max-width: 880px; margin-left: auto; margin-right: auto;">
       <div>
-        <img class="pdf-clip" style="margin: 0;" src="slides/copilot/page_12.png"
+        <img class="pdf-clip zoomable" style="margin: 0; cursor: zoom-in;" src="slides/copilot/page_12.png"
              alt="Slide 12: Bar chart — closer ties (partners, family, friends) produce higher comfort with social AI. Service providers and classrooms produce lowest comfort." />
         <p class="scene-caption" style="margin-top: 10px;">Comfort correlates with relationship closeness.</p>
       </div>
       <div>
-        <img class="pdf-clip" style="margin: 0;" src="slides/copilot/page_13.png"
+        <img class="pdf-clip zoomable" style="margin: 0; cursor: zoom-in;" src="slides/copilot/page_13.png"
              alt="Slide 13: Bar chart — lighter topics (travel, food, entertainment) produce highest comfort. Finance and health topics produce lowest comfort." />
         <p class="scene-caption" style="margin-top: 10px;">Comfort correlates with topic weight.</p>
       </div>
@@ -928,10 +942,36 @@
   </div>
 </section>
 
+<div id="img-lightbox" role="dialog" aria-modal="true" aria-label="Image zoom">
+  <img id="img-lightbox-img" src="" alt="" />
+</div>
+
 <button id="scroll-top" type="button" aria-label="Scroll to top">↑</button>
 
 <script>
 (function () {
+  /* ── Zoomable images ── */
+  var lightbox = document.getElementById('img-lightbox');
+  var lightboxImg = document.getElementById('img-lightbox-img');
+  document.querySelectorAll('img.zoomable').forEach(function (img) {
+    img.addEventListener('click', function () {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  lightbox.addEventListener('click', function () {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
   /* ── Finding card expand/collapse ── */
   document.querySelectorAll('.findings--collapsible .finding').forEach(function (el) {
     var toggle = function () {

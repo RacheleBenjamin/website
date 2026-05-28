@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-sans: 'Inter', 'Helvetica Neue', Roboto, Arial, sans-serif;
+  --cream: #EDF2FA;
+  --ink: #1A1A1A;
+  --ink-70: rgba(26,26,26,.70);
+  --ink-60: rgba(26,26,26,.60);
+  --ink-50: rgba(26,26,26,.50);
+  --ink-40: rgba(26,26,26,.40);
+  --ink-30: rgba(26,26,26,.30);
+  --ink-20: rgba(26,26,26,.20);
+  --ink-15: rgba(26,26,26,.15);
+  --ink-10: rgba(26,26,26,.10);
+  --ink-05: rgba(26,26,26,.05);
+  --shop: #1d4ed8;     --shop-bg: #dbeafe;
+  --agent: #6d28d9;   --agent-bg: #ede9fe;
+  --work: #b45309;    --work-bg: #fde4cf;
+  --positive: #047857; --positive-bg: #d1fae5;
+}
+
+*, *::before, *::after { font-family: var(--font-sans); }
+
+/* Display headings render bold by default, matching the case-study cover/section titles */
+.font-display { font-weight: 700; letter-spacing: -0.02em; }
+
 html {
   scroll-behavior: smooth;
 }
@@ -13,5 +37,5 @@ body {
 
 ::selection {
   background: #1A1A1A;
-  color: #F5F1EA;
+  color: #EDF2FA;
 }

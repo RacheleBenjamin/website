@@ -15,25 +15,25 @@ export const researchThemes = [
   {
     title: 'Defining the Uncanny',
     description:
-      'A program of research investigating what makes a stimulus feel "uncanny" — developing a validated psychological scale and exploring how narrative framing shapes uncanny perception.',
+      'Constructing a scale to measure uncanny feelings.',
     color: 'purple',
   },
   {
     title: 'Meaning Maintenance & Uncertainty',
     description:
-      'How people respond when their sense of meaning is threatened — including effects on working memory, the relationship between regret and psychological pain, and an integrative ecological framework for human motivation.',
+      'How people respond when their sense of meaning is threatened.',
     color: 'indigo',
   },
   {
     title: 'Terror Management Theory',
     description:
-      'A multi-paper systematic and p-curve analysis of the Terror Management Theory literature, evaluating evidential value and addressing publication bias in a foundational area of social psychology.',
+      'An analysis of the Terror Management Theory literature, evaluating evidential value and addressing publication bias.',
     color: 'rose',
   },
   {
     title: 'Democracy & Political Attitudes',
     description:
-      "Examining who supports democratic norms — and how that support shifts depending on which party holds power. Includes dissertation work on democracy's occasional supporters.",
+      "Examining who supports democratic principles, and how that support shifts depending on which party holds power.",
     color: 'amber',
   },
 ]
@@ -46,6 +46,7 @@ export const publications = [
     venue: 'Journal of Personality and Social Psychology',
     year: 2025,
     citations: 12,
+    theme: 'tmt',
     summary:
       "A systematic review evaluating the empirical foundation of the mortality salience hypothesis — extending earlier p-curve work into a comprehensive audit of TMT's most-cited prediction.",
     url: 'https://scholar.google.com/citations?user=J8PNDCwAAAAJ&hl=en',
@@ -57,6 +58,7 @@ export const publications = [
     venue: 'Advances in Motivation Science',
     year: 2024,
     citations: 5,
+    theme: 'meaning',
     summary:
       'A theoretical chapter integrating diverse motivational drivers under a unified ecological model of meaning, contextualizing how people seek and maintain coherent worldviews.',
     url: 'https://scholar.google.com/citations?user=J8PNDCwAAAAJ&hl=en',
@@ -68,6 +70,7 @@ export const publications = [
     venue: 'Journal of Personality Assessment',
     year: 2023,
     citations: 16,
+    theme: 'uncanny',
     summary:
       'Developed and validated a psychometric scale measuring uncanny feelings across multiple studies, with applications to real-world contexts including the COVID-19 pandemic and human-AI interaction.',
     url: 'https://scholar.google.com/citations?user=J8PNDCwAAAAJ&hl=en',
@@ -79,6 +82,7 @@ export const publications = [
     venue: 'Journal of Personality and Social Psychology',
     year: 2022,
     citations: 14,
+    theme: 'democracy',
     summary:
       'Despite widespread support for democratic principles, democratic norms have eroded globally. This work shows whose grief over democratic backsliding depends on which party holds power.',
     url: 'https://scholar.google.com/citations?user=J8PNDCwAAAAJ&hl=en',
@@ -89,6 +93,7 @@ export const publications = [
     authors: 'Benjamin, R.',
     venue: 'Doctoral Dissertation, University of British Columbia',
     year: 2022,
+    theme: 'democracy',
     summary:
       'Doctoral dissertation examining the conditional nature of public support for democratic norms across political identity and contextual factors.',
     url: 'https://scholar.google.com/citations?user=J8PNDCwAAAAJ&hl=en',
@@ -100,6 +105,7 @@ export const publications = [
     venue: 'PLOS ONE',
     year: 2018,
     citations: 25,
+    theme: 'meaning',
     summary:
       'Tested the Meaning Maintenance Model prediction that uncertainty drives a search for meaning — finding meaning threats increase working memory capacity, using Bayesian regression analyses across multiple studies.',
     url: 'https://scholar.google.com/citations?user=J8PNDCwAAAAJ&hl=en',

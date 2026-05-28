@@ -23,36 +23,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - name: Install StatiCrypt
-        run: npm install -g staticrypt
+      - run: npm ci
 
-      - name: Assemble site (deck + slide images only)
-        run: |
-          mkdir -p site
-          cp -r public/slides site/slides
-
-      - name: Encrypt deck with password
+      - name: Build (Vite + StatiCrypt encryption)
+        run: npm run build
         env:
-          DECK_PASSWORD: ${{ secrets.DECK_PASSWORD }}
-        run: |
-          if [ -z "$DECK_PASSWORD" ]; then
-            echo "::error::DECK_PASSWORD secret is not set. Add it in repo Settings → Secrets and variables → Actions."
-            exit 1
-          fi
-          npx staticrypt public/case-study-shopping.html \
-            --password "$DECK_PASSWORD" \
-            --short \
-            --template-title "Rachele Benjamin — Case Study" \
-            --template-instructions "Enter the password I shared with you to view this case study." \
-            --template-button "Unlock" \
-            -d site
-          mv site/case-study-shopping.html site/index.html
+          STATICRYPT_PASSWORD: ${{ secrets.STATICRYPT_PASSWORD }}
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: dist
 
   deploy:
     needs: build

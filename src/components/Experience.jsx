@@ -38,7 +38,7 @@ const education = [
 
 const skills = [
   'Mixed methods', 'Jobs to Be Done', 'Diary studies', 'Survey design',
-  'Usability testing', 'Moderated interviews', 'FigJam facilitation',
+  'Usability testing', 'Moderated interviews',
   'Concept testing', 'Stakeholder presentations', 'Bayesian analysis', 'Figma',
 ]
 
@@ -62,7 +62,7 @@ export default function Experience() {
           <span className="text-xs tracking-wider-3 uppercase text-ink/50 font-medium">Background</span>
           <h2 className="mt-4 font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight">
             Experience &<br />
-            <span className="italic font-light">Education</span>
+            <span className="text-work">Education</span>
           </h2>
         </motion.div>
 
@@ -84,7 +84,7 @@ export default function Experience() {
                 <p className="font-display italic text-ink/70 mb-4">{exp.company}</p>
                 <ul className="space-y-3">
                   {exp.highlights.map((h, j) => (
-                    <li key={j} className="text-sm text-ink/70 leading-relaxed font-light transition-colors group-hover:text-ink/80">{h}</li>
+                    <li key={j} className="text-sm text-ink/70 leading-relaxed transition-colors group-hover:text-ink/80">{h}</li>
                   ))}
                 </ul>
               </div>
@@ -107,7 +107,7 @@ export default function Experience() {
                 <p className="font-display italic text-ink/70 mb-4">{edu.institution}</p>
                 <ul className="space-y-3">
                   {edu.highlights.map((h, j) => (
-                    <li key={j} className="text-sm text-ink/70 leading-relaxed font-light transition-colors group-hover:text-ink/80">{h}</li>
+                    <li key={j} className="text-sm text-ink/70 leading-relaxed transition-colors group-hover:text-ink/80">{h}</li>
                   ))}
                 </ul>
               </div>
@@ -124,7 +124,7 @@ export default function Experience() {
             <Heading>Methods</Heading>
             <ul className="mt-8 space-y-2.5">
               {skills.map((s) => (
-                <li key={s} className="text-sm text-ink/70 font-light hover:text-ink transition-colors cursor-default">
+                <li key={s} className="text-sm text-ink/70 hover:text-ink transition-colors cursor-default">
                   {s}
                 </li>
               ))}
