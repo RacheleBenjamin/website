@@ -5,12 +5,12 @@ import { scrollToAnchor } from '../hooks/scrollToAnchor'
 const homeLinks = [
   { label: 'Case Studies', href: '#case-study' },
   { label: 'Academic Research', href: '#/research' },
-  { label: 'About / Contact', href: '#contact' },
+  { label: 'Contact', href: '#contact' },
 ]
 
 const researchLinks = [
   { label: 'Portfolio', href: '#/' },
-  { label: 'About / Contact', href: '#/#contact' },
+  { label: 'Contact', href: '#/#contact' },
 ]
 
 function SocialIcons() {
