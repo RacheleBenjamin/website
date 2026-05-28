@@ -56,8 +56,8 @@ export default function Hero() {
             Academic Research
           </a>
           <a
-            href="/RB-Resume.pdf"
-            download
+            href={`${import.meta.env.BASE_URL}RB-Resume.pdf`}
+            download="RB-Resume.pdf"
             className="group inline-flex items-center gap-2.5 border border-ink/20 text-ink px-8 py-4 text-xs tracking-wider-2 uppercase font-medium hover:border-ink hover:bg-ink hover:text-cream transition-all duration-300"
           >
             Download Resume
