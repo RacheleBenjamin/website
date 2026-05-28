@@ -114,6 +114,23 @@ export const publications = [
 ]
 
 
+export const press = [
+  {
+    title: "Why Liberals (Sometimes) Mourn Democracy's Decline",
+    outlet: 'Character & Context — SPSP',
+    year: 2022,
+    url: 'https://spsp.org/news/character-and-context-blog/benjamin-laurin-democracy-decline-liberal-concern',
+    description: 'On research showing that concern over democratic backsliding is conditional — liberals mourn it most, but only when the other party holds power.',
+  },
+  {
+    title: 'Rachele Benjamin on Measuring Uncanny Experiences',
+    outlet: 'ISSEP Spotlights',
+    year: 2021,
+    url: 'https://www.issep.org/spotlights/benjamin',
+    description: '2020 Innovation in Existential Psychology Research Award winner discusses constructing a psychometric scale of uncanny feelings and its applications.',
+  },
+]
+
 // Aggregate citation count for display in hero
 export const totalCitations = publications.reduce(
   (sum, p) => sum + (p.citations || 0),

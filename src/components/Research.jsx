@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { academicProfile, researchThemes, publications, totalCitations } from '../data/research'
+import { academicProfile, researchThemes, publications, totalCitations, press } from '../data/research'
 
 const containerVariants = {
   hidden: {},
@@ -186,6 +186,63 @@ export default function Research() {
                       </span>
                     )}
                     <span className="text-base group-hover:translate-x-1 transition-transform" aria-hidden>↗</span>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Press */}
+      <section className="py-24 px-6 border-t border-ink/10">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-12"
+          >
+            <span className="text-xs tracking-wider-3 uppercase text-ink/50">Press</span>
+            <h2 className="mt-4 font-display text-4xl sm:text-5xl tracking-tight">
+              In the <span className="text-work">media</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="space-y-px bg-ink/10 border-y border-ink/10"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+          >
+            {press.map((item) => (
+              <motion.a
+                key={item.url}
+                variants={itemVariants}
+                href={item.url}
+                target="_blank"
+                rel="noreferrer"
+                className="block bg-cream group hover:bg-ink hover:text-cream transition-colors px-4 sm:px-8 py-8"
+              >
+                <div className="grid grid-cols-12 gap-4 sm:gap-6 items-baseline">
+                  <span className="col-span-2 sm:col-span-1 text-xs tracking-wider-2 text-ink/40 group-hover:text-cream/40 transition-colors">
+                    {item.year}
+                  </span>
+                  <div className="col-span-10 sm:col-span-10">
+                    <h3 className="font-display text-xl sm:text-2xl leading-snug tracking-tight">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-[10px] tracking-wider-2 uppercase text-ink/50 group-hover:text-cream/60 transition-colors">
+                      {item.outlet}
+                    </p>
+                    <p className="mt-3 text-sm text-ink/60 group-hover:text-cream/70 transition-colors leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                  <div className="hidden sm:flex col-span-1 items-start justify-end">
+                    <span className="text-base text-ink/50 group-hover:text-cream/70 group-hover:translate-x-1 transition-all" aria-hidden>↗</span>
                   </div>
                 </div>
               </motion.a>
