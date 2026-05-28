@@ -1680,7 +1680,8 @@
     </div>
 
     <!-- Opportunity Matrix -->
-    <h2 class="section-title" style="margin-top:56px;">Opportunity matrix: <span class="italic">Satisfaction × Importance</span></h2>
+    <h2 class="section-title" style="margin-top:56px;">Interactive matrix to help stakeholders decide</h2>
+    <p style="font-size:15px;font-style:italic;color:var(--ink-60);margin:6px 0 4px;line-height:1.5;">Users are relatively satisfied with shopping jobs — all scores cluster in the upper right.</p>
     <p style="font-size:13px;color:var(--ink-50);margin:0 0 28px;line-height:1.6;">Upper-left = high importance, low satisfaction — strongest opportunity for AI to step in. Axes scaled 1–5. <strong>Hover</strong> each emoji to reveal the job.</p>
 
     <div style="display:flex;align-items:stretch;gap:0;">
@@ -1700,9 +1701,6 @@
       <!-- Plot + x-axis -->
       <div style="flex:1;min-width:0;">
         <div id="opp-plot" style="position:relative;height:420px;background:#fafaf8;border:1px solid var(--ink-10);border-radius:6px;overflow:hidden;">
-
-          <!-- Opportunity zone: upper-left (low satisfaction, high importance) -->
-          <div style="position:absolute;top:0;left:0;width:50%;height:50%;background:rgba(180,83,9,.04);pointer-events:none;"></div>
 
           <!-- Grid lines at 25%, 50%, 75% -->
           <div style="position:absolute;top:25%;left:0;right:0;height:1px;background:var(--ink-10);pointer-events:none;"></div>
