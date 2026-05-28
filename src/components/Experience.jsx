@@ -8,7 +8,6 @@ const experiences = [
     highlights: [
       'Led 35+ studies across Edge (Consumer & Enterprise), Shopping, Copilot, GroupMe, Character, Read Aloud, Bing, and more',
       'Established agentic AI research foundations for Shopping and Browser for Work',
-      'Findings showcased at Microsoft Ignite 2026; contributed to Figma Make and Vibe Code Sprint',
       'Designed large-scale survey research with 1,500+ participants',
     ],
   },
