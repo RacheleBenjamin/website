@@ -46,7 +46,7 @@ export default function Research() {
           <span className="text-xs tracking-wider-3 uppercase text-ink/50">Academic Research</span>
           <h1 className="mt-4 font-display text-5xl sm:text-7xl lg:text-8xl leading-[0.98] tracking-tight">
             Social<br />
-            <span className="text-work">Psychology.</span>
+            <span className="text-work">Psychology</span>
           </h1>
           <p className="mt-8 text-base sm:text-lg text-ink/60 max-w-xl mx-auto leading-relaxed">
             My doctoral research at the University of British Columbia explores how people make meaning under uncertainty — from the uncanny valley to political attitudes.
