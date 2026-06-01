@@ -56,7 +56,7 @@ export default function Featured() {
         {/* Open-in-new-tab affordance */}
         <div className="mt-16 flex justify-end gap-8">
           <a
-            href={`${import.meta.env.BASE_URL}case-study-copilot.html#RacheleBenjaminPhD`}
+            href={`${import.meta.env.BASE_URL}case-study-copilot.html`}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 text-[11px] sm:text-xs tracking-wider-2 uppercase text-ink/60 hover:text-ink transition-colors font-medium"
