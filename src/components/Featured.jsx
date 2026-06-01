@@ -4,7 +4,7 @@ export default function Featured() {
   const chartUrl = `${import.meta.env.BASE_URL}featured/group-share-chart.html`
 
   return (
-    <section id="featured" className="pt-8 sm:pt-12 pb-24 sm:pb-32 px-6 border-t border-ink/10">
+    <section id="featured" className="pt-8 sm:pt-12 pb-12 sm:pb-16 px-6 border-t border-ink/10">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <motion.div
@@ -14,10 +14,10 @@ export default function Featured() {
           transition={{ duration: 0.7 }}
           className="mb-10"
         >
-          <h2 className="font-display text-xl sm:text-2xl leading-snug tracking-tight max-w-3xl">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight tracking-tight max-w-3xl">
             Programmed a skill that produces interactable charts to connect stakeholders to more information. Sample: Large-scale survey to uncover AI opportunities in digital groups.
           </h2>
-          <p className="mt-3 text-sm text-ink/60 max-w-2xl leading-relaxed">
+          <p className="mt-3 text-sm text-ink/60 leading-relaxed max-w-xl">
             Hover the labels for exact survey phrasing, hover or click the chart for significance tests. Interact with the legend to sort &amp; filter data.
           </p>
         </motion.div>
