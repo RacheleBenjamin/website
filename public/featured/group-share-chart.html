@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comfort Sharing AI Conversations by Group</title>
+  <style>
+    :root {
+      --bg:       #FBF7EC;
+      --ink:      #1a1a1a;
+      --muted:    #5a5550;
+      --font:     Georgia, 'Times New Roman', serif;
+      --red:      #CF6454;
+      --amber:    #DBA83C;
+      --teal:     #74B3C2;
+      --bar-h:    30px;
+      --row-gap:  7px;
+      --label-w:  230px;
+      --label-gap:20px;
+      --tip-bg:   #161310;
+      --tip-ink:  #F4ECD8;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--font); }
+
+    .slide { max-width: 920px; margin: 0 auto; padding: 48px 56px 80px; position: relative; }
+
+    /* ── Section header ──────────────────────────────────── */
+    .section-title {
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.25;
+      margin: 0 0 14px;
+      color: var(--ink);
+    }
+    .section-help {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin: 0 0 22px;
+      max-width: 760px;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,.12);
+      margin: 0 0 22px;
+    }
+    .section-sub {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.45;
+      margin: 0 0 32px;
+      font-style: normal;
+    }
+
+    /* ── Survey question card ────────────────────────────── */
+    .survey-q {
+      margin: 0 0 28px;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .survey-q .q-lbl {
+      font-style: normal;
+      font-size: 10.5px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    /* ── Legend + integrated sort ─────────────────────────── */
+    .legend-hint {
+      padding-left: calc(var(--label-w) + var(--label-gap));
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .05em;
+      margin-bottom: 10px;
+    }
+    .legend-hint span { margin-right: 18px; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 0;
+      padding-left: calc(var(--label-w) + var(--label-gap));
+      margin-bottom: 22px;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      position: relative;
+      margin-right: 24px;
+    }
+
+    /* Swatch — click to hide */
+    .leg-swatch {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background .15s, border-color .15s;
+      margin-right: 7px;
+    }
+    .legend-item[data-seg="red"]   .leg-swatch { background: var(--red); }
+    .legend-item[data-seg="amber"] .leg-swatch { background: var(--amber); }
+    .legend-item[data-seg="teal"]  .leg-swatch { background: var(--teal); }
+    .legend-item.seg-off .leg-swatch {
+      background: transparent !important;
+      border-color: var(--muted);
+    }
+
+    /* Label — click to sort */
+    .leg-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .leg-label:hover { color: var(--ink); border-bottom-color: rgba(0,0,0,.3); }
+    .legend-item.sort-active .leg-label {
+      border-bottom-color: var(--ink);
+    }
+    .legend-item[data-seg="red"].sort-active   .leg-label { color: var(--red); border-bottom-color: var(--red); }
+    .legend-item[data-seg="amber"].sort-active .leg-label { color: #8c6a1a; border-bottom-color: #8c6a1a; }
+    .legend-item[data-seg="teal"].sort-active  .leg-label { color: #3a7e8e; border-bottom-color: #3a7e8e; }
+    .legend-item.seg-off .leg-label { color: var(--muted); }
+
+    /* Sort arrow */
+    .leg-arrow {
+      font-size: 11px;
+      margin-left: 4px;
+      opacity: 0;
+      color: var(--muted);
+      transition: opacity .15s;
+      pointer-events: none;
+    }
+    .legend-item.sort-active .leg-arrow { opacity: 1; }
+
+    /* Legend hover tooltip */
+    .leg-tip {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 280px;
+      background: var(--tip-bg);
+      color: var(--tip-ink);
+      padding: 12px 14px;
+      font-size: 12px;
+      line-height: 1.5;
+      box-shadow: 0 12px 28px rgba(0,0,0,.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .14s;
+      z-index: 30;
+    }
+    .leg-tip .lbl {
+      display: block;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #a89878;
+      margin-bottom: 5px;
+    }
+    .legend-item:hover .leg-tip { opacity: 1; pointer-events: none; }
+
+    /* ── Chart rows ─────────────────────────────────────── */
+    .chart { width: 100%; }
+
+    .row {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--row-gap);
+      gap: var(--label-gap);
+      position: relative;
+    }
+
+    /* ── Bar-hover statistical popover (positioned by JS) ── */
+    .stat-tip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      max-height: calc(100vh - 16px);
+      overflow-y: auto;
+      background: var(--tip-bg);
+      color: var(--tip-ink);
+      padding: 14px 16px;
+      font-size: 12px;
+      line-height: 1.55;
+      box-shadow: 0 14px 32px rgba(0,0,0,.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .14s;
+      z-index: 40;
+      text-align: left;
+    }
+    .row .bar-wrap:hover ~ .stat-tip,
+    .stat-tip:hover { opacity: 1; }
+    .row.tip-active .stat-tip { opacity: 1; }
+    .bar-wrap { cursor: default; }
+
+    .stat-tip .lbl {
+      display: block;
+      font-size: 12.5px;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: #c9b78c;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .stat-tip .stat-block + .stat-block { margin-top: 10px; }
+    .stat-tip .stat-val {
+      font-size: 14px;
+      color: var(--tip-ink);
+      font-weight: 600;
+    }
+    .stat-tip .stat-line { color: #d8cdb5; margin-top: 3px; }
+    .stat-tip .stat-line .ds { color: #f4ecd8; font-weight: 600; }
+    .stat-tip .stat-line.none { color: #8a7e65; font-style: italic; }
+    .stat-tip .stat-n {
+      font-size: 10px;
+      color: #8a7e65;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(168,152,120,.25);
+    }
+
+    /* Row label — hover = survey tip, click = hide/show */
+    .row-label {
+      width: var(--label-w);
+      flex-shrink: 0;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.35;
+      color: var(--ink);
+      cursor: pointer;
+      position: relative;
+      padding-right: 0;
+      transition: opacity .2s;
+    }
+    .row-label:hover { opacity: .7; }
+    .row.row-off .row-label { opacity: .35; text-decoration: line-through; }
+
+    /* ── Red orb click affordance ─────────────────────── */
+    /* Idles over the Partner bar, smoothly follows the cursor when the user
+       brings the mouse near the chart. Disappears after first bar click. */
+    .click-demo {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+      left: 0; top: 0;
+      width: 0; height: 0;
+      transition: transform .22s cubic-bezier(.22,.61,.36,1);
+      will-change: transform;
+    }
+    .click-demo .ripple {
+      position: absolute;
+      left: 0; top: 0;
+      width: 14px; height: 14px;
+      margin: -7px 0 0 -7px;
+      border-radius: 50%;
+      background: rgba(207,100,84,.85);
+      box-shadow: 0 0 0 0 rgba(207,100,84,.55);
+      animation: orb-pulse 1.6s ease-out infinite;
+    }
+    @keyframes orb-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(207,100,84,.55); }
+      70%  { box-shadow: 0 0 0 18px rgba(207,100,84,0); }
+      100% { box-shadow: 0 0 0 0 rgba(207,100,84,0); }
+    }
+    body.demo-done .click-demo { display: none; }
+
+    /* Row label tooltip */
+    .row-tip {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      width: 300px;
+      background: var(--tip-bg);
+      color: var(--tip-ink);
+      padding: 12px 14px;
+      font-size: 12px;
+      line-height: 1.5;
+      box-shadow: 0 12px 28px rgba(0,0,0,.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .14s;
+      z-index: 30;
+      text-align: left;
+    }
+    .row-tip .lbl {
+      display: block;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #a89878;
+      margin-bottom: 5px;
+    }
+    .row-tip .q {
+      display: block;
+      font-size: 10px;
+      color: #8a7a5a;
+      margin-top: 6px;
+      font-style: italic;
+    }
+    .row-label:hover .row-tip { opacity: 1; }
+
+    /* Bar — collapses when row is hidden */
+    .bar-wrap {
+      flex: 1;
+      overflow: hidden;
+      max-height: 100px;
+      transition: max-height .3s ease, opacity .25s;
+    }
+    .row.row-off .bar-wrap { max-height: 0; opacity: 0; }
+
+    .bar {
+      display: flex;
+      height: var(--bar-h);
+      width: 100%;
+    }
+    .seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: flex-basis .45s ease, opacity .25s;
+    }
+    .seg.red   { background: var(--red);   color: #fff; }
+    .seg.amber { background: var(--amber); color: #1a1a1a; }
+    .seg.teal  { background: var(--teal);  color: #fff; }
+    .seg.seg-hidden { flex-basis: 0 !important; opacity: 0; }
+
+    /* ── Per-segment hover visual states ───────────────── */
+    .bar { position: relative; transition: filter .2s; }
+
+    /* Model 1 hover: red (not comfortable) gets a full outline; amber+teal
+       (the two sharing types) share a single outline. The divider between
+       red and amber is a single 2px line (red's right border) -- amber's
+       left side is intentionally borderless so the two don't stack. */
+    .bar.hover-m1 .seg.red {
+      box-shadow:
+        inset 2px 2px 0 0 var(--ink),
+        inset -2px -2px 0 0 var(--ink);
+    }
+    .bar.hover-m1 .seg.amber {
+      box-shadow: inset 0 2px 0 0 var(--ink), inset 0 -2px 0 0 var(--ink);
+    }
+    .bar.hover-m1 .seg.teal {
+      box-shadow:
+        inset -2px 2px 0 0 var(--ink),
+        inset 0 -2px 0 0 var(--ink);
+    }
+    /* If red is hidden, amber needs its own left border */
+    .bar.hover-m1 .seg.red.seg-hidden + .seg.amber,
+    .bar.hover-m1 .seg.amber:first-child {
+      box-shadow:
+        inset 2px 2px 0 0 var(--ink),
+        inset 0 -2px 0 0 var(--ink);
+    }
+    /* If amber is hidden, teal needs its own left border too */
+    .bar.hover-m1 .seg.amber.seg-hidden + .seg.teal,
+    .bar.hover-m1 .seg.teal:first-child {
+      box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink);
+    }
+    /* If teal is hidden, amber gets its own right border too */
+    .bar.hover-m1 .seg.amber:last-child {
+      box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink);
+    }
+
+    /* Model 2 (after click): red collapses; amber and teal each get their own
+       black outline. Amber's right border is omitted so the seam between amber
+       and teal is a single 2px line (teal's left border). */
+    .bar.hover-m2 .seg.amber {
+      box-shadow: inset 2px 2px 0 0 var(--ink), inset 0 -2px 0 0 var(--ink);
+    }
+    .bar.hover-m2 .seg.teal {
+      box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink);
+    }
+    /* If teal is hidden, amber needs its own right border */
+    .bar.hover-m2 .seg.amber:last-child {
+      box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink);
+    }
+
+    .bar-wrap { cursor: pointer; }
+
+    /* Peer-row highlighting: peers that are significantly different from the
+       hovered row (either direction) fade out, leaving the hovered row plus
+       its statistical ‘neighbors’ (no significant difference) at full opacity. */
+    .row.peer-dim .bar-wrap { opacity: .25; }
+    .row.peer-dim .row-label { opacity: .4; }
+
+    /* ── X-axis ──────────────────────────────────────────── */
+    .axis-row { display: flex; align-items: flex-start; margin-top: 4px; }
+    .axis-spacer { width: calc(var(--label-w) + var(--label-gap)); flex-shrink: 0; }
+    .axis { flex: 1; position: relative; height: 28px; border-top: 1px solid rgba(0,0,0,.22); }
+    .tick {
+      position: absolute; top: 5px; transform: translateX(-50%);
+      font-size: 11px; color: var(--muted); white-space: nowrap;
+    }
+    .tick:last-child { transform: translateX(-80%); }
+
+    .n-note {
+      font-size: 12px; color: var(--muted); margin-top: 8px;
+      padding-left: calc(var(--label-w) + var(--label-gap));
+    }
+
+    /* ── Model annotation footer ───────────────────────── */
+    .model-note {
+      margin-top: 48px;
+      padding: 18px 22px;
+      border-top: 1px solid rgba(0,0,0,.15);
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .model-note h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 8px;
+      letter-spacing: .01em;
+    }
+    .model-note code {
+      font-family: 'Consolas', 'Menlo', monospace;
+      font-size: 11px;
+      background: rgba(0,0,0,.05);
+      padding: 1px 5px;
+      border-radius: 2px;
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="survey-q">
+    <span class="q-lbl">Survey question:</span>In general, how comfortable or uncomfortable are you sharing AI output with these groups / individuals?
+  </div>
+
+  <!-- ── Legend with integrated sort ── -->
+  <div class="legend" id="legend">
+
+    <div class="legend-item" data-seg="red">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% not comfortable sharing</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        Not comfortable sharing any output or conversation with them.
+      </div>
+    </div>
+
+    <div class="legend-item" data-seg="amber">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% selective sharing</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        Comfortable sharing specific AI output or conversation portions.
+      </div>
+    </div>
+
+    <div class="legend-item" data-seg="teal">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% comfortable bringing others into an AI group chat</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        Comfortable bringing others into an AI group chat.
+      </div>
+    </div>
+
+  </div><!-- /legend -->
+
+  <div class="click-demo" id="clickDemo" aria-hidden="true">
+    <span class="ripple"></span>
+  </div>
+
+  <!-- ── Chart ── -->
+  <div class="chart" id="chart">
+
+    <div class="row" data-key="friends" data-red="15.0" data-amber="66.6" data-teal="18.4">
+      <div class="row-label">Friends
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Friends"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg red"   data-pct="15.0">15%</div>
+        <div class="seg amber" data-pct="66.6">67%</div>
+        <div class="seg teal"  data-pct="18.4">18%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="partner" data-red="15.9" data-amber="60.3" data-teal="23.8">
+      <div class="row-label">Partner / significant other
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Partner / significant other"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg red"   data-pct="15.9">16%</div>
+        <div class="seg amber" data-pct="60.3">60%</div>
+        <div class="seg teal"  data-pct="23.8">24%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="family" data-red="16.7" data-amber="65.3" data-teal="17.9">
+      <div class="row-label">Family
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Family"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg red"   data-pct="16.7">17%</div>
+        <div class="seg amber" data-pct="65.3">65%</div>
+        <div class="seg teal"  data-pct="17.9">18%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="project" data-red="20.3" data-amber="63.2" data-teal="16.5">
+      <div class="row-label">Professional project team
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Project team (professional, personal, academic, or other)"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg red"   data-pct="20.3">20%</div>
+        <div class="seg amber" data-pct="63.2">63%</div>
+        <div class="seg teal"  data-pct="16.5">17%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="community" data-red="21.5" data-amber="59.3" data-teal="19.2">
+      <div class="row-label">Community / club / faith / gaming
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Shared interest / club / faith / gaming / volunteer group"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg red"   data-pct="21.5">22%</div>
+        <div class="seg amber" data-pct="59.3">59%</div>
+        <div class="seg teal"  data-pct="19.2">19%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="classroom" data-red="23.2" data-amber="58.5" data-teal="18.3">
+      <div class="row-label">Classroom / study group
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Classroom / study group"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg red"   data-pct="23.2">23%</div>
+        <div class="seg amber" data-pct="58.5">59%</div>
+        <div class="seg teal"  data-pct="18.3">18%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="service" data-red="49.3" data-amber="42.2" data-teal="8.6">
+      <div class="row-label">Service providers / businesses
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Service providers / businesses (such as financial advisor, doctor, landlord)"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg red"   data-pct="49.3">49%</div>
+        <div class="seg amber" data-pct="42.2">42%</div>
+        <div class="seg teal"  data-pct="8.6">9%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="axis-row">
+      <div class="axis-spacer"></div>
+      <div class="axis">
+        <span class="tick" style="left:0%">0%</span>
+        <span class="tick" style="left:10%">10%</span>
+        <span class="tick" style="left:20%">20%</span>
+        <span class="tick" style="left:30%">30%</span>
+        <span class="tick" style="left:40%">40%</span>
+        <span class="tick" style="left:50%">50%</span>
+        <span class="tick" style="left:60%">60%</span>
+        <span class="tick" style="left:70%">70%</span>
+        <span class="tick" style="left:80%">80%</span>
+        <span class="tick" style="left:90%">90%</span>
+        <span class="tick" style="left:100%">100%</span>
+      </div>
+    </div>
+  </div><!-- /chart -->
+
+  <p class="n-note">N = 1,045 (US and Japanese sample)</p>
+
+  <!-- ── Model annotation ── -->
+  <div class="model-note">
+    <h3>Group Type Differences in Sharing Comfort: Within-Subjects Mixed Model</h3>
+    <p>
+      Model: <code>glmer(share ~ GroupType + (1 | ResponseId), family = binomial)</code>.
+      Estimated marginal means (<code>emmeans</code>) with Holm-adjusted p-values across the 21
+      contrasts; only contrasts with adjusted p &lt; .05 are shown.
+    </p>
+    <p>
+      Pairwise comparisons: <strong>Comfortable sharing in any way</strong>, collapses the two
+      sharing modes (selective + AI group chat) against not comfortable. <strong>Among sharers</strong>,
+      restricts the analysis to respondents who said they would share (selective or group chat) and
+      answers which groups users are more willing to bring into an AI group chat rather than share
+      selectively.
+    </p>
+  </div>
+
+</div><!-- /slide -->
+
+<script>
+(function () {
+  const chart  = document.getElementById('chart');
+  const axisRow = chart.querySelector('.axis-row');
+  const rows   = Array.from(chart.querySelectorAll('.row'));
+  const items  = Array.from(document.querySelectorAll('.legend-item'));
+
+  const hiddenSegs = new Set();
+  let sortKey = null;   // null = original order
+  let sortDir = 'desc'; // 'desc' = high→low
+
+  rows.forEach((r, i) => r.dataset.origIdx = i);
+
+  // ── Segment visibility ──────────────────────────────────
+  // Widths are NOT renormalized when segs are hidden — each visible seg keeps
+  // its raw percentage so the x-axis ticks remain accurate; hidden segs just
+  // leave empty space at the right.
+  function recalcRow(row, hidden) {
+    ['red','amber','teal'].forEach(k => {
+      const seg = row.querySelector('.seg.' + k);
+      if (hidden.has(k)) {
+        seg.classList.add('seg-hidden');
+      } else {
+        seg.classList.remove('seg-hidden');
+        seg.style.flex = `0 0 ${parseFloat(row.dataset[k]).toFixed(2)}%`;
+      }
+    });
+  }
+  function applySegs() {
+    const extra = globalMode === 'm2' ? new Set([...hiddenSegs, 'red']) : new Set(hiddenSegs);
+    rows.forEach(row => recalcRow(row, extra));
+  }
+
+  // ── Row sort ────────────────────────────────────────────
+  function applySort() {
+    let ordered;
+    if (!sortKey) {
+      ordered = rows.slice().sort((a, b) => +a.dataset.origIdx - +b.dataset.origIdx);
+    } else {
+      ordered = rows.slice().sort((a, b) => {
+        const d = parseFloat(b.dataset[sortKey]) - parseFloat(a.dataset[sortKey]);
+        return sortDir === 'desc' ? d : -d;
+      });
+    }
+    ordered.forEach(r => chart.insertBefore(r, axisRow));
+  }
+
+  // ── Sort arrow indicators ───────────────────────────────
+  function updateArrows() {
+    items.forEach(item => {
+      const arrow = item.querySelector('.leg-arrow');
+      if (item.dataset.seg === sortKey) {
+        arrow.textContent = sortDir === 'desc' ? ' ↓' : ' ↑';
+        item.classList.add('sort-active');
+      } else {
+        arrow.textContent = '';
+        item.classList.remove('sort-active');
+      }
+    });
+  }
+
+  // ── Legend interactions ─────────────────────────────────
+  items.forEach(item => {
+    const swatch = item.querySelector('.leg-swatch');
+    const label  = item.querySelector('.leg-label');
+    const seg    = item.dataset.seg;
+
+    // Swatch click → hide/show segment
+    swatch.addEventListener('click', e => {
+      e.stopPropagation();
+      // In M2, the red swatch toggles back to M1 (consistent with the
+      // visual hollow state shown on red while in M2).
+      if (seg === 'red' && globalMode === 'm2') {
+        setGlobalMode('m1');
+        rows.forEach(r => r._refreshHover && r._refreshHover());
+        return;
+      }
+      if (hiddenSegs.has(seg)) {
+        hiddenSegs.delete(seg);
+        item.classList.remove('seg-off');
+      } else if (hiddenSegs.size < 2) {
+        hiddenSegs.add(seg);
+        item.classList.add('seg-off');
+      }
+      applySegs();
+    });
+
+    // Label click → sort (1st click = desc, 2nd click = asc, toggle)
+    label.addEventListener('click', e => {
+      e.stopPropagation();
+      if (sortKey === seg) {
+        sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+      } else {
+        sortKey = seg;
+        sortDir = 'desc';
+      }
+      updateArrows();
+      applySort();
+    });
+  });
+
+  // ── Row label click → hide/show row ────────────────────
+  rows.forEach(row => {
+    const label = row.querySelector('.row-label');
+    label.addEventListener('click', () => {
+      row.classList.toggle('row-off');
+    });
+  });
+  // ── Stat-tip data + render ────────────────────────────────
+  const SHORT = {
+    partner:   'Partner',
+    family:    'Family',
+    friends:   'Friends',
+    project:   'Project team',
+    classroom: 'Classroom',
+    community: 'Community group',
+    service:   'Service providers'
+  };
+  // Model 1: comfortable (selective+chat) vs not. Holm-adjusted p<.05 only.
+  // Per key: pct = estimated probability of being comfortable sharing in any way.
+  // more = significantly more comfortable than these groups; less = the reverse.
+  const M1 = {
+    friends:   { pct: 95.3, more: ['project','classroom','community','service'], less: [] },
+    partner:   { pct: 94.6, more: ['classroom','community','service'],            less: [] },
+    family:    { pct: 94.2, more: ['classroom','community','service'],            less: [] },
+    project:   { pct: 91.8, more: ['service'],                                    less: ['friends'] },
+    community: { pct: 90.8, more: ['service'],                                    less: ['partner','family','friends'] },
+    classroom: { pct: 89.4, more: ['service'],                                    less: ['partner','family','friends'] },
+    service:   { pct: 52.6, more: [], less: ['partner','family','friends','project','classroom','community'] }
+  };
+  // Model 2: AI group chat vs selective, among sharers.
+  // pct = estimated P(group chat | willing to share at all).
+  const M2 = {
+    partner:   { pct: 12.0, more: ['family','friends','project','classroom','service'], less: [] },
+    community: { pct:  8.1, more: ['service'],                                            less: [] },
+    family:    { pct:  7.3, more: ['service'],                                            less: ['partner'] },
+    friends:   { pct:  7.3, more: ['service'],                                            less: ['partner'] },
+    classroom: { pct:  6.9, more: ['service'],                                            less: ['partner'] },
+    project:   { pct:  5.5, more: [],                                                     less: ['partner'] },
+    service:   { pct:  2.9, more: [], less: ['partner','family','friends','classroom','community'] }
+  };
+  // n rated per group (excluding N/A) and n among sharers
+  const N_RATED = {
+    partner: 715, family: 860, friends: 853, project: 684,
+    classroom: 508, community: 715, service: 631
+  };
+  const N_SHARERS = {
+    partner: 601, family: 716, friends: 725, project: 545,
+    classroom: 390, community: 561, service: 320
+  };
+  function listNames(keys) {
+    return keys.map(k => `<span class="ds">${SHORT[k]}</span>`).join(', ');
+  }
+  function rowData(key) {
+    const r = document.querySelector(`.row[data-key="${key}"]`);
+    return {
+      red:   parseFloat(r.dataset.red),
+      amber: parseFloat(r.dataset.amber),
+      teal:  parseFloat(r.dataset.teal),
+    };
+  }
+  function renderM1Block(key) {
+    const m = M1[key];
+    const d = rowData(key);
+    const pct = d.amber + d.teal;
+    return `
+      <div class="stat-block">
+        <span class="lbl">Comfortable sharing in any way</span>
+        <div class="stat-val">${Math.round(pct)}% comfortable sharing with ${SHORT[key]} in some way</div>
+        ${m.more.length ? `<div class="stat-line">Significantly more comfortable than ${listNames(m.more)}</div>` : ''}
+        ${m.less.length ? `<div class="stat-line">Significantly less comfortable than ${listNames(m.less)}</div>` : ''}
+        ${(!m.more.length && !m.less.length) ? `<div class="stat-line none">No significant differences from other groups</div>` : ''}
+      </div>`;
+  }
+  function renderM2Block(key) {
+    const m = M2[key];
+    const d = rowData(key);
+    return `
+      <div class="stat-block">
+        <span class="lbl">AI group chat</span>
+        <div class="stat-val">${Math.round(d.teal)}% would bring ${SHORT[key]} into an AI group chat</div>
+        ${m.more.length ? `<div class="stat-line">Significantly more likely than for ${listNames(m.more)}</div>` : ''}
+        ${m.less.length ? `<div class="stat-line">Significantly less likely than for ${listNames(m.less)}</div>` : ''}
+        ${(!m.more.length && !m.less.length) ? `<div class="stat-line none">No significant differences from other groups</div>` : ''}
+      </div>`;
+  }
+  function renderNote(key) {
+    return `<div class="stat-n">n = ${N_RATED[key]} rated this group · ${N_SHARERS[key]} willing to share · Holm-adjusted pairwise (p &lt; .05)</div>`;
+  }
+  function renderStat(row, mode) {
+    // mode: 'both' | 'm1' | 'm2'
+    const key = row.dataset.key;
+    const tip = row.querySelector('.stat-tip');
+    const parts = [];
+    if (mode === 'm1') {
+      parts.push(renderM1Block(key));
+    } else if (mode === 'm2') {
+      parts.push(renderM2Block(key));
+    } else {
+      parts.push(renderM1Block(key), renderM2Block(key));
+    }
+    parts.push(renderNote(key));
+    tip.innerHTML = parts.join('');
+  }
+  rows.forEach(r => renderStat(r, 'both'));
+
+  // ── Viewport-aware positioning for the stat-tip ───────────────────────
+  function positionTip(row) {
+    const bar = row.querySelector('.bar-wrap');
+    const tip = row.querySelector('.stat-tip');
+    const br  = bar.getBoundingClientRect();
+    const tw  = tip.offsetWidth  || 300;
+    const th  = tip.offsetHeight || 200;
+    const gap = 18;
+    const vw  = window.innerWidth;
+    const vh  = window.innerHeight;
+
+    let left = br.right + gap;
+    if (left + tw + 8 > vw) {
+      left = br.left - gap - tw;
+      if (left < 8) left = Math.max(8, vw - tw - 8);
+    }
+    let top = br.top + br.height / 2 - th / 2;
+    top = Math.max(8, Math.min(top, vh - th - 8));
+    if (top < 8) top = 8;
+
+    tip.style.left = left + 'px';
+    tip.style.top  = top  + 'px';
+  }
+  rows.forEach(row => {
+    const bar      = row.querySelector('.bar-wrap');
+    const barInner = row.querySelector('.bar');
+
+    // Peer-row highlight: fade peers that are significantly different from
+    // the hovered row in EITHER direction. The hovered row and its
+    // not-significantly-different neighbors stay at full opacity, forming a
+    // visual cluster.
+    function applyPeers(m) {
+      const key  = row.dataset.key;
+      const stat = (m === 'm2' ? M2 : M1)[key];
+      const sig  = new Set([...stat.more, ...stat.less]);
+      rows.forEach(r => {
+        if (r === row) return;
+        if (sig.has(r.dataset.key)) r.classList.add('peer-dim');
+      });
+    }
+    function clearPeers() {
+      rows.forEach(r => r.classList.remove('peer-dim'));
+    }
+
+    // Compute which model the hover should reveal, based purely on which
+    // segments are currently visible (whether by user filter or by mode):
+    //   {red, amber, teal} visible → M1 hover
+    //   {amber, teal} visible (red gone)  → M2 hover
+    //   anything else                    → no hover
+    function hoverMode() {
+      const redVis   = !hiddenSegs.has('red')   && globalMode !== 'm2';
+      const amberVis = !hiddenSegs.has('amber');
+      const tealVis  = !hiddenSegs.has('teal');
+      if (redVis && amberVis && tealVis) return 'm1';
+      if (!redVis && amberVis && tealVis) return 'm2';
+      return null;
+    }
+
+    function applyHover() {
+      const m = hoverMode();
+      if (!m) return;
+      barInner.classList.remove('hover-m1', 'hover-m2');
+      barInner.classList.add('hover-' + m);
+      clearPeers();
+      applyPeers(m);
+      renderStat(row, m);
+      positionTip(row);
+      row.classList.add('tip-active');
+    }
+    function clearHover() {
+      barInner.classList.remove('hover-m1', 'hover-m2');
+      row.classList.remove('tip-active');
+      clearPeers();
+    }
+
+    bar.addEventListener('mouseenter', applyHover);
+    bar.addEventListener('mouseleave', clearHover);
+    bar.addEventListener('click', e => {
+      e.stopPropagation();
+      document.body.classList.add('demo-done');
+      // Click rule:
+      //   • If any segment is user-filtered OR we're in M2 → reset to clean M1
+      //     (all segments visible, M1 hover available).
+      //   • Otherwise (clean M1) → toggle to M2.
+      if (hiddenSegs.size > 0 || globalMode === 'm2') {
+        // Clear all user filters
+        hiddenSegs.forEach(s => {
+          const it = document.querySelector(`.legend-item[data-seg="${s}"]`);
+          if (it) it.classList.remove('seg-off');
+        });
+        hiddenSegs.clear();
+        setGlobalMode('m1');
+      } else {
+        setGlobalMode('m2');
+      }
+      applyHover();
+    });
+
+    // Expose for global-mode refresh
+    row._refreshHover = () => {
+      if (row.classList.contains('tip-active')) applyHover();
+    };
+  });
+
+  // ── Global mode toggle (affects every row's red visibility) ──
+  let globalMode = 'm1';
+
+  function setGlobalMode(m) {
+    globalMode = m;
+    // Re-emerge any user-hidden segments that are relevant to this
+    // comparison, with the same animation as a legend filter toggle.
+    const relevant = m === 'm2' ? ['amber','teal'] : ['red','amber','teal'];
+    relevant.forEach(seg => {
+      if (hiddenSegs.has(seg)) {
+        hiddenSegs.delete(seg);
+        const it = document.querySelector(`.legend-item[data-seg="${seg}"]`);
+        if (it) it.classList.remove('seg-off');
+      }
+    });
+    const extra = m === 'm2' ? new Set([...hiddenSegs, 'red']) : new Set(hiddenSegs);
+    rows.forEach(r => recalcRow(r, extra));
+    // In M2, sort by group-chat (teal) descending so pairwise comparisons
+    // are easier to read; restore original order when leaving M2.
+    if (m === 'm2') { sortKey = 'teal'; sortDir = 'desc'; }
+    else            { sortKey = null; }
+    updateArrows();
+    applySort();
+    // Mirror the change on the legend: red swatch goes hollow in M2, just
+    // like the user filtering it themselves.
+    const redItem = document.querySelector('.legend-item[data-seg="red"]');
+    if (redItem) redItem.classList.toggle('seg-off', m === 'm2');
+  }
+
+  // ── Red-orb click affordance: idles over Partner bar, follows mouse
+  //     when within proximity of the chart, hides after first bar click. ──
+  const demo  = document.getElementById('clickDemo');
+  const chartBox = document.getElementById('chart');
+  const PROXIMITY = 120; // px from chart bbox edge (tighter so the orb
+                         // doesn't drift into the annotation footer)
+
+  function setOrb(x, y) {
+    demo.style.transform = `translate(${x}px, ${y}px)`;
+  }
+  function homePos() {
+    const bar = document.querySelector('.row[data-key="partner"] .bar-wrap');
+    if (!bar) return [0, 0];
+    const r = bar.getBoundingClientRect();
+    return [r.left + r.width * 0.38, r.top + r.height / 2];
+  }
+  function goHome() {
+    const [hx, hy] = homePos();
+    setOrb(hx, hy);
+  }
+  goHome();
+  setTimeout(goHome, 100);
+
+  document.addEventListener('mousemove', e => {
+    if (document.body.classList.contains('demo-done')) return;
+    const cr = chartBox.getBoundingClientRect();
+    // Snap home when the cursor drops below the chart (annotation area)
+    if (e.clientY > cr.bottom + 20) { goHome(); return; }
+    const dx = Math.max(cr.left - e.clientX, 0, e.clientX - cr.right);
+    const dy = Math.max(cr.top  - e.clientY, 0, e.clientY - cr.bottom);
+    const dist = Math.hypot(dx, dy);
+    if (dist <= PROXIMITY) setOrb(e.clientX, e.clientY);
+    else                   goHome();
+  }, { passive: true });
+  window.addEventListener('resize', goHome);
+  window.addEventListener('scroll', goHome, { passive: true });
+
+  // ── Init ────────────────────────────────────────────────
+  applySegs();
+  applySort();
+  updateArrows();
+})();
+</script>
+</body>
+</html>

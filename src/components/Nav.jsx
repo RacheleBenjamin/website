@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { scrollToAnchor } from '../hooks/scrollToAnchor'
 
 const homeLinks = [
+  { label: 'Featured', href: '#featured', pill: true },
   { label: 'Portfolio', href: '#case-study' },
   { label: 'Academic Research', href: '#/research' },
   { label: 'Contact', href: '#contact' },
@@ -98,7 +99,9 @@ export default function Nav({ variant = 'home' }) {
                       }
                       scrollToAnchor(anchor)
                     }}
-                    className="text-[11px] sm:text-xs tracking-wider-2 uppercase text-ink/70 hover:text-ink transition-colors font-medium"
+                    className={link.pill
+                      ? 'text-[11px] sm:text-xs tracking-wider-2 uppercase text-ink border border-ink/40 px-3 py-1 rounded-full hover:bg-ink hover:text-cream hover:border-ink transition-all font-medium'
+                      : 'text-[11px] sm:text-xs tracking-wider-2 uppercase text-ink/70 hover:text-ink transition-colors font-medium'}
                   >
                     {link.label}
                   </a>
