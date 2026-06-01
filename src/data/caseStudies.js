@@ -320,7 +320,7 @@ export const caseStudies = [
     caseUrl: '/website/case-study-open-banking.html',
     title: 'Foundational Research to Guide TD\'s Open Banking Strategy',
     subtitle: 'Multi-phased strategic research preparing TD Bank for Open Banking regulatory transition',
-    theme: '🔐',
+    theme: '🔐 Open Banking',
     themeColor: '#00A758',
     context:
       'Secured funding for and executed multi-phased generative research program preparing bank leaders for Open Banking regulatory transition.',

@@ -113,7 +113,7 @@ export default function CaseStudy() {
                             </>
                           )}
                         </div>
-                        <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight tracking-tight">
+                        <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight tracking-tight text-ink group-hover:text-cream group-focus:text-cream transition-colors">
                           {study.title}
                         </h3>
                         <p className="mt-3 text-sm text-ink/60 group-hover:text-cream/70 transition-colors leading-relaxed max-w-xl">
@@ -146,7 +146,7 @@ export default function CaseStudy() {
                             </>
                           )}
                         </div>
-                        <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight tracking-tight">
+                        <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight tracking-tight text-ink transition-colors">
                           {study.title}
                         </h3>
                         <p className="mt-3 text-sm text-ink/60 leading-relaxed max-w-xl">
