@@ -14,7 +14,8 @@ export default function Featured() {
           transition={{ duration: 0.7 }}
           className="mb-10"
         >
-          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight tracking-tight max-w-3xl">
+          <span className="text-xs tracking-wider-3 uppercase text-ink/50">Featured Work</span>
+          <h2 className="mt-4 font-display text-2xl sm:text-3xl lg:text-4xl leading-tight tracking-tight max-w-3xl">
             Programmed a skill that produces interactable charts to connect stakeholders to more information. Sample: Large-scale survey to uncover AI opportunities in digital groups.
           </h2>
           <p className="mt-3 text-sm text-ink/60 leading-relaxed max-w-xl">
