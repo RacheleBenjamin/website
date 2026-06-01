@@ -47,6 +47,7 @@ export default function Hero() {
             className="group inline-flex items-center gap-2.5 border border-ink/20 text-ink px-8 py-4 text-xs tracking-wider-2 uppercase font-medium hover:border-ink hover:bg-ink hover:text-cream transition-all duration-300"
           >
             Featured Work
+            <span className="transition-transform duration-300" aria-hidden>→</span>
           </a>
           <a
             href="#case-study"
