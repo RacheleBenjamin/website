@@ -12,13 +12,13 @@ export default function Featured() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-10"
+          className="text-center mb-16"
         >
           <span className="text-xs tracking-wider-3 uppercase text-ink/50">Featured Work</span>
-          <h2 className="mt-4 font-display text-2xl sm:text-3xl lg:text-4xl leading-tight tracking-tight max-w-3xl">
+          <h2 className="mt-4 font-display text-5xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
             Programmed a skill that produces interactable charts to connect stakeholders to more information. Sample: Large-scale survey to uncover AI opportunities in digital groups.
           </h2>
-          <p className="mt-3 text-sm text-ink/60 leading-relaxed max-w-xl">
+          <p className="mt-6 text-base text-ink/60 max-w-2xl mx-auto leading-relaxed">
             Hover the labels for exact survey phrasing, hover or click the chart for significance tests. Interact with the legend to sort &amp; filter data.
           </p>
         </motion.div>
