@@ -1,7 +1,19 @@
 import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
 export default function Featured() {
   const chartUrl = `${import.meta.env.BASE_URL}featured/group-share-chart.html`
+  const iframeRef = useRef(null)
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.data?.type === 'chartHeight' && iframeRef.current) {
+        iframeRef.current.style.height = e.data.height + 'px'
+      }
+    }
+    window.addEventListener('message', handler)
+    return () => window.removeEventListener('message', handler)
+  }, [])
 
   return (
     <section id="featured" className="pt-8 sm:pt-12 pb-12 sm:pb-16 px-6 border-t border-ink/10">
@@ -32,10 +44,11 @@ export default function Featured() {
           className="border border-ink/10 bg-cream shadow-sm overflow-hidden"
         >
           <iframe
+            ref={iframeRef}
             src={chartUrl}
             title="Comfort sharing AI conversations by group — interactive chart"
             className="w-full block"
-            style={{ height: '1100px', border: 0 }}
+            style={{ height: '800px', border: 0 }}
             loading="lazy"
           />
         </motion.div>

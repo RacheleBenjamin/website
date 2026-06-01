@@ -1018,5 +1018,13 @@
   updateArrows();
 })();
 </script>
+
+<script>
+  function reportHeight() {
+    window.parent.postMessage({ type: 'chartHeight', height: document.documentElement.scrollHeight }, '*');
+  }
+  window.addEventListener('load', reportHeight);
+  window.addEventListener('resize', reportHeight);
+</script>
 </body>
 </html>
