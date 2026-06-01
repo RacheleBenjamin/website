@@ -1,5 +1,6 @@
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import Featured from './components/Featured'
 import CaseStudy from './components/CaseStudy'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
@@ -18,6 +19,7 @@ export default function App() {
       ) : (
         <main>
           <Hero />
+          <Featured />
           <CaseStudy />
           <Experience />
           <Contact />
