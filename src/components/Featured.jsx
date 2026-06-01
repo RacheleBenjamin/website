@@ -54,7 +54,16 @@ export default function Featured() {
         </motion.div>
 
         {/* Open-in-new-tab affordance */}
-        <div className="mt-16 flex justify-end">
+        <div className="mt-16 flex justify-end gap-8">
+          <a
+            href={`${import.meta.env.BASE_URL}case-study-copilot.html`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-[11px] sm:text-xs tracking-wider-2 uppercase text-ink/60 hover:text-ink transition-colors font-medium"
+          >
+            Open the relevant case study
+            <span className="text-[9px] opacity-60">↗</span>
+          </a>
           <a
             href={chartUrl}
             target="_blank"
