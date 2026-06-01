@@ -774,20 +774,36 @@
   <div class="slide-inner">
     <div class="slide-tag">Finding · Context &amp; scenarios</div>
     <span class="finding-eyebrow">Finding</span>
-    <h2 class="finding-headline">Social AI is already happening — <em>with partners, for travel and food</em></h2>
+    <h2 class="finding-headline">More comfort sharing among closer tie groups</h2>
 
-    <div style="display: flex; flex-direction: column; gap: 32px; margin-top: 32px; max-width: 880px; margin-left: auto; margin-right: auto;">
-      <div>
-        <img class="pdf-clip zoomable" style="margin: 0; cursor: zoom-in;" src="slides/copilot/page_12.png"
-             alt="Slide 12: Bar chart — closer ties (partners, family, friends) produce higher comfort with social AI. Service providers and classrooms produce lowest comfort." />
-        <p class="scene-caption" style="margin-top: 10px;">Comfort correlates with relationship closeness.</p>
+    <div style="margin-top: 32px; max-width: 880px; margin-left: auto; margin-right: auto;">
+      <div style="border: 1px solid rgba(0,0,0,.1); background: #faf9f6; overflow: hidden;">
+        <iframe
+          id="comfort-chart"
+          src="featured/group-share-chart.html"
+          title="Comfort sharing AI conversations by group — interactive chart"
+          style="width: 100%; display: block; height: 800px; border: 0;"
+          loading="lazy"
+        ></iframe>
       </div>
-      <div>
-        <img class="pdf-clip zoomable" style="margin: 0; cursor: zoom-in;" src="slides/copilot/page_13.png"
-             alt="Slide 13: Bar chart — lighter topics (travel, food, entertainment) produce highest comfort. Finance and health topics produce lowest comfort." />
-        <p class="scene-caption" style="margin-top: 10px;">Comfort correlates with topic weight.</p>
+      <div style="margin-top: 16px; display: flex; justify-content: flex-end;">
+        <a href="featured/group-share-chart.html" target="_blank" rel="noreferrer"
+           style="display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;color:rgba(26,26,26,.6);text-decoration:none;">
+          Click to open HTML, showcasing my agent skill that produces interactable charts
+          <span style="font-size:9px;opacity:.6;">↗</span>
+        </a>
       </div>
     </div>
+    <script>
+      (function () {
+        var iframe = document.getElementById('comfort-chart');
+        window.addEventListener('message', function (e) {
+          if (e.data && e.data.type === 'chartHeight' && iframe) {
+            iframe.style.height = e.data.height + 'px';
+          }
+        });
+      })();
+    </script>
 
     <aside class="emergent-insight" aria-label="Quantitative pattern">
       <div class="ei-label">Quantitative pattern</div>
