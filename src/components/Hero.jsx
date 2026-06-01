@@ -43,6 +43,12 @@ export default function Hero() {
 
         <motion.div variants={itemVariants} className="mt-14 flex flex-wrap justify-center gap-4">
           <a
+            href="#featured"
+            className="group inline-flex items-center gap-2.5 border border-ink/20 text-ink px-8 py-4 text-xs tracking-wider-2 uppercase font-medium hover:border-ink hover:bg-ink hover:text-cream transition-all duration-300"
+          >
+            Featured Work
+          </a>
+          <a
             href="#case-study"
             className="group inline-flex items-center gap-2.5 border border-ink/20 text-ink px-8 py-4 text-xs tracking-wider-2 uppercase font-medium hover:border-ink hover:bg-ink hover:text-cream transition-all duration-300"
           >
