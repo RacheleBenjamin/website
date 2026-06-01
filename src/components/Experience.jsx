@@ -29,8 +29,8 @@ const education = [
     degree: 'PhD, Social Psychology',
     institution: 'University of British Columbia',
     highlights: [
-      'Dissertation: defining and explaining "uncanny" feelings',
-      'Research on attitudes towards democracy',
+      'Defining and explaining "uncanny" feelings',
+      'Dissertation: Research on attitudes towards democracy',
     ],
   },
 ]
