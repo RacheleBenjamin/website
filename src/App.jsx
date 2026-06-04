@@ -19,7 +19,9 @@ export default function App() {
       ) : (
         <main>
           <Hero />
-          <Featured />
+          <div className="hidden sm:block">
+            <Featured />
+          </div>
           <CaseStudy />
           <Experience />
           <Contact />
