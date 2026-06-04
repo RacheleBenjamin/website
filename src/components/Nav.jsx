@@ -85,7 +85,7 @@ export default function Nav({ variant = 'home' }) {
                   : null
               return (
                 <li key={link.href} className={link.pill ? 'hidden sm:list-item' : undefined}>
-                  <aa
+                  <a
                     href={link.href}
                     onClick={(e) => {
                       const anchor = crossPageAnchor || samePageAnchor
