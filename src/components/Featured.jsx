@@ -27,12 +27,6 @@ export default function Featured() {
           className="text-center mb-16"
         >
           <span className="text-xs tracking-wider-3 uppercase text-ink/50">Featured Work</span>
-          <h2 className="mt-4 font-display text-5xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
-            Programmed a skill that produces interactable charts to connect stakeholders to more information.
-          </h2>
-          <p className="mt-6 text-base text-ink/60 max-w-2xl mx-auto leading-relaxed">
-            Hover the labels for exact survey phrasing, hover or click the chart for significance tests. Interact with the legend to sort &amp; filter data.
-          </p>
         </motion.div>
 
         {/* Embedded chart */}
