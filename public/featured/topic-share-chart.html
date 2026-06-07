@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comfort Sharing AI Conversations by Group</title>
+  <title>Comfort Sharing AI Output by Topic</title>
   <style>
     :root {
       --bg:       #FBF7EC;
@@ -15,7 +15,7 @@
       --teal:     #74B3C2;
       --bar-h:    30px;
       --row-gap:  7px;
-      --label-w:  230px;
+      --label-w:  280px;
       --label-gap:20px;
       --tip-bg:   #161310;
       --tip-ink:  #F4ECD8;
@@ -31,46 +31,39 @@
       font-size: 26px;
       font-weight: 600;
       line-height: 1.25;
-      margin: 0 0 14px;
+      margin: 0 0 10px;
       color: var(--ink);
     }
-    .section-help {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.5;
-      margin: 0 0 22px;
-      max-width: 760px;
-    }
-    .section-divider {
-      border: none;
-      border-top: 1px solid rgba(0,0,0,.12);
-      margin: 0 0 22px;
-    }
     .section-sub {
-      font-size: 18px;
+      font-size: 15px;
       color: var(--muted);
       line-height: 1.45;
       margin: 0 0 32px;
-      font-style: normal;
+      font-style: italic;
     }
 
     /* ── Survey question card ────────────────────────────── */
     .survey-q {
-      margin: 0 0 28px;
-      font-size: 15px;
-      line-height: 1.45;
-      color: var(--muted);
-      font-style: italic;
+      border-left: 3px solid var(--ink);
+      padding: 4px 0 4px 16px;
+      margin: 0 0 26px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink);
     }
     .survey-q .q-lbl {
-      font-style: normal;
+      display: block;
       font-size: 10.5px;
       letter-spacing: .08em;
       text-transform: uppercase;
       color: var(--muted);
+      margin-bottom: 6px;
       font-weight: 600;
-      margin-right: 8px;
     }
+    .survey-q .q-stem { font-weight: 600; margin-bottom: 8px; }
+    .survey-q ol { margin: 0; padding-left: 20px; }
+    .survey-q ol li { margin-bottom: 3px; }
+    .survey-q ol li b { font-weight: 600; }
 
     /* ── Legend + integrated sort ─────────────────────────── */
     .legend-hint {
@@ -445,13 +438,8 @@
 <body>
 <div class="slide">
 
-  <h1 class="section-title">Programmed a skill that produces interactable charts to connect stakeholders to more information. Sample: Large-scale survey to uncover AI opportunities in digital groups.</h1>
-  <p class="section-help">Hover the labels for exact survey phrasing, hover or click the chart for significance tests. Interact with the legend to sort &amp; filter data.</p>
-  <hr class="section-divider">
-
-  <div class="survey-q">
-    <span class="q-lbl">Survey question:</span>In general, how comfortable or uncomfortable are you sharing AI output with these groups / individuals?
-  </div>
+  <h1 class="section-title">Programmed a skill that produces interactable charts to connect stakeholders to more information. Click the legend to sort and filter, hover labels for exact survey wording, and hover and click the chart for significance tests.</h1>
+  <p class="section-sub">Context: We conducted a large-scale survey to uncover AI opportunities in digital groups.</p>
 
   <!-- ── Legend with integrated sort ── -->
   <div class="legend" id="legend">
@@ -492,110 +480,240 @@
     <span class="ripple"></span>
   </div>
 
+  <div class="survey-q">
+    <span class="q-lbl">Survey question</span>
+    <div class="q-stem">How <b>comfortable</b> are you sharing AI output on these topics (e.g., with friends, family, your significant other, professional groups, etc.)?</div>
+    <ol>
+      <li><b>Not comfortable sharing</b> &mdash; not comfortable sharing any output or conversation with them.</li>
+      <li><b>Selective sharing</b> &mdash; comfortable sharing specific AI output or conversation portions.</li>
+      <li><b>AI group chat</b> &mdash; comfortable bringing others into an AI group chat.</li>
+    </ol>
+  </div>
+
   <!-- ── Chart ── -->
   <div class="chart" id="chart">
 
-    <div class="row" data-key="friends" data-red="15.0" data-amber="66.6" data-teal="18.4">
-      <div class="row-label">Friends
+        <div class="row" data-key="food" data-red="12.7" data-amber="57.3" data-teal="30.0">
+      <div class="row-label">Food, cooking & meal planning
         <div class="row-tip">
           <span class="lbl">Survey wording</span>
-          "Friends"
+          "Food, cooking & meal planning"
         </div>
       </div>
       <div class="bar-wrap"><div class="bar">
-        <div class="seg teal"  data-pct="18.4">18%</div>
-        <div class="seg amber" data-pct="66.6">67%</div>
-        <div class="seg red"   data-pct="15.0">15%</div>
+        <div class="seg teal"  data-pct="30.0">30%</div>
+        <div class="seg amber" data-pct="57.3">57%</div>
+        <div class="seg red"   data-pct="12.7">13%</div>
       </div></div>
       <div class="stat-tip"></div>
     </div>
 
-    <div class="row" data-key="partner" data-red="15.9" data-amber="60.3" data-teal="23.8">
-      <div class="row-label">Partner / significant other
+    <div class="row" data-key="entertain" data-red="13.7" data-amber="57.1" data-teal="29.2">
+      <div class="row-label">Entertainment (movies, shows, music)
         <div class="row-tip">
           <span class="lbl">Survey wording</span>
-          "Partner / significant other"
+          "Entertainment (movies, shows, music)"
         </div>
       </div>
       <div class="bar-wrap"><div class="bar">
-        <div class="seg teal"  data-pct="23.8">24%</div>
+        <div class="seg teal"  data-pct="29.2">29%</div>
+        <div class="seg amber" data-pct="57.1">57%</div>
+        <div class="seg red"   data-pct="13.7">14%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="gaming" data-red="13.9" data-amber="54.0" data-teal="32.1">
+      <div class="row-label">Gaming & play
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Gaming & play"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="32.1">32%</div>
+        <div class="seg amber" data-pct="54.0">54%</div>
+        <div class="seg red"   data-pct="13.9">14%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="news" data-red="14.0" data-amber="61.3" data-teal="24.7">
+      <div class="row-label">News & current events
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "News & current events"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="24.7">25%</div>
+        <div class="seg amber" data-pct="61.3">61%</div>
+        <div class="seg red"   data-pct="14.0">14%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="travel" data-red="16.1" data-amber="64.0" data-teal="19.9">
+      <div class="row-label">Travel planning
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Travel planning"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="19.9">20%</div>
+        <div class="seg amber" data-pct="64.0">64%</div>
+        <div class="seg red"   data-pct="16.1">16%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="hobbies" data-red="16.4" data-amber="63.9" data-teal="19.7">
+      <div class="row-label">Hobbies & interests
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Hobbies & interests"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="19.7">20%</div>
+        <div class="seg amber" data-pct="63.9">64%</div>
+        <div class="seg red"   data-pct="16.4">16%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="learning" data-red="20.0" data-amber="58.8" data-teal="21.2">
+      <div class="row-label">Learning, schoolwork & skill building
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Learning, schoolwork & skill building"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="21.2">21%</div>
+        <div class="seg amber" data-pct="58.8">59%</div>
+        <div class="seg red"   data-pct="20.0">20%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="shopping" data-red="21.6" data-amber="60.3" data-teal="18.2">
+      <div class="row-label">Shopping & buying decisions
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Shopping & buying decisions"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="18.2">18%</div>
         <div class="seg amber" data-pct="60.3">60%</div>
-        <div class="seg red"   data-pct="15.9">16%</div>
+        <div class="seg red"   data-pct="21.6">22%</div>
       </div></div>
       <div class="stat-tip"></div>
     </div>
 
-    <div class="row" data-key="family" data-red="16.7" data-amber="65.3" data-teal="17.9">
-      <div class="row-label">Family
+    <div class="row" data-key="content" data-red="22.6" data-amber="56.8" data-teal="20.6">
+      <div class="row-label">Content creation & creative work
         <div class="row-tip">
           <span class="lbl">Survey wording</span>
-          "Family"
+          "Content creation & creative work"
         </div>
       </div>
       <div class="bar-wrap"><div class="bar">
-        <div class="seg teal"  data-pct="17.9">18%</div>
-        <div class="seg amber" data-pct="65.3">65%</div>
-        <div class="seg red"   data-pct="16.7">17%</div>
+        <div class="seg teal"  data-pct="20.6">21%</div>
+        <div class="seg amber" data-pct="56.8">57%</div>
+        <div class="seg red"   data-pct="22.6">23%</div>
       </div></div>
       <div class="stat-tip"></div>
     </div>
 
-    <div class="row" data-key="project" data-red="20.3" data-amber="63.2" data-teal="16.5">
-      <div class="row-label">Professional project team
+    <div class="row" data-key="work" data-red="22.8" data-amber="59.1" data-teal="18.1">
+      <div class="row-label">Professional projects & work management
         <div class="row-tip">
           <span class="lbl">Survey wording</span>
-          "Project team (professional, personal, academic, or other)"
+          "Professional projects & work management"
         </div>
       </div>
       <div class="bar-wrap"><div class="bar">
-        <div class="seg teal"  data-pct="16.5">17%</div>
-        <div class="seg amber" data-pct="63.2">63%</div>
-        <div class="seg red"   data-pct="20.3">20%</div>
+        <div class="seg teal"  data-pct="18.1">18%</div>
+        <div class="seg amber" data-pct="59.1">59%</div>
+        <div class="seg red"   data-pct="22.8">23%</div>
       </div></div>
       <div class="stat-tip"></div>
     </div>
 
-    <div class="row" data-key="community" data-red="21.5" data-amber="59.3" data-teal="19.2">
-      <div class="row-label">Community / club / faith / gaming
+    <div class="row" data-key="job" data-red="31.0" data-amber="52.6" data-teal="16.5">
+      <div class="row-label">Job hunting & career development
         <div class="row-tip">
           <span class="lbl">Survey wording</span>
-          "Shared interest / club / faith / gaming / volunteer group"
+          "Job hunting & career development"
         </div>
       </div>
       <div class="bar-wrap"><div class="bar">
-        <div class="seg teal"  data-pct="19.2">19%</div>
-        <div class="seg amber" data-pct="59.3">59%</div>
-        <div class="seg red"   data-pct="21.5">22%</div>
+        <div class="seg teal"  data-pct="16.5">16%</div>
+        <div class="seg amber" data-pct="52.6">53%</div>
+        <div class="seg red"   data-pct="31.0">31%</div>
       </div></div>
       <div class="stat-tip"></div>
     </div>
 
-    <div class="row" data-key="classroom" data-red="23.2" data-amber="58.5" data-teal="18.3">
-      <div class="row-label">Classroom / study group
+    <div class="row" data-key="health" data-red="31.2" data-amber="54.5" data-teal="14.2">
+      <div class="row-label">Health & well-being
         <div class="row-tip">
           <span class="lbl">Survey wording</span>
-          "Classroom / study group"
+          "Health & well-being"
         </div>
       </div>
       <div class="bar-wrap"><div class="bar">
-        <div class="seg teal"  data-pct="18.3">18%</div>
-        <div class="seg amber" data-pct="58.5">59%</div>
-        <div class="seg red"   data-pct="23.2">23%</div>
+        <div class="seg teal"  data-pct="14.2">14%</div>
+        <div class="seg amber" data-pct="54.5">54%</div>
+        <div class="seg red"   data-pct="31.2">31%</div>
       </div></div>
       <div class="stat-tip"></div>
     </div>
 
-    <div class="row" data-key="service" data-red="49.3" data-amber="42.2" data-teal="8.6">
-      <div class="row-label">Service providers / businesses
+    <div class="row" data-key="parenting" data-red="33.2" data-amber="54.6" data-teal="12.2">
+      <div class="row-label">Parenting & family logistics
         <div class="row-tip">
           <span class="lbl">Survey wording</span>
-          "Service providers / businesses (such as financial advisor, doctor, landlord)"
+          "Parenting & family logistics"
         </div>
       </div>
       <div class="bar-wrap"><div class="bar">
-        <div class="seg teal"  data-pct="8.6">9%</div>
-        <div class="seg amber" data-pct="42.2">42%</div>
-        <div class="seg red"   data-pct="49.3">49%</div>
+        <div class="seg teal"  data-pct="12.2">12%</div>
+        <div class="seg amber" data-pct="54.6">55%</div>
+        <div class="seg red"   data-pct="33.2">33%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="life_org" data-red="34.9" data-amber="51.1" data-teal="14.1">
+      <div class="row-label">Life organization & household management
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Life organization & household management"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="14.1">14%</div>
+        <div class="seg amber" data-pct="51.1">51%</div>
+        <div class="seg red"   data-pct="34.9">35%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="finance" data-red="47.9" data-amber="43.0" data-teal="9.0">
+      <div class="row-label">Finance & investing
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "Finance & investing"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="9.0">9%</div>
+        <div class="seg amber" data-pct="43.0">43%</div>
+        <div class="seg red"   data-pct="47.9">48%</div>
       </div></div>
       <div class="stat-tip"></div>
     </div>
@@ -622,17 +740,18 @@
 
   <!-- ── Model annotation ── -->
   <div class="model-note">
-    <h3>Group Type Differences in Sharing Comfort: Within-Subjects Mixed Model</h3>
+    <h3>Topic Differences in Sharing Comfort: Within-Subjects Mixed Model</h3>
     <p>
-      Model: <code>glmer(share ~ GroupType + (1 | ResponseId), family = binomial)</code>.
-      Estimated marginal means (<code>emmeans</code>) with Holm-adjusted p-values across the 21
-      contrasts; only contrasts with adjusted p &lt; .05 are shown.
+      Model: <code>glmer(share ~ Topic + (1 | ResponseId), family = binomial)</code>.
+      Estimated marginal means (<code>emmeans</code>) with Holm-adjusted p-values across the 105
+      pairwise contrasts; only contrasts with adjusted p &lt; .05 are surfaced as significant in
+      the hover tip.
     </p>
     <p>
       Pairwise comparisons: <strong>Comfortable sharing in any way</strong>, collapses the two
       sharing modes (selective + AI group chat) against not comfortable. <strong>Among sharers</strong>,
       restricts the analysis to respondents who said they would share (selective or group chat) and
-      answers which groups users are more willing to bring into an AI group chat rather than share
+      answers which topics users are more willing to bring into an AI group chat rather than share
       selectively.
     </p>
   </div>
@@ -749,46 +868,64 @@
   });
   // ── Stat-tip data + render ────────────────────────────────
   const SHORT = {
-    partner:   'Partner',
-    family:    'Family',
-    friends:   'Friends',
-    project:   'Project team',
-    classroom: 'Classroom',
-    community: 'Community group',
-    service:   'Service providers'
+    food      : 'Food',
+    entertain : 'Entertainment',
+    gaming    : 'Gaming',
+    news      : 'News',
+    travel    : 'Travel',
+    hobbies   : 'Hobbies',
+    learning  : 'Learning',
+    shopping  : 'Shopping',
+    content   : 'Content creation',
+    work      : 'Work projects',
+    job       : 'Job hunting',
+    health    : 'Health',
+    parenting : 'Parenting',
+    life_org  : 'Life organization',
+    finance   : 'Finance'
   };
   // Model 1: comfortable (selective+chat) vs not. Holm-adjusted p<.05 only.
   // Per key: pct = estimated probability of being comfortable sharing in any way.
   // more = significantly more comfortable than these groups; less = the reverse.
   const M1 = {
-    friends:   { pct: 95.3, more: ['project','classroom','community','service'], less: [] },
-    partner:   { pct: 94.6, more: ['classroom','community','service'],            less: [] },
-    family:    { pct: 94.2, more: ['classroom','community','service'],            less: [] },
-    project:   { pct: 91.8, more: ['service'],                                    less: ['friends'] },
-    community: { pct: 90.8, more: ['service'],                                    less: ['partner','family','friends'] },
-    classroom: { pct: 89.4, more: ['service'],                                    less: ['partner','family','friends'] },
-    service:   { pct: 52.6, more: [], less: ['partner','family','friends','project','classroom','community'] }
+    food      : { pct: 96.3, more: ['shopping','health','finance','learning','life_org','work','parenting','job','content'], less: [] },
+    entertain : { pct: 96.2, more: ['shopping','health','finance','learning','life_org','work','parenting','job','content'], less: [] },
+    gaming    : { pct: 96.3, more: ['shopping','health','finance','learning','life_org','work','parenting','job','content'], less: [] },
+    news      : { pct: 95.9, more: ['shopping','health','finance','learning','life_org','work','parenting','job','content'], less: [] },
+    travel    : { pct: 94.7, more: ['shopping','health','finance','life_org','work','parenting','job','content'], less: [] },
+    hobbies   : { pct: 94.9, more: ['shopping','health','finance','life_org','work','parenting','job','content'], less: [] },
+    learning  : { pct: 91.6, more: ['health','finance','life_org','parenting','job'], less: ['gaming','news','entertain','food'] },
+    shopping  : { pct: 90.7, more: ['health','finance','life_org','parenting','job'], less: ['gaming','news','entertain','hobbies','travel','food'] },
+    content   : { pct: 89.4, more: ['health','finance','life_org','parenting','job'], less: ['gaming','news','entertain','hobbies','travel','food'] },
+    work      : { pct: 89.0, more: ['health','finance','life_org','parenting','job'], less: ['gaming','news','entertain','hobbies','travel','food'] },
+    job       : { pct: 79.6, more: ['finance'], less: ['shopping','gaming','news','entertain','learning','work','hobbies','travel','food','content'] },
+    health    : { pct: 80.1, more: ['finance'], less: ['shopping','gaming','news','entertain','learning','work','hobbies','travel','food','content'] },
+    parenting : { pct: 77.3, more: ['finance'], less: ['shopping','gaming','news','entertain','learning','work','hobbies','travel','food','content'] },
+    life_org  : { pct: 75.6, more: ['finance'], less: ['shopping','gaming','news','entertain','learning','work','hobbies','travel','food','content'] },
+    finance   : { pct: 54.8, more: [], less: ['shopping','health','gaming','news','entertain','learning','life_org','work','hobbies','travel','food','parenting','job','content'] }
   };
   // Model 2: AI group chat vs selective, among sharers.
   // pct = estimated P(group chat | willing to share at all).
   const M2 = {
-    partner:   { pct: 12.0, more: ['family','friends','project','classroom','service'], less: [] },
-    community: { pct:  8.1, more: ['service'],                                            less: [] },
-    family:    { pct:  7.3, more: ['service'],                                            less: ['partner'] },
-    friends:   { pct:  7.3, more: ['service'],                                            less: ['partner'] },
-    classroom: { pct:  6.9, more: ['service'],                                            less: ['partner'] },
-    project:   { pct:  5.5, more: [],                                                     less: ['partner'] },
-    service:   { pct:  2.9, more: [], less: ['partner','family','friends','classroom','community'] }
+    food      : { pct: 14.7, more: ['shopping','health','finance','learning','life_org','work','hobbies','travel','parenting','job','content'], less: [] },
+    entertain : { pct: 13.3, more: ['shopping','health','finance','learning','life_org','work','hobbies','travel','parenting','job','content'], less: [] },
+    gaming    : { pct: 14.2, more: ['shopping','health','finance','learning','life_org','work','hobbies','travel','parenting','job','content'], less: [] },
+    news      : { pct: 10.4, more: ['shopping','health','finance','life_org','work','parenting','job'], less: [] },
+    travel    : { pct:  6.7, more: ['finance','parenting'], less: ['gaming','entertain','food'] },
+    hobbies   : { pct:  6.8, more: ['finance','parenting'], less: ['gaming','entertain','food'] },
+    learning  : { pct:  7.1, more: ['finance','parenting'], less: ['gaming','entertain','food'] },
+    shopping  : { pct:  5.3, more: ['finance','parenting'], less: ['gaming','news','entertain','food'] },
+    content   : { pct:  6.4, more: ['finance','parenting'], less: ['gaming','entertain','food'] },
+    work      : { pct:  5.3, more: ['finance','parenting'], less: ['gaming','news','entertain','food'] },
+    job       : { pct:  4.8, more: [], less: ['gaming','news','entertain','food'] },
+    health    : { pct:  4.4, more: [], less: ['gaming','news','entertain','food'] },
+    parenting : { pct:  2.4, more: [], less: ['shopping','gaming','news','entertain','learning','work','hobbies','travel','food','content'] },
+    life_org  : { pct:  3.9, more: [], less: ['gaming','news','entertain','food'] },
+    finance   : { pct:  2.4, more: [], less: ['shopping','gaming','news','entertain','learning','work','hobbies','travel','food','content'] }
   };
   // n rated per group (excluding N/A) and n among sharers
-  const N_RATED = {
-    partner: 715, family: 860, friends: 853, project: 684,
-    classroom: 508, community: 715, service: 631
-  };
-  const N_SHARERS = {
-    partner: 601, family: 716, friends: 725, project: 545,
-    classroom: 390, community: 561, service: 320
-  };
+  const N_RATED = { shopping: 682, health: 704, finance: 632, gaming: 504, news: 705, entertain: 665, learning: 679, life_org: 619, work: 635, hobbies: 812, travel: 719, food: 686, parenting: 491, job: 588, content: 637 };
+  const N_SHARERS = { shopping: 535, health: 484, finance: 329, gaming: 434, news: 606, entertain: 574, learning: 543, life_org: 403, work: 490, hobbies: 679, travel: 603, food: 599, parenting: 328, job: 406, content: 493 };
   function listNames(keys) {
     return keys.map(k => `<span class="ds">${SHORT[k]}</span>`).join(', ');
   }
@@ -807,7 +944,7 @@
     return `
       <div class="stat-block">
         <span class="lbl">Comfortable sharing in any way</span>
-        <div class="stat-val">${Math.round(pct)}% comfortable sharing with ${SHORT[key]} in some way</div>
+        <div class="stat-val">${Math.round(pct)}% comfortable sharing about ${SHORT[key]} in some way</div>
         ${m.more.length ? `<div class="stat-line">Significantly more comfortable than ${listNames(m.more)}</div>` : ''}
         ${m.less.length ? `<div class="stat-line">Significantly less comfortable than ${listNames(m.less)}</div>` : ''}
         ${(!m.more.length && !m.less.length) ? `<div class="stat-line none">No significant differences from other groups</div>` : ''}
@@ -989,7 +1126,7 @@
     demo.style.transform = `translate(${x}px, ${y}px)`;
   }
   function homePos() {
-    const bar = document.querySelector('.row[data-key="partner"] .bar-wrap');
+    const bar = document.querySelector('.row[data-key="food"] .bar-wrap');
     if (!bar) return [0, 0];
     const r = bar.getBoundingClientRect();
     return [r.left + r.width * 0.38, r.top + r.height / 2];

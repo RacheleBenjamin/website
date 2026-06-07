@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Action Openness by Shopping Activity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #EDF2FA;
+      --ink:      #1A1A1A;
+      --muted:    rgba(26,26,26,.60);
+      --font:     'Inter', 'Helvetica Neue', Roboto, Arial, sans-serif;
+      --sage:     #232270;
+      --teal:     #3838E0;
+      --amber:    #A8A6F5;
+      --red:      #D9D9D9;
+      --bar-h:    30px;
+      --row-gap:  7px;
+      --label-w:  260px;
+      --label-gap:20px;
+      --tip-bg:   #161310;
+      --tip-ink:  #F4ECD8;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--font); }
+
+    .slide { max-width: 980px; margin: 0 auto; padding: 8px 24px 40px; position: relative; }
+
+    /* Case-study embed: outer slide already provides its own title. Hide the chart's. */
+    .section-title { display: none; }
+    .section-sub {
+      font-size: 13px; color: var(--muted); line-height: 1.45;
+      margin: 0 0 24px;
+    }
+
+    .survey-q {
+      border-left: 3px solid var(--ink);
+      padding: 4px 0 4px 16px; margin: 0 0 26px;
+      font-size: 13.5px; line-height: 1.55; color: var(--ink);
+    }
+    .survey-q .q-lbl {
+      display: block; font-size: 10.5px; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 6px; font-weight: 600;
+    }
+    .survey-q .q-stem { font-weight: 600; margin-bottom: 8px; }
+    .survey-q ol { margin: 0; padding-left: 20px; }
+    .survey-q ol li { margin-bottom: 3px; }
+    .survey-q ol li b { font-weight: 600; }
+
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 6px 0;
+      padding-left: calc(var(--label-w) + var(--label-gap));
+      margin-bottom: 22px;
+    }
+    .legend-item {
+      display: inline-flex; align-items: center; gap: 0;
+      position: relative; margin-right: 22px;
+    }
+    .leg-swatch {
+      width: 14px; height: 14px; flex-shrink: 0; cursor: pointer;
+      border: 2px solid transparent;
+      transition: background .15s, border-color .15s;
+      margin-right: 7px;
+    }
+    .legend-item[data-seg="sage"]  .leg-swatch { background: var(--sage); }
+    .legend-item[data-seg="teal"]  .leg-swatch { background: var(--teal); }
+    .legend-item[data-seg="amber"] .leg-swatch { background: var(--amber); }
+    .legend-item[data-seg="red"]   .leg-swatch { background: var(--red); border-color: rgba(0,0,0,.4); }
+    .legend-item.seg-off .leg-swatch {
+      background: transparent !important; border-color: var(--muted);
+    }
+    .leg-label {
+      font-size: 12.5px; font-weight: 500; color: var(--ink);
+      cursor: pointer; padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .leg-label:hover { color: var(--ink); border-bottom-color: rgba(0,0,0,.3); }
+    .legend-item.sort-active .leg-label { border-bottom-color: var(--ink); }
+    .legend-item[data-seg="sage"].sort-active  .leg-label { color: #3d6e57; border-bottom-color: #3d6e57; }
+    .legend-item[data-seg="teal"].sort-active  .leg-label { color: #3a7e8e; border-bottom-color: #3a7e8e; }
+    .legend-item[data-seg="amber"].sort-active .leg-label { color: #8c6a1a; border-bottom-color: #8c6a1a; }
+    .legend-item[data-seg="red"].sort-active   .leg-label { color: var(--ink); border-bottom-color: var(--ink); }
+    .legend-item.seg-off .leg-label { color: var(--muted); }
+
+    .leg-arrow {
+      font-size: 11px; margin-left: 4px; opacity: 0;
+      color: var(--muted); transition: opacity .15s; pointer-events: none;
+    }
+    .legend-item.sort-active .leg-arrow { opacity: 1; }
+
+    .leg-tip {
+      position: absolute; top: calc(100% + 8px); left: 0;
+      width: 280px; background: var(--tip-bg); color: var(--tip-ink);
+      padding: 12px 14px; font-size: 12px; line-height: 1.5;
+      box-shadow: 0 12px 28px rgba(0,0,0,.3);
+      opacity: 0; pointer-events: none; transition: opacity .14s; z-index: 30;
+    }
+    .leg-tip .lbl {
+      display: block; font-size: 10px; letter-spacing: .1em;
+      text-transform: uppercase; color: #a89878; margin-bottom: 5px;
+    }
+    .legend-item:hover .leg-tip { opacity: 1; pointer-events: none; }
+
+    .chart { width: 100%; }
+    .row {
+      display: flex; align-items: center; margin-bottom: var(--row-gap);
+      gap: var(--label-gap); position: relative;
+    }
+
+    .stat-tip {
+      position: fixed; top: 0; left: 0; width: 310px;
+      max-height: calc(100vh - 16px); overflow-y: auto;
+      background: var(--tip-bg); color: var(--tip-ink);
+      padding: 14px 16px; font-size: 12px; line-height: 1.55;
+      box-shadow: 0 14px 32px rgba(0,0,0,.35);
+      opacity: 0; pointer-events: none; transition: opacity .14s;
+      z-index: 40; text-align: left;
+    }
+    .stat-tip:hover { opacity: 1; }
+    .row.tip-active .stat-tip { opacity: 1; }
+    .bar-wrap { cursor: default; }
+
+    .stat-tip .lbl {
+      display: block; font-size: 12.5px; letter-spacing: .07em;
+      text-transform: uppercase; color: #c9b78c;
+      margin-bottom: 5px; font-weight: 600;
+    }
+    .stat-tip .stat-block + .stat-block { margin-top: 10px; }
+    .stat-tip .stat-val {
+      font-size: 14px; color: var(--tip-ink); font-weight: 600;
+    }
+    .stat-tip .stat-line { color: #d8cdb5; margin-top: 3px; }
+    .stat-tip .stat-line .ds { color: #f4ecd8; font-weight: 600; }
+    .stat-tip .stat-line.none { color: #8a7e65; font-style: italic; }
+    .stat-tip .stat-n {
+      font-size: 10px; color: #8a7e65;
+      margin-top: 10px; padding-top: 8px;
+      border-top: 1px solid rgba(168,152,120,.25);
+    }
+
+    .row-label {
+      width: var(--label-w); flex-shrink: 0; text-align: right;
+      font-size: 14px; line-height: 1.35; color: var(--ink);
+      cursor: pointer; position: relative; transition: opacity .2s;
+    }
+    .row-label:hover { opacity: .7; }
+    .row.row-off .row-label { opacity: .35; text-decoration: line-through; }
+
+    .click-demo {
+      position: fixed; pointer-events: none; z-index: 50;
+      left: 0; top: 0; width: 0; height: 0;
+      transition: transform .22s cubic-bezier(.22,.61,.36,1);
+      will-change: transform;
+    }
+    .click-demo .ripple {
+      position: absolute; left: 0; top: 0;
+      width: 14px; height: 14px; margin: -7px 0 0 -7px;
+      border-radius: 50%; background: rgba(207,100,84,.85);
+      box-shadow: 0 0 0 0 rgba(207,100,84,.55);
+      animation: orb-pulse 1.6s ease-out infinite;
+    }
+    @keyframes orb-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(207,100,84,.55); }
+      70%  { box-shadow: 0 0 0 18px rgba(207,100,84,0); }
+      100% { box-shadow: 0 0 0 0 rgba(207,100,84,0); }
+    }
+    body.demo-done .click-demo { display: none; }
+
+    .row-tip {
+      position: absolute; top: calc(100% + 6px); right: 0; width: 320px;
+      background: var(--tip-bg); color: var(--tip-ink);
+      padding: 12px 14px; font-size: 12px; line-height: 1.5;
+      box-shadow: 0 12px 28px rgba(0,0,0,.3);
+      opacity: 0; pointer-events: none; transition: opacity .14s;
+      z-index: 30; text-align: left;
+    }
+    .row-tip .lbl {
+      display: block; font-size: 10px; letter-spacing: .1em;
+      text-transform: uppercase; color: #a89878; margin-bottom: 5px;
+    }
+    .row-label:hover .row-tip { opacity: 1; }
+
+    .bar-wrap {
+      flex: 1; overflow: hidden; max-height: 100px;
+      transition: max-height .3s ease, opacity .25s;
+    }
+    .row.row-off .bar-wrap { max-height: 0; opacity: 0; }
+
+    .bar { display: flex; flex-direction: row-reverse; justify-content: flex-end; height: var(--bar-h); width: 100%; }
+    .seg {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; overflow: hidden; white-space: nowrap;
+      transition: flex-basis .45s ease, opacity .25s;
+    }
+    .seg.sage  { background: var(--sage);  color: #fff; }
+    .seg.teal  { background: var(--teal);  color: #fff; }
+    .seg.amber { background: var(--amber); color: #1a1a1a; }
+    .seg.red   { background: var(--red);   color: #1a1a1a; }
+    .seg.seg-hidden { flex-basis: 0 !important; opacity: 0; }
+
+    .bar { position: relative; transition: filter .2s; }
+
+    /* ── M1 hover: visual order (row-reverse): red | amber | teal | sage          */
+    /* red = separate group (leftmost). {amber|teal|sage} = helpers (right side).  */
+    .bar.hover-m1 .seg.sage  { box-shadow: inset -2px 2px 0 0 var(--ink), inset 0 -2px 0 0 var(--ink); } /* right+top+bottom */
+    .bar.hover-m1 .seg.teal  { box-shadow: inset 0 2px 0 0 var(--ink),    inset 0 -2px 0 0 var(--ink); } /* top+bottom */
+    .bar.hover-m1 .seg.amber { box-shadow: inset 2px 2px 0 0 var(--ink),  inset 0 -2px 0 0 var(--ink); } /* left+top+bottom */
+    .bar.hover-m1 .seg.red   { box-shadow: inset 2px 2px 0 0 var(--ink),  inset -2px -2px 0 0 var(--ink); } /* full box */
+    /* Edge: sage hidden → teal is now visually rightmost helper */
+    .bar.hover-m1 .seg.sage.seg-hidden + .seg.teal { box-shadow: inset -2px 2px 0 0 var(--ink), inset 0 -2px 0 0 var(--ink); }
+    /* Edge: sage+teal hidden → amber alone → full box */
+    .bar.hover-m1 .seg.sage.seg-hidden + .seg.teal.seg-hidden + .seg.amber { box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink); }
+
+    /* ── M2 hover: red collapsed. Visual order: amber | teal | sage               */
+    /* {amber} = ideas-only group (leftmost). {teal|sage} = AI-work group (right). */
+    .bar.hover-m2 .seg.sage  { box-shadow: inset -2px 2px 0 0 var(--ink), inset 0 -2px 0 0 var(--ink); } /* right+top+bottom */
+    .bar.hover-m2 .seg.teal  { box-shadow: inset 2px 2px 0 0 var(--ink),  inset 0 -2px 0 0 var(--ink); } /* left+top+bottom */
+    .bar.hover-m2 .seg.amber { box-shadow: inset 2px 2px 0 0 var(--ink),  inset -2px -2px 0 0 var(--ink); } /* full box */
+    /* Edge: sage hidden → teal alone in AI-work group → full box */
+    .bar.hover-m2 .seg.sage.seg-hidden + .seg.teal { box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink); }
+
+    .bar-wrap { cursor: pointer; }
+
+    .row.peer-dim .bar-wrap { opacity: .25; }
+    .row.peer-dim .row-label { opacity: .4; }
+
+    .axis-row { display: flex; align-items: flex-start; margin-top: 4px; }
+    .axis-spacer { width: calc(var(--label-w) + var(--label-gap)); flex-shrink: 0; }
+    .axis { flex: 1; position: relative; height: 28px; border-top: 1px solid rgba(0,0,0,.22); }
+    .tick {
+      position: absolute; top: 5px; transform: translateX(-50%);
+      font-size: 11px; color: var(--muted); white-space: nowrap;
+    }
+    .tick:last-child { transform: translateX(-80%); }
+
+    .n-note {
+      font-size: 12px; color: var(--muted); margin-top: 8px;
+      padding-left: calc(var(--label-w) + var(--label-gap));
+    }
+
+    .model-note {
+      margin-top: 48px; padding: 18px 22px;
+      border-top: 1px solid rgba(0,0,0,.15);
+      font-size: 12px; line-height: 1.6; color: var(--muted);
+    }
+    .model-note h3 {
+      font-size: 13px; font-weight: 600; color: var(--ink);
+      margin: 0 0 8px; letter-spacing: .01em;
+    }
+    .model-note code {
+      font-family: 'Consolas', 'Menlo', monospace; font-size: 11px;
+      background: rgba(0,0,0,.05); padding: 1px 5px; border-radius: 2px;
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+<div class="slide">
+
+  <h1 class="section-title">AI Action Openness by Shopping Activity</h1>
+
+  <div class="legend" id="legend">
+    <div class="legend-item" data-seg="sage">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% AI completes all of it</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        AI should complete all of this activity for me.
+      </div>
+    </div>
+    <div class="legend-item" data-seg="teal">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% AI completes part of it</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        AI should complete part of this activity for me.
+      </div>
+    </div>
+    <div class="legend-item" data-seg="amber">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% only ideas &amp; suggestions</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        AI should only offer ideas and suggestions.
+      </div>
+    </div>
+    <div class="legend-item" data-seg="red">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% no AI help wanted</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        AI shouldn't help me with this activity at all.
+      </div>
+    </div>
+  </div>
+
+  <div class="click-demo" id="clickDemo" aria-hidden="true">
+    <span class="ripple"></span>
+  </div>
+
+  <div class="chart" id="chart">
+
+    <div class="row" data-key="17" data-sage="45.8" data-teal="26.9" data-amber="15.7" data-red="11.6">
+      <div class="row-label">Track an order
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "keep track of when and how my order will arrive"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="45.8">46%</div>
+        <div class="seg teal"  data-pct="26.9">27%</div>
+        <div class="seg amber" data-pct="15.7">16%</div>
+        <div class="seg red"   data-pct="11.6">12%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="5" data-sage="34.6" data-teal="31.5" data-amber="30.1" data-red="3.7">
+      <div class="row-label">Compare similar products
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "compare similar products on price, quality, shipping costs, etc."
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="34.6">35%</div>
+        <div class="seg teal"  data-pct="31.5">32%</div>
+        <div class="seg amber" data-pct="30.1">30%</div>
+        <div class="seg red"   data-pct="3.7">4%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="21" data-sage="34.1" data-teal="22.2" data-amber="37.2" data-red="6.5">
+      <div class="row-label">Find the best store location
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "find the best location to make an in-store purchase"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="34.1">34%</div>
+        <div class="seg teal"  data-pct="22.2">22%</div>
+        <div class="seg amber" data-pct="37.2">37%</div>
+        <div class="seg red"   data-pct="6.5">6%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="4" data-sage="28.5" data-teal="37.4" data-amber="24.8" data-red="9.3">
+      <div class="row-label">Apply discounts & purchase
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "apply discounts and complete the purchase"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="28.5">28%</div>
+        <div class="seg teal"  data-pct="37.4">37%</div>
+        <div class="seg amber" data-pct="24.8">25%</div>
+        <div class="seg red"   data-pct="9.3">9%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="20" data-sage="27.9" data-teal="28.3" data-amber="33.8" data-red="10.1">
+      <div class="row-label">Interpret reviews
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "interpret customer and/or expert reviews"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="27.9">28%</div>
+        <div class="seg teal"  data-pct="28.3">28%</div>
+        <div class="seg amber" data-pct="33.8">34%</div>
+        <div class="seg red"   data-pct="10.1">10%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="18" data-sage="25.2" data-teal="39.5" data-amber="21.3" data-red="14.0">
+      <div class="row-label">Make a return or exchange
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "make an exchange or return"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="25.2">25%</div>
+        <div class="seg teal"  data-pct="39.5">40%</div>
+        <div class="seg amber" data-pct="21.3">21%</div>
+        <div class="seg red"   data-pct="14.0">14%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="6" data-sage="24.8" data-teal="29.5" data-amber="33.9" data-red="11.8">
+      <div class="row-label">Save options for later
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "save different product options for later"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="24.8">25%</div>
+        <div class="seg teal"  data-pct="29.5">30%</div>
+        <div class="seg amber" data-pct="33.9">34%</div>
+        <div class="seg red"   data-pct="11.8">12%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="10" data-sage="23.7" data-teal="31.6" data-amber="40.4" data-red="4.3">
+      <div class="row-label">Find deals on wanted products
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "find deals on products that meet my needs and wants"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="23.7">24%</div>
+        <div class="seg teal"  data-pct="31.6">32%</div>
+        <div class="seg amber" data-pct="40.4">40%</div>
+        <div class="seg red"   data-pct="4.3">4%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="23" data-sage="21.5" data-teal="33.5" data-amber="31.0" data-red="14.0">
+      <div class="row-label">Negotiate price with sellers
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "negotiate a price with sellers"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="21.5">22%</div>
+        <div class="seg teal"  data-pct="33.5">34%</div>
+        <div class="seg amber" data-pct="31.0">31%</div>
+        <div class="seg red"   data-pct="14.0">14%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="22" data-sage="21.4" data-teal="28.8" data-amber="34.2" data-red="15.6">
+      <div class="row-label">Write a product review
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "write a product review"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="21.4">21%</div>
+        <div class="seg teal"  data-pct="28.8">29%</div>
+        <div class="seg amber" data-pct="34.2">34%</div>
+        <div class="seg red"   data-pct="15.6">16%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="19" data-sage="19.8" data-teal="32.4" data-amber="30.4" data-red="17.5">
+      <div class="row-label">Manage a subscription
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "manage a subscription"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="19.8">20%</div>
+        <div class="seg teal"  data-pct="32.4">32%</div>
+        <div class="seg amber" data-pct="30.4">30%</div>
+        <div class="seg red"   data-pct="17.5">18%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="9" data-sage="18.4" data-teal="26.7" data-amber="48.3" data-red="6.6">
+      <div class="row-label">Find shopping inspiration
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "find shopping inspiration"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="18.4">18%</div>
+        <div class="seg teal"  data-pct="26.7">27%</div>
+        <div class="seg amber" data-pct="48.3">48%</div>
+        <div class="seg red"   data-pct="6.6">7%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="7" data-sage="16.9" data-teal="27.0" data-amber="48.5" data-red="7.6">
+      <div class="row-label">Find products that fit needs
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "find products that meet my needs and wants"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="16.9">17%</div>
+        <div class="seg teal"  data-pct="27.0">27%</div>
+        <div class="seg amber" data-pct="48.5">48%</div>
+        <div class="seg red"   data-pct="7.6">8%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="1" data-sage="16.0" data-teal="34.8" data-amber="35.2" data-red="13.9">
+      <div class="row-label">Restock household items
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "keep tabs on household stuff to buy and restock"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="16.0">16%</div>
+        <div class="seg teal"  data-pct="34.8">35%</div>
+        <div class="seg amber" data-pct="35.2">35%</div>
+        <div class="seg red"   data-pct="13.9">14%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="11" data-sage="15.4" data-teal="36.4" data-amber="35.3" data-red="12.9">
+      <div class="row-label">Contact sellers / support
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "communicate with sellers and Customer Support"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="15.4">15%</div>
+        <div class="seg teal"  data-pct="36.4">36%</div>
+        <div class="seg amber" data-pct="35.3">35%</div>
+        <div class="seg red"   data-pct="12.9">13%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="12" data-sage="14.9" data-teal="24.4" data-amber="44.6" data-red="16.1">
+      <div class="row-label">Time the purchase
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "monitor my finances and price fluctuations to decide when to buy"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="14.9">15%</div>
+        <div class="seg teal"  data-pct="24.4">24%</div>
+        <div class="seg amber" data-pct="44.6">45%</div>
+        <div class="seg red"   data-pct="16.1">16%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="8" data-sage="10.8" data-teal="20.1" data-amber="48.5" data-red="20.5">
+      <div class="row-label">Decide on a budget
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "interpret my finances and product options to decide on a budget"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg sage"  data-pct="10.8">11%</div>
+        <div class="seg teal"  data-pct="20.1">20%</div>
+        <div class="seg amber" data-pct="48.5">48%</div>
+        <div class="seg red"   data-pct="20.5">20%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="axis-row">
+      <div class="axis-spacer"></div>
+      <div class="axis">
+        <span class="tick" style="left:0%">0%</span>
+        <span class="tick" style="left:10%">10%</span>
+        <span class="tick" style="left:20%">20%</span>
+        <span class="tick" style="left:30%">30%</span>
+        <span class="tick" style="left:40%">40%</span>
+        <span class="tick" style="left:50%">50%</span>
+        <span class="tick" style="left:60%">60%</span>
+        <span class="tick" style="left:70%">70%</span>
+        <span class="tick" style="left:80%">80%</span>
+        <span class="tick" style="left:90%">90%</span>
+        <span class="tick" style="left:100%">100%</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="n-note">N = 1,657 respondents · 8,211 activity-ratings · ~480 per activity (random subset per respondent)</p>
+
+  <div class="model-note">
+    <h3>Activity Differences in AI Openness: Within-Subjects Mixed Models</h3>
+    <p>
+      <strong>Model 1 &mdash; Open to any AI help:</strong>
+      <code>glmer(any_help ~ Activity + (1 | ResponseId), family = binomial)</code>,
+      where <code>any_help = 1</code> if the respondent picked ideas, part, or all (vs no help).
+    </p>
+    <p>
+      <strong>Model 2 &mdash; Wants AI to do the work, among helpers:</strong>
+      <code>glmer(ai_does ~ Activity + (1 | ResponseId), family = binomial)</code>,
+      restricted to respondents who would accept any AI help; <code>ai_does = 1</code> if
+      they picked &quot;complete part&quot; or &quot;complete all&quot; (vs &quot;ideas only&quot;).
+    </p>
+    <p>
+      Estimated marginal means (<code>emmeans</code>) with Holm-adjusted p-values across the 136
+      pairwise contrasts per model; only contrasts with adjusted p &lt; .05 are shown in the
+      hover tips.
+    </p>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  const chart  = document.getElementById('chart');
+  const axisRow = chart.querySelector('.axis-row');
+  const rows   = Array.from(chart.querySelectorAll('.row'));
+  const items  = Array.from(document.querySelectorAll('.legend-item'));
+
+  const SEGS = ['sage','teal','amber','red'];
+  const hiddenSegs = new Set();
+  let sortKey = 'red';
+  let sortDir = 'asc';
+  let globalMode = 'm1';
+
+  rows.forEach((r, i) => r.dataset.origIdx = i);
+
+  function recalcRow(row, hidden) {
+    SEGS.forEach(k => {
+      const seg = row.querySelector('.seg.' + k);
+      if (!seg) return;
+      if (hidden.has(k)) {
+        seg.classList.add('seg-hidden');
+      } else {
+        seg.classList.remove('seg-hidden');
+        seg.style.flex = `0 0 ${parseFloat(row.dataset[k]).toFixed(2)}%`;
+      }
+    });
+  }
+  function applySegs() {
+    const extra = globalMode === 'm2' ? new Set([...hiddenSegs, 'red']) : new Set(hiddenSegs);
+    rows.forEach(row => recalcRow(row, extra));
+  }
+
+  function applySort() {
+    let ordered;
+    if (!sortKey) {
+      ordered = rows.slice().sort((a, b) => +a.dataset.origIdx - +b.dataset.origIdx);
+    } else {
+      ordered = rows.slice().sort((a, b) => {
+        const d = parseFloat(b.dataset[sortKey]) - parseFloat(a.dataset[sortKey]);
+        return sortDir === 'desc' ? d : -d;
+      });
+    }
+    ordered.forEach(r => chart.insertBefore(r, axisRow));
+  }
+
+  function updateArrows() {
+    items.forEach(item => {
+      const arrow = item.querySelector('.leg-arrow');
+      if (item.dataset.seg === sortKey) {
+        arrow.textContent = sortDir === 'desc' ? ' ↓' : ' ↑';
+        item.classList.add('sort-active');
+      } else {
+        arrow.textContent = '';
+        item.classList.remove('sort-active');
+      }
+    });
+  }
+
+  items.forEach(item => {
+    const swatch = item.querySelector('.leg-swatch');
+    const label  = item.querySelector('.leg-label');
+    const seg    = item.dataset.seg;
+
+    swatch.addEventListener('click', e => {
+      e.stopPropagation();
+      if (seg === 'red' && globalMode === 'm2') {
+        setGlobalMode('m1');
+        rows.forEach(r => r._refreshHover && r._refreshHover());
+        return;
+      }
+      if (hiddenSegs.has(seg)) {
+        hiddenSegs.delete(seg);
+        item.classList.remove('seg-off');
+      } else if (hiddenSegs.size < 3) {
+        hiddenSegs.add(seg);
+        item.classList.add('seg-off');
+      }
+      applySegs();
+    });
+
+    label.addEventListener('click', e => {
+      e.stopPropagation();
+      if (sortKey === seg) {
+        sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+      } else {
+        sortKey = seg;
+        sortDir = 'desc';
+      }
+      updateArrows();
+      applySort();
+    });
+  });
+
+  rows.forEach(row => {
+    const label = row.querySelector('.row-label');
+    label.addEventListener('click', () => row.classList.toggle('row-off'));
+  });
+
+  const SHORT = {
+    "1": "Restock household items",
+    "4": "Apply discounts & purchase",
+    "5": "Compare similar products",
+    "6": "Save options for later",
+    "7": "Find products that fit needs",
+    "8": "Decide on a budget",
+    "9": "Find shopping inspiration",
+    "10": "Find deals on wanted products",
+    "11": "Contact sellers / support",
+    "12": "Time the purchase",
+    "17": "Track an order",
+    "18": "Make a return or exchange",
+    "19": "Manage a subscription",
+    "20": "Interpret reviews",
+    "21": "Find the best store location",
+    "22": "Write a product review",
+    "23": "Negotiate price with sellers"
+  };
+  const M1    = {
+    "1": { more: ["8"], less: ["5", "7", "9", "10", "21"] },
+    "10": { more: ["1", "4", "6", "8", "11", "12", "17", "18", "19", "20", "22", "23"], less: [] },
+    "11": { more: ["8"], less: ["5", "7", "9", "10", "21"] },
+    "12": { more: [], less: ["4", "5", "6", "7", "9", "10", "20", "21"] },
+    "17": { more: ["8", "19"], less: ["5", "10"] },
+    "18": { more: ["8"], less: ["5", "7", "9", "10", "21"] },
+    "19": { more: [], less: ["4", "5", "6", "7", "9", "10", "17", "20", "21"] },
+    "20": { more: ["8", "12", "19"], less: ["5", "10"] },
+    "21": { more: ["1", "8", "11", "12", "18", "19", "22", "23"], less: [] },
+    "22": { more: [], less: ["5", "7", "9", "10", "21"] },
+    "23": { more: ["8"], less: ["5", "7", "9", "10", "21"] },
+    "4": { more: ["8", "12", "19"], less: ["5", "10"] },
+    "5": { more: ["1", "4", "6", "8", "11", "12", "17", "18", "19", "20", "22", "23"], less: [] },
+    "6": { more: ["8", "12", "19"], less: ["5", "10"] },
+    "7": { more: ["1", "8", "11", "12", "18", "19", "22", "23"], less: [] },
+    "8": { more: [], less: ["1", "4", "5", "6", "7", "9", "10", "11", "17", "18", "20", "21", "23"] },
+    "9": { more: ["1", "8", "11", "12", "18", "19", "22", "23"], less: [] }
+  };
+  const M2    = {
+    "1": { more: ["7", "8", "9", "12"], less: ["4", "17", "18"] },
+    "10": { more: ["7", "8", "9", "12"], less: ["4", "17", "18"] },
+    "11": { more: ["7", "8", "9", "12"], less: ["4", "5", "17", "18"] },
+    "12": { more: [], less: ["1", "4", "5", "6", "10", "11", "17", "18", "19", "20", "21", "22", "23"] },
+    "17": { more: ["1", "4", "5", "6", "7", "8", "9", "10", "11", "12", "19", "20", "21", "22", "23"], less: [] },
+    "18": { more: ["1", "6", "7", "8", "9", "10", "11", "12", "19", "20", "21", "22", "23"], less: [] },
+    "19": { more: ["7", "8", "9", "12"], less: ["4", "17", "18"] },
+    "20": { more: ["7", "8", "9", "12"], less: ["4", "17", "18"] },
+    "21": { more: ["7", "8", "9", "12"], less: ["4", "17", "18"] },
+    "22": { more: ["8", "9", "12"], less: ["4", "5", "17", "18"] },
+    "23": { more: ["7", "8", "9", "12"], less: ["4", "17", "18"] },
+    "4": { more: ["1", "6", "7", "8", "9", "10", "11", "12", "19", "20", "21", "22", "23"], less: ["17"] },
+    "5": { more: ["7", "8", "9", "11", "12", "22"], less: ["17"] },
+    "6": { more: ["7", "8", "9", "12"], less: ["4", "17", "18"] },
+    "7": { more: ["8"], less: ["1", "4", "5", "6", "10", "11", "17", "18", "19", "20", "21", "23"] },
+    "8": { more: [], less: ["1", "4", "5", "6", "7", "10", "11", "17", "18", "19", "20", "21", "22", "23"] },
+    "9": { more: [], less: ["1", "4", "5", "6", "10", "11", "17", "18", "19", "20", "21", "22", "23"] }
+  };
+  const N_RATED   = {
+    "1": 488,
+    "4": 484,
+    "5": 482,
+    "6": 475,
+    "7": 485,
+    "8": 482,
+    "9": 484,
+    "10": 493,
+    "11": 481,
+    "12": 484,
+    "17": 483,
+    "18": 484,
+    "19": 481,
+    "20": 477,
+    "21": 478,
+    "22": 486,
+    "23": 484
+  };
+  const N_HELPERS = {
+    "1": 420,
+    "4": 439,
+    "5": 464,
+    "6": 419,
+    "7": 448,
+    "8": 383,
+    "9": 452,
+    "10": 472,
+    "11": 419,
+    "12": 406,
+    "17": 427,
+    "18": 416,
+    "19": 397,
+    "20": 429,
+    "21": 447,
+    "22": 410,
+    "23": 416
+  };
+
+  function listNames(keys) {
+    return keys.map(k => `<span class="ds">${SHORT[k]}</span>`).join(', ');
+  }
+  function rowData(key) {
+    const r = document.querySelector(`.row[data-key="${key}"]`);
+    return {
+      sage:  parseFloat(r.dataset.sage),
+      teal:  parseFloat(r.dataset.teal),
+      amber: parseFloat(r.dataset.amber),
+      red:   parseFloat(r.dataset.red),
+    };
+  }
+  function renderM1Block(key) {
+    const m = M1[key]; if (!m) return '';
+    const d = rowData(key);
+    const pct = d.sage + d.teal + d.amber;
+    return `
+      <div class="stat-block">
+        <span class="lbl">Open to any AI help</span>
+        <div class="stat-val">${Math.round(pct)}% open to AI helping with ${SHORT[key].toLowerCase()}</div>
+        ${m.more.length ? `<div class="stat-line">Significantly more open than for ${listNames(m.more)}</div>` : ''}
+        ${m.less.length ? `<div class="stat-line">Significantly less open than for ${listNames(m.less)}</div>` : ''}
+        ${(!m.more.length && !m.less.length) ? `<div class="stat-line none">No significant differences from other activities</div>` : ''}
+      </div>`;
+  }
+  function renderM2Block(key) {
+    const m = M2[key]; if (!m) return '';
+    const d = rowData(key);
+    const pct = d.sage + d.teal;
+    return `
+      <div class="stat-block">
+        <span class="lbl">AI does the work (among helpers)</span>
+        <div class="stat-val">${Math.round(pct)}% want AI to complete part or all of ${SHORT[key].toLowerCase()}</div>
+        ${m.more.length ? `<div class="stat-line">Significantly more delegation than for ${listNames(m.more)}</div>` : ''}
+        ${m.less.length ? `<div class="stat-line">Significantly less delegation than for ${listNames(m.less)}</div>` : ''}
+        ${(!m.more.length && !m.less.length) ? `<div class="stat-line none">No significant differences from other activities</div>` : ''}
+      </div>`;
+  }
+  function renderNote(key) {
+    return `<div class="stat-n">n = ${N_RATED[key]} rated this activity · ${N_HELPERS[key]} open to AI help · Holm-adjusted pairwise (p &lt; .05)</div>`;
+  }
+  function renderStat(row, mode) {
+    const key = row.dataset.key;
+    const tip = row.querySelector('.stat-tip');
+    const parts = [];
+    if (mode === 'm1') parts.push(renderM1Block(key));
+    else if (mode === 'm2') parts.push(renderM2Block(key));
+    else parts.push(renderM1Block(key), renderM2Block(key));
+    parts.push(renderNote(key));
+    tip.innerHTML = parts.join('');
+  }
+  rows.forEach(r => renderStat(r, 'both'));
+
+  function positionTip(row) {
+    const bar = row.querySelector('.bar-wrap');
+    const tip = row.querySelector('.stat-tip');
+    const br  = bar.getBoundingClientRect();
+    const tw  = tip.offsetWidth  || 310;
+    const th  = tip.offsetHeight || 200;
+    const vw  = window.innerWidth, vh = window.innerHeight;
+    // Always pin to right side of viewport
+    tip.style.left = (vw - tw - 16) + 'px';
+    const top = Math.max(8, Math.min(br.top + br.height / 2 - th / 2, vh - th - 8));
+    tip.style.top  = top + 'px';
+  }
+
+  rows.forEach(row => {
+    const bar      = row.querySelector('.bar-wrap');
+    const barInner = row.querySelector('.bar');
+
+    function applyPeers(m) {
+      const key = row.dataset.key;
+      const stat = (m === 'm2' ? M2 : M1)[key];
+      if (!stat) return;
+      const sig = new Set([...stat.more, ...stat.less]);
+      rows.forEach(r => { if (r !== row && sig.has(r.dataset.key)) r.classList.add('peer-dim'); });
+    }
+    function clearPeers() { rows.forEach(r => r.classList.remove('peer-dim')); }
+
+    function hoverMode() {
+      const redVis   = !hiddenSegs.has('red')   && globalMode !== 'm2';
+      const amberVis = !hiddenSegs.has('amber');
+      const tealVis  = !hiddenSegs.has('teal');
+      const sageVis  = !hiddenSegs.has('sage');
+      // M1 requires all 4 segments visible; M2 requires red gone but sage+teal+amber visible.
+      if (sageVis && tealVis && amberVis && redVis) return 'm1';
+      if (sageVis && tealVis && amberVis && !redVis) return 'm2';
+      return null;
+    }
+
+    function applyHover() {
+      const m = hoverMode();
+      if (!m) { clearHover(); return; }
+      barInner.classList.remove('hover-m1', 'hover-m2');
+      barInner.classList.add('hover-' + m);
+      clearPeers();
+      applyPeers(m);
+      renderStat(row, m);
+      positionTip(row);
+      row.classList.add('tip-active');
+    }
+    function clearHover() {
+      barInner.classList.remove('hover-m1', 'hover-m2');
+      row.classList.remove('tip-active');
+      clearPeers();
+    }
+
+    bar.addEventListener('mouseenter', applyHover);
+    bar.addEventListener('mouseleave', clearHover);
+    bar.addEventListener('click', e => {
+      e.stopPropagation();
+      document.body.classList.add('demo-done');
+      if (hiddenSegs.size > 0 || globalMode === 'm2') {
+        hiddenSegs.forEach(s => {
+          const it = document.querySelector(`.legend-item[data-seg="${s}"]`);
+          if (it) it.classList.remove('seg-off');
+        });
+        hiddenSegs.clear();
+        setGlobalMode('m1');
+      } else {
+        setGlobalMode('m2');
+      }
+      applyHover();
+    });
+
+    row._refreshHover = () => { if (row.classList.contains('tip-active')) applyHover(); };
+  });
+
+  function setGlobalMode(m) {
+    globalMode = m;
+    const relevant = m === 'm2' ? ['sage','teal','amber'] : SEGS;
+    relevant.forEach(seg => {
+      if (hiddenSegs.has(seg)) {
+        hiddenSegs.delete(seg);
+        const it = document.querySelector(`.legend-item[data-seg="${seg}"]`);
+        if (it) it.classList.remove('seg-off');
+      }
+    });
+    const extra = m === 'm2' ? new Set([...hiddenSegs, 'red']) : new Set(hiddenSegs);
+    rows.forEach(r => recalcRow(r, extra));
+    if (m === 'm2') { sortKey = 'amber'; sortDir = 'asc'; }
+    else             { sortKey = 'red';   sortDir = 'asc'; }
+    updateArrows();
+    applySort();
+    const redItem = document.querySelector('.legend-item[data-seg="red"]');
+    if (redItem) redItem.classList.toggle('seg-off', m === 'm2');
+  }
+
+  const demo  = document.getElementById('clickDemo');
+  const PROXIMITY = 120;
+  const ORB_KEY = "5";
+
+  function setOrb(x, y) { demo.style.transform = `translate(${x}px, ${y}px)`; }
+  function homePos() {
+    const bar = document.querySelector(`.row[data-key="${ORB_KEY}"] .bar-wrap`);
+    if (!bar) return { x: 0, y: 0 };
+    const br = bar.getBoundingClientRect();
+    return { x: br.left + br.width * 0.5, y: br.top + br.height * 0.5 };
+  }
+  function park() { const p = homePos(); setOrb(p.x, p.y); }
+  park();
+  window.addEventListener('resize', park);
+  window.addEventListener('scroll', park, { passive: true });
+  document.addEventListener('mousemove', e => {
+    const cb = document.getElementById('chart').getBoundingClientRect();
+    const dx = Math.max(cb.left - e.clientX, e.clientX - cb.right, 0);
+    const dy = Math.max(cb.top  - e.clientY, e.clientY - cb.bottom, 0);
+    const dist = Math.hypot(dx, dy);
+    if (dist < PROXIMITY) setOrb(e.clientX, e.clientY);
+    else                  park();
+  });
+
+  applySegs();
+  updateArrows();
+  applySort();
+})();
+</script>
+</body>
+</html>

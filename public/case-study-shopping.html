@@ -1931,17 +1931,17 @@
     <h2 class="section-title">Activities require more vs. less <span class="italic">automation</span></h2>
 
     <div class="reactions-cluster hover-reveal" tabindex="0">
-      <figcaption style="margin-bottom:14px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-50); font-weight:700;">Hover the chart to reveal the findings</figcaption>
-      <div class="image-callout-group" tabindex="0" style="max-width: 1200px; margin: 0 auto;">
-        <img src="slides/_pdf_pages/page_19.png" alt="Stacked-bar chart showing automation preferences across shopping activities: Track, Compare, Purchase rank highest for full automation; Timing and Budget lean toward 'Ideas and suggestions only.'" />
-        <div class="image-callout image-callout--top is-right-anchor" role="note" style="top: 14%; max-width: 540px;">
-          <p class="image-callout-text"><span style="font-size:1.2em;">🤖</span> AI should take the reigns a bit more, for <strong>Track</strong>, <strong>Compare</strong>, and <strong>Purchase</strong>, users welcome higher automation.</p>
-        </div>
-        <div class="image-callout image-callout--bottom is-right-anchor" role="note" style="max-width: 540px;">
-          <p class="image-callout-text"><span style="font-size:1.2em;">💡</span> AI should offer ideas and suggestions only, for <strong>Timing</strong> and <strong>Budget</strong>, users are concerned that AI will absorb tasks they would rather handle themselves.</p>
-        </div>
+      <figcaption style="margin-bottom:14px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-50); font-weight:700;">Click the legend or hover a bar to explore</figcaption>
+      <div class="image-callout-group" tabindex="0" style="max-width: 1200px; margin: 0 auto; position: relative;">
+        <iframe
+          id="study3-chart-frame"
+          src="featured/shopping-ai-openness-chart-cs.html"
+          title="Interactive stacked-bar chart: openness to AI automation across 17 shopping activities. Click the legend to switch between models; hover any bar for Holm-adjusted pairwise significance tests."
+          loading="lazy"
+          onload="(function(f){try{var sync=function(){f.style.height=(f.contentDocument.body.scrollHeight+8)+'px'};sync();new ResizeObserver(sync).observe(f.contentDocument.body);}catch(e){}})(this)"
+          style="width: 100%; height: 1200px; border: 0; display: block; background: transparent;"
+        ></iframe>
       </div>
-      <p class="body" style="margin-top: 22px; font-size: 13px; color: var(--ink-50); font-style: italic;">Participants chose one of: AI should complete all of this activity for me · AI should complete part of this activity for me · AI should only offer ideas and suggestions · AI shouldn't help me with this activity at all.</p>
 
       <div class="opportunity-pair" style="display:flex; flex-direction: column; gap: 48px; margin-top: 56px;">
         <figure style="margin:0;">
