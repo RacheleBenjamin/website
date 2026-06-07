@@ -133,6 +133,7 @@ export const caseStudies = [
     company: 'Microsoft AI',
     timeline: 'Aug 2024 – Oct 2025',
     studies: 'Studies 5 & 6',
+    caseUrl: '/website/case-study-commercial-jtbd.html',
     title: 'Laying the Foundation for an AI-First Browser for Work',
     subtitle: 'Shaping the AI-first browser for 10M+ enterprise users through JTBD and generative research',
     theme: '🧑‍💻 Browser for Work',
