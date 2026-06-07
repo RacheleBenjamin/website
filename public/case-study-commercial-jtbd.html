@@ -446,8 +446,9 @@
   .persona-avatar {
     width: 64px; height: 64px; border-radius: 50%;
     background: var(--work-bg); display: flex; align-items: center; justify-content: center;
-    font-size: 24px; font-weight: 700; color: var(--work);
+    font-size: 24px; font-weight: 700; color: var(--work); overflow: hidden;
   }
+  .persona-avatar img { width: 100%; height: 100%; object-fit: cover; }
   .persona-info .persona-name { font-size: 20px; font-weight: 700; color: var(--ink); }
   .persona-info .persona-role { font-size: 13px; color: var(--ink-50); margin-top: 2px; }
   .persona-body { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
@@ -652,148 +653,82 @@
     <aside class="cover-pitch" aria-label="The research brief">
       <div class="cover-pitch-eyebrow">The ask</div>
       <p class="cover-pitch-text">
-        We don't know enough about <em> commercial users</em>.
+        We don't know enough about <em> commercial browser users</em>.
       </p>
       <p class="cover-pitch-text cover-pitch-text--sub">
         What are the gaps? What are the opportunities?
     </aside>
 
+
 <!-- ══════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 2 — Method & Participants                                    -->
+<!-- SLIDE 2b — Key Players                                             -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
-<section class="slide" id="slide-2">
-  <div class="slide-num">02</div>
+<section class="slide" id="slide-3b">
   <div class="slide-inner">
-    <div class="slide-tag">Method</div>
-    <h2 class="section-title">Participants were a mix of Chrome and Edge users, individual contributors, and people managers, in various roles, who use the browser at work.</h2>
-    <p class="body"></p>
+    <h2 class="section-title">Key <span class="italic">players</span></h2>
 
-    <div class="methods-grid--bare">
-      <div class="method-item">
-        <span class="m-label">Study type</span>
-        <span class="m-value">Generative 1:1 interviews</span>
+    <!-- Stakeholder quote cards -->
+    <div class="kp-grid">
+
+      <div class="kp-card">
+        <div class="kp-avatar-row">
+          <div class="ur-ring" data-seed="ProductLeader" data-skin="f5c8a0" data-hair="long" data-haircolor="472f1f" data-eyes="open" style="width:72px;height:72px;font-size:24px;">P</div>
+          <div>
+            <div class="kp-name">Product Leader</div>
+            <div class="kp-role">Microsoft Edge Enterprise</div>
+          </div>
+        </div>
+        <blockquote class="kp-quote">
+          &ldquo;We want to know what Commercial browser users need from us.&rdquo;
+        </blockquote>
       </div>
-      <div class="method-item">
-        <span class="m-label">Sample</span>
-        <span class="m-value">N = 16 participants</span>
+
+      <div class="kp-card">
+        <div class="kp-avatar-row">
+          <div class="ur-ring" data-seed="DesignLead" data-skin="c68642" data-hair="shortCombover" data-haircolor="1a1a1a" data-eyes="happy" style="width:72px;height:72px;font-size:24px;">D</div>
+          <div>
+            <div class="kp-name">Design</div>
+            <div class="kp-role">UX &amp; Product Design</div>
+          </div>
+        </div>
+        <blockquote class="kp-quote">
+          &ldquo;We need scenarios to design solutions for.&rdquo;
+        </blockquote>
       </div>
-      <div class="method-item">
-        <span class="m-label">Duration</span>
-        <span class="m-value">75-min FigJam sessions</span>
+
+      <div class="kp-card">
+        <div class="kp-avatar-row">
+          <div class="ur-ring" data-seed="MarketingLead" data-skin="e8b88a" data-hair="curly" data-haircolor="8a4f1e" data-eyes="glasses" style="width:72px;height:72px;font-size:24px;">M</div>
+          <div>
+            <div class="kp-name">Marketing</div>
+            <div class="kp-role">Product Marketing</div>
+          </div>
+        </div>
+        <blockquote class="kp-quote">
+          &ldquo;We need to know what solutions to showcase at the Ignite conference in a month.&rdquo;
+        </blockquote>
       </div>
-      <div class="method-item">
-        <span class="m-label">Framework</span>
-        <span class="m-value">Jobs to Be Done</span>
-      </div>
+
     </div>
 
-    <div class="ur-sample-section">
-      <div class="ur-columns">
-        <div>
-          <div class="ur-col-h">Research / Product Roles</div>
-          <div class="ur-grid">
-            <div class="ur-card">
-              <div class="ur-ring">C</div>
-              <div class="ur-name">Catherine</div>
-              <div class="ur-meta">Accounting · Tax</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">T</div>
-              <div class="ur-name">Tejal</div>
-              <div class="ur-meta">Consulting · Analyst</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">J</div>
-              <div class="ur-name">Julia</div>
-              <div class="ur-meta">Tech · Product Ops</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">N</div>
-              <div class="ur-name">Natasha</div>
-              <div class="ur-meta">Consulting · Risk</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">R</div>
-              <div class="ur-name">Rinkle</div>
-              <div class="ur-meta">Insurance · Ops</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="ur-col-h">Direct with Customers / Clients</div>
-          <div class="ur-grid">
-            <div class="ur-card">
-              <div class="ur-ring">D</div>
-              <div class="ur-name">Dylan</div>
-              <div class="ur-meta">Automotive · Mgr</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">R</div>
-              <div class="ur-name">Rodney</div>
-              <div class="ur-meta">Logistics · Store Mgr</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">B</div>
-              <div class="ur-name">Brianna</div>
-              <div class="ur-meta">Healthcare · Nurse</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">G</div>
-              <div class="ur-name">Gearoid</div>
-              <div class="ur-meta">Education · Teacher</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">A</div>
-              <div class="ur-name">Aurora</div>
-              <div class="ur-meta">Social Svcs · Crisis</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="ur-col-h">IT <span class="amp">&amp;</span> HR Roles</div>
-          <div class="ur-grid">
-            <div class="ur-card">
-              <div class="ur-ring">C</div>
-              <div class="ur-name">Christina</div>
-              <div class="ur-meta">Tech · Program Analyst</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">A</div>
-              <div class="ur-name">Adnan</div>
-              <div class="ur-meta">Gov · IT Risk Mgmt</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">M</div>
-              <div class="ur-name">Marc-Louis</div>
-              <div class="ur-meta">Events · Product</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">A</div>
-              <div class="ur-name">Aurelio</div>
-              <div class="ur-meta">Gov · IT Supervisor</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">N</div>
-              <div class="ur-name">Natalie</div>
-              <div class="ur-meta">Healthcare · HR</div>
-            </div>
-            <div class="ur-card">
-              <div class="ur-ring">E</div>
-              <div class="ur-name">Elise</div>
-              <div class="ur-meta">Finance · RTW Spec.</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- Context band -->
+    <div class="kp-context-block" style="margin-top: 48px;">
+      <div class="kp-block-label">Context</div>
+      <p class="kp-block-body">Past research was thin — no segments, no foundational research. Metrics to guide research planning weren&rsquo;t available (e.g., usage statistics among job roles / industries).</p>
     </div>
+
+    <!-- Plan band -->
+    <div class="kp-context-block kp-plan" style="margin-top: 20px;">
+      <div class="kp-block-label">Plan</div>
+      <p class="kp-block-body">Foundational research &amp; scoping with the product and marketing teams to identify key user groups.</p>
+    </div>
+
   </div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 3 — A priori JTBD list                                       -->
+<!-- SLIDE 2 — A priori JTBD list                                       -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-3" style="padding-bottom: 64px; overflow: hidden;">
-  <div class="slide-num">03</div>
   <div class="slide-inner">
     <div class="slide-tag">Jobs to Be Done · Input</div>
     <h2 class="section-title">Using secondary sources (Consumer Browser JTBD, Information Worker research, Copilot Usage Intent) we compiled an a priori list of 33 jobs.</h2>
@@ -928,73 +863,7 @@
       line-height: 1.4;
     }
   </style>
-</section>
 
-<!-- ══════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 3b — Key Players                                             -->
-<!-- ══════════════════════════════════════════════════════════════════ -->
-<section class="slide" id="slide-3b">
-  <div class="slide-inner">
-    <div class="slide-tag">Context · Stakeholders</div>
-    <h2 class="section-title">Key <span class="italic">players</span></h2>
-
-    <!-- Stakeholder quote cards -->
-    <div class="kp-grid">
-
-      <div class="kp-card">
-        <div class="kp-avatar-row">
-          <div class="ur-ring" data-seed="ProductLeader" data-skin="f5c8a0" data-hair="long01" data-haircolor="472f1f" data-eyes="variant01" style="width:72px;height:72px;font-size:24px;">P</div>
-          <div>
-            <div class="kp-name">Product Leader</div>
-            <div class="kp-role">Microsoft Edge Enterprise</div>
-          </div>
-        </div>
-        <blockquote class="kp-quote">
-          &ldquo;We want to know what Commercial browser users need from us.&rdquo;
-        </blockquote>
-      </div>
-
-      <div class="kp-card">
-        <div class="kp-avatar-row">
-          <div class="ur-ring" data-seed="DesignLead" data-skin="c68642" data-hair="short03" data-haircolor="1a1a1a" data-eyes="variant04" style="width:72px;height:72px;font-size:24px;">D</div>
-          <div>
-            <div class="kp-name">Design</div>
-            <div class="kp-role">UX &amp; Product Design</div>
-          </div>
-        </div>
-        <blockquote class="kp-quote">
-          &ldquo;We need scenarios to design solutions for.&rdquo;
-        </blockquote>
-      </div>
-
-      <div class="kp-card">
-        <div class="kp-avatar-row">
-          <div class="ur-ring" data-seed="MarketingLead" data-skin="e8b88a" data-hair="shortCurly01" data-haircolor="8a4f1e" data-eyes="variant06" style="width:72px;height:72px;font-size:24px;">M</div>
-          <div>
-            <div class="kp-name">Marketing</div>
-            <div class="kp-role">Product Marketing</div>
-          </div>
-        </div>
-        <blockquote class="kp-quote">
-          &ldquo;We need to know what solutions to showcase at the Ignite conference in a month.&rdquo;
-        </blockquote>
-      </div>
-
-    </div>
-
-    <!-- Context band -->
-    <div class="kp-context-block" style="margin-top: 48px;">
-      <div class="kp-block-label">Context</div>
-      <p class="kp-block-body">Past research was thin — no segments, no foundational research. Metrics to guide research planning weren&rsquo;t available (e.g., usage statistics among job roles / industries).</p>
-    </div>
-
-    <!-- Plan band -->
-    <div class="kp-context-block kp-plan" style="margin-top: 20px;">
-      <div class="kp-block-label">Plan</div>
-      <p class="kp-block-body">Foundational research &amp; scoping with the product and marketing teams to identify key user groups.</p>
-    </div>
-
-  </div>
 </section>
 
 <style>
@@ -1059,18 +928,19 @@
 </style>
 
 <script>
-  /* DiceBear avatar generator for Key Players section */
-  (function () {
-    var rings = document.querySelectorAll('#slide-3b .ur-ring[data-seed]');
+  /* DiceBear avatar generator — Key Players + Participants */
+  document.addEventListener('DOMContentLoaded', function () {
+    var rings = document.querySelectorAll('.ur-ring[data-seed], .persona-avatar[data-seed]');
     rings.forEach(function (el) {
       var d = el.dataset;
       var initial = el.textContent;
       var params = new URLSearchParams({ seed: d.seed, backgroundColor: 'fde4cf' });
+      var femHair = new Set(['long','extraLong','bobCut','bobBangs','pigtails','straightBun','curlyBun','bunUndercut']);
       if (d.skin) params.set('skinColor', d.skin);
       if (d.hair) params.set('hair', d.hair);
+      if (d.hair && femHair.has(d.hair)) params.set('facialHairProbability', '0');
       if (d.haircolor) params.set('hairColor', d.haircolor);
       if (d.eyes) params.set('eyes', d.eyes);
-      ['smile', 'bigSmile', 'lips', 'smirk'].forEach(function (m) { params.append('mouth', m); });
       var url = 'https://api.dicebear.com/9.x/personas/svg?' + params.toString();
       var img = document.createElement('img');
       img.alt = d.seed;
@@ -1082,8 +952,138 @@
       el.appendChild(img);
       img.src = url;
     });
-  })();
+  });
 </script>
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 3 — Method & Participants                                    -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-2">
+  <div class="slide-inner">
+    <div class="slide-tag">Method</div>
+    <h2 class="section-title">Participants were a mix of Chrome and Edge users, individual contributors, and people managers, in various roles, who use the browser at work.</h2>
+    <p class="body"></p>
+
+    <div class="methods-grid--bare">
+      <div class="method-item">
+        <span class="m-label">Study type</span>
+        <span class="m-value">Generative 1:1 interviews</span>
+      </div>
+      <div class="method-item">
+        <span class="m-label">Sample</span>
+        <span class="m-value">N = 16 participants</span>
+      </div>
+      <div class="method-item">
+        <span class="m-label">Duration</span>
+        <span class="m-value">75-min FigJam sessions</span>
+      </div>
+      <div class="method-item">
+        <span class="m-label">Framework</span>
+        <span class="m-value">Jobs to Be Done</span>
+      </div>
+    </div>
+
+    <div class="ur-sample-section">
+      <div class="ur-columns">
+        <div>
+          <div class="ur-col-h">Research / Product Roles</div>
+          <div class="ur-grid">
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Catherine" data-hair="straightBun">C</div>
+              <div class="ur-name">Catherine</div>
+              <div class="ur-meta">Accounting · Tax</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Tejal" data-hair="bobBangs">T</div>
+              <div class="ur-name">Tejal</div>
+              <div class="ur-meta">Consulting · Analyst</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Julia" data-hair="long">J</div>
+              <div class="ur-name">Julia</div>
+              <div class="ur-meta">Tech · Product Ops</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Natasha" data-hair="straightBun">N</div>
+              <div class="ur-name">Natasha</div>
+              <div class="ur-meta">Consulting · Risk</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Rinkle" data-hair="bobCut">R</div>
+              <div class="ur-name">Rinkle</div>
+              <div class="ur-meta">Insurance · Ops</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ur-col-h">Direct with Customers / Clients</div>
+          <div class="ur-grid">
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Dylan" data-hair="shortCombover">D</div>
+              <div class="ur-name">Dylan</div>
+              <div class="ur-meta">Automotive · Mgr</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Rodney" data-hair="shortComboverChops">R</div>
+              <div class="ur-name">Rodney</div>
+              <div class="ur-meta">Logistics · Store Mgr</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Brianna" data-hair="curlyBun">B</div>
+              <div class="ur-name">Brianna</div>
+              <div class="ur-meta">Healthcare · Nurse</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Gearoid" data-hair="fade">G</div>
+              <div class="ur-name">Gearoid</div>
+              <div class="ur-meta">Education · Teacher</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Aurora" data-hair="extraLong">A</div>
+              <div class="ur-name">Aurora</div>
+              <div class="ur-meta">Social Svcs · Crisis</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ur-col-h">IT <span class="amp">&amp;</span> HR Roles</div>
+          <div class="ur-grid">
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Christina" data-hair="bobBangs">C</div>
+              <div class="ur-name">Christina</div>
+              <div class="ur-meta">Tech · Program Analyst</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Adnan" data-hair="fade">A</div>
+              <div class="ur-name">Adnan</div>
+              <div class="ur-meta">Gov · IT Risk Mgmt</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="MarcLouis" data-hair="shortCombover">M</div>
+              <div class="ur-name">Marc-Louis</div>
+              <div class="ur-meta">Events · Product</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Aurelio" data-hair="shortComboverChops">A</div>
+              <div class="ur-name">Aurelio</div>
+              <div class="ur-meta">Gov · IT Supervisor</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Natalie" data-hair="bobCut">N</div>
+              <div class="ur-name">Natalie</div>
+              <div class="ur-meta">Healthcare · HR</div>
+            </div>
+            <div class="ur-card">
+              <div class="ur-ring" data-seed="Elise" data-hair="bobBangs">E</div>
+              <div class="ur-name">Elise</div>
+              <div class="ur-meta">Finance · RTW Spec.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <!-- SLIDE 4 — Core JTBD                                                -->
@@ -1164,19 +1164,173 @@
 <!-- SLIDE 5 — Motivations                                              -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-5">
-  <div class="slide-num">05</div>
   <div class="slide-inner">
     <div class="slide-tag">Jobs to Be Done · Motivations</div>
     <h2 class="section-title">Users' motivations were <span class="italic">variable</span></h2>
     <p class="body">Part of the JTBD framework is understanding what users really want out of their browser jobs. We captured five major motivations:</p>
 
-    <div class="motivation-grid">
-      <div class="motivation-card"><div class="emoji">⚖️</div><div class="name">Balance</div></div>
-      <div class="motivation-card"><div class="emoji">🚀</div><div class="name">Get Ahead</div></div>
-      <div class="motivation-card"><div class="emoji">🌱</div><div class="name">Personal Growth</div></div>
-      <div class="motivation-card"><div class="emoji">💛</div><div class="name">Make a Difference</div></div>
-      <div class="motivation-card"><div class="emoji">🛡️</div><div class="name">Stability</div></div>
+    <!-- Motivation ↔ Job bipartite diagram -->
+    <div id="motiv-diagram" style="position:relative;margin-top:40px;user-select:none;">
+      <!-- Top row: motivations -->
+      <div class="motiv-top-row">
+        <div class="motiv-node" data-id="balance"         tabindex="0">Balance</div>
+        <div class="motiv-node" data-id="stability"       tabindex="0">Stability</div>
+        <div class="motiv-node" data-id="get-ahead"       tabindex="0">Get ahead</div>
+        <div class="motiv-node" data-id="enjoyment"       tabindex="0">Enjoyment</div>
+        <div class="motiv-node" data-id="personal-growth" tabindex="0">Personal growth</div>
+        <div class="motiv-node" data-id="make-diff"       tabindex="0">Make a difference</div>
+      </div>
+
+      <!-- SVG for connection lines (drawn by JS) -->
+      <svg id="motiv-svg" aria-hidden="true" style="position:absolute;top:0;left:0;pointer-events:none;overflow:visible;"></svg>
+
+      <!-- Spacer for the line zone -->
+      <div style="height:88px;"></div>
+
+      <!-- Bottom rows: jobs -->
+      <div class="motiv-jobs-row">
+        <div class="motiv-job" data-id="plan-coord">Plan / coordinate</div>
+        <div class="motiv-job" data-id="collaborate">Collaborate</div>
+        <div class="motiv-job" data-id="get-answers">Get answers</div>
+        <div class="motiv-job" data-id="interpret">Interpret</div>
+        <div class="motiv-job" data-id="inform">Inform</div>
+      </div>
+      <div class="motiv-jobs-row" style="margin-top:8px;">
+        <div class="motiv-job" data-id="research">Research</div>
+        <div class="motiv-job" data-id="create">Create</div>
+        <div class="motiv-job" data-id="influence">Influence</div>
+        <div class="motiv-job" data-id="learn">Learn</div>
+        <div class="motiv-job" data-id="stay-uptodate">Stay up to date</div>
+      </div>
     </div>
+
+    <style>
+      .motiv-top-row, .motiv-jobs-row {
+        display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+      }
+      .motiv-node, .motiv-job {
+        background: #0ea5c9; color: #fff;
+        font-size: 13px; font-weight: 700;
+        padding: 10px 18px;
+        border-radius: 3px;
+        cursor: default;
+        transition: background .18s ease, opacity .18s ease, transform .18s ease;
+        white-space: nowrap;
+      }
+      .motiv-node { cursor: pointer; }
+      .motiv-node:hover, .motiv-node:focus-visible { background: #0369a1; outline: none; }
+      /* Active (hovered) states */
+      .motiv-node--active  { background: #0369a1 !important; transform: translateY(-2px); }
+      .motiv-job--active   { background: #0369a1 !important; }
+      /* Dimmed states */
+      .motiv-node--dim, .motiv-job--dim { opacity: 0.22; }
+    </style>
+
+    <script>
+    (function () {
+      var CONNECTIONS = {
+        'balance':         ['plan-coord', 'collaborate', 'inform',    'research',  'learn'],
+        'stability':       ['inform',     'plan-coord',  'get-answers','interpret', 'stay-uptodate'],
+        'get-ahead':       ['influence',  'inform',      'create',     'get-answers','collaborate'],
+        'enjoyment':       ['learn',      'create',      'stay-uptodate','research','collaborate'],
+        'personal-growth': ['research',   'learn',       'influence',  'create',    'get-answers'],
+        'make-diff':       ['inform',     'influence',   'collaborate','interpret', 'plan-coord'],
+      };
+
+      var diagram = document.getElementById('motiv-diagram');
+      var svg     = document.getElementById('motiv-svg');
+      var lineEls = [];
+
+      function getRelCenter(el) {
+        var er = el.getBoundingClientRect();
+        var pr = diagram.getBoundingClientRect();
+        return {
+          x:      er.left + er.width  / 2 - pr.left,
+          top:    er.top             - pr.top,
+          bottom: er.bottom          - pr.top,
+        };
+      }
+
+      function drawLines() {
+        svg.innerHTML = '';
+        lineEls = [];
+        svg.setAttribute('width',  diagram.offsetWidth);
+        svg.setAttribute('height', diagram.offsetHeight);
+
+        Object.keys(CONNECTIONS).forEach(function (motivId) {
+          var mEl = diagram.querySelector('[data-id="' + motivId + '"]');
+          if (!mEl) return;
+          var mc = getRelCenter(mEl);
+
+          CONNECTIONS[motivId].forEach(function (jobId) {
+            var jEl = diagram.querySelector('[data-id="' + jobId + '"]');
+            if (!jEl) return;
+            var jc = getRelCenter(jEl);
+
+            var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', mc.x);
+            line.setAttribute('y1', mc.bottom);
+            line.setAttribute('x2', jc.x);
+            line.setAttribute('y2', jc.top);
+            line.setAttribute('stroke',        '#0ea5c9');
+            line.setAttribute('stroke-width',  '1.5');
+            line.setAttribute('stroke-dasharray', '5,4');
+            line.setAttribute('stroke-opacity','0.3');
+            line.style.transition = 'stroke-opacity .18s ease, stroke-width .18s ease';
+            line.dataset.motiv = motivId;
+            line.dataset.job   = jobId;
+            svg.appendChild(line);
+            lineEls.push(line);
+          });
+        });
+      }
+
+      function highlight(motivId) {
+        var connected = CONNECTIONS[motivId] || [];
+        diagram.querySelectorAll('.motiv-node').forEach(function (n) {
+          n.classList.toggle('motiv-node--active', n.dataset.id === motivId);
+          n.classList.toggle('motiv-node--dim',    n.dataset.id !== motivId);
+        });
+        diagram.querySelectorAll('.motiv-job').forEach(function (j) {
+          var on = connected.indexOf(j.dataset.id) !== -1;
+          j.classList.toggle('motiv-job--active', on);
+          j.classList.toggle('motiv-job--dim',    !on);
+        });
+        lineEls.forEach(function (l) {
+          var on = l.dataset.motiv === motivId;
+          l.setAttribute('stroke-opacity', on ? '1'   : '0.05');
+          l.setAttribute('stroke-width',   on ? '2.5' : '1');
+          if (on) l.removeAttribute('stroke-dasharray');
+          else    l.setAttribute('stroke-dasharray', '5,4');
+        });
+      }
+
+      function reset() {
+        diagram.querySelectorAll('.motiv-node, .motiv-job').forEach(function (n) {
+          n.classList.remove('motiv-node--active','motiv-node--dim','motiv-job--active','motiv-job--dim');
+        });
+        lineEls.forEach(function (l) {
+          l.setAttribute('stroke-opacity',  '0.3');
+          l.setAttribute('stroke-width',    '1.5');
+          l.setAttribute('stroke-dasharray','5,4');
+        });
+      }
+
+      function init() {
+        drawLines();
+        diagram.querySelectorAll('.motiv-node').forEach(function (node) {
+          node.addEventListener('mouseenter', function () { highlight(node.dataset.id); });
+          node.addEventListener('focus',      function () { highlight(node.dataset.id); });
+          node.addEventListener('mouseleave', reset);
+          node.addEventListener('blur',       reset);
+        });
+      }
+
+      if (document.readyState === 'complete') { setTimeout(init, 50); }
+      else { window.addEventListener('load', function () { setTimeout(init, 50); }); }
+      window.addEventListener('resize', drawLines);
+    })();
+    </script>
 
     <div class="reactions-cluster hover-reveal scroll-reveal" tabindex="0" style="margin-top: 48px;">
       <div class="reaction-stack" style="max-width: 700px;">
@@ -1209,7 +1363,6 @@
 <!-- SLIDE 6 — Cross-role JTBD                                          -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-6">
-  <div class="slide-num">06</div>
   <div class="slide-inner">
     <div class="slide-tag">Opportunities</div>
     <h2 class="section-title">Common JTBD <span class="italic">across roles</span></h2>
@@ -1248,14 +1401,13 @@
 <!-- SLIDE 7 — Julia (Research/Product)                                 -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-7">
-  <div class="slide-num">07</div>
   <div class="slide-inner">
     <div class="slide-tag">Opportunities · Research / Product Roles</div>
     <h2 class="section-title">Julia balances a lot, and Gen AI can <span class="italic">streamline</span> some tasks</h2>
 
     <div class="persona-card">
       <div class="persona-header">
-        <div class="persona-avatar">J</div>
+        <div class="persona-avatar" data-seed="Julia">J</div>
         <div class="persona-info">
           <div class="persona-name">Julia</div>
           <div class="persona-role">Tech · Product Operations Manager</div>
@@ -1299,14 +1451,13 @@
 <!-- SLIDE 8 — Marc-Louis (IT)                                          -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-8">
-  <div class="slide-num">08</div>
   <div class="slide-inner">
     <div class="slide-tag">Opportunities · IT Roles</div>
     <h2 class="section-title">Marc-Louis uses Gen AI to guide a broad <span class="italic">initial search</span></h2>
 
     <div class="persona-card">
       <div class="persona-header">
-        <div class="persona-avatar">M</div>
+        <div class="persona-avatar" data-seed="MarcLouis">M</div>
         <div class="persona-info">
           <div class="persona-name">Marc-Louis</div>
           <div class="persona-role">Event Services · Product Analyst</div>
@@ -1349,14 +1500,13 @@
 <!-- SLIDE 9 — Elise (HR)                                               -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-9">
-  <div class="slide-num">09</div>
   <div class="slide-inner">
     <div class="slide-tag">Opportunities · HR Roles</div>
     <h2 class="section-title">Elise feels Gen AI can streamline, but can't manage <span class="italic">conversations</span> like she can</h2>
 
     <div class="persona-card">
       <div class="persona-header">
-        <div class="persona-avatar">E</div>
+        <div class="persona-avatar" data-seed="Elise">E</div>
         <div class="persona-info">
           <div class="persona-name">Elise</div>
           <div class="persona-role">Finance · Return to Work Specialist</div>
@@ -1399,40 +1549,9 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 10 — Survey data (bar chart)                                 -->
-<!-- ══════════════════════════════════════════════════════════════════ -->
-<section class="slide" id="slide-10">
-  <div class="slide-num">10</div>
-  <div class="slide-inner">
-    <div class="slide-tag">Quantitative Validation</div>
-    <h2 class="section-title">Top browser activities <span class="italic">quantified</span></h2>
-    <p class="body">Survey data (% of respondents reporting each activity) validated the qualitative JTBD findings.</p>
-
-    <div class="chart-container">
-      <table>
-        <thead>
-          <tr><th style="width: 50%;">Activity</th><th>Frequency</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Communicating (threads, emails, messages)</td><td class="bar-cell"><div class="bar-fill" style="width: 73%;"></div><span>73%</span></td></tr>
-          <tr><td>Access the right tools and resources</td><td class="bar-cell"><div class="bar-fill" style="width: 68%;"></div><span>68%</span></td></tr>
-          <tr><td>Collaborating (editing shared artefact)</td><td class="bar-cell"><div class="bar-fill" style="width: 68%;"></div><span>68%</span></td></tr>
-          <tr><td>Get answers, guidance, or instructions</td><td class="bar-cell"><div class="bar-fill" style="width: 63%;"></div><span>63%</span></td></tr>
-          <tr><td>Dealing with data (analyzing, reporting)</td><td class="bar-cell"><div class="bar-fill" style="width: 61%;"></div><span>61%</span></td></tr>
-          <tr><td>Searching for documentation / info</td><td class="bar-cell"><div class="bar-fill" style="width: 60%;"></div><span>60%</span></td></tr>
-          <tr><td>Explore or research a topic in-depth</td><td class="bar-cell"><div class="bar-fill" style="width: 58%;"></div><span>58%</span></td></tr>
-          <tr><td>Brainstorming (generating ideas)</td><td class="bar-cell"><div class="bar-fill" style="width: 56%;"></div><span>56%</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════════ -->
 <!-- SLIDE 11 — What's Missing from Gen AI                              -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-11">
-  <div class="slide-num">11</div>
   <div class="slide-inner">
     <div class="slide-tag Impact">Key Finding</div>
     <h2 class="section-title">When users engage with Gen AI at work, here's what's <span class="italic">missing</span></h2>
@@ -1479,7 +1598,6 @@
 <!-- SLIDE 12 — Summary                                                 -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-12">
-  <div class="slide-num">12</div>
   <div class="slide-inner">
     <div class="slide-tag outcomes">In Summary</div>
 

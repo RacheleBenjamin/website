@@ -1584,32 +1584,6 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════════ -->
-<!-- SLIDE 19 — Method · Study 3                                        -->
-<!-- ══════════════════════════════════════════════════════════════════ -->
-<section class="slide" id="slide-19-method">
-  <div class="slide-num">19</div>
-  <div class="slide-inner">
-    <div class="slide-tag">Study 3 · Method</div>
-    <h3 class="sub-title">A mixed-methods study to find the highest-leverage <span class="italic">shopping jobs</span> for agentic AI</h3>
-
-    <div class="methods-grid methods-grid--bare">
-      <div class="method-item">
-        <span class="m-label">Study type</span>
-        <span class="m-value">Mixed methods: qualitative Jobs to Be Done synthesis + quantitative survey</span>
-      </div>
-      <div class="method-item">
-        <span class="m-label">Sample</span>
-        <span class="m-value"><strong>1,533</strong> US online shoppers</span>
-      </div>
-      <div class="method-item">
-        <span class="m-label">Approach</span>
-        <span class="m-value">Opportunity scoring (importance × dissatisfaction) crossed with AI openness to surface high-leverage jobs.</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════════ -->
 <!-- SLIDE 20 — JTBD with definitions                                   -->
 <!-- ══════════════════════════════════════════════════════════════════ -->
 <section class="slide" id="slide-20">
@@ -1636,6 +1610,32 @@
       <div class="jtbd-cell" tabindex="0"><span class="term">🔍 Find</span><span class="desc">Find products that meet my needs and wants.</span></div>
       <div class="jtbd-cell" tabindex="0"><span class="term">🤝 Negotiate</span><span class="desc">Negotiate a price with sellers.</span></div>
       <div class="jtbd-cell" tabindex="0"><span class="term">💰 Budget</span><span class="desc">Interpret finances and product options to decide on a budget.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 19 — Method · Study 3                                        -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-19-method">
+  <div class="slide-num">19</div>
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3 · Method</div>
+    <h3 class="sub-title">A mixed-methods study to find the highest-leverage <span class="italic">shopping jobs</span> for agentic AI</h3>
+
+    <div class="methods-grid methods-grid--bare">
+      <div class="method-item">
+        <span class="m-label">Study type</span>
+        <span class="m-value">Mixed methods: qualitative Jobs to Be Done synthesis + quantitative survey</span>
+      </div>
+      <div class="method-item">
+        <span class="m-label">Sample</span>
+        <span class="m-value"><strong>1,533</strong> US online shoppers</span>
+      </div>
+      <div class="method-item">
+        <span class="m-label">Approach</span>
+        <span class="m-value">Opportunity scoring (importance × dissatisfaction) crossed with AI openness to surface high-leverage jobs.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -2337,6 +2337,58 @@
     toggle();
     btn.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+<script>
+  /* ── Cartoon avatars for participant circles ───────────────────── */
+  (function () {
+    const HAIR_MAP = {
+      straightBun:          'bun',
+      curlyBun:             'bun',
+      bunUndercut:          'bun',
+      curly:                'curly',
+      shortCombover:        'shortFlat',
+      shortComboverChops:   'shortFlat',
+      extraLong:            'longButNotTooLong',
+      bald:                 'none',
+    };
+    const FACIAL_MAP = {
+      beardMustache: 'beardMedium',
+    };
+    const EYES_MAP = {
+      glasses: 'eyepatch',   // closest Avataaars accessory
+    };
+
+    document.querySelectorAll('.ur-ring[data-seed]').forEach(ring => {
+      const seed      = ring.dataset.seed      || '';
+      const skin      = ring.dataset.skin      || 'ffd5dc';
+      const hairKey   = ring.dataset.hair      || 'shortFlat';
+      const hairColor = ring.dataset.haircolor || '0e0e0e';
+      const facial    = ring.dataset.facial;
+      const eyes      = ring.dataset.eyes;
+
+      const hair     = HAIR_MAP[hairKey] || hairKey;
+      const params   = new URLSearchParams({
+        seed,
+        skinColor:        skin,
+        hair:             hair,
+        hairColor:        hairColor,
+        mouth:            'smile',
+        eyes:             eyes === 'glasses' ? 'squint' : 'default',
+        accessories:      eyes === 'glasses' ? 'prescription02' : 'blank',
+        facialHair:       facial ? FACIAL_MAP[facial] || 'blank' : 'blank',
+        backgroundColor:  'transparent',
+      });
+
+      const img = document.createElement('img');
+      img.src = `https://api.dicebear.com/9.x/avataaars/svg?${params}`;
+      img.alt = seed;
+      img.width  = 84;
+      img.height = 84;
+      ring.textContent = '';   // remove initial letter
+      ring.appendChild(img);
     });
   })();
 </script>
