@@ -2414,34 +2414,10 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     </div>
 
     <div class="diary-layout">
-      <div class="diary-card">
-        <h3 class="diary-card-title">Diary study dev environment</h3>
-        <p>To get more confidence, I ran a diary study in a dev environment with two user groups.</p>
 
-        <div class="cohort-grid">
-          <div class="cohort-box">
-            <h4 class="cohort-name">Tab heavy</h4>
-            <p>Users clearly living in the problem space the feature was meant to solve.</p>
-          </div>
-          <div class="cohort-box">
-            <h4 class="cohort-name">Tab normal</h4>
-            <p>Users closer to the broader population, to test whether the concept still held value.</p>
-          </div>
-        </div>
 
         <div class="study-flow">
-          <div class="study-step">
-            <div class="study-step-title">Assignment</div>
-            <p>Randomly assign, 2 different groups.</p>
-          </div>
-          <div class="study-step">
-            <div class="study-step-title">Counterbalance</div>
-            <p>Small counterbalance component for richer insight on all the tasks, but also cross-feedback.</p>
-          </div>
-          <div class="study-step">
-            <div class="study-step-title">What this added</div>
-            <p>More confidence about how each direction behaved across different usage patterns, not just inside one narrow power-user cohort.</p>
-          </div>
+
         </div>
       </div>
 
@@ -2513,13 +2489,37 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
         <div class="tension-bullets s2-participants">
-          <p class="plan-rq-intro">Horizontal tab users with 10+ tabs open on average, randomly split across the two variants.</p>
-          <div class="participant-row">
-            <div class="participant-item">
-              <span class="participant-stat">14</span>
-              <p class="participant-label">Horizontal tab users in Edge Dev</p>
+          <p class="plan-rq-intro">Horizontal tab users with 10+ tabs open on average were randomly assigned to either the <span class="italic">Switcher</span> or <span class="italic">Transient</span> condition.</p>
+
+          <div class="p-grid">
+            <div class="p-group">
+              <div class="p-group-head p-switcher">Switcher</div>
+              <div class="p-bubbles">
+                <figure class="p-bubble"><span class="p-circle p-c-switcher">JH</span><figcaption><b>Jen H</b><span>Delivery driver</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-switcher">S</span><figcaption><b>Shalon</b><span>PhD applicant</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-switcher">L</span><figcaption><b>Lauren</b><span>Research administrator</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-switcher">JW</span><figcaption><b>Jennifer W</b><span>Self-employed</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-switcher">H</span><figcaption><b>Hanson</b><span>Master's student</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-switcher">T</span><figcaption><b>Tyvon</b><span>Content creator</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-switcher">C</span><figcaption><b>Chidubem</b><span>Football recruiter</span></figcaption></figure>
+              </div>
+            </div>
+
+            <div class="p-group">
+              <div class="p-group-head p-transient">Transient</div>
+              <div class="p-bubbles">
+                <figure class="p-bubble"><span class="p-circle p-c-transient">A</span><figcaption><b>Allison</b><span>College student</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-transient">N</span><figcaption><b>Naomi</b><span>Medical student</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-transient">J</span><figcaption><b>Janet</b><span>Teambuilding &amp; personal development</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-transient">B</span><figcaption><b>Brandon</b><span>Field engineer</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-transient">D</span><figcaption><b>Debbie</b><span>Chief information officer</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-transient">S</span><figcaption><b>Stephanie</b><span>Marketing communications specialist</span></figcaption></figure>
+                <figure class="p-bubble"><span class="p-circle p-c-transient">T</span><figcaption><b>Taylor</b><span>Graduate student</span></figcaption></figure>
+              </div>
             </div>
           </div>
+
+          <p class="p-note">2 participants did not complete the full diary study and dropped after 1–2 days.</p>
         </div>
       </div>
     </div>
@@ -2595,9 +2595,66 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     #slide-6b .tension-toggle[aria-expanded="true"] + .tension-bullets {
       max-height: 600px;
     }
+    #slide-6b .tension-toggle[aria-expanded="true"] + .s2-participants {
+      max-height: 1600px;
+    }
+    #slide-6b .s2-participants .plan-rq-intro { margin-bottom: 26px; }
+    #slide-6b .p-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    #slide-6b .p-group-head {
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--ink-10);
+    }
+    #slide-6b .p-switcher { color: var(--work); }
+    #slide-6b .p-transient { color: #0f766e; }
+    #slide-6b .p-bubbles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 16px;
+    }
+    #slide-6b .p-bubble {
+      margin: 0;
+      width: 92px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    #slide-6b .p-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      border: 3px solid;
+      flex-shrink: 0;
+    }
+    #slide-6b .p-c-switcher { border-color: var(--work); background: rgba(0,93,170,.08); color: var(--work); }
+    #slide-6b .p-c-transient { border-color: #0f766e; background: rgba(15,118,110,.08); color: #0f766e; }
+    #slide-6b .p-bubble figcaption {
+      margin-top: 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    #slide-6b .p-bubble figcaption b { font-size: 13px; color: var(--ink); font-weight: 700; }
+    #slide-6b .p-bubble figcaption span { font-size: 11px; line-height: 1.3; color: var(--ink-50); }
+    #slide-6b .p-note { margin-top: 28px; font-size: 13px; font-style: italic; color: var(--ink-50); }
     @media (max-width: 700px) {
       .s2-timeline { flex-direction: column; }
       .s2-arrow { transform: rotate(90deg); justify-content: center; }
+      #slide-6b .p-grid { grid-template-columns: 1fr; gap: 28px; }
     }
   </style>
   <script>
