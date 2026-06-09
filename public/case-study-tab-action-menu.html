@@ -237,6 +237,16 @@
     object-fit: contain;
   }
 
+  .cover-segment-image {
+    margin-top: 24px;
+    display: block;
+    width: min(100%, 860px);
+    margin-inline: auto;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    background: #fff;
+  }
+
   .cover-schematic {
     margin-top: 10px;
     border: 1px solid var(--ink-10);
@@ -1576,6 +1586,10 @@
     color: #fff;
   }
 
+  .outcome-video-wrap {
+    margin-top: 16px;
+  }
+
   .reflection-note {
     margin-top: 22px;
     background: #EAF4FF;
@@ -1809,6 +1823,8 @@
     <div class="eyebrow">Case Study</div>
     <h1>From Tab Overload to <span class="accent">Tab Action Menu</span></h1>
     <div class="subtitle">De-risking decisions in Microsoft Edge</div>
+
+    <img class="cover-segment-image" src="images/tab-heavy-segment.png" alt="Tab-heavy user segment visualization">
 
     <aside class="cover-pitch" aria-label="The decision window">
       <div class="cover-pitch-eyebrow">Decision Window</div>
@@ -2298,11 +2314,10 @@
     <h3 class="vt-source-label">User research</h3>
     <div class="tension-card plain">
       <button class="tension-toggle" aria-expanded="false">
-        <span class="vt-stat-inline">11 / 16</span>
         <h3 class="tension-card-title">Never turned it on</h3>
         <span class="toggle-chevron" aria-hidden="true"></span>
       </button>
-      <p class="tension-bullets-text">In our user research, 11 of 16 participants didn't know the feature existed.</p>
+      <p class="tension-bullets-text">In our user research, 11 of 16 participants didn't even know the feature existed.</p>
     </div>
 
     <h3 class="vt-source-label">Telemetry</h3>
@@ -2539,11 +2554,6 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
         </div>
       </div>
-    </div>
-
-    <div class="decision-callout" style="margin-top: 40px;">
-      <div class="decision-callout-label">Recommendation</div>
-      <p><strong>Build the simpler Switcher menu.</strong> Lower the engineering cost, help users discover vertical tabs.</p>
     </div>
   </div>
 
@@ -2828,8 +2838,10 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
   .res-face-line {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     margin-bottom: 18px;
+    min-height: 58px;
+    position: relative;
   }
   .res-face {
     width: 58px; height: 58px;
@@ -2838,20 +2850,39 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     border: 3px solid var(--ink-30);
     background: var(--ink-10);
     flex-shrink: 0;
+    cursor: pointer;
   }
   .res-face.is-sw { border-color: var(--work); }
   .res-face.is-tr { border-color: #0f766e; }
   .res-face.is-none { border-color: var(--ink-30); }
   .res-quote {
-    position: relative;
+    position: absolute;
+    left: 74px;
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 4;
     background: #fff;
     border: 1px solid var(--ink-10);
     border-radius: 12px;
     padding: 12px 16px;
+    width: max-content;
+    max-width: 260px;
     font-size: 14px;
     font-style: italic;
     line-height: 1.45;
     color: var(--ink-70);
+    transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  }
+  .res-face-line:hover .res-quote {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+  }
+  .res-face-line:hover .res-face {
+    box-shadow: 0 0 0 6px rgba(0,93,170,.08);
   }
   .res-quote::before {
     content: "";
@@ -2909,10 +2940,11 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     grid-template-columns: 170px 1fr;
     gap: 24px;
     align-items: start;
-    background: #fff;
-    border: 1px solid var(--ink-10);
-    border-radius: 4px;
-    padding: 22px 24px;
+    background: transparent;
+    border: 0;
+    border-top: 1px solid var(--ink-10);
+    border-radius: 0;
+    padding: 24px 0 18px;
   }
   .diary-person { text-align: center; }
   .diary-face {
@@ -2933,34 +2965,90 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     list-style: none; margin: 0; padding: 0;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 14px;
+    gap: 28px;
   }
-  .diary-day { position: relative; }
+  .diary-day {
+    position: relative;
+    padding-top: 30px;
+  }
+  /* connecting rail between nodes */
+  .diary-day:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    width: calc(100% + 28px);
+    height: 2px;
+    background: var(--ink-10);
+    z-index: 0;
+  }
+  /* node dot */
+  .diary-day::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--work);
+    box-shadow: 0 0 0 4px var(--cream);
+    z-index: 1;
+  }
+  .diary-day.cond-tr::before { background: #0f766e; }
+  /* off-day node: hollow */
+  .diary-day:has(.dd-chip.is-off)::before {
+    background: var(--cream);
+    border: 2px solid var(--ink-30);
+    box-shadow: 0 0 0 4px var(--cream);
+  }
   .dd-chip {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    padding: 8px 6px;
-    min-width: 64px;
-    width: 100%;
+    gap: 0;
+    padding: 0;
+    min-width: 0;
+    width: auto;
   }
   .dd-chip.is-off {
-    background: var(--ink-10);
-    clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
-    padding: 14px 6px;
+    background: transparent;
+    width: auto;
+    height: auto;
+    min-width: 0;
+    aspect-ratio: auto;
+    margin-inline: 0;
+    justify-content: flex-start;
+    clip-path: none;
+    padding: 0;
   }
-  .dd-label { font-size: 13px; font-weight: 700; }
+  .dd-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
   .diary-day.cond-sw .dd-label { color: var(--work); }
   .diary-day.cond-tr .dd-label { color: #0f766e; }
-  .dd-chip.is-off .dd-label { color: var(--ink-60); }
-  .dd-count { font-size: 13px; color: var(--ink-70); }
-  .dd-chip.is-off .dd-count { color: var(--ink-50); }
+  .dd-chip.is-off .dd-label { color: var(--ink-50); }
+  .dd-count {
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: -.02em;
+  }
+  .dd-chip.is-off .dd-count { color: var(--ink-50); font-weight: 600; }
+  .dd-chip.is-off .dd-label,
+  .dd-chip.is-off .dd-count {
+    text-align: left;
+    line-height: 1.25;
+  }
   .dd-quote {
-    margin: 8px 2px 0;
-    font-size: 12px;
+    margin: 10px 0 0;
+    font-size: 14px;
     font-style: italic;
-    line-height: 1.4;
+    line-height: 1.55;
     color: var(--ink-60);
   }
   .res-legend {
@@ -2976,6 +3064,33 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     background: var(--ink-10);
     clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
   }
+  .reco-divider {
+    height: 1px;
+    background: var(--ink-10);
+    margin-bottom: 30px;
+  }
+  .reco-callout {
+    display: grid;
+    gap: 16px;
+  }
+  .reco-switcher-label {
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.72);
+    font-weight: 700;
+  }
+  .reco-schematic {
+    max-width: 420px;
+    background: #fff;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 4px;
+    padding: 10px;
+  }
+  .reco-callout .decision-callout-label {
+    margin-top: 2px;
+  }
 
   @media (max-width: 820px) {
     .res-score, .res-charts { grid-template-columns: 1fr; }
@@ -2983,18 +3098,24 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     .diary-row { grid-template-columns: 1fr; }
     .diary-person { display: flex; align-items: center; gap: 16px; text-align: left; }
     .diary-person b, .diary-person span { text-align: left; }
-    .diary-days { grid-template-columns: repeat(3, 1fr); }
+    .diary-days { grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .diary-day { padding: 0 0 28px 30px; }
+    .diary-day::before {
+      top: 0; left: 0;
+    }
+    .diary-day:not(:last-child)::after {
+      top: 7px; left: 6px; width: 2px; height: 100%;
+    }
   }
   @media (max-width: 560px) {
-    .diary-days { grid-template-columns: repeat(2, 1fr); }
+    .diary-days { grid-template-columns: 1fr; }
   }
 </style>
 
 <section class="slide res-slide" id="slide-r1">
   <div class="slide-inner">
-    <div class="slide-tag">Results · Exploring states</div>
+    <div class="slide-tag">Results</div>
     <h2 class="section-title">Switcher helped people <span class="italic">explore different states</span> more than Transient</h2>
-    <p class="res-sub">Switcher wasn't as disorienting as we feared &mdash; and no one felt trapped in vertical.</p>
 
     <div class="res-score">
       <div class="res-score-col">
@@ -3019,11 +3140,6 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
         <p class="res-takeaway-body">Only <strong>2</strong> participants discovered and explored pinned vertical tabs during the study.</p>
       </div>
     </div>
-
-    <div class="insight-bar">
-      <span class="insight-label">Why care about vertical tabs</span>
-      Awareness is low (3&ndash;4%). It's in our best interest to introduce more users to it without alienating those who prefer horizontal tabs.
-    </div>
   </div>
 </section>
 
@@ -3031,21 +3147,21 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
   <div class="slide-inner">
     <div class="slide-tag">Results · Preference</div>
     <h2 class="section-title">Participants were <span class="italic">split</span> between Switcher and Transient</h2>
-    <p class="res-sub">Though we recommend Switcher, we must retain the qualities of Transient mode that people value.</p>
 
     <div class="res-split">
       <div class="res-split-col">
         <h3 class="res-split-head is-sw">Chose Switcher</h3>
         <div class="res-face-line">
           <img class="res-face is-sw" src="images/diary-participants/chidubem.png" alt="Chidubem">
-          <div class="res-quote">"I have no need for the dropdown menu."</div>
+          <div class="res-quote">"I have no need for the dropdown menu in Transient. It doesn't feel intuitive."</div>
         </div>
         <div class="res-face-line">
           <img class="res-face is-sw" src="images/diary-participants/jennifer-w.png" alt="Jennifer W">
+          <div class="res-quote">"I think the Transient feature takes up too much screen space."</div>
         </div>
         <div class="res-face-line">
           <img class="res-face is-sw" src="images/diary-participants/jen-h.png" alt="Jen H">
-          <div class="res-quote">"[Switcher] means less clicks for the same results."</div>
+          <div class="res-quote font-sz">"[Switcher] means less clicks for the same results."</div>
         </div>
       </div>
 
@@ -3053,14 +3169,15 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
         <h3 class="res-split-head is-tr">Chose Transient</h3>
         <div class="res-face-line">
           <img class="res-face is-tr" src="images/diary-participants/janet.png" alt="Janet">
-          <div class="res-quote">"[Pinned] takes up a lot of real estate on this side."</div>
+          <div class="res-quote">"[Pinned] wasn't my favorite mode because it takes up a lot of real estate on this side."</div>
         </div>
         <div class="res-face-line">
           <img class="res-face is-tr" src="images/diary-participants/naomi.png" alt="Naomi">
-          <div class="res-quote">"It presents the feature in a less in-your-face fashion."</div>
+          <div class="res-quote">"it presents the feature in a less in-your-face fashion. I like the dropdown menu and pinning functionality."</div>
         </div>
         <div class="res-face-line">
           <img class="res-face is-tr" src="images/diary-participants/allison.png" alt="Allison">
+          <div class="res-quote">"Transient having a pop-up that appears when you click the icon is condensed, but very useful."</div>
         </div>
       </div>
 
@@ -3068,6 +3185,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
         <h3 class="res-split-head is-none">Chose neither</h3>
         <div class="res-face-line">
           <img class="res-face is-none" src="images/diary-participants/brandon.png" alt="Brandon">
+          <div class="res-quote">"They seem exactly the same to be honest."</div>
         </div>
         <div class="res-face-line">
           <img class="res-face is-none" src="images/diary-participants/hanson.png" alt="Hanson">
@@ -3075,23 +3193,18 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
         </div>
         <div class="res-face-line">
           <img class="res-face is-none" src="images/diary-participants/debbie.png" alt="Debbie">
+          <div class="res-quote">"If anything Switcher is even worse."</div>
         </div>
         <p class="res-split-note">Three participants didn't pick up on the difference.</p>
       </div>
-    </div>
 
-    <div class="decision-callout" style="margin-top: 40px;">
-      <div class="decision-callout-label">Recommendation</div>
-      <p><strong>Move ahead with Switcher</strong> &mdash; and ensure it doesn't force users into vertical mode.</p>
-    </div>
-  </div>
 </section>
 
 <section class="slide res-slide" id="slide-r3">
   <div class="slide-inner">
     <div class="slide-tag">Results · Satisfaction</div>
-    <h2 class="section-title">Impressions of both variants were on average <span class="italic">positive (4/5)</span></h2>
-    <p class="res-sub">Daily satisfaction across the six-day diary, per participant and on average.</p>
+    <h2 class="section-title">Impressions of both variants were on average <span class="italic">positive</span></h2>
+    <p class="res-sub">Daily satisfaction across the six-day diary (1=very negative, 5=very positive).</p>
 
     <div class="res-charts">
       <div class="res-chart-card">
@@ -3180,18 +3293,12 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
     <p class="res-foot">Two participants dropped out after 1&ndash;2 days; if they had continued, Transient usage could have reached 4/6 days.</p>
 
-    <div class="insight-bar">
-      <span class="insight-label">Insight</span>
-      In Switcher mode Tab Central is more available (and therefore more used) &mdash; but not more frustrating.
-    </div>
-  </div>
 </section>
 
 <section class="slide res-slide" id="slide-r4">
   <div class="slide-inner">
     <div class="slide-tag">Results · Warming to vertical</div>
-    <h2 class="section-title">Switcher users who kept tabs <span class="italic">vertical</span> benefitted from it</h2>
-    <p class="res-sub">4 Switcher participants kept their tabs vertical most of the study. They maneuvered better and could see more of each tab title.</p>
+    <h2 class="section-title">Switcher helped participants discover and warm to different states, <span class="italic">which aligns with our goals</span></h2>
 
     <div class="res-diary">
       <div class="diary-row">
@@ -3227,21 +3334,12 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
           <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 6</span><span class="dd-count">8 tabs</span></span><p class="dd-quote">"Something I'll probably take forward&hellip; before I didn't see the use."</p></li>
         </ol>
       </div>
-    </div>
-
-    <div class="insight-bar">
-      <span class="insight-label">Insight</span>
-      Switcher helped participants discover and warm to different states.
-    </div>
-  </div>
 </section>
 
 <section class="slide res-slide" id="slide-r5">
   <div class="slide-inner">
     <div class="slide-tag">Results · Used as needed</div>
-    <h2 class="section-title">Many participants used Tab Central <span class="italic">sparingly</span></h2>
-    <p class="res-sub">3 Switcher and 5 Transient participants kept their tabs horizontal most of the time, reaching for the feature only as needed.</p>
-    <div class="res-legend"><span class="leg-octo" aria-hidden="true"></span> Days they didn't use the feature</div>
+    <h2 class="section-title">Participants in both groups kept their tabs horizontal, reaching for the feature <span class="italic">as needed.</span></h2>
 
     <div class="res-diary">
       <div class="diary-row">
@@ -3279,10 +3377,6 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
       </div>
     </div>
 
-    <div class="insight-bar">
-      <span class="insight-label">Insight</span>
-      Both Switcher and Transient let horizontal tab users reach for Tab Central on their own terms.
-    </div>
   </div>
 </section>
 
@@ -3290,8 +3384,6 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
   <div class="slide-inner">
     <div class="slide-tag">Results · The skeptics</div>
     <h2 class="section-title">Some heavy tab users want tabs <span class="italic">gone, not managed</span></h2>
-    <p class="res-sub">3 participants weren't interested in tab management despite typically keeping 10+ tabs open.</p>
-    <div class="res-legend"><span class="leg-octo" aria-hidden="true"></span> Days they didn't use the feature</div>
 
     <div class="res-diary">
       <div class="diary-row">
@@ -3329,9 +3421,44 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
       </div>
     </div>
 
-    <div class="decision-callout" style="margin-top: 40px;">
-      <div class="decision-callout-label">Recommendation</div>
-      <p>When we define our users, <strong>tab volume plays a role &mdash; but so do attitudes</strong> toward managing (vs. closing off) open tabs.</p>
+    <div class="insight-bar">
+      <span class="insight-label">Future Direction</span>
+      There's more to learn about attitudes towards tab clutter.
+    </div>
+  </div>
+</section>
+
+<section class="slide res-slide" id="slide-r7">
+  <div class="slide-inner">
+
+    <div class="decision-callout reco-callout">
+      <p class="reco-switcher-label">Recommendation</p>
+      <div class="decision-callout-label">Switcher</div>
+
+      <div class="verdict-schematic schem-toggle reco-schematic" role="button" tabindex="0" aria-pressed="false" data-schem="switcher" data-state="blank" aria-label="Switcher schematic. Click the chevron to open the side panel.">
+        <div class="schem-browser">
+          <div class="schem-top">
+            <button class="mega-trigger-btn" type="button" aria-label="Menu trigger" tabindex="-1"></button>
+            <span class="schem-dot"></span>
+            <span class="schem-dot"></span>
+            <span class="schem-dot"></span>
+          </div>
+          <div class="schem-body">
+            <div class="menu-content">
+              <div class="tab-content-box"></div>
+            </div>
+            <div class="menu-rail" aria-hidden="true">
+              <span class="active"></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+        <span class="schem-hint">Click the chevron to open</span>
+      </div>
+
+      <p><strong>Build the simpler Switcher menu.</strong> Lower the engineering cost, help users discover vertical tabs.</p>
     </div>
   </div>
 </section>
@@ -3347,6 +3474,12 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     <div class="impact-banner">
       <div class="impact-banner-label">Product impact</div>
       <p>It’s now in product, serving <strong>1.3M daily average users</strong>, helping people stay productive.</p>
+    </div>
+
+    <div class="outcome-video-wrap">
+      <video class="cover-video" controls preload="metadata" playsinline>
+        <source src="videos/tab-action-menu-today.mp4" type="video/mp4" />
+      </video>
     </div>
 
  
