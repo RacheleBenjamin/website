@@ -1803,7 +1803,7 @@
     <aside class="cover-pitch" aria-label="The decision window">
       <div class="cover-pitch-eyebrow">Decision Window</div>
       <p class="cover-pitch-text">Leadership review in one month. Clickable prototypes. The team needs direction.</p>
-      <p class="cover-pitch-sub"><strong>Core question:</strong> Will a simpler tab tool help users manage clutter?</p>
+      <p class="cover-pitch-sub"><strong>Core question:</strong> Will vertical tabs help users manage clutter?</p>
 
       <div class="cover-media-grid" aria-label="Prototype demos">
         <div class="cover-media-item">
@@ -1843,7 +1843,7 @@
           </svg>
         </div>
         <h3 class="dp-title">A tool for everyone</h3>
-        <p class="dp-desc">Optimize for daily use, enable a transitioning between horizontal and vertical tabs</p>
+        <p class="dp-desc">Optimize for daily use</p>
       </div>
 
       <div class="dp-card">
@@ -1856,7 +1856,7 @@
           </svg>
         </div>
         <h3 class="dp-title">Bring similar concepts together</h3>
-        <p class="dp-desc">Combine similar views (vertical tabs, tab manager) and tools like Recently closed, workspaces</p>
+        <p class="dp-desc">Combine tools</p>
       </div>
 
       <div class="dp-card">
@@ -1871,8 +1871,8 @@
             <path d="M18 36v4M30 36v4" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3 class="dp-title">Simplify the states</h3>
-        <p class="dp-desc">Minimizing the number of different states or modes the user interface can be in</p>
+        <h3 class="dp-title">Simplify states</h3>
+        <p class="dp-desc">Reduce different modes</p>
       </div>
     </div>
   </div>
@@ -2125,24 +2125,55 @@
     <div class="slide-tag">More signal to help them decide</div>
     <h2 class="section-title"><span class="italic">Vertical tabs is useful, but not discoverable</span></h2>
 
-            <div class="metric-orb" aria-label="7 percent of users flipped on vertical tabs">
-              <strong>5-7%</strong>
-              <span>Flipped it on</span>
-            </div>
-            <p>There’s a discoverability problem.</p>
-          </div>
-        </div>
-
-            <div class="metric-orb" aria-label="80 percent of people who flip it on keep it on">
-              <strong>80%</strong>
-              <span>Who flip it on, keep it on</span>
-            <p>DSAT from accidentally turning it on didn’t explain all the engagement.</p>
-          </div>
-        </div>
-      </div>
+    <div class="vt-cards">
+      <button class="vt-card" aria-expanded="false">
+        <strong class="vt-stat">11 / 16</strong>
+        <span class="vt-headline">Never turned it on</span>
+        <span class="vt-detail">In our user research, 11 of 16 participants had never activated vertical tabs &mdash; they didn't know the feature existed.</span>
+      </button>
+      <button class="vt-card" aria-expanded="false">
+        <strong class="vt-stat">5&ndash;7%</strong>
+        <span class="vt-headline">Flipped it on</span>
+        <span class="vt-detail">Only 5&ndash;7% of all Edge users have ever toggled vertical tabs on. There's a discoverability problem, not a usability problem.</span>
+      </button>
+      <button class="vt-card" aria-expanded="false">
+        <strong class="vt-stat">80%</strong>
+        <span class="vt-headline">Who flip it on, keep it on</span>
+        <span class="vt-detail">DSAT from accidentally turning it on doesn't explain all the engagement. It's a die-hard cohort &mdash; once they find it, they love it.</span>
+      </button>
     </div>
-
+  </div>
 </section>
+
+<style>
+  .vt-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 36px; }
+  @media (max-width: 700px) { .vt-cards { grid-template-columns: 1fr; } }
+  .vt-card {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+    background: #fff; border: 1px solid var(--ink-10); border-radius: 4px;
+    padding: 28px 24px; cursor: pointer; text-align: left;
+    transition: border-color .2s ease, box-shadow .2s ease;
+    font-family: inherit; font-size: inherit; color: inherit;
+  }
+  .vt-card:hover, .vt-card:focus-visible { border-color: var(--work); box-shadow: 0 8px 24px rgba(0,0,0,.06); outline: none; }
+  .vt-stat { font-size: clamp(36px,4vw,52px); font-weight: 700; color: var(--work); line-height: 1; letter-spacing: -.02em; }
+  .vt-headline { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .vt-detail {
+    font-size: 14px; color: var(--ink-70); line-height: 1.55;
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: max-height .35s ease, opacity .3s ease, margin-top .3s ease; margin-top: 0;
+  }
+  .vt-card[aria-expanded="true"] .vt-detail { max-height: 200px; opacity: 1; margin-top: 6px; }
+  .vt-card[aria-expanded="true"] { border-color: var(--work); }
+</style>
+<script>
+document.querySelectorAll('.vt-card').forEach(function(card){
+  card.addEventListener('click',function(){
+    var open = card.getAttribute('aria-expanded')==='true';
+    card.setAttribute('aria-expanded', open?'false':'true');
+  });
+});
+</script>
 
 <section class="slide" id="slide-6">
   <div class="slide-inner">
@@ -2151,11 +2182,11 @@
 
     <div class="direction-grid" aria-label="Two more concepts to pressure-test">
       <div class="direction-card">
-        <p class="direction-kicker">Transient</p>
-        <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="transient" data-state="blank" aria-label="Transient schematic. Click the chevron to open the menu, click again to pin it to the side.">
+        <p class="direction-kicker">Switcher</p>
+        <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="switcher" data-state="blank" aria-label="Switcher schematic. Click the chevron to open the side panel.">
           <div class="schem-browser">
             <div class="schem-top">
-              <button class="mega-trigger-btn" type="button" aria-label="Dropdown trigger" tabindex="-1"></button>
+              <button class="mega-trigger-btn" type="button" aria-label="Menu trigger" tabindex="-1"></button>
               <span class="schem-dot"></span>
               <span class="schem-dot"></span>
               <span class="schem-dot"></span>
@@ -2177,11 +2208,11 @@
       </div>
 
       <div class="direction-card">
-        <p class="direction-kicker">Switcher</p>
-        <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="switcher" data-state="blank" aria-label="Switcher schematic. Click the chevron to open the side panel.">
+        <p class="direction-kicker">Transient</p>
+        <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="transient" data-state="blank" aria-label="Transient schematic. Click the chevron to open the menu, click again to pin it to the side.">
           <div class="schem-browser">
             <div class="schem-top">
-              <button class="mega-trigger-btn" type="button" aria-label="Menu trigger" tabindex="-1"></button>
+              <button class="mega-trigger-btn" type="button" aria-label="Dropdown trigger" tabindex="-1"></button>
               <span class="schem-dot"></span>
               <span class="schem-dot"></span>
               <span class="schem-dot"></span>
@@ -2303,7 +2334,6 @@
   <div class="slide-inner">
     <div class="slide-tag">Outcome</div>
     <h2 class="section-title">The business made an <span class="italic">informed</span> choice</h2>
-    <p class="body">They built the complex one. In this case, complexity was okay in that moment, and engineering cost was something they were willing to invest. I don’t always need to be right; the point was that the business had enough signal to choose knowingly.</p>
 
 
     </div>
