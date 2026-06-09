@@ -1978,30 +1978,70 @@
 
     <div class="tension-map" aria-label="Product tension map">
       <div class="tension-card plain">
-        <h3 class="tension-card-title">Push toward simplicity</h3>
-        <ul>
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Push toward simplicity</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ul class="tension-bullets">
           <li>Design system change demands simplicity.</li>
           <li>Vertical tabs as an existing simple solution.</li>
         </ul>
       </div>
 
       <div class="tension-card plain">
-        <h3 class="tension-card-title">What’s known</h3>
-        <ul>
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">What's known</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ul class="tension-bullets">
           <li>People want help managing tabs.</li>
           <li>All their tools in one place appeals to tab-heavy users.</li>
         </ul>
       </div>
 
       <div class="tension-card plain">
-        <h3 class="tension-card-title">What’s unknown</h3>
-        <ul>
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">What's unknown</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ul class="tension-bullets">
           <li>Whether the simpler direction would still serve people.</li>
           <li>Whether vertical tabs DSAT is a reason to avoid it.</li>
           <li>Whether this concept has appeal beyond the most tab-heavy cohort.</li>
         </ul>
       </div>
     </div>
+
+    <style>
+      .tension-toggle {
+        display: flex; align-items: center; justify-content: space-between; width: 100%;
+        background: none; border: none; padding: 0; cursor: pointer;
+        font-family: inherit; color: inherit; gap: 12px;
+      }
+      .tension-toggle .tension-card-title { margin: 0; }
+      .toggle-chevron {
+        display: inline-block; width: 18px; height: 18px; flex-shrink: 0;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none'%3E%3Cpath d='M5 7l4 4 4-4' stroke='%231A1A1A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+        transition: transform .25s ease;
+      }
+      .tension-toggle[aria-expanded="true"] .toggle-chevron { transform: rotate(180deg); }
+      .tension-bullets {
+        max-height: 0; overflow: hidden; opacity: 0;
+        transition: max-height .35s ease, opacity .3s ease, margin-top .3s ease;
+        margin-top: 0; padding-left: 20px;
+      }
+      .tension-toggle[aria-expanded="true"] + .tension-bullets {
+        max-height: 300px; opacity: 1; margin-top: 12px;
+      }
+    </style>
+    <script>
+    document.querySelectorAll('.tension-toggle').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var open = btn.getAttribute('aria-expanded')==='true';
+        btn.setAttribute('aria-expanded', open?'false':'true');
+      });
+    });
+    </script>
   </div>
 </section>
 
@@ -2125,12 +2165,17 @@
     <div class="slide-tag">More signal to help them decide</div>
     <h2 class="section-title"><span class="italic">Vertical tabs is useful, but not discoverable</span></h2>
 
-    <div class="vt-cards">
+    <h3 class="vt-source-label">User research</h3>
+    <div class="vt-cards vt-cards--single">
       <button class="vt-card" aria-expanded="false">
         <strong class="vt-stat">11 / 16</strong>
         <span class="vt-headline">Never turned it on</span>
         <span class="vt-detail">In our user research, 11 of 16 participants had never activated vertical tabs &mdash; they didn't know the feature existed.</span>
       </button>
+    </div>
+
+    <h3 class="vt-source-label">Telemetry</h3>
+    <div class="vt-cards vt-cards--pair">
       <button class="vt-card" aria-expanded="false">
         <strong class="vt-stat">5&ndash;7%</strong>
         <span class="vt-headline">Flipped it on</span>
@@ -2146,8 +2191,15 @@
 </section>
 
 <style>
-  .vt-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 36px; }
-  @media (max-width: 700px) { .vt-cards { grid-template-columns: 1fr; } }
+  .vt-source-label {
+    font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-50); margin: 32px 0 12px; padding: 0;
+  }
+  .vt-source-label:first-of-type { margin-top: 36px; }
+  .vt-cards { display: grid; gap: 16px; }
+  .vt-cards--single { grid-template-columns: 1fr; max-width: 380px; }
+  .vt-cards--pair  { grid-template-columns: repeat(2,1fr); }
+  @media (max-width: 700px) { .vt-cards--pair { grid-template-columns: 1fr; } }
   .vt-card {
     display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
     background: #fff; border: 1px solid var(--ink-10); border-radius: 4px;
