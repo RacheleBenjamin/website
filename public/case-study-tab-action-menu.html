@@ -518,6 +518,11 @@
     box-shadow: 0 18px 28px rgba(0,0,0,.32);
   }
 
+  /* Transient floating: shorten so it doesn't reach the bottom (reads as unpinned vs. full-height pinned) */
+  .schem-toggle[data-schem="transient"][data-state="dropdown"] .menu-rail {
+    bottom: 12px;
+  }
+
   /* Transient dropdown: chevron becomes a flat pin glyph (browser-icon style) */
   .schem-toggle[data-schem="transient"][data-state="dropdown"] .mega-trigger-btn {
     border-color: transparent;
@@ -2432,7 +2437,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
         </button>
         <ul class="tension-bullets">
           <li>Vertical tabs may be disorienting in practice.</li>
-          <li>Flexibility might translate to more capture of different user groups.</li>
+          <li>Flexibility might translate to more capture of die-hard horizontal tab users.</li>
         </ul>
       </div>
     </div>
