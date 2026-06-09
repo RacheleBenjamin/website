@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>From Tab Overload to Tab Action Menu · Rachele Benjamin, PhD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #EDF2FA;
+    --ink: #1A1A1A;
+    --ink-70: rgba(26,26,26,.70);
+    --ink-60: rgba(26,26,26,.60);
+    --ink-50: rgba(26,26,26,.50);
+    --ink-30: rgba(26,26,26,.30);
+    --ink-10: rgba(26,26,26,.10);
+    --work: #005DAA;
+    --font-sans: 'Inter', 'Helvetica Neue', Roboto, Arial, 'Lucida Grande', sans-serif;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    font-family: var(--font-sans) !important;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  body {
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(237,242,250,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ink-10);
+  }
+
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .topbar a.home {
+    font-size: 18px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .topbar a.home span {
+    color: var(--work);
+  }
+
+  .topbar .meta {
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+  }
+
+  .slide {
+    position: relative;
+    padding: 96px 32px;
+    border-bottom: 1px solid var(--ink-10);
+  }
+
+  .slide-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .slide-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+
+  .section-title {
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    margin: 0 0 20px;
+  }
+
+  .italic {
+    color: var(--work);
+  }
+
+  .body {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .cover {
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 32px;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ink-50);
+    margin-bottom: 28px;
+  }
+
+  .cover h1 {
+    font-size: clamp(56px, 8.4vw, 104px);
+    line-height: 1.02;
+    letter-spacing: -.03em;
+    font-weight: 700;
+    margin: 0 auto 24px;
+    max-width: 11ch;
+  }
+
+  .cover h1 .accent {
+    color: var(--work);
+  }
+
+  .subtitle {
+    font-size: 13px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    margin-top: 12px;
+  }
+
+  .author {
+    margin-top: 48px;
+    font-size: 14px;
+    color: var(--ink-60);
+  }
+
+  .author strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .cover-pitch {
+    margin: 48px auto 0;
+    max-width: none;
+    text-align: left;
+    background: transparent;
+    color: var(--ink);
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .cover-pitch-eyebrow {
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .cover-pitch-text {
+    font-size: clamp(20px, 2.1vw, 26px);
+    line-height: 1.35;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .cover-pitch-sub {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--ink-10);
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.55;
+    color: var(--ink-70);
+  }
+
+  .cover-pitch-sub strong {
+    color: var(--ink);
+  }
+
+  .cover-media-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .cover-media-item {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+
+  .cover-media-title {
+    margin: 0;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-60);
+  }
+
+  .cover-video {
+    width: 100%;
+    height: clamp(280px, 30vw, 420px);
+    display: block;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    background: #0f0f0f;
+    object-fit: contain;
+  }
+
+  .cover-schematic {
+    margin-top: 10px;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    background: #fff;
+    padding: 10px;
+    display: block;
+  }
+
+  .schem-browser {
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+    height: 186px;
+  }
+
+  .schem-top {
+    height: 24px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid var(--ink-10);
+    background: #f7f9fd;
+  }
+
+  .schem-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: rgba(26,26,26,.25);
+  }
+
+  .schem-top .schem-dot:first-of-type {
+    margin-left: auto;
+  }
+
+  .schem-body {
+    height: 160px;
+    position: relative;
+    background: #fff;
+  }
+
+  .mega-trigger-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(26,26,26,.35);
+    background: #fff;
+    position: relative;
+    margin-right: 2px;
+  }
+
+  .mega-trigger-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-right: 1px solid rgba(26,26,26,.75);
+    border-bottom: 1px solid rgba(26,26,26,.75);
+    transform: translate(-50%, -65%) rotate(45deg);
+  }
+
+  .mega-open-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .mega-open-tab {
+    width: 16px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(26,26,26,.16);
+  }
+
+  .mega-content-hint {
+    margin: 10px;
+    height: calc(100% - 20px);
+    border: 1px dashed var(--ink-30);
+    border-radius: 4px;
+    background: linear-gradient(to bottom, rgba(26,26,26,.04), rgba(26,26,26,.02));
+  }
+
+  .mega-dropdown-panel {
+    position: absolute;
+    top: -12px;
+    left: 14px;
+    right: 96px;
+    border: 1px solid #374151;
+    border-radius: 4px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    background: #4b5563;
+    box-shadow: 0 16px 26px rgba(0,0,0,.26);
+    z-index: 2;
+  }
+
+  .mega-dropdown-panel div {
+    height: 62px;
+    border-radius: 3px;
+    background: rgba(255,255,255,.2);
+  }
+
+  .tab-centre-layout {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    height: 100%;
+  }
+
+  .tab-rail {
+    border-right: 1px solid var(--ink-10);
+    background: #4b5563;
+    padding: 8px 6px;
+    display: grid;
+    gap: 6px;
+    align-content: start;
+  }
+
+  .tab-rail span {
+    height: 18px;
+    border-radius: 3px;
+    background: rgba(255,255,255,.35);
+  }
+
+  .tab-rail span.active {
+    background: rgba(255,255,255,.7);
+  }
+
+  .tab-workspace {
+    padding: 10px;
+    display: block;
+  }
+
+  .tab-content-box {
+    height: 100%;
+    border: 1px dashed var(--ink-30);
+    border-radius: 4px;
+    background: linear-gradient(to bottom, rgba(26,26,26,.04), rgba(26,26,26,.02));
+  }
+
+  .tab-toolbar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .tab-toolbar span {
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(26,26,26,.16);
+  }
+
+  .tab-content {
+    border: 1px dashed var(--ink-30);
+    border-radius: 4px;
+    padding: 8px;
+    display: grid;
+    gap: 6px;
+  }
+
+  .tab-content span {
+    height: 12px;
+    border-radius: 3px;
+    background: rgba(26,26,26,.14);
+  }
+
+  .schem-caption {
+    margin: 8px 0 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--ink-60);
+    min-height: 36px;
+  }
+
+  .direction-grid {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .direction-card {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 28px;
+  }
+
+  .direction-kicker {
+    margin: 0 0 8px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    font-weight: 700;
+  }
+
+  .direction-name {
+    margin: 0 0 16px;
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.12;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .schem-toggle {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: transparent;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    display: block;
+  }
+
+  .schem-toggle:focus-visible {
+    outline: 2px solid var(--work);
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+
+  .menu-content {
+    position: absolute;
+    inset: 0;
+    left: 0;
+    padding: 10px;
+    transition: left .28s ease;
+  }
+
+  .menu-content .tab-content-box {
+    height: 100%;
+  }
+
+  .menu-rail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 68px;
+    background: #4b5563;
+    border-right: 1px solid #374151;
+    padding: 8px 6px;
+    display: grid;
+    gap: 6px;
+    align-content: start;
+    transform: translateY(-100%);
+    opacity: 0;
+    z-index: 2;
+    transition: transform .28s ease, opacity .2s ease, box-shadow .28s ease, border-radius .28s ease;
+  }
+
+  .menu-rail span {
+    height: 18px;
+    border-radius: 3px;
+    background: rgba(255,255,255,.35);
+  }
+
+  .menu-rail span.active {
+    background: rgba(255,255,255,.7);
+  }
+
+  /* Transient: floating dropdown (drop shadow, overlays content) */
+  .schem-toggle[data-state="dropdown"] .menu-rail {
+    transform: translateY(0);
+    opacity: 1;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 18px 28px rgba(0,0,0,.32);
+  }
+
+  /* Transient dropdown: chevron becomes a flat pin glyph (browser-icon style) */
+  .schem-toggle[data-schem="transient"][data-state="dropdown"] .mega-trigger-btn {
+    border-color: transparent;
+    background: transparent;
+    overflow: visible;
+  }
+
+  .schem-toggle[data-schem="transient"][data-state="dropdown"] .mega-trigger-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    border: 0;
+    background-color: var(--work);
+    transform: translate(-50%, -50%);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 9V4l1 0c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1l1 0v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16 9V4l1 0c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1l1 0v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  .schem-toggle[data-schem="transient"][data-state="dropdown"] .mega-trigger-btn::before {
+    content: none;
+  }
+
+  /* Mega menu: wide dropdown panel that drops in from the top */
+  .schem-toggle[data-schem="mega"] .mega-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 96px;
+    background: #4b5563;
+    border-bottom: 1px solid #374151;
+    border-radius: 0 0 4px 4px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    transform: translateY(-120%);
+    opacity: 0;
+    z-index: 2;
+    transition: transform .28s ease, opacity .2s ease, box-shadow .28s ease;
+  }
+
+  .schem-toggle[data-schem="mega"] .mega-panel > div {
+    border-radius: 3px;
+    background: rgba(255,255,255,.25);
+  }
+
+  .schem-toggle[data-schem="mega"][data-state="dropdown"] .mega-panel {
+    transform: translateY(0);
+    opacity: 1;
+    box-shadow: 0 18px 28px rgba(0,0,0,.32);
+  }
+
+  /* Switcher / pinned: docked panel (no shadow, pushes content) */
+  .schem-toggle[data-state="switcher"] .menu-rail,
+  .schem-toggle[data-state="panel"] .menu-rail {
+    transform: translateY(0);
+    opacity: 1;
+    border-radius: 0;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+  }
+
+  /* Switcher and Tab Centre are side panes, so they slide in from the left (not the top) */
+  .schem-toggle[data-schem="switcher"][data-state="blank"] .menu-rail,
+  .schem-toggle[data-schem="tabcentre"][data-state="blank"] .menu-rail {
+    transform: translateX(-100%);
+  }
+
+  .schem-toggle[data-state="switcher"] .menu-content,
+  .schem-toggle[data-state="panel"] .menu-content {
+    left: 68px;
+  }
+
+  .schem-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--work);
+  }
+
+  .schem-hint::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--work);
+  }
+
+  .direction-card p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .section-placeholder {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 0 0;
+    color: var(--ink-50);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .tension-map {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    align-items: start;
+  }
+
+  .tension-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .tension-card {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 24px;
+  }
+
+  .tension-card.plain {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .tension-card-title {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .tension-card p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .tension-card ul {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--ink-70);
+  }
+
+  .tension-card li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .tension-center {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    padding: 18px 0;
+  }
+
+  .tension-axis {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    right: 14px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(26,26,26,.18), rgba(0,93,170,.75), rgba(26,26,26,.18));
+    transform: translateY(-50%);
+  }
+
+  .tension-pole {
+    position: absolute;
+    top: calc(50% - 34px);
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--ink);
+  }
+
+  .tension-pole.left {
+    left: 8px;
+  }
+
+  .tension-pole.right {
+    right: 8px;
+  }
+
+  .tension-labels {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .tension-label {
+    width: 92px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    font-weight: 700;
+  }
+
+  .decision-core {
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    width: min(100%, 260px);
+    background: var(--ink);
+    color: #fff;
+    border-left: 6px solid var(--work);
+    border-radius: 4px;
+    padding: 24px 22px;
+    box-shadow: 0 18px 36px rgba(26,26,26,.18);
+  }
+
+  .decision-core-title {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.68);
+    font-weight: 700;
+  }
+
+  .decision-core-body {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.45;
+    color: #fff;
+  }
+
+  .option-strip {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .option-pill {
+    border: 1px solid var(--ink-10);
+    background: #fff;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+    font-weight: 600;
+  }
+
+  .notes-grid {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 20px;
+  }
+
+  .note-band {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 22px 24px;
+  }
+
+  .note-band-label {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .note-band p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .setup-visual {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 120px 1fr 120px 1fr;
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .setup-card {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 24px;
+  }
+
+  .setup-card-title {
+    margin: 0 0 12px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .setup-card p,
+  .setup-card li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .setup-card p {
+    margin: 0;
+  }
+
+  .setup-card ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .setup-card li + li {
+    margin-top: 8px;
+  }
+
+  .setup-card.highlight {
+    border-left: 4px solid var(--work);
+  }
+
+  .setup-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    color: var(--ink-30);
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .setup-subgrid {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .prompt-pill {
+    display: inline-block;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: var(--work);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .learn-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .learn-item {
+    padding: 16px 18px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 14px 32px rgba(26,26,26,.12);
+  }
+
+  .learn-item-title {
+    margin: 0 0 6px;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.62);
+    font-weight: 700;
+  }
+
+  .learn-item p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #fff;
+  }
+
+  .verdict-grid {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .verdict-card {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 28px;
+  }
+
+  .verdict-card.mega {
+    border-top: 3px solid rgba(26,26,26,.28);
+  }
+
+  .verdict-card.center {
+    border-top: 3px solid var(--work);
+  }
+
+  .verdict-kicker {
+    margin: 0 0 8px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    font-weight: 700;
+  }
+
+  .verdict-name {
+    margin: 0 0 18px;
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.12;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .verdict-schematic {
+    margin: 0 0 16px;
+    position: relative;
+  }
+
+  .verdict-quote-anchor {
+    position: absolute;
+    z-index: 10;
+  }
+
+  .verdict-hotspot {
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    border: 2px solid #fff;
+    background: var(--work);
+    box-shadow: 0 0 0 1px var(--work);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .verdict-hotspot:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  .verdict-hover-note {
+    position: absolute;
+    top: 18px;
+    left: 0;
+    width: max-content;
+    max-width: 280px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--ink-20);
+    background: #fff;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.45;
+    box-shadow: 0 14px 30px rgba(26,26,26,.14);
+    z-index: 12;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .2s ease, transform .2s ease;
+    pointer-events: none;
+  }
+
+  .verdict-hover-note.is-positive {
+    background: #eef2f7;
+  }
+
+  .verdict-hover-note.is-negative {
+    background: #fff0f0;
+  }
+
+  .verdict-quote-anchor:hover .verdict-hover-note,
+  .verdict-quote-anchor:focus-within .verdict-hover-note {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .verdict-quote-anchor.mega-a {
+    top: 8px;
+    left: 10px;
+  }
+
+  .verdict-quote-anchor.mega-b {
+    top: 52px;
+    left: 36px;
+  }
+
+  .verdict-quote-anchor.mega-b .verdict-hover-note {
+    left: 0;
+  }
+
+  .verdict-quote-anchor.center-a {
+    top: 26px;
+    left: 14px;
+  }
+
+  .verdict-quote-anchor.center-b {
+    left: 24px;
+    bottom: 18px;
+  }
+
+  .verdict-summary {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--ink-10);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .decision-callout {
+    margin-top: 28px;
+    background: var(--ink);
+    color: #fff;
+    border-left: 6px solid var(--work);
+    border-radius: 4px;
+    padding: 28px 30px;
+    box-shadow: 0 18px 40px rgba(26,26,26,.16);
+  }
+
+  .decision-callout-label {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.68);
+    font-weight: 700;
+  }
+
+  .decision-callout p {
+    margin: 0;
+    font-size: clamp(19px, 2vw, 24px);
+    line-height: 1.45;
+    color: #fff;
+  }
+
+  .decision-callout strong {
+    color: #fff;
+  }
+
+  .results-notes {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .results-note {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+
+  .results-note-label {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .results-note p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .timeline-strip {
+    margin-top: 38px;
+    position: relative;
+    padding: 0;
+  }
+
+  .timeline-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .timeline-step {
+    position: relative;
+    padding-top: 0;
+  }
+
+  .timeline-card {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 22px 24px;
+    min-height: 100%;
+  }
+
+  .timeline-kicker {
+    display: none;
+  }
+
+  .timeline-title {
+    margin: 0 0 12px;
+    font-size: 18px;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .timeline-card p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .timeline-card p + p {
+    margin-top: 12px;
+  }
+
+  .metric-orb {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .metric-orb strong {
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -.03em;
+    color: #fff;
+  }
+
+  .metric-orb span {
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.7);
+    font-weight: 700;
+  }
+
+  .bridge-panel {
+    margin-top: 36px;
+    background: var(--ink);
+    color: #fff;
+    border-left: 6px solid var(--work);
+    border-radius: 4px;
+    padding: 28px 30px;
+    box-shadow: 0 18px 40px rgba(26,26,26,.14);
+  }
+
+  .bridge-label {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.68);
+    font-weight: 700;
+  }
+
+  .bridge-panel p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.55;
+    color: #fff;
+  }
+
+  .bridge-subgrid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .bridge-chip {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 4px;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255,255,255,.88);
+  }
+
+  .diary-layout {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .diary-card {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 26px;
+  }
+
+  .diary-card-title {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .diary-card p,
+  .diary-card li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .diary-card p {
+    margin: 0;
+  }
+
+  .diary-card ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .diary-card li + li {
+    margin-top: 8px;
+  }
+
+  .cohort-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .cohort-box {
+    background: var(--cream);
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 18px;
+  }
+
+  .cohort-name {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .cohort-box p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-70);
+  }
+
+  .study-flow {
+    margin-top: 16px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .study-step {
+    background: #EAF4FF;
+    border-left: 4px solid var(--work);
+    border-radius: 4px;
+    padding: 16px 18px;
+  }
+
+  .study-step-title {
+    margin: 0 0 6px;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .study-step p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-70);
+  }
+
+  .diary-callout {
+    margin-top: 20px;
+    background: #BFDDF7;
+    border-left: 4px solid var(--work);
+    border-radius: 4px;
+    padding: 22px 24px;
+  }
+
+  .diary-callout-label {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .diary-callout p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .reco-tradeoff {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .reco-panel {
+    background: var(--ink);
+    color: #fff;
+    border-left: 6px solid var(--work);
+    border-radius: 4px;
+    padding: 30px 32px;
+    box-shadow: 0 18px 40px rgba(26,26,26,.16);
+  }
+
+  .reco-panel-label {
+    margin: 0 0 12px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.68);
+    font-weight: 700;
+  }
+
+  .reco-panel p {
+    margin: 0;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.5;
+    color: #fff;
+  }
+
+  .reco-support {
+    margin-top: 18px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .reco-support-item {
+    padding: 14px 16px;
+    border-radius: 4px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.9);
+  }
+
+  .risk-stack {
+    display: grid;
+    gap: 14px;
+  }
+
+  .risk-card {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 22px 24px;
+  }
+
+  .risk-card-title {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .risk-card p,
+  .risk-card li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .risk-card p {
+    margin: 0;
+  }
+
+  .risk-card ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .risk-card li + li {
+    margin-top: 8px;
+  }
+
+  .reco-bottom-note {
+    margin-top: 24px;
+    background: #EAF4FF;
+    border-left: 4px solid var(--work);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+
+  .reco-bottom-note-label {
+    margin: 0 0 8px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .reco-bottom-note p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .outcome-grid {
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .outcome-card {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 26px;
+  }
+
+  .outcome-card.actual {
+    border-top: 3px solid var(--work);
+  }
+
+  .outcome-card.reco {
+    border-top: 3px solid rgba(26,26,26,.24);
+  }
+
+  .outcome-label {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .outcome-title {
+    margin: 0 0 12px;
+    font-size: clamp(26px, 2.6vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .outcome-card p,
+  .outcome-card li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .outcome-card p {
+    margin: 0;
+  }
+
+  .outcome-card ul {
+    margin: 16px 0 0;
+    padding-left: 18px;
+  }
+
+  .outcome-card li + li {
+    margin-top: 8px;
+  }
+
+  .impact-banner {
+    margin-top: 26px;
+    background: var(--work);
+    color: #fff;
+    border-radius: 4px;
+    padding: 30px 32px;
+    box-shadow: 0 18px 40px rgba(0,93,170,.16);
+  }
+
+  .impact-banner-label {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.72);
+    font-weight: 700;
+  }
+
+  .impact-banner p {
+    margin: 0;
+    font-size: clamp(21px, 2.1vw, 28px);
+    line-height: 1.45;
+    color: #fff;
+  }
+
+  .reflection-note {
+    margin-top: 22px;
+    background: #EAF4FF;
+    border-left: 4px solid var(--work);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+
+  .reflection-note-label {
+    margin: 0 0 8px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--work);
+    font-weight: 700;
+  }
+
+  .reflection-note p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-70);
+  }
+
+  .figma-embed-wrap {
+    margin-top: 34px;
+    border: 1px solid var(--ink-10);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(26,26,26,.08);
+  }
+
+  .figma-embed-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--ink-10);
+    background: #f8fafc;
+  }
+
+  .figma-embed-meta p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-70);
+  }
+
+  .figma-embed-meta strong {
+    color: var(--ink);
+  }
+
+  .figma-open-link {
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--work);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .figma-open-link:hover {
+    text-decoration: underline;
+  }
+
+  .figma-embed {
+    width: 100%;
+    height: min(78vh, 820px);
+    border: 0;
+    display: block;
+    background: #fff;
+  }
+
+  .figma-blocked-note {
+    padding: 28px 22px 30px;
+    background: #fff;
+  }
+
+  .figma-blocked-note p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-70);
+    max-width: 72ch;
+  }
+
+  .figma-cta-row {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .figma-launch-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--ink);
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 11px 14px;
+    border-radius: 4px;
+  }
+
+  .figma-launch-btn:hover {
+    background: #000;
+  }
+
+  @media (max-width: 700px) {
+    .topbar-inner {
+      padding: 14px 20px;
+      flex-direction: column;
+    }
+
+    .slide,
+    .cover {
+      padding: 88px 20px;
+    }
+
+    .cover-pitch {
+      padding: 0;
+    }
+
+    .cover-media-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .notes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .setup-subgrid {
+      grid-template-columns: 1fr;
+    }
+
+    .results-notes {
+      grid-template-columns: 1fr;
+    }
+
+    .bridge-subgrid,
+    .cohort-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .figma-embed-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .figma-embed {
+      height: 68vh;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .tension-map {
+      grid-template-columns: 1fr;
+    }
+
+    .tension-center {
+      padding: 8px 0 18px;
+    }
+
+    .tension-axis {
+      top: 50%;
+    }
+
+    .setup-visual {
+      grid-template-columns: 1fr;
+    }
+
+    .setup-arrow {
+      min-height: auto;
+      transform: rotate(90deg);
+      padding: 4px 0;
+    }
+
+    .verdict-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-line {
+      display: none;
+    }
+
+    .diary-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .direction-grid {
+      grid-template-columns: 1fr;
+    }
+
+
+  @media (min-width: 981px) and (max-width: 1280px) {
+    .tension-map {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+    .reco-tradeoff {
+      grid-template-columns: 1fr;
+    }
+
+    .outcome-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="home" href="https://RacheleBenjamin.github.io/website/">Rachele <span>Benjamin</span></a>
+    <span class="meta">Case Study · Edge Productivity</span>
+  </div>
+</header>
+
+<section class="slide cover" id="slide-1">
+  <div class="slide-inner">
+    <div class="eyebrow">Case Study</div>
+    <h1>From Tab Overload to <span class="accent">Tab Action Menu</span></h1>
+    <div class="subtitle">De-risking decisions in Microsoft Edge</div>
+
+    <aside class="cover-pitch" aria-label="The decision window">
+      <div class="cover-pitch-eyebrow">Decision Window</div>
+      <p class="cover-pitch-text">Leadership review in one month. Clickable prototypes. The team needs direction.</p>
+      <p class="cover-pitch-sub"><strong>Core question:</strong> Will a simpler tab tool help users manage clutter?</p>
+
+      <div class="cover-media-grid" aria-label="Prototype demos">
+        <div class="cover-media-item">
+          <h3 class="cover-media-title">Mega Menu</h3>
+          <video class="cover-video" controls preload="metadata" playsinline>
+            <source src="videos/mega-menu-demo.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="cover-media-item">
+          <h3 class="cover-media-title">New: Tab Centre</h3>
+          <video class="cover-video" controls preload="metadata" playsinline>
+            <source src="videos/tab-centre-demo.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- Design Principles                                                  -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="slide-principles">
+  <div class="slide-inner">
+    <div class="slide-tag">Design Principles</div>
+    <h2 class="section-title">Three principles guided our <span class="italic">design decisions</span></h2>
+
+    <div class="dp-grid">
+      <div class="dp-card">
+        <div class="dp-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle cx="16" cy="20" r="6" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
+            <circle cx="24" cy="20" r="6" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
+            <circle cx="32" cy="20" r="6" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
+            <path d="M10 34c0-4 4-7 8-7h12c4 0 8 3 8 7" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="dp-title">A tool for everyone</h3>
+        <p class="dp-desc">Optimize for daily use, enable a transitioning between horizontal and vertical tabs</p>
+      </div>
+
+      <div class="dp-card">
+        <div class="dp-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="8" y="8" width="14" height="14" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
+            <rect x="26" y="8" width="14" height="14" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
+            <rect x="17" y="26" width="14" height="14" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
+            <path d="M22 15h4M15 22v4M33 22v4" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="dp-title">Bring similar concepts together</h3>
+        <p class="dp-desc">Combine similar views (vertical tabs, tab manager) and tools like Recently closed, workspaces</p>
+      </div>
+
+      <div class="dp-card">
+        <div class="dp-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="10" y="10" width="28" height="22" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
+            <path d="M10 18h28" stroke="var(--ink)" stroke-width="2"/>
+            <circle cx="33" cy="14" r="2" fill="var(--ink)"/>
+            <rect x="14" y="22" width="8" height="6" rx="1" stroke="var(--ink)" stroke-width="1.5" fill="none"/>
+            <line x1="26" y1="24" x2="34" y2="24" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="26" y1="27" x2="31" y2="27" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M18 36v4M30 36v4" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="dp-title">Simplify the states</h3>
+        <p class="dp-desc">Minimizing the number of different states or modes the user interface can be in</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .dp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+  }
+  @media (max-width: 700px) { .dp-grid { grid-template-columns: 1fr; } }
+  .dp-card {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 32px 28px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .dp-icon {
+    margin-bottom: 4px;
+  }
+  .dp-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0;
+  }
+  .dp-desc {
+    font-size: 14px;
+    color: var(--ink-70);
+    line-height: 1.55;
+    margin: 0;
+    max-width: 260px;
+  }
+</style>
+
+<section class="slide" id="slide-2">
+  <div class="slide-inner">
+    <div class="slide-tag">Context</div>
+    <h2 class="section-title">Design Leadership pushed back, and now the team is thinking seriously about the <span class="italic">simplicity-usability tradeoff</span></h2>
+
+    <div class="cover-media-grid" aria-label="Concept schematics">
+      <div class="cover-media-item">
+        <h3 class="cover-media-title">Mega Menu</h3>
+        <div class="cover-schematic" aria-label="Mega menu schematic">
+          <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="mega" data-state="blank" aria-label="Mega menu schematic. Click the trigger to open the menu.">
+            <div class="schem-browser">
+              <div class="schem-top">
+                <button class="mega-trigger-btn" type="button" aria-label="Menu trigger" tabindex="-1"></button>
+                <div class="mega-open-tabs" aria-hidden="true">
+                  <span class="mega-open-tab"></span>
+                  <span class="mega-open-tab"></span>
+                  <span class="mega-open-tab"></span>
+                </div>
+                <span class="schem-dot"></span>
+                <span class="schem-dot"></span>
+                <span class="schem-dot"></span>
+              </div>
+              <div class="schem-body">
+                <div class="menu-content"><div class="tab-content-box"></div></div>
+                <div class="mega-panel" aria-hidden="true">
+                  <div></div><div></div><div></div><div></div>
+                </div>
+              </div>
+            </div>
+            <span class="schem-hint">Click the trigger to open</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-media-item">
+        <h3 class="cover-media-title">New: Tab Centre</h3>
+        <div class="cover-schematic" aria-label="Tab centre schematic">
+          <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="tabcentre" data-state="blank" aria-label="Tab Centre schematic. Click the trigger to slide in the tab rail.">
+            <div class="schem-browser">
+              <div class="schem-top">
+                <button class="mega-trigger-btn" type="button" aria-label="Menu trigger" tabindex="-1"></button>
+                <span class="schem-dot"></span>
+                <span class="schem-dot"></span>
+                <span class="schem-dot"></span>
+              </div>
+              <div class="schem-body">
+                <div class="menu-content"><div class="tab-content-box"></div></div>
+                <div class="menu-rail" aria-hidden="true">
+                  <span class="active"></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+            <span class="schem-hint">Click the trigger to open</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tension-map" aria-label="Product tension map">
+      <div class="tension-card plain">
+        <h3 class="tension-card-title">Push toward simplicity</h3>
+        <ul>
+          <li>Design system change demands simplicity.</li>
+          <li>Vertical tabs as an existing simple solution.</li>
+        </ul>
+      </div>
+
+      <div class="tension-card plain">
+        <h3 class="tension-card-title">What’s known</h3>
+        <ul>
+          <li>People want help managing tabs.</li>
+          <li>All their tools in one place appeals to tab-heavy users.</li>
+        </ul>
+      </div>
+
+      <div class="tension-card plain">
+        <h3 class="tension-card-title">What’s unknown</h3>
+        <ul>
+          <li>Whether the simpler direction would still serve people.</li>
+          <li>Whether vertical tabs DSAT is a reason to avoid it.</li>
+          <li>Whether this concept has appeal beyond the most tab-heavy cohort.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-3">
+  <div class="slide-inner">
+    <div class="slide-tag">Plan</div>
+    <h2 class="section-title">Study setup to help the team <span class="italic">decide</span></h2>
+
+    <div class="setup-visual" aria-label="Study setup visual">
+
+      <div class="setup-card highlight">
+        <h3 class="setup-card-title">Method</h3>
+        <p>Unmoderated testing of discoverability, impressions, and usefulness. Two user groups, 8 participants each: tab-heavy, tab-light. Mega-menu tested after Tab Center.</p>
+      </div>
+
+    <div class="setup-subgrid">
+      <div class="setup-card">
+        <span class="prompt-pill">Prompt 1</span>
+        <p>get into the menu</p>
+      </div>
+      <div class="setup-card">
+        <span class="prompt-pill">Prompt 2</span>
+        <p>when would this be helpful</p>
+      </div>
+      <div class="setup-card">
+        <span class="prompt-pill">Prompt 3</span>
+        <p>when can you see yourself opening this menu</p>
+      </div>
+    </div>
+
+ 
+</section>
+
+<section class="slide" id="slide-4">
+  <div class="slide-inner">
+    <div class="slide-tag">Results</div>
+    <h2 class="section-title">On its own, <span class="italic">which one they liked better</span> didn't give signal</h2>
+
+    <div class="verdict-grid">
+      <div class="verdict-card mega">
+        <p class="verdict-kicker">Concept verdict</p>
+        <h3 class="verdict-name">Mega menu</h3>
+        <div class="verdict-schematic" aria-label="Mega menu schematic">
+          <div class="schem-browser">
+            <div class="schem-top">
+              <button class="mega-trigger-btn" type="button" aria-label="Menu trigger"></button>
+              <div class="mega-open-tabs" aria-hidden="true">
+                <span class="mega-open-tab"></span>
+                <span class="mega-open-tab"></span>
+                <span class="mega-open-tab"></span>
+              </div>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+            </div>
+            <div class="schem-body">
+              <div class="mega-content-hint"></div>
+              <div class="mega-dropdown-panel">
+                <div></div><div></div>
+              </div>
+            </div>
+          </div>
+          <div class="verdict-quote-anchor mega-a">
+            <button class="verdict-hotspot" type="button" aria-label="Show quote: better for nipping in and out"></button>
+            <div class="verdict-hover-note is-positive">“better for nipping in and out quickly”</div>
+          </div>
+          <div class="verdict-quote-anchor mega-b">
+            <button class="verdict-hotspot" type="button" aria-label="Show quote: “This is insane, I'm going to lose my mind if we open 2 more tabs, if there's a scroll bar here it’s going to be way too big"></button>
+            <div class="verdict-hover-note is-negative">“This is insane, I'm going to lose my mind if we open 2 more tabs, if there's a scroll bar here it’s going to be way too big.”</div>
+          </div>
+        </div>
+        <div class="verdict-summary">Mega menu had utility, but it felt bloated and cluttered.</div>
+      </div>
+
+      <div class="verdict-card center">
+        <p class="verdict-kicker">Concept verdict</p>
+        <h3 class="verdict-name">Tab Centre</h3>
+        <div class="verdict-schematic" aria-label="Tab centre schematic">
+          <div class="schem-browser">
+            <div class="schem-top">
+              <button class="mega-trigger-btn" type="button" aria-label="Menu trigger"></button>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+            </div>
+            <div class="schem-body">
+              <div class="tab-centre-layout">
+                <div class="tab-rail">
+                  <span class="active"></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="tab-workspace">
+                  <div class="tab-content-box"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="verdict-quote-anchor center-a">
+            <button class="verdict-hotspot" type="button" aria-label="Show quote: Way simpler layout"></button>
+            <div class="verdict-hover-note is-positive">“This is a way simpler layout”</div>
+          </div>
+          <div class="verdict-quote-anchor center-b">
+            <button class="verdict-hotspot" type="button" aria-label="Show quote: This is disorienting"></button>
+            <div class="verdict-hover-note is-negative">“This is disorienting”</div>
+          </div>
+        </div>
+        <div class="verdict-summary">Felt simpler, but created some disorientation.</div>
+      </div>
+    </div>
+
+    <div class="decision-callout">
+      <div class="decision-callout-label">Recommendation</div>
+      <p><strong>Go with Tab Centre (add an escape hatch). We didn’t get enough evidence to justify added clutter.</strong></p>
+    </div>
+
+
+<section class="slide" id="slide-5">
+  <div class="slide-inner">
+    <div class="slide-tag">More signal to help them decide</div>
+    <h2 class="section-title"><span class="italic">Vertical tabs is useful, but not discoverable</span></h2>
+
+            <div class="metric-orb" aria-label="7 percent of users flipped on vertical tabs">
+              <strong>5-7%</strong>
+              <span>Flipped it on</span>
+            </div>
+            <p>There’s a discoverability problem.</p>
+          </div>
+        </div>
+
+            <div class="metric-orb" aria-label="80 percent of people who flip it on keep it on">
+              <strong>80%</strong>
+              <span>Who flip it on, keep it on</span>
+            <p>DSAT from accidentally turning it on didn’t explain all the engagement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+<section class="slide" id="slide-6">
+  <div class="slide-inner">
+    <div class="slide-tag">Next stage of the study</div>
+    <h2 class="section-title">We presented to Product Leaders and were approved to build. The next key decision point: <span class="italic">How much flexibility do our users need?</span></h2>
+
+    <div class="direction-grid" aria-label="Two more concepts to pressure-test">
+      <div class="direction-card">
+        <p class="direction-kicker">Transient</p>
+        <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="transient" data-state="blank" aria-label="Transient schematic. Click the chevron to open the menu, click again to pin it to the side.">
+          <div class="schem-browser">
+            <div class="schem-top">
+              <button class="mega-trigger-btn" type="button" aria-label="Dropdown trigger" tabindex="-1"></button>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+            </div>
+            <div class="schem-body">
+              <div class="menu-content">
+                <div class="tab-content-box"></div>
+              </div>
+              <div class="menu-rail" aria-hidden="true">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <span class="schem-hint">Click the chevron to open</span>
+        </div>
+      </div>
+
+      <div class="direction-card">
+        <p class="direction-kicker">Switcher</p>
+        <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="switcher" data-state="blank" aria-label="Switcher schematic. Click the chevron to open the side panel.">
+          <div class="schem-browser">
+            <div class="schem-top">
+              <button class="mega-trigger-btn" type="button" aria-label="Menu trigger" tabindex="-1"></button>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+            </div>
+            <div class="schem-body">
+              <div class="menu-content">
+                <div class="tab-content-box"></div>
+              </div>
+              <div class="menu-rail" aria-hidden="true">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <span class="schem-hint">Click the chevron to open</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="diary-layout">
+      <div class="diary-card">
+        <h3 class="diary-card-title">Diary study dev environment</h3>
+        <p>To get more confidence, I ran a diary study in a dev environment with two user groups.</p>
+
+        <div class="cohort-grid">
+          <div class="cohort-box">
+            <h4 class="cohort-name">Tab heavy</h4>
+            <p>Users clearly living in the problem space the feature was meant to solve.</p>
+          </div>
+          <div class="cohort-box">
+            <h4 class="cohort-name">Tab normal</h4>
+            <p>Users closer to the broader population, to test whether the concept still held value.</p>
+          </div>
+        </div>
+
+        <div class="study-flow">
+          <div class="study-step">
+            <div class="study-step-title">Assignment</div>
+            <p>Randomly assign, 2 different groups.</p>
+          </div>
+          <div class="study-step">
+            <div class="study-step-title">Counterbalance</div>
+            <p>Small counterbalance component for richer insight on all the tasks, but also cross-feedback.</p>
+          </div>
+          <div class="study-step">
+            <div class="study-step-title">What this added</div>
+            <p>More confidence about how each direction behaved across different usage patterns, not just inside one narrow power-user cohort.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="diary-card">
+        <h3 class="diary-card-title">Why this stage mattered</h3>
+        <ul>
+          <li>The team still couldn’t rely on “which one they liked better.”</li>
+          <li>The richer question was whether flexibility actually solved the problem better, or just added complexity.</li>
+          <li>This stage set up the recommendation by checking whether people got stuck, whether the pattern converted people into vertical-tab users, and whether engineering cost was worth it.</li>
+        </ul>
+
+        <div class="diary-callout">
+          <div class="diary-callout-label">What this section sets up</div>
+          <p>The next step wasn’t just another round of preference testing. It was a way to see whether a more flexible concept created enough real behavior change to justify building it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide" id="slide-7">
+  <div class="slide-inner">
+    <div class="slide-tag">Recommendation</div>
+    <h2 class="section-title">Lower the cost, help users discover <span class="italic">vertical tabs</span></h2>
+    <p class="body">My recommendation was to build the simpler one. The team didn’t have signal that people were getting stuck in it, and there was signal that it could convert people into a vertical-tabs-is-solving-the-problem user group.</p>
+
+    <div class="reco-tradeoff">
+      <div class="reco-panel">
+        <div class="reco-panel-label">Recommendation</div>
+        <p>Build the simpler one. Lower the engineering cost, help users discover vertical tabs, and use the lighter-weight direction to move more people into a problem-solving behavior instead of over-investing in flexibility too early.</p>
+
+        <div class="reco-support">
+          <div class="reco-support-item">No clear signal that people were stuck in the simpler pattern.</div>
+          <div class="reco-support-item">Some people got into vertical tabs and wanted to keep it forever.</div>
+          <div class="reco-support-item">The stronger upside looked like conversion into a vertical-tabs user group, not maximum surface flexibility.</div>
+        </div>
+      </div>
+
+      <div class="risk-stack">
+        <div class="risk-card">
+          <div class="risk-card-title">What I was giving up</div>
+          <ul>
+            <li>The more flexible concept had genuine appeal.</li>
+            <li>It combined the best parts of Mega Menu and Tab Centre.</li>
+            <li>Some users may have benefited from the added control.</li>
+          </ul>
+        </div>
+
+        <div class="risk-card">
+          <div class="risk-card-title">Why I still recommended it</div>
+          <ul>
+            <li>The feedback was still balanced / mixed.</li>
+            <li>I didn’t have a strong reason to spend more engineering cost yet.</li>
+            <li>The simpler pattern looked like enough to learn from in product.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="reco-bottom-note">
+      <div class="reco-bottom-note-label">Decision logic</div>
+      <p>The recommendation wasn’t “build the one people liked better.” It was: build the cheaper one, because the evidence did not justify more complexity, and the product could still learn a lot by helping users discover vertical tabs.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-8">
+  <div class="slide-inner">
+    <div class="slide-tag">Outcome</div>
+    <h2 class="section-title">The business made an <span class="italic">informed</span> choice</h2>
+    <p class="body">They built the complex one. In this case, complexity was okay in that moment, and engineering cost was something they were willing to invest. I don’t always need to be right; the point was that the business had enough signal to choose knowingly.</p>
+
+
+    </div>
+
+    <div class="impact-banner">
+      <div class="impact-banner-label">Product impact</div>
+      <p>It’s now in product, serving <strong>1.3M daily average users</strong>, helping people stay productive.</p>
+    </div>
+
+ 
+<script>
+  (function () {
+    var cycles = {
+      transient: ['blank', 'dropdown', 'switcher'],
+      switcher: ['blank', 'panel'],
+      mega: ['blank', 'dropdown'],
+      tabcentre: ['blank', 'panel']
+    };
+    var hints = {
+      transient: {
+        blank: 'Click the chevron to open',
+        dropdown: 'Click again to pin to the side',
+        switcher: 'Pinned to the side — click to close'
+      },
+      switcher: {
+        blank: 'Click the chevron to open',
+        panel: 'Click to close'
+      },
+      mega: {
+        blank: 'Click the chevron to open',
+        dropdown: 'Click to close'
+      },
+      tabcentre: {
+        blank: 'Click the chevron to open',
+        panel: 'Click to close'
+      }
+    };
+    document.querySelectorAll('.schem-toggle').forEach(function (el) {
+      var kind = el.getAttribute('data-schem');
+      var states = cycles[kind];
+      if (!states) return;
+      function apply(state) {
+        el.setAttribute('data-state', state);
+        el.setAttribute('aria-pressed', state === 'blank' ? 'false' : 'true');
+        var hint = el.querySelector('.schem-hint');
+        if (hint && hints[kind]) hint.textContent = hints[kind][state];
+      }
+      function advance() {
+        var cur = el.getAttribute('data-state') || states[0];
+        var idx = states.indexOf(cur);
+        apply(states[(idx + 1) % states.length]);
+      }
+      el.addEventListener('click', advance);
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          advance();
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
