@@ -3114,31 +3114,24 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     .diary-days { grid-template-columns: 1fr; }
   }
 
+  /* Slide R4 hero: schematic + title side-by-side, uniform scale */
   .r4-hero {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 36px;
-    align-items: stretch;
+    align-items: center;
     margin-bottom: 8px;
   }
   .r4-schem-col {
-    width: 200px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    position: relative;
   }
-  .r4-schem-col > .verdict-schematic {
+  .r4-schem-col .verdict-schematic {
     margin: 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    transform-origin: top left;
   }
   .r4-schem-col .schem-browser {
-    flex: 1;
-    height: auto;
-  }
-  .r4-text-col {
-    align-self: center;
+    height: 186px;
+    width: 200px;
   }
   .r4-text-col .section-title {
     margin: 0;
@@ -3339,7 +3332,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
 <section class="slide res-slide" id="slide-r4">
   <div class="slide-inner">
-    <div class="slide-tag">Study 2 Results Â· Warming to vertical</div>
+    <div class="slide-tag">Study 2 Results · Warming to vertical</div>
     <div class="r4-hero">
       <div class="r4-schem-col">
         <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="switcher" data-state="blank" aria-label="Switcher schematic. Click the chevron to open the side panel.">
@@ -3403,11 +3396,27 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
           <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 6</span><span class="dd-count">8 tabs</span></span><p class="dd-quote">"Something I'll probably take forward&hellip; before I didn't see the use."</p></li>
         </ol>
       </div>
+<script>
+(function(){
+  function scaleR4(){
+    var text=document.querySelector(".r4-text-col");
+    var vs=document.querySelector(".r4-schem-col .verdict-schematic");
+    var col=document.querySelector(".r4-schem-col");
+    if(!text||!vs||!col)return;
+    var s=text.offsetHeight/186;
+    vs.style.transform="scale("+s+")";
+    col.style.width=(200*s)+"px";
+    col.style.height=(186*s)+"px";
+  }
+  scaleR4();
+  window.addEventListener("resize",scaleR4);
+})();
+</script>
 </section>
 
 <section class="slide res-slide" id="slide-r5">
   <div class="slide-inner">
-    <div class="slide-tag">Study 2 Results Â· Used as needed</div>
+    <div class="slide-tag">Study 2 Results · Used as needed</div>
     <h2 class="section-title">Participants in both groups kept their tabs horizontal, reaching for the feature <span class="italic">as needed.</span></h2>
 
     <div class="res-diary">
@@ -3451,7 +3460,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
 <section class="slide res-slide" id="slide-r6">
   <div class="slide-inner">
-    <div class="slide-tag">Study 2 Results Â· The skeptics</div>
+    <div class="slide-tag">Study 2 Results · The skeptics</div>
     <h2 class="section-title">Some heavy tab users want tabs <span class="italic">gone, not managed</span></h2>
 
     <div class="res-diary">
