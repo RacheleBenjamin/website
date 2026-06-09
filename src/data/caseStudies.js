@@ -212,8 +212,8 @@ export const caseStudies = [
     company: 'Microsoft',
     timeline: 'Aug 2024 - Present',
     caseUrl: '/website/case-study-tab-action-menu.html',
-    title: 'Productivity for the People: A 0-1 Feature for Organizing Browser Tabs',
-    subtitle: 'From blank-slate research to 1.3M daily active users',
+    title: 'Productivity for the People: A Feature for Organizing Browser Tabs',
+    subtitle: 'From concept validation to 1.3M daily active users',
     theme: '📑 Productivity',
     themeColor: '#0078D4',
     context:
