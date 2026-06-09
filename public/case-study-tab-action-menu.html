@@ -632,21 +632,14 @@
 
   .tension-map {
     margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
     width: 100%;
-    max-width: 1100px;
-    margin-left: auto;
+    max-width: 720px;
+    margin-left: 0;
     margin-right: auto;
-  }
-
-  @media (max-width: 800px) {
-    .tension-map {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
   }
 
   .tension-column {
@@ -1847,12 +1840,7 @@
     <div class="dp-grid">
       <div class="dp-card">
         <div class="dp-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <circle cx="16" cy="20" r="6" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
-            <circle cx="24" cy="20" r="6" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
-            <circle cx="32" cy="20" r="6" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
-            <path d="M10 34c0-4 4-7 8-7h12c4 0 8 3 8 7" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          </svg>
+  
         </div>
         <h3 class="dp-title">A tool for everyone</h3>
         <p class="dp-desc">Optimize for daily use</p>
@@ -1860,12 +1848,7 @@
 
       <div class="dp-card">
         <div class="dp-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="8" y="8" width="14" height="14" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
-            <rect x="26" y="8" width="14" height="14" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
-            <rect x="17" y="26" width="14" height="14" rx="2" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
-            <path d="M22 15h4M15 22v4M33 22v4" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/>
-          </svg>
+   
         </div>
         <h3 class="dp-title">Bring similar concepts together</h3>
         <p class="dp-desc">Combine tools</p>
@@ -1873,15 +1856,7 @@
 
       <div class="dp-card">
         <div class="dp-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="10" y="10" width="28" height="22" rx="3" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
-            <path d="M10 18h28" stroke="var(--ink)" stroke-width="2"/>
-            <circle cx="33" cy="14" r="2" fill="var(--ink)"/>
-            <rect x="14" y="22" width="8" height="6" rx="1" stroke="var(--ink)" stroke-width="1.5" fill="none"/>
-            <line x1="26" y1="24" x2="34" y2="24" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="26" y1="27" x2="31" y2="27" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M18 36v4M30 36v4" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
+      
         </div>
         <h3 class="dp-title">Simplify states</h3>
         <p class="dp-desc">Reduce different modes</p>
@@ -2006,7 +1981,7 @@
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
         <ul class="tension-bullets">
-          <li>Vertical tabs reduces the states.</li>
+          <li>Vertical tabs simplifies the states.</li>
         </ul>
       </div>
 
@@ -2060,26 +2035,36 @@
     <div class="slide-tag">Plan</div>
     <h2 class="section-title">Study setup to help the team <span class="italic">decide</span></h2>
 
-    <div class="setup-card highlight" style="margin-top: 40px;">
-      <h3 class="setup-card-title">Method</h3>
-      <p>Remote unmoderated concept testing of discoverability, impressions, and usefulness. Two user groups; mega-menu tested after Tab Centre.</p>
+    <div class="plan-fold" style="margin-top: 40px;">
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Method</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <p class="tension-bullets-text">Remote unmoderated concept testing of discoverability, impressions, and usefulness. Two user groups; mega-menu tested after Tab Centre.</p>
+      </div>
     </div>
 
     <h3 class="plan-section-label">Research questions</h3>
     <p class="plan-section-sub">Our questions mapped onto two design principles:</p>
 
-    <div class="rq-grid">
-      <div class="rq-card">
-        <h4 class="rq-principle">A tool for everyone</h4>
-        <ul>
+    <div class="plan-fold">
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">A tool for everyone</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ul class="tension-bullets">
           <li>When and why do different user groups need a tab tool?</li>
-          <li>How will tab manager and mega-menu help users quickly find a tab?</li>
-          <li>How do these tools facilitate the transition between horizontal and vertical tabs?</li>
+          <li>How well or poorly do tab manager and mega-menu help users manage tab clutter?</li>
         </ul>
       </div>
-      <div class="rq-card">
-        <h4 class="rq-principle">Bring similar concepts together</h4>
-        <ul>
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Bring similar concepts together</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ul class="tension-bullets">
           <li>Will users have easier access to features like Recently closed tabs and Workspaces from these entry points?</li>
         </ul>
       </div>
@@ -2088,32 +2073,23 @@
     <h3 class="plan-section-label">Participants</h3>
     <p class="plan-section-sub">Two user groups in remote unmoderated sessions. Both have 10+ tabs open at a time and hadn't used vertical tabs in the past month.</p>
 
-    <div class="participant-grid">
-      <div class="participant-card">
+    <div class="participant-row">
+      <div class="participant-item">
         <span class="participant-stat">10</span>
         <p class="participant-label">Non-workspaces &amp; non-tab group users</p>
       </div>
-      <div class="participant-card">
+      <div class="participant-item">
         <span class="participant-stat">6</span>
         <p class="participant-label">Workspaces &amp; tab groups users</p>
       </div>
     </div>
 
     <h3 class="plan-section-label">Prompts</h3>
-    <div class="setup-subgrid">
-      <div class="setup-card">
-        <span class="prompt-pill">Prompt 1</span>
-        <p>get into the menu</p>
-      </div>
-      <div class="setup-card">
-        <span class="prompt-pill">Prompt 2</span>
-        <p>when would this be helpful</p>
-      </div>
-      <div class="setup-card">
-        <span class="prompt-pill">Prompt 3</span>
-        <p>when can you see yourself opening this menu</p>
-      </div>
-    </div>
+    <ol class="prompt-list">
+      <li>get into the menu</li>
+      <li>when would this be helpful</li>
+      <li>when can you see yourself opening this menu</li>
+    </ol>
   </div>
 
   <style>
@@ -2126,55 +2102,29 @@
       font-weight: 700;
     }
     .plan-section-sub {
-      margin: 0 0 20px;
+      margin: 0 0 18px;
       font-size: 15px;
       line-height: 1.55;
       color: var(--ink-70);
       max-width: 720px;
     }
-    .rq-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
+    .plan-fold {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 720px;
     }
-    .rq-card {
-      background: #fff;
-      border: 1px solid var(--ink-10);
-      border-radius: 4px;
-      padding: 24px;
+    #slide-3 .participant-row {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
     }
-    .rq-principle {
-      margin: 0 0 14px;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--work);
-    }
-    .rq-card ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-    .rq-card li {
-      font-size: 15px;
-      line-height: 1.55;
-      color: var(--ink-70);
-    }
-    .rq-card li + li { margin-top: 10px; }
-    .participant-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-    .participant-card {
-      background: #fff;
-      border: 1px solid var(--ink-10);
-      border-left: 4px solid var(--work);
-      border-radius: 4px;
-      padding: 24px;
+    #slide-3 .participant-item {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
-    .participant-stat {
+    #slide-3 .participant-stat {
       font-size: clamp(40px, 5vw, 56px);
       font-weight: 700;
       color: var(--work);
@@ -2182,16 +2132,36 @@
       letter-spacing: -.02em;
       flex-shrink: 0;
     }
-    .participant-label {
+    #slide-3 .participant-label {
       margin: 0;
       font-size: 15px;
       line-height: 1.4;
       color: var(--ink-70);
+      max-width: 200px;
     }
+    .prompt-list {
+      margin: 0;
+      padding-left: 20px;
+      max-width: 720px;
+    }
+    .prompt-list li {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-70);
+    }
+    .prompt-list li + li { margin-top: 10px; }
     @media (max-width: 700px) {
-      .rq-grid, .participant-grid { grid-template-columns: 1fr; }
+      #slide-3 .participant-row { gap: 28px; }
     }
   </style>
+  <script>
+  document.querySelectorAll('#slide-3 .tension-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var open = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+    });
+  });
+  </script>
 </section>
 
 <section class="slide" id="slide-4">
