@@ -2060,13 +2060,46 @@
     <div class="slide-tag">Plan</div>
     <h2 class="section-title">Study setup to help the team <span class="italic">decide</span></h2>
 
-    <div class="setup-visual" aria-label="Study setup visual">
+    <div class="setup-card highlight" style="margin-top: 40px;">
+      <h3 class="setup-card-title">Method</h3>
+      <p>Remote unmoderated concept testing of discoverability, impressions, and usefulness. Two user groups; mega-menu tested after Tab Centre.</p>
+    </div>
 
-      <div class="setup-card highlight">
-        <h3 class="setup-card-title">Method</h3>
-        <p>Unmoderated testing of discoverability, impressions, and usefulness. Two user groups, 8 participants each: tab-heavy, tab-light. Mega-menu tested after Tab Center.</p>
+    <h3 class="plan-section-label">Research questions</h3>
+    <p class="plan-section-sub">Our questions mapped onto two design principles:</p>
+
+    <div class="rq-grid">
+      <div class="rq-card">
+        <h4 class="rq-principle">A tool for everyone</h4>
+        <ul>
+          <li>When and why do different user groups need a tab tool?</li>
+          <li>How will tab manager and mega-menu help users quickly find a tab?</li>
+          <li>How do these tools facilitate the transition between horizontal and vertical tabs?</li>
+        </ul>
       </div>
+      <div class="rq-card">
+        <h4 class="rq-principle">Bring similar concepts together</h4>
+        <ul>
+          <li>Will users have easier access to features like Recently closed tabs and Workspaces from these entry points?</li>
+        </ul>
+      </div>
+    </div>
 
+    <h3 class="plan-section-label">Participants</h3>
+    <p class="plan-section-sub">Two user groups in remote unmoderated sessions. Both have 10+ tabs open at a time and hadn't used vertical tabs in the past month.</p>
+
+    <div class="participant-grid">
+      <div class="participant-card">
+        <span class="participant-stat">10</span>
+        <p class="participant-label">Non-workspaces &amp; non-tab group users</p>
+      </div>
+      <div class="participant-card">
+        <span class="participant-stat">6</span>
+        <p class="participant-label">Workspaces &amp; tab groups users</p>
+      </div>
+    </div>
+
+    <h3 class="plan-section-label">Prompts</h3>
     <div class="setup-subgrid">
       <div class="setup-card">
         <span class="prompt-pill">Prompt 1</span>
@@ -2081,8 +2114,84 @@
         <p>when can you see yourself opening this menu</p>
       </div>
     </div>
+  </div>
 
- 
+  <style>
+    .plan-section-label {
+      margin: 48px 0 6px;
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+      font-weight: 700;
+    }
+    .plan-section-sub {
+      margin: 0 0 20px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-70);
+      max-width: 720px;
+    }
+    .rq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .rq-card {
+      background: #fff;
+      border: 1px solid var(--ink-10);
+      border-radius: 4px;
+      padding: 24px;
+    }
+    .rq-principle {
+      margin: 0 0 14px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--work);
+    }
+    .rq-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .rq-card li {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-70);
+    }
+    .rq-card li + li { margin-top: 10px; }
+    .participant-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .participant-card {
+      background: #fff;
+      border: 1px solid var(--ink-10);
+      border-left: 4px solid var(--work);
+      border-radius: 4px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .participant-stat {
+      font-size: clamp(40px, 5vw, 56px);
+      font-weight: 700;
+      color: var(--work);
+      line-height: 1;
+      letter-spacing: -.02em;
+      flex-shrink: 0;
+    }
+    .participant-label {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--ink-70);
+    }
+    @media (max-width: 700px) {
+      .rq-grid, .participant-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </section>
 
 <section class="slide" id="slide-4">
@@ -2182,7 +2291,7 @@
         <h3 class="tension-card-title">Never turned it on</h3>
         <span class="toggle-chevron" aria-hidden="true"></span>
       </button>
-      <p class="tension-bullets-text">In our user research, 11 of 16 participants had never activated vertical tabs &mdash; they didn't know the feature existed.</p>
+      <p class="tension-bullets-text">In our user research, 11 of 16 participants didn't know the feature existed.</p>
     </div>
 
     <h3 class="vt-source-label">Telemetry</h3>
@@ -2192,7 +2301,7 @@
         <h3 class="tension-card-title">Flipped it on</h3>
         <span class="toggle-chevron" aria-hidden="true"></span>
       </button>
-      <p class="tension-bullets-text">Only 5&ndash;7% of all Edge users have ever toggled vertical tabs on. There's a discoverability problem, not a usability problem.</p>
+      <p class="tension-bullets-text">Only 5&ndash;7% of all Edge users have ever toggled vertical tabs on. There's a discoverability problem.</p>
     </div>
 
 
@@ -2202,7 +2311,7 @@
         <h3 class="tension-card-title">Who flip it on, keep it on</h3>
         <span class="toggle-chevron" aria-hidden="true"></span>
       </button>
-      <p class="tension-bullets-text">DSAT from accidentally turning it on doesn't explain all the engagement. It's a die-hard cohort &mdash; once they find it, they love it.</p>
+      <p class="tension-bullets-text">DSAT from accidentally turning it on doesn't explain all the engagement.</p>
     </div>
   </div>
 </section>
