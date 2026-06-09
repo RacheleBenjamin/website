@@ -1813,7 +1813,7 @@
     <aside class="cover-pitch" aria-label="The decision window">
       <div class="cover-pitch-eyebrow">Decision Window</div>
       <p class="cover-pitch-text">Leadership review in one month. Clickable prototypes. The team needs direction.</p>
-      <p class="cover-pitch-sub"><strong>Core question:</strong> Will vertical tabs help users manage clutter?</p>
+      <p class="cover-pitch-sub"><strong>Core question:</strong> Will vertical tabs help users manage tab clutter, or will users reject it outright?</p>
 
       <div class="cover-media-grid" aria-label="Prototype demos">
         <div class="cover-media-item">
@@ -2286,7 +2286,7 @@
 
     <div class="decision-callout">
       <div class="decision-callout-label">Recommendation</div>
-      <p><strong>Go with Tab Centre</strong> (add an escape hatch). We de-risked the simpler design.</p>
+      <p><strong>Go with Tab Centre</strong> (but carefully plan an escape hatch for stuck users). We de-risked the simpler design.</p>
     </div>
 
 
@@ -2312,7 +2312,7 @@
         <h3 class="tension-card-title">Flipped it on</h3>
         <span class="toggle-chevron" aria-hidden="true"></span>
       </button>
-      <p class="tension-bullets-text">Only 5&ndash;7% of all Edge users have ever toggled vertical tabs on. There's a discoverability problem.</p>
+      <p class="tension-bullets-text">Only 3&ndash;4% of all Edge users have ever toggled vertical tabs on. There's a discoverability problem.</p>
     </div>
 
 
@@ -2509,7 +2509,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
         <div class="tension-bullets s2-participants">
-          <p class="plan-rq-intro">Horizontal tab users with 10+ tabs open on average were randomly assigned to either the <span class="italic">Switcher</span> or <span class="italic">Transient</span> condition.</p>
+          <p class="plan-rq-intro">Horizontal tab users with 10+ tabs open on average were randomly assigned to either the Switcher or Transient condition.</p>
 
           <div class="p-grid">
             <div class="p-group">
@@ -2539,6 +2539,11 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
         </div>
       </div>
+    </div>
+
+    <div class="decision-callout" style="margin-top: 40px;">
+      <div class="decision-callout-label">Recommendation</div>
+      <p><strong>Build the simpler Switcher menu.</strong> Lower the engineering cost, help users discover vertical tabs.</p>
     </div>
   </div>
 
@@ -2658,8 +2663,9 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     #slide-6b .p-switcher { color: var(--work); }
     #slide-6b .p-transient { color: #0f766e; }
     #slide-6b .p-bubbles {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 92px);
+      grid-auto-rows: 132px;
       gap: 20px 16px;
     }
     #slide-6b .p-bubble {
@@ -2716,24 +2722,624 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
   </script>
 </section>
 
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- RESULTS (Study 2 diary findings)                                    -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<style>
+  .res-slide .res-sub {
+    margin: 0 0 8px;
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.55;
+    color: var(--ink-70);
+    max-width: 880px;
+  }
+  /* shared insight / recommendation bar (PDF footer motif) */
+  .insight-bar {
+    margin-top: 44px;
+    background: linear-gradient(90deg, rgba(0,93,170,.07), rgba(15,118,110,.05));
+    border-radius: 4px;
+    padding: 20px 26px;
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.55;
+    color: var(--ink-70);
+  }
+  .insight-bar .insight-label {
+    font-weight: 700;
+    color: var(--ink);
+    margin-right: 6px;
+  }
+  .insight-bar .insight-label::after { content: " |"; color: var(--ink-30); }
 
+  /* condition color tokens reused across results */
+  .res-sw { color: var(--work); }
+  .res-tr { color: #0f766e; }
 
-    <div class="reco-tradeoff">
-      <div class="reco-panel">
-        <div class="reco-panel-label">Recommendation</div>
-        <p><strong>Build the simpler Switcher menu.</strong> Lower the engineering cost, help users discover vertical tabs.</p>
+  /* ── Slide R1: state-exploration scorecard ── */
+  .res-score {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .res-score-col {
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-top: 3px solid var(--work);
+    border-radius: 4px;
+    padding: 28px 30px 30px;
+  }
+  .res-score-col.is-tr { border-top-color: #0f766e; }
+  .res-score-head {
+    margin: 0 0 18px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+  .res-checklist { list-style: none; margin: 0 0 22px; padding: 0; }
+  .res-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    font-size: 16px;
+    color: var(--ink-70);
+    border-bottom: 1px solid var(--ink-10);
+  }
+  .res-checklist li:last-child { border-bottom: 0; }
+  .res-check {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: #fff;
+  }
+  .res-check.yes-sw { background: var(--work); }
+  .res-check.yes-tr { background: #0f766e; }
+  .res-check.no { background: var(--ink); }
+  .res-takeaway-title {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .res-takeaway-title.is-sw { color: var(--work); }
+  .res-takeaway-title.is-tr { color: #0f766e; }
+  .res-takeaway-body { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-70); }
+  .res-takeaway-body strong { color: var(--ink); }
 
-        <div class="reco-support">
+  /* ── Slide R2: split-preference faces ── */
+  .res-split {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .res-split-head {
+    margin: 0 0 22px;
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ink-10);
+  }
+  .res-split-head.is-sw { color: var(--work); }
+  .res-split-head.is-tr { color: #0f766e; }
+  .res-split-head.is-none { color: var(--ink-50); }
+  .res-face-line {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .res-face {
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--ink-30);
+    background: var(--ink-10);
+    flex-shrink: 0;
+  }
+  .res-face.is-sw { border-color: var(--work); }
+  .res-face.is-tr { border-color: #0f766e; }
+  .res-face.is-none { border-color: var(--ink-30); }
+  .res-quote {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--ink-70);
+  }
+  .res-quote::before {
+    content: "";
+    position: absolute;
+    left: -8px; top: 22px;
+    width: 14px; height: 14px;
+    background: #fff;
+    border-left: 1px solid var(--ink-10);
+    border-bottom: 1px solid var(--ink-10);
+    transform: rotate(45deg);
+  }
+  .res-split-note {
+    margin: 14px 0 0;
+    font-size: 14px;
+    color: var(--ink-50);
+    font-style: italic;
+  }
+
+  /* ── Slide R3: satisfaction line charts ── */
+  .res-charts {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .res-chart-head {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .res-chart-cond {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .res-chart-cond.is-sw { color: var(--work); }
+  .res-chart-cond.is-tr { color: #0f766e; }
+  .res-chart-desc {
+    margin: 4px 0 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-60);
+  }
+  .res-chart-desc strong { color: var(--ink); }
+  .res-chart svg { width: 100%; height: auto; display: block; }
+  .res-foot {
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--ink-50);
+    font-style: italic;
+  }
+
+  /* ── Slides R4-R6: day-by-day diaries ── */
+  .res-diary { margin-top: 44px; display: flex; flex-direction: column; gap: 14px; }
+  .diary-row {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 24px;
+    align-items: start;
+    background: #fff;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    padding: 22px 24px;
+  }
+  .diary-person { text-align: center; }
+  .diary-face {
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--ink-30);
+    background: var(--ink-10);
+  }
+  .diary-face.is-sw { border-color: var(--work); }
+  .diary-face.is-tr { border-color: #0f766e; }
+  .diary-person b { display: block; margin-top: 10px; font-size: 14px; color: var(--ink); }
+  .diary-person span { display: block; font-size: 12px; color: var(--ink-50); line-height: 1.35; }
+  .diary-person .diary-cond { font-weight: 600; margin-top: 3px; }
+  .diary-person .diary-cond.is-sw { color: var(--work); }
+  .diary-person .diary-cond.is-tr { color: #0f766e; }
+  .diary-days {
+    list-style: none; margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+  }
+  .diary-day { position: relative; }
+  .dd-chip {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 6px;
+    min-width: 64px;
+    width: 100%;
+  }
+  .dd-chip.is-off {
+    background: var(--ink-10);
+    clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+    padding: 14px 6px;
+  }
+  .dd-label { font-size: 13px; font-weight: 700; }
+  .diary-day.cond-sw .dd-label { color: var(--work); }
+  .diary-day.cond-tr .dd-label { color: #0f766e; }
+  .dd-chip.is-off .dd-label { color: var(--ink-60); }
+  .dd-count { font-size: 13px; color: var(--ink-70); }
+  .dd-chip.is-off .dd-count { color: var(--ink-50); }
+  .dd-quote {
+    margin: 8px 2px 0;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink-60);
+  }
+  .res-legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--ink-60);
+  }
+  .res-legend .leg-octo {
+    width: 22px; height: 22px;
+    background: var(--ink-10);
+    clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  }
+
+  @media (max-width: 820px) {
+    .res-score, .res-charts { grid-template-columns: 1fr; }
+    .res-split { grid-template-columns: 1fr; gap: 36px; }
+    .diary-row { grid-template-columns: 1fr; }
+    .diary-person { display: flex; align-items: center; gap: 16px; text-align: left; }
+    .diary-person b, .diary-person span { text-align: left; }
+    .diary-days { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .diary-days { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<section class="slide res-slide" id="slide-r1">
+  <div class="slide-inner">
+    <div class="slide-tag">Results · Exploring states</div>
+    <h2 class="section-title">Switcher helped people <span class="italic">explore different states</span> more than Transient</h2>
+    <p class="res-sub">Switcher wasn't as disorienting as we feared &mdash; and no one felt trapped in vertical.</p>
+
+    <div class="res-score">
+      <div class="res-score-col">
+        <h3 class="res-score-head res-sw">Switcher</h3>
+        <ul class="res-checklist">
+          <li><span class="res-check yes-sw">&#10003;</span> Navigate tab clutter</li>
+          <li><span class="res-check yes-sw">&#10003;</span> Discover different tab tools</li>
+          <li><span class="res-check yes-sw">&#10003;</span> Explore different states</li>
+        </ul>
+        <p class="res-takeaway-title is-sw">Switcher is not the trap we thought it was</p>
+        <p class="res-takeaway-body">About half our participants closed &amp; opened Tab Central only as needed. <strong>0</strong> felt trapped in vertical.</p>
+      </div>
+
+      <div class="res-score-col is-tr">
+        <h3 class="res-score-head res-tr">Transient</h3>
+        <ul class="res-checklist">
+          <li><span class="res-check yes-tr">&#10003;</span> Navigate tab clutter</li>
+          <li><span class="res-check yes-tr">&#10003;</span> Discover different tab tools</li>
+          <li><span class="res-check no">&#10005;</span> Explore different states</li>
+        </ul>
+        <p class="res-takeaway-title is-tr">We aimed for flexibility but achieved subtlety</p>
+        <p class="res-takeaway-body">Only <strong>2</strong> participants discovered and explored pinned vertical tabs during the study.</p>
+      </div>
+    </div>
+
+    <div class="insight-bar">
+      <span class="insight-label">Why care about vertical tabs</span>
+      Awareness is low (3&ndash;4%). It's in our best interest to introduce more users to it without alienating those who prefer horizontal tabs.
+    </div>
+  </div>
+</section>
+
+<section class="slide res-slide" id="slide-r2">
+  <div class="slide-inner">
+    <div class="slide-tag">Results · Preference</div>
+    <h2 class="section-title">Participants were <span class="italic">split</span> between Switcher and Transient</h2>
+    <p class="res-sub">Though we recommend Switcher, we must retain the qualities of Transient mode that people value.</p>
+
+    <div class="res-split">
+      <div class="res-split-col">
+        <h3 class="res-split-head is-sw">Chose Switcher</h3>
+        <div class="res-face-line">
+          <img class="res-face is-sw" src="images/diary-participants/chidubem.png" alt="Chidubem">
+          <div class="res-quote">"I have no need for the dropdown menu."</div>
+        </div>
+        <div class="res-face-line">
+          <img class="res-face is-sw" src="images/diary-participants/jennifer-w.png" alt="Jennifer W">
+        </div>
+        <div class="res-face-line">
+          <img class="res-face is-sw" src="images/diary-participants/jen-h.png" alt="Jen H">
+          <div class="res-quote">"[Switcher] means less clicks for the same results."</div>
         </div>
       </div>
 
+      <div class="res-split-col">
+        <h3 class="res-split-head is-tr">Chose Transient</h3>
+        <div class="res-face-line">
+          <img class="res-face is-tr" src="images/diary-participants/janet.png" alt="Janet">
+          <div class="res-quote">"[Pinned] takes up a lot of real estate on this side."</div>
+        </div>
+        <div class="res-face-line">
+          <img class="res-face is-tr" src="images/diary-participants/naomi.png" alt="Naomi">
+          <div class="res-quote">"It presents the feature in a less in-your-face fashion."</div>
+        </div>
+        <div class="res-face-line">
+          <img class="res-face is-tr" src="images/diary-participants/allison.png" alt="Allison">
+        </div>
+      </div>
+
+      <div class="res-split-col">
+        <h3 class="res-split-head is-none">Chose neither</h3>
+        <div class="res-face-line">
+          <img class="res-face is-none" src="images/diary-participants/brandon.png" alt="Brandon">
+        </div>
+        <div class="res-face-line">
+          <img class="res-face is-none" src="images/diary-participants/hanson.png" alt="Hanson">
+          <div class="res-quote">"I do not see vertical tabs being something that I explore any further."</div>
+        </div>
+        <div class="res-face-line">
+          <img class="res-face is-none" src="images/diary-participants/debbie.png" alt="Debbie">
+        </div>
+        <p class="res-split-note">Three participants didn't pick up on the difference.</p>
+      </div>
+    </div>
+
+    <div class="decision-callout" style="margin-top: 40px;">
+      <div class="decision-callout-label">Recommendation</div>
+      <p><strong>Move ahead with Switcher</strong> &mdash; and ensure it doesn't force users into vertical mode.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide res-slide" id="slide-r3">
+  <div class="slide-inner">
+    <div class="slide-tag">Results · Satisfaction</div>
+    <h2 class="section-title">Impressions of both variants were on average <span class="italic">positive (4/5)</span></h2>
+    <p class="res-sub">Daily satisfaction across the six-day diary, per participant and on average.</p>
+
+    <div class="res-charts">
+      <div class="res-chart-card">
+        <div class="res-chart-head">
+          <div class="res-chart-cond is-tr">Transient</div>
+          <p class="res-chart-desc">Used Tab Central <strong>about half</strong> of the days (vs. kept it closed)</p>
+        </div>
+        <div class="res-chart">
+          <svg viewBox="0 0 480 320" role="img" aria-label="Transient daily satisfaction line chart">
+            <!-- gridlines + y labels -->
+            <g font-size="11" fill="rgba(26,26,26,.45)">
+              <line x1="50" y1="30"  x2="450" y2="30"  stroke="rgba(26,26,26,.10)"/>
+              <line x1="50" y1="95"  x2="450" y2="95"  stroke="rgba(26,26,26,.10)"/>
+              <line x1="50" y1="160" x2="450" y2="160" stroke="rgba(26,26,26,.10)"/>
+              <line x1="50" y1="225" x2="450" y2="225" stroke="rgba(26,26,26,.10)"/>
+              <line x1="50" y1="290" x2="450" y2="290" stroke="rgba(26,26,26,.10)"/>
+              <text x="40" y="34"  text-anchor="end">5</text>
+              <text x="40" y="99"  text-anchor="end">4</text>
+              <text x="40" y="164" text-anchor="end">3</text>
+              <text x="40" y="229" text-anchor="end">2</text>
+              <text x="40" y="294" text-anchor="end">1</text>
+            </g>
+            <!-- x labels -->
+            <g font-size="11" fill="rgba(26,26,26,.55)" text-anchor="middle">
+              <text x="50"  y="310">1</text>
+              <text x="130" y="310">2</text>
+              <text x="210" y="310">3</text>
+              <text x="290" y="310">4</text>
+              <text x="370" y="310">5</text>
+              <text x="450" y="310">6</text>
+            </g>
+            <!-- faint individuals -->
+            <polyline points="50,95 130,30" fill="none" stroke="#0f766e" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 4"/>
+            <polyline points="50,160 130,160 210,160" fill="none" stroke="#0f766e" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 4"/>
+            <polyline points="370,160 450,160" fill="none" stroke="#0f766e" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 4"/>
+            <!-- average -->
+            <polyline points="50,127 130,95 210,127 290,30 370,127 450,75" fill="none" stroke="#0f766e" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+            <g fill="#0f766e">
+              <circle cx="50" cy="127" r="4"/><circle cx="130" cy="95" r="4"/><circle cx="210" cy="127" r="4"/>
+              <circle cx="290" cy="30" r="4"/><circle cx="370" cy="127" r="4"/><circle cx="450" cy="75" r="4"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="res-chart-card">
+        <div class="res-chart-head">
+          <div class="res-chart-cond is-sw">Switcher</div>
+          <p class="res-chart-desc">Used Tab Central on average <strong>5/6 days</strong> (vs. kept it closed)</p>
+        </div>
+        <div class="res-chart">
+          <svg viewBox="0 0 480 320" role="img" aria-label="Switcher daily satisfaction line chart">
+            <g font-size="11" fill="rgba(26,26,26,.45)">
+              <line x1="50" y1="30"  x2="450" y2="30"  stroke="rgba(26,26,26,.10)"/>
+              <line x1="50" y1="95"  x2="450" y2="95"  stroke="rgba(26,26,26,.10)"/>
+              <line x1="50" y1="160" x2="450" y2="160" stroke="rgba(26,26,26,.10)"/>
+              <line x1="50" y1="225" x2="450" y2="225" stroke="rgba(26,26,26,.10)"/>
+              <line x1="50" y1="290" x2="450" y2="290" stroke="rgba(26,26,26,.10)"/>
+              <text x="40" y="34"  text-anchor="end">5</text>
+              <text x="40" y="99"  text-anchor="end">4</text>
+              <text x="40" y="164" text-anchor="end">3</text>
+              <text x="40" y="229" text-anchor="end">2</text>
+              <text x="40" y="294" text-anchor="end">1</text>
+            </g>
+            <g font-size="11" fill="rgba(26,26,26,.55)" text-anchor="middle">
+              <text x="50"  y="310">1</text>
+              <text x="130" y="310">2</text>
+              <text x="210" y="310">3</text>
+              <text x="290" y="310">4</text>
+              <text x="370" y="310">5</text>
+              <text x="450" y="310">6</text>
+            </g>
+            <!-- faint individuals -->
+            <polyline points="50,30 130,95 210,95 290,95 370,95 450,30" fill="none" stroke="var(--work)" stroke-opacity=".40" stroke-width="2" stroke-dasharray="4 4"/>
+            <polyline points="50,160 130,160 210,160" fill="none" stroke="var(--work)" stroke-opacity=".40" stroke-width="2" stroke-dasharray="4 4"/>
+            <!-- average -->
+            <polyline points="50,95 130,121 210,108 290,95 370,108 450,69" fill="none" stroke="var(--work)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+            <g fill="var(--work)">
+              <circle cx="50" cy="95" r="4"/><circle cx="130" cy="121" r="4"/><circle cx="210" cy="108" r="4"/>
+              <circle cx="290" cy="95" r="4"/><circle cx="370" cy="108" r="4"/><circle cx="450" cy="69" r="4"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <p class="res-foot">Two participants dropped out after 1&ndash;2 days; if they had continued, Transient usage could have reached 4/6 days.</p>
+
+    <div class="insight-bar">
+      <span class="insight-label">Insight</span>
+      In Switcher mode Tab Central is more available (and therefore more used) &mdash; but not more frustrating.
+    </div>
+  </div>
+</section>
+
+<section class="slide res-slide" id="slide-r4">
+  <div class="slide-inner">
+    <div class="slide-tag">Results · Warming to vertical</div>
+    <h2 class="section-title">Switcher users who kept tabs <span class="italic">vertical</span> benefitted from it</h2>
+    <p class="res-sub">4 Switcher participants kept their tabs vertical most of the study. They maneuvered better and could see more of each tab title.</p>
+
+    <div class="res-diary">
+      <div class="diary-row">
+        <div class="diary-person">
+          <img class="diary-face is-sw" src="images/diary-participants/jen-h.png" alt="Jen H">
+          <b>Jen H</b>
+          <span>Delivery driver</span>
+          <span class="diary-cond is-sw">Switcher</span>
+        </div>
+        <ol class="diary-days">
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 1</span><span class="dd-count">20+ tabs</span></span></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 2</span><span class="dd-count">45 tabs</span></span><p class="dd-quote">"I can leave it open so I can go back to it."</p></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 3</span><span class="dd-count">47 tabs</span></span></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 4</span><span class="dd-count">47 tabs</span></span></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 5</span><span class="dd-count">47 tabs</span></span><p class="dd-quote">"I feel more organized and it's easier to maneuver."</p></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 6</span><span class="dd-count">30&ndash;40 tabs</span></span><p class="dd-quote">"Now I see almost the whole title&hellip; it's less stressful."</p></li>
+        </ol>
+      </div>
+
+      <div class="diary-row">
+        <div class="diary-person">
+          <img class="diary-face is-sw" src="images/diary-participants/lauren.png" alt="Lauren">
+          <b>Lauren</b>
+          <span>Research administrator</span>
+          <span class="diary-cond is-sw">Switcher</span>
+        </div>
+        <ol class="diary-days">
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 1</span><span class="dd-count">2 tabs</span></span></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 2</span><span class="dd-count">6 tabs</span></span><p class="dd-quote">"I guess the vertical tabs are fine."</p></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 3</span><span class="dd-count">6 tabs</span></span><p class="dd-quote">"When they're vertical it's easier to scan with your eyes."</p></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 4</span><span class="dd-count">2&ndash;3 tabs</span></span></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 5</span><span class="dd-count">3 tabs</span></span></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 6</span><span class="dd-count">8 tabs</span></span><p class="dd-quote">"Something I'll probably take forward&hellip; before I didn't see the use."</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="insight-bar">
+      <span class="insight-label">Insight</span>
+      Switcher helped participants discover and warm to different states.
+    </div>
+  </div>
+</section>
+
+<section class="slide res-slide" id="slide-r5">
+  <div class="slide-inner">
+    <div class="slide-tag">Results · Used as needed</div>
+    <h2 class="section-title">Many participants used Tab Central <span class="italic">sparingly</span></h2>
+    <p class="res-sub">3 Switcher and 5 Transient participants kept their tabs horizontal most of the time, reaching for the feature only as needed.</p>
+    <div class="res-legend"><span class="leg-octo" aria-hidden="true"></span> Days they didn't use the feature</div>
+
+    <div class="res-diary">
+      <div class="diary-row">
+        <div class="diary-person">
+          <img class="diary-face is-tr" src="images/diary-participants/allison.png" alt="Allison">
+          <b>Allison</b>
+          <span>College student</span>
+          <span class="diary-cond is-tr">Transient</span>
+        </div>
+        <ol class="diary-days">
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 1</span><span class="dd-count">3 tabs</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip"><span class="dd-label">Day 2</span><span class="dd-count">10 tabs</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 3</span><span class="dd-count">4 tabs</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 4</span><span class="dd-count">3 tabs</span></span><p class="dd-quote">"Bills and videos didn't require a lot of tabs."</p></li>
+          <li class="diary-day cond-tr"><span class="dd-chip"><span class="dd-label">Day 5</span><span class="dd-count">7 tabs</span></span><p class="dd-quote">"It really helped me organize my thoughts for my ungrouped tabs."</p></li>
+          <li class="diary-day cond-tr"><span class="dd-chip"><span class="dd-label">Day 6</span><span class="dd-count">7 tabs</span></span></li>
+        </ol>
+      </div>
+
+      <div class="diary-row">
+        <div class="diary-person">
+          <img class="diary-face is-sw" src="images/diary-participants/shalon.png" alt="Shalon">
+          <b>Shalon</b>
+          <span>PhD applicant</span>
+          <span class="diary-cond is-sw">Switcher</span>
+        </div>
+        <ol class="diary-days">
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 1</span><span class="dd-count">6&ndash;8 tabs</span></span><p class="dd-quote">"[Tab Central] is more effective for storing and organizing."</p></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 2</span><span class="dd-count">10&ndash;15 tabs</span></span></li>
+          <li class="diary-day cond-sw"><span class="dd-chip is-off"><span class="dd-label">Day 3</span><span class="dd-count">11 tabs</span></span><p class="dd-quote">"Worked a 9hr shift&hellip; didn't have time to use it."</p></li>
+          <li class="diary-day cond-sw"><span class="dd-chip is-off"><span class="dd-label">Day 4</span><span class="dd-count">2&ndash;3 tabs</span></span></li>
+          <li class="diary-day cond-sw"><span class="dd-chip is-off"><span class="dd-label">Day 5</span><span class="dd-count">5 tabs</span></span></li>
+          <li class="diary-day cond-sw"><span class="dd-chip"><span class="dd-label">Day 6</span><span class="dd-count">26 tabs</span></span><p class="dd-quote">"I needed to organize 15+ websites into one group."</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="insight-bar">
+      <span class="insight-label">Insight</span>
+      Both Switcher and Transient let horizontal tab users reach for Tab Central on their own terms.
+    </div>
+  </div>
+</section>
+
+<section class="slide res-slide" id="slide-r6">
+  <div class="slide-inner">
+    <div class="slide-tag">Results · The skeptics</div>
+    <h2 class="section-title">Some heavy tab users want tabs <span class="italic">gone, not managed</span></h2>
+    <p class="res-sub">3 participants weren't interested in tab management despite typically keeping 10+ tabs open.</p>
+    <div class="res-legend"><span class="leg-octo" aria-hidden="true"></span> Days they didn't use the feature</div>
+
+    <div class="res-diary">
+      <div class="diary-row">
+        <div class="diary-person">
+          <img class="diary-face is-tr" src="images/diary-participants/janet.png" alt="Janet">
+          <b>Janet</b>
+          <span>Teambuilding &amp; development</span>
+          <span class="diary-cond is-tr">Transient</span>
+        </div>
+        <ol class="diary-days">
+          <li class="diary-day cond-tr"><span class="dd-chip"><span class="dd-label">Day 1</span><span class="dd-count">4 tabs</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip"><span class="dd-label">Day 2</span><span class="dd-count">4 tabs</span></span><p class="dd-quote">"I don't understand when I'd ever organize tabs vs. just getting rid of them."</p></li>
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 3</span><span class="dd-count">4 tabs</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 4</span><span class="dd-count">20 tabs</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 5</span><span class="dd-count">NA</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 6</span><span class="dd-count">7 tabs</span></span><p class="dd-quote">"I just quickly closed them as they fell under the cursor."</p></li>
+        </ol>
+      </div>
+
+      <div class="diary-row">
+        <div class="diary-person">
+          <img class="diary-face is-tr" src="images/diary-participants/brandon.png" alt="Brandon">
+          <b>Brandon</b>
+          <span>Field engineer</span>
+          <span class="diary-cond is-tr">Transient</span>
+        </div>
+        <ol class="diary-days">
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 1</span><span class="dd-count">6&ndash;8 tabs</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 2</span><span class="dd-count">NA</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip"><span class="dd-label">Day 3</span><span class="dd-count">7 tabs</span></span><p class="dd-quote">"I used it mainly because I knew it was there."</p></li>
+          <li class="diary-day cond-tr"><span class="dd-chip is-off"><span class="dd-label">Day 4</span><span class="dd-count">2 tabs</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip"><span class="dd-label">Day 5</span><span class="dd-count">6 tabs</span></span></li>
+          <li class="diary-day cond-tr"><span class="dd-chip"><span class="dd-label">Day 6</span><span class="dd-count">5 tabs</span></span><p class="dd-quote">"I simply don't use tabs the way this was invented to."</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="decision-callout" style="margin-top: 40px;">
+      <div class="decision-callout-label">Recommendation</div>
+      <p>When we define our users, <strong>tab volume plays a role &mdash; but so do attitudes</strong> toward managing (vs. closing off) open tabs.</p>
+    </div>
   </div>
 </section>
 
 <section class="slide" id="slide-8">
   <div class="slide-inner">
     <div class="slide-tag">Outcome</div>
-    <h2 class="section-title">The business made an <span class="italic">informed</span> choice</h2>
+    <h2 class="section-title">Another LT review, and the business made an <span class="italic">informed</span> choice</h2>
 
 
     </div>
