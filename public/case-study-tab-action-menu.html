@@ -2459,27 +2459,31 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     <div class="slide-tag">Study 2 plan</div>
     <h2 class="section-title">A week-long diary study to see how <span class="italic">behavior evolves</span></h2>
 
-    <div class="s2-timeline" aria-label="Study timeline">
-      <div class="s2-phase">
-        <div class="s2-phase-day">Day 0</div>
-        <div class="s2-phase-name">Setup</div>
-        <p>Implement the flag in Edge Dev.</p>
-      </div>
-      <div class="s2-arrow" aria-hidden="true">→</div>
-      <div class="s2-phase">
-        <div class="s2-phase-day">Days 1–6</div>
-        <div class="s2-phase-name">Diary study</div>
-        <p>Measure how satisfaction &amp; usage patterns evolve throughout the week; collect impressions of specific tools &amp; features (Tab search, Workspaces).</p>
-      </div>
+    <div class="s2-timeline" aria-label="Study timeline across one week">
+      <ol class="s2-steps">
+        <li class="s2-step">
+          <span class="s2-node" aria-hidden="true"></span>
+          <div class="s2-step-day">Day 0</div>
+          <div class="s2-step-name">Setup</div>
+          <p>Implement the flag in Edge Dev.</p>
+        </li>
+        <li class="s2-step">
+          <span class="s2-node" aria-hidden="true"></span>
+          <div class="s2-step-day">Days 1–5</div>
+          <div class="s2-step-name">Diary study</div>
+          <p>Measure how satisfaction &amp; usage patterns evolve throughout the week; collect impressions of specific tools &amp; features (Tab search, Workspaces).</p>
+        </li>
+        <li class="s2-step">
+          <span class="s2-node" aria-hidden="true"></span>
+          <div class="s2-step-day">Day 6</div>
+          <div class="s2-step-name">Compare</div>
+          <p>Compare Transient and Switcher.</p>
+        </li>
+      </ol>
     </div>
 
     <div class="plan-fold" style="margin-top: 40px;">
       <div class="plan-fold-item">
-        <button class="tension-toggle" aria-expanded="false">
-          <h3 class="tension-card-title">Method</h3>
-          <span class="toggle-chevron" aria-hidden="true"></span>
-        </button>
-        <p class="tension-bullets-text">A diary study run in Edge Dev. We measured how satisfaction and usage patterns shifted across a full week of real use, rather than relying on a single first-impression session.</p>
       </div>
 
       <div class="plan-fold-item">
@@ -2539,45 +2543,61 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
   <style>
     .s2-timeline {
-      margin-top: 40px;
-      display: flex;
-      align-items: stretch;
-      gap: 20px;
-      max-width: 860px;
+      margin-top: 48px;
+      position: relative;
+      max-width: 940px;
     }
-    .s2-phase {
-      flex: 1;
-      background: #fff;
-      border: 1px solid var(--ink-10);
-      border-top: 4px solid var(--work);
-      border-radius: 4px;
-      padding: 22px 24px;
+    .s2-steps {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
     }
-    .s2-phase-day {
+    .s2-step {
+      position: relative;
+      padding-top: 30px;
+    }
+    .s2-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 7px;
+      width: calc(100% + 28px);
+      height: 2px;
+      background: var(--ink-10);
+      z-index: 0;
+    }
+    .s2-node {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--work);
+      box-shadow: 0 0 0 4px var(--cream);
+      z-index: 1;
+    }
+    .s2-step-day {
       font-size: 12px;
       letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--work);
       font-weight: 700;
     }
-    .s2-phase-name {
+    .s2-step-name {
       margin: 4px 0 10px;
       font-size: 20px;
       font-weight: 700;
       color: var(--ink);
     }
-    .s2-phase p {
+    .s2-step p {
       margin: 0;
       font-size: 15px;
       line-height: 1.55;
       color: var(--ink-70);
-    }
-    .s2-arrow {
-      display: flex;
-      align-items: center;
-      color: var(--ink-30);
-      font-size: 30px;
-      line-height: 1;
     }
     #slide-6b .participant-row {
       display: flex;
@@ -2664,8 +2684,11 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     #slide-6b .p-bubble figcaption span { font-size: 11px; line-height: 1.3; color: var(--ink-50); }
     #slide-6b .p-note { margin-top: 28px; font-size: 13px; font-style: italic; color: var(--ink-50); }
     @media (max-width: 700px) {
-      .s2-timeline { flex-direction: column; }
-      .s2-arrow { transform: rotate(90deg); justify-content: center; }
+      .s2-steps { grid-template-columns: 1fr; gap: 0; }
+      .s2-step { padding: 0 0 28px 30px; }
+      .s2-step:not(:last-child)::after {
+        top: 7px; left: 6px; width: 2px; height: 100%;
+      }
       #slide-6b .p-grid { grid-template-columns: 1fr; gap: 28px; }
     }
   </style>
