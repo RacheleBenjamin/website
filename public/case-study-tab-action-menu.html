@@ -632,10 +632,13 @@
 
   .tension-map {
     margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 24px;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .tension-column {
@@ -1983,8 +1986,7 @@
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
         <ul class="tension-bullets">
-          <li>Design system change demands simplicity.</li>
-          <li>Vertical tabs as an existing simple solution.</li>
+          <li>Vertical tabs reduces the states.</li>
         </ul>
       </div>
 
@@ -1994,8 +1996,8 @@
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
         <ul class="tension-bullets">
-          <li>People want help managing tabs.</li>
-          <li>All their tools in one place appeals to tab-heavy users.</li>
+          <li>People need help managing tabs.</li>
+          <li>The menu brings tools together.</li>
         </ul>
       </div>
 
@@ -2005,16 +2007,15 @@
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
         <ul class="tension-bullets">
-          <li>Whether the simpler direction would still serve people.</li>
           <li>Whether vertical tabs DSAT is a reason to avoid it.</li>
-          <li>Whether this concept has appeal beyond the most tab-heavy cohort.</li>
+          <li>Whether this concept appeals to non-tab-heavy users.</li>
         </ul>
       </div>
     </div>
 
     <style>
       .tension-toggle {
-        display: flex; align-items: center; justify-content: space-between; width: 100%;
+        display: flex; align-items: center; justify-content: flex-start;
         background: none; border: none; padding: 0; cursor: pointer;
         font-family: inherit; color: inherit; gap: 12px;
       }
@@ -2166,63 +2167,60 @@
     <h2 class="section-title"><span class="italic">Vertical tabs is useful, but not discoverable</span></h2>
 
     <h3 class="vt-source-label">User research</h3>
-    <div class="vt-cards vt-cards--single">
-      <button class="vt-card" aria-expanded="false">
-        <strong class="vt-stat">11 / 16</strong>
-        <span class="vt-headline">Never turned it on</span>
-        <span class="vt-detail">In our user research, 11 of 16 participants had never activated vertical tabs &mdash; they didn't know the feature existed.</span>
+    <div class="tension-card plain">
+      <button class="tension-toggle" aria-expanded="false">
+        <span class="vt-stat-inline">11 / 16</span>
+        <h3 class="tension-card-title">Never turned it on</h3>
+        <span class="toggle-chevron" aria-hidden="true"></span>
       </button>
+      <p class="tension-bullets-text">In our user research, 11 of 16 participants had never activated vertical tabs &mdash; they didn't know the feature existed.</p>
     </div>
 
     <h3 class="vt-source-label">Telemetry</h3>
-    <div class="vt-cards vt-cards--pair">
-      <button class="vt-card" aria-expanded="false">
-        <strong class="vt-stat">5&ndash;7%</strong>
-        <span class="vt-headline">Flipped it on</span>
-        <span class="vt-detail">Only 5&ndash;7% of all Edge users have ever toggled vertical tabs on. There's a discoverability problem, not a usability problem.</span>
+    <div class="tension-card plain">
+      <button class="tension-toggle" aria-expanded="false">
+        <span class="vt-stat-inline">5&ndash;7%</span>
+        <h3 class="tension-card-title">Flipped it on</h3>
+        <span class="toggle-chevron" aria-hidden="true"></span>
       </button>
-      <button class="vt-card" aria-expanded="false">
-        <strong class="vt-stat">80%</strong>
-        <span class="vt-headline">Who flip it on, keep it on</span>
-        <span class="vt-detail">DSAT from accidentally turning it on doesn't explain all the engagement. It's a die-hard cohort &mdash; once they find it, they love it.</span>
+      <p class="tension-bullets-text">Only 5&ndash;7% of all Edge users have ever toggled vertical tabs on. There's a discoverability problem, not a usability problem.</p>
+    </div>
+    <div class="tension-card plain">
+      <button class="tension-toggle" aria-expanded="false">
+        <span class="vt-stat-inline">80%</span>
+        <h3 class="tension-card-title">Who flip it on, keep it on</h3>
+        <span class="toggle-chevron" aria-hidden="true"></span>
       </button>
+      <p class="tension-bullets-text">DSAT from accidentally turning it on doesn't explain all the engagement. It's a die-hard cohort &mdash; once they find it, they love it.</p>
     </div>
   </div>
 </section>
 
 <style>
-  .vt-source-label {
-    font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--ink-50); margin: 32px 0 12px; padding: 0;
+  .vt-stat-inline {
+    font-size: 22px; font-weight: 700; color: var(--work); line-height: 1;
+    letter-spacing: -.02em; white-space: nowrap; flex-shrink: 0;
   }
-  .vt-source-label:first-of-type { margin-top: 36px; }
-  .vt-cards { display: grid; gap: 16px; }
-  .vt-cards--single { grid-template-columns: 1fr; max-width: 380px; }
-  .vt-cards--pair  { grid-template-columns: repeat(2,1fr); }
-  @media (max-width: 700px) { .vt-cards--pair { grid-template-columns: 1fr; } }
-  .vt-card {
-    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
-    background: #fff; border: 1px solid var(--ink-10); border-radius: 4px;
-    padding: 28px 24px; cursor: pointer; text-align: left;
-    transition: border-color .2s ease, box-shadow .2s ease;
-    font-family: inherit; font-size: inherit; color: inherit;
-  }
-  .vt-card:hover, .vt-card:focus-visible { border-color: var(--work); box-shadow: 0 8px 24px rgba(0,0,0,.06); outline: none; }
-  .vt-stat { font-size: clamp(36px,4vw,52px); font-weight: 700; color: var(--work); line-height: 1; letter-spacing: -.02em; }
-  .vt-headline { font-size: 15px; font-weight: 600; color: var(--ink); }
-  .vt-detail {
+  .tension-bullets-text {
     font-size: 14px; color: var(--ink-70); line-height: 1.55;
     max-height: 0; overflow: hidden; opacity: 0;
-    transition: max-height .35s ease, opacity .3s ease, margin-top .3s ease; margin-top: 0;
+    transition: max-height .35s ease, opacity .3s ease, margin-top .3s ease;
+    margin: 0; padding-left: 0;
   }
-  .vt-card[aria-expanded="true"] .vt-detail { max-height: 200px; opacity: 1; margin-top: 6px; }
-  .vt-card[aria-expanded="true"] { border-color: var(--work); }
+  .tension-toggle[aria-expanded="true"] + .tension-bullets-text {
+    max-height: 300px; opacity: 1; margin-top: 10px;
+  }
+  .vt-source-label {
+    font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-50); margin: 28px 0 10px; padding: 0;
+  }
+  .vt-source-label:first-of-type { margin-top: 36px; }
 </style>
 <script>
-document.querySelectorAll('.vt-card').forEach(function(card){
-  card.addEventListener('click',function(){
-    var open = card.getAttribute('aria-expanded')==='true';
-    card.setAttribute('aria-expanded', open?'false':'true');
+document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var open = btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded', open?'false':'true');
   });
 });
 </script>
