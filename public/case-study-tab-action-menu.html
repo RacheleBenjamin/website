@@ -2413,28 +2413,38 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
       </div>
     </div>
 
-    <div class="diary-layout">
-
-
-        <div class="study-flow">
-
-        </div>
+    <div class="tension-map" aria-label="What we knew going in">
+      <div class="tension-card plain">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">What's known</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ul class="tension-bullets">
+          <li>Tab Center matches users' expectations.</li>
+          <li>The "riskiest assumption" that vertical tabs is disorienting wasn't evidenced in prototype testing.</li>
+        </ul>
       </div>
 
-      <div class="diary-card">
-        <h3 class="diary-card-title">Why this stage mattered</h3>
-        <ul>
-          <li>The team still couldn’t rely on “which one they liked better.”</li>
-          <li>The richer question was whether flexibility actually solved the problem better, or just added complexity.</li>
-          <li>This stage set up the recommendation by checking whether people got stuck, whether the pattern converted people into vertical-tab users, and whether engineering cost was worth it.</li>
+      <div class="tension-card plain">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">What's unknown</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ul class="tension-bullets">
+          <li>Vertical tabs may be disorienting in practice.</li>
+          <li>Flexibility might translate to more capture of different user groups.</li>
         </ul>
-
-        <div class="diary-callout">
-          <div class="diary-callout-label">What this section sets up</div>
-          <p>The next step wasn’t just another round of preference testing. It was a way to see whether a more flexible concept created enough real behavior change to justify building it.</p>
-        </div>
       </div>
     </div>
+
+    <script>
+    document.querySelectorAll('#slide-6 .tension-toggle').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var open = btn.getAttribute('aria-expanded')==='true';
+        btn.setAttribute('aria-expanded', open?'false':'true');
+      });
+    });
+    </script>
   </div>
 </section>
 
@@ -2480,7 +2490,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
           <h3 class="tension-card-title">Approach</h3>
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
-        <p class="tension-bullets-text">We randomly assigned 14 horizontal tab users to the Switcher or Transient experience. On the final day, they saw a recording demoing the unassigned version.</p>
+        <p class="tension-bullets-text">We randomly assigned 12 horizontal tab users to the Switcher or Transient experience. On the final day, they saw a recording demoing the unassigned version.</p>
       </div>
 
       <div class="plan-fold-item">
@@ -2513,13 +2523,10 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
                 <figure class="p-bubble"><span class="p-circle p-c-transient">J</span><figcaption><b>Janet</b><span>Teambuilding &amp; personal development</span></figcaption></figure>
                 <figure class="p-bubble"><span class="p-circle p-c-transient">B</span><figcaption><b>Brandon</b><span>Field engineer</span></figcaption></figure>
                 <figure class="p-bubble"><span class="p-circle p-c-transient">D</span><figcaption><b>Debbie</b><span>Chief information officer</span></figcaption></figure>
-                <figure class="p-bubble"><span class="p-circle p-c-transient">S</span><figcaption><b>Stephanie</b><span>Marketing communications specialist</span></figcaption></figure>
-                <figure class="p-bubble"><span class="p-circle p-c-transient">T</span><figcaption><b>Taylor</b><span>Graduate student</span></figcaption></figure>
               </div>
             </div>
           </div>
 
-          <p class="p-note">2 participants did not complete the full diary study and dropped after 1–2 days.</p>
         </div>
       </div>
     </div>
