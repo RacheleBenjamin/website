@@ -16,6 +16,7 @@ const files = [
   'dist/case-study-shopping.html',
   'dist/case-study-open-banking.html',
   'dist/case-study-copilot.html',
+  'dist/case-study-tab-action-menu.html',
 ]
 
 for (const file of files) {
