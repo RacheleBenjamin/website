@@ -2459,29 +2459,6 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     <div class="slide-tag">Study 2 plan</div>
     <h2 class="section-title">A week-long diary study to see how <span class="italic">behavior evolves</span></h2>
 
-    <div class="s2-timeline" aria-label="Study timeline across one week">
-      <ol class="s2-steps">
-        <li class="s2-step">
-          <span class="s2-node" aria-hidden="true"></span>
-          <div class="s2-step-day">Day 0</div>
-          <div class="s2-step-name">Setup</div>
-          <p>Implement the flag in Edge Dev.</p>
-        </li>
-        <li class="s2-step">
-          <span class="s2-node" aria-hidden="true"></span>
-          <div class="s2-step-day">Days 1–5</div>
-          <div class="s2-step-name">Diary study</div>
-          <p>Measure how satisfaction &amp; usage patterns evolve throughout the week; collect impressions of specific tools &amp; features (Tab search, Workspaces).</p>
-        </li>
-        <li class="s2-step">
-          <span class="s2-node" aria-hidden="true"></span>
-          <div class="s2-step-day">Day 6</div>
-          <div class="s2-step-name">Compare</div>
-          <p>Compare Transient and Switcher.</p>
-        </li>
-      </ol>
-    </div>
-
     <div class="plan-fold" style="margin-top: 40px;">
       <div class="plan-fold-item">
       </div>
@@ -2499,7 +2476,31 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
           <h3 class="tension-card-title">Approach</h3>
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
-        <p class="tension-bullets-text">We randomly assigned 12 horizontal tab users to the Switcher or Transient experience. On the final day, they saw a recording demoing the unassigned version.</p>
+        <div class="tension-bullets s2-approach">
+          <p class="plan-rq-intro">We randomly assigned 12 horizontal tab users to the Switcher or Transient experience. On the final day, they saw a recording demoing the unassigned version.</p>
+          <div class="s2-timeline" aria-label="Study timeline across one week">
+            <ol class="s2-steps">
+              <li class="s2-step">
+                <span class="s2-node" aria-hidden="true"></span>
+                <div class="s2-step-day">Day 0</div>
+                <div class="s2-step-name">Setup</div>
+                <p>Implement the flag in Edge Dev.</p>
+              </li>
+              <li class="s2-step">
+                <span class="s2-node" aria-hidden="true"></span>
+                <div class="s2-step-day">Days 1–5</div>
+                <div class="s2-step-name">Diary study</div>
+                <p>Measure how satisfaction &amp; usage patterns evolve throughout the week; collect impressions of specific tools &amp; features (Tab search, Workspaces).</p>
+              </li>
+              <li class="s2-step">
+                <span class="s2-node" aria-hidden="true"></span>
+                <div class="s2-step-day">Day 6</div>
+                <div class="s2-step-name">Compare</div>
+                <p>Compare Transient and Switcher.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
 
       <div class="plan-fold-item">
@@ -2543,9 +2544,9 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
   <style>
     .s2-timeline {
-      margin-top: 48px;
+      margin-top: 28px;
       position: relative;
-      max-width: 940px;
+      max-width: 100%;
     }
     .s2-steps {
       list-style: none;
@@ -2627,9 +2628,18 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     #slide-6b .tension-toggle[aria-expanded="true"] + .tension-bullets {
       max-height: 600px;
     }
+    #slide-6b .tension-toggle[aria-expanded="true"] + .s2-approach {
+      max-height: 700px;
+    }
     #slide-6b .tension-toggle[aria-expanded="true"] + .s2-participants {
       max-height: 1600px;
     }
+    /* Let the diagrams use the full slide width even inside a collapsible */
+    #slide-6b .s2-approach,
+    #slide-6b .s2-participants {
+      padding-left: 0;
+    }
+    #slide-6b .s2-approach .plan-rq-intro { max-width: 720px; }
     #slide-6b .s2-participants .plan-rq-intro { margin-bottom: 26px; }
     #slide-6b .p-grid {
       display: grid;
@@ -2707,12 +2717,11 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
   <div class="slide-inner">
     <div class="slide-tag">Recommendation</div>
     <h2 class="section-title">Lower the cost, help users discover <span class="italic">vertical tabs</span></h2>
-    <p class="body">My recommendation was to build the simpler one. The team didn’t have signal that people were getting stuck in it, and there was signal that it could convert people into a vertical-tabs-is-solving-the-problem user group.</p>
 
     <div class="reco-tradeoff">
       <div class="reco-panel">
         <div class="reco-panel-label">Recommendation</div>
-        <p>Build the simpler one. Lower the engineering cost, help users discover vertical tabs, and use the lighter-weight direction to move more people into a problem-solving behavior instead of over-investing in flexibility too early.</p>
+        <p>Build the simpler one. Lower the engineering cost, help users discover vertical tabs.</p>
 
         <div class="reco-support">
           <div class="reco-support-item">No clear signal that people were stuck in the simpler pattern.</div>
@@ -2721,31 +2730,6 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
         </div>
       </div>
 
-      <div class="risk-stack">
-        <div class="risk-card">
-          <div class="risk-card-title">What I was giving up</div>
-          <ul>
-            <li>The more flexible concept had genuine appeal.</li>
-            <li>It combined the best parts of Mega Menu and Tab Centre.</li>
-            <li>Some users may have benefited from the added control.</li>
-          </ul>
-        </div>
-
-        <div class="risk-card">
-          <div class="risk-card-title">Why I still recommended it</div>
-          <ul>
-            <li>The feedback was still balanced / mixed.</li>
-            <li>I didn’t have a strong reason to spend more engineering cost yet.</li>
-            <li>The simpler pattern looked like enough to learn from in product.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="reco-bottom-note">
-      <div class="reco-bottom-note-label">Decision logic</div>
-      <p>The recommendation wasn’t “build the one people liked better.” It was: build the cheaper one, because the evidence did not justify more complexity, and the product could still learn a lot by helping users discover vertical tabs.</p>
-    </div>
   </div>
 </section>
 
