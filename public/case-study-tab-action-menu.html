@@ -2043,53 +2043,62 @@
         </button>
         <p class="tension-bullets-text">Remote unmoderated concept testing of discoverability, impressions, and usefulness. Two user groups; mega-menu tested after Tab Centre.</p>
       </div>
-    </div>
 
-    <h3 class="plan-section-label">Research questions</h3>
-    <p class="plan-section-sub">Our questions mapped onto two design principles:</p>
-
-    <div class="plan-fold">
       <div class="plan-fold-item">
         <button class="tension-toggle" aria-expanded="false">
-          <h3 class="tension-card-title">A tool for everyone</h3>
+          <h3 class="tension-card-title">Research questions</h3>
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
-        <ul class="tension-bullets">
-          <li>When and why do different user groups need a tab tool?</li>
-          <li>How well or poorly do tab manager and mega-menu help users manage tab clutter?</li>
-        </ul>
+        <div class="tension-bullets plan-rq">
+          <p class="plan-rq-intro">Our questions mapped onto two design principles:</p>
+          <div class="plan-principle">
+            <h4 class="plan-principle-name">A tool for everyone</h4>
+            <ul>
+              <li>When and why do different user groups need a tab tool?</li>
+              <li>How well or poorly do tab manager and mega-menu help users manage tab clutter?</li>
+            </ul>
+          </div>
+          <div class="plan-principle">
+            <h4 class="plan-principle-name">Bring similar concepts together</h4>
+            <ul>
+              <li>Will users have easier access to features like Recently closed tabs and Workspaces from these entry points?</li>
+            </ul>
+          </div>
+        </div>
       </div>
+
       <div class="plan-fold-item">
         <button class="tension-toggle" aria-expanded="false">
-          <h3 class="tension-card-title">Bring similar concepts together</h3>
+          <h3 class="tension-card-title">Participants</h3>
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
-        <ul class="tension-bullets">
-          <li>Will users have easier access to features like Recently closed tabs and Workspaces from these entry points?</li>
-        </ul>
+        <div class="tension-bullets plan-participants">
+          <p class="plan-rq-intro">Two user groups in remote unmoderated sessions. Both have 10+ tabs open at a time and hadn't used vertical tabs in the past month.</p>
+          <div class="participant-row">
+            <div class="participant-item">
+              <span class="participant-stat">10</span>
+              <p class="participant-label">Non-workspaces &amp; non-tab group users</p>
+            </div>
+            <div class="participant-item">
+              <span class="participant-stat">6</span>
+              <p class="participant-label">Workspaces &amp; tab groups users</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Prompts</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ol class="tension-bullets prompt-list">
+          <li>get into the menu</li>
+          <li>when would this be helpful</li>
+          <li>when can you see yourself opening this menu</li>
+        </ol>
       </div>
     </div>
-
-    <h3 class="plan-section-label">Participants</h3>
-    <p class="plan-section-sub">Two user groups in remote unmoderated sessions. Both have 10+ tabs open at a time and hadn't used vertical tabs in the past month.</p>
-
-    <div class="participant-row">
-      <div class="participant-item">
-        <span class="participant-stat">10</span>
-        <p class="participant-label">Non-workspaces &amp; non-tab group users</p>
-      </div>
-      <div class="participant-item">
-        <span class="participant-stat">6</span>
-        <p class="participant-label">Workspaces &amp; tab groups users</p>
-      </div>
-    </div>
-
-    <h3 class="plan-section-label">Prompts</h3>
-    <ol class="prompt-list">
-      <li>get into the menu</li>
-      <li>when would this be helpful</li>
-      <li>when can you see yourself opening this menu</li>
-    </ol>
   </div>
 
   <style>
@@ -2108,6 +2117,30 @@
       color: var(--ink-70);
       max-width: 720px;
     }
+    .plan-rq-intro {
+      margin: 0 0 16px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-70);
+    }
+    .plan-principle { margin-bottom: 18px; }
+    .plan-principle:last-child { margin-bottom: 0; }
+    .plan-principle-name {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--work);
+    }
+    .plan-principle ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .plan-principle li {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-70);
+    }
+    .plan-principle li + li { margin-top: 8px; }
     .plan-fold {
       display: flex;
       flex-direction: column;
@@ -2150,6 +2183,9 @@
       color: var(--ink-70);
     }
     .prompt-list li + li { margin-top: 10px; }
+    #slide-3 .tension-toggle[aria-expanded="true"] + .tension-bullets {
+      max-height: 600px;
+    }
     @media (max-width: 700px) {
       #slide-3 .participant-row { gap: 28px; }
     }
@@ -2424,6 +2460,154 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
       </div>
     </div>
   </div>
+</section>
+
+
+<section class="slide" id="slide-6b">
+  <div class="slide-inner">
+    <div class="slide-tag">Study 2 plan</div>
+    <h2 class="section-title">A week-long diary study to see how <span class="italic">behavior evolves</span></h2>
+
+    <div class="s2-timeline" aria-label="Study timeline">
+      <div class="s2-phase">
+        <div class="s2-phase-day">Day 0</div>
+        <div class="s2-phase-name">Setup</div>
+        <p>Implement the flag in Edge Dev.</p>
+      </div>
+      <div class="s2-arrow" aria-hidden="true">→</div>
+      <div class="s2-phase">
+        <div class="s2-phase-day">Days 1–6</div>
+        <div class="s2-phase-name">Diary study</div>
+        <p>Measure how satisfaction &amp; usage patterns evolve throughout the week; collect impressions of specific tools &amp; features (Tab search, Workspaces).</p>
+      </div>
+    </div>
+
+    <div class="plan-fold" style="margin-top: 40px;">
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Method</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <p class="tension-bullets-text">A diary study run in Edge Dev. We measured how satisfaction and usage patterns shifted across a full week of real use, rather than relying on a single first-impression session.</p>
+      </div>
+
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Research question</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <p class="tension-bullets-text">How does Tab Central (Switcher &amp; Transient variants) help horizontal tab users navigate tab clutter, discover different tab tools, and explore different states?</p>
+      </div>
+
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Approach</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <p class="tension-bullets-text">We randomly assigned 14 horizontal tab users to the Switcher or Transient experience. On the final day, they saw a recording demoing the unassigned version.</p>
+      </div>
+
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Participants</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="tension-bullets s2-participants">
+          <p class="plan-rq-intro">Horizontal tab users with 10+ tabs open on average, randomly split across the two variants.</p>
+          <div class="participant-row">
+            <div class="participant-item">
+              <span class="participant-stat">14</span>
+              <p class="participant-label">Horizontal tab users in Edge Dev</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .s2-timeline {
+      margin-top: 40px;
+      display: flex;
+      align-items: stretch;
+      gap: 20px;
+      max-width: 860px;
+    }
+    .s2-phase {
+      flex: 1;
+      background: #fff;
+      border: 1px solid var(--ink-10);
+      border-top: 4px solid var(--work);
+      border-radius: 4px;
+      padding: 22px 24px;
+    }
+    .s2-phase-day {
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--work);
+      font-weight: 700;
+    }
+    .s2-phase-name {
+      margin: 4px 0 10px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .s2-phase p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-70);
+    }
+    .s2-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--ink-30);
+      font-size: 30px;
+      line-height: 1;
+    }
+    #slide-6b .participant-row {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    #slide-6b .participant-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    #slide-6b .participant-stat {
+      font-size: clamp(40px, 5vw, 56px);
+      font-weight: 700;
+      color: var(--work);
+      line-height: 1;
+      letter-spacing: -.02em;
+      flex-shrink: 0;
+    }
+    #slide-6b .participant-label {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--ink-70);
+      max-width: 220px;
+    }
+    #slide-6b .tension-toggle[aria-expanded="true"] + .tension-bullets {
+      max-height: 600px;
+    }
+    @media (max-width: 700px) {
+      .s2-timeline { flex-direction: column; }
+      .s2-arrow { transform: rotate(90deg); justify-content: center; }
+    }
+  </style>
+  <script>
+  document.querySelectorAll('#slide-6b .tension-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var open = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+    });
+  });
+  </script>
 </section>
 
 
