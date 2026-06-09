@@ -3113,6 +3113,33 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
   @media (max-width: 560px) {
     .diary-days { grid-template-columns: 1fr; }
   }
+
+  /* ── Slide R4 hero: schematic + title side-by-side ── */
+  .r4-hero {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 36px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .r4-schem-col {
+    flex-shrink: 0;
+  }
+  .r4-schem-col .schem-browser {
+    height: 186px;
+  }
+  .r4-text-col .section-title {
+    margin: 0;
+  }
+  @media (max-width: 980px) {
+    .r4-hero {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .r4-schem-col {
+      max-width: 300px;
+    }
+  }
 </style>
 
 <section class="slide res-slide" id="slide-r1">
@@ -3301,7 +3328,36 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 <section class="slide res-slide" id="slide-r4">
   <div class="slide-inner">
     <div class="slide-tag">Study 2 Results · Warming to vertical</div>
-    <h2 class="section-title">Switcher helped participants discover and warm to different states, which<span class="italic"> aligns with our design principles</span></h2>
+
+    <div class="r4-hero">
+      <div class="r4-schem-col">
+        <div class="verdict-schematic schem-toggle" role="button" tabindex="0" aria-pressed="false" data-schem="switcher" data-state="blank" aria-label="Switcher schematic. Click the chevron to open the side panel.">
+          <div class="schem-browser">
+            <div class="schem-top">
+              <button class="mega-trigger-btn" type="button" aria-label="Menu trigger" tabindex="-1"></button>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+              <span class="schem-dot"></span>
+            </div>
+            <div class="schem-body">
+              <div class="menu-content">
+                <div class="tab-content-box"></div>
+              </div>
+              <div class="menu-rail" aria-hidden="true">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <span class="schem-hint">Click the chevron to open</span>
+        </div>
+      </div>
+      <div class="r4-text-col">
+        <h2 class="section-title">Switcher helped participants discover and warm to different states, which<span class="italic"> aligns with our design principles</span></h2>
+      </div>
+    </div>
 
     <div class="res-diary">
       <div class="diary-row">
