@@ -632,13 +632,21 @@
 
   .tension-map {
     margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    align-items: center;
-    max-width: 600px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    align-items: start;
+    width: 100%;
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  @media (max-width: 800px) {
+    .tension-map {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
   }
 
   .tension-column {
@@ -652,6 +660,7 @@
     border: 1px solid var(--ink-10);
     border-radius: 4px;
     padding: 24px;
+    text-align: left;
   }
 
   .tension-card.plain {
@@ -1982,22 +1991,22 @@
     <div class="tension-map" aria-label="Product tension map">
       <div class="tension-card plain">
         <button class="tension-toggle" aria-expanded="false">
-          <h3 class="tension-card-title">Push toward simplicity</h3>
-          <span class="toggle-chevron" aria-hidden="true"></span>
-        </button>
-        <ul class="tension-bullets">
-          <li>Vertical tabs reduces the states.</li>
-        </ul>
-      </div>
-
-      <div class="tension-card plain">
-        <button class="tension-toggle" aria-expanded="false">
           <h3 class="tension-card-title">What's known</h3>
           <span class="toggle-chevron" aria-hidden="true"></span>
         </button>
         <ul class="tension-bullets">
           <li>People need help managing tabs.</li>
           <li>The menu brings tools together.</li>
+        </ul>
+      </div>
+
+      <div class="tension-card plain">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Push toward simplicity</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ul class="tension-bullets">
+          <li>Vertical tabs reduces the states.</li>
         </ul>
       </div>
 
@@ -2157,7 +2166,7 @@
 
     <div class="decision-callout">
       <div class="decision-callout-label">Recommendation</div>
-      <p><strong>Go with Tab Centre (add an escape hatch). We didn’t get enough evidence to justify added clutter.</strong></p>
+      <p><strong>Go with Tab Centre (add an escape hatch). We de-risked the simpler design.</strong></p>
     </div>
 
 
