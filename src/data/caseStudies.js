@@ -125,7 +125,7 @@ export const caseStudies = [
     ],
     challenge:
       'AI assistants are designed for solo use, but people increasingly use them with and around other people. Where is social AI already happening, what jobs is it doing, and what should Copilot build to support it?',
-    tags: ['foundational', 'qualitative', 'quantitative', 'endtoend'],
+    tags: ['foundational', 'qualitative', 'quantitative'],
   },
   {
     id: 'featured-04',
@@ -200,7 +200,7 @@ export const caseStudies = [
       'FigJam gallery wall',
       'Figma Make contribution',
     ],
-    tags: ['foundational', 'qualitative', 'endtoend', 'tactical'],
+    tags: ['foundational', 'qualitative'],
   },
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -255,7 +255,7 @@ export const caseStudies = [
       'Concept test findings',
       'Product strategy recommendations',
     ],
-    tags: ['foundational', 'tactical', 'qualitative', 'endtoend'],
+    tags: ['tactical', 'qualitative', 'endtoend'],
   },
   // ───────────────────────────────────────────────────────────────────────────
   // TD BANK — Product Portfolio (Aug 2022 - Jul 2024)
@@ -285,7 +285,7 @@ export const caseStudies = [
     recommendations: 'Minimize repetitive data entry, build explicit checkpoints, offer proactive human touchpoints.',
     impact: 'Improved estate settlement journey, produced valuable insights, and demonstrated ROI of research-driven interventions. Research outcomes sparked a partnership with Empathy — a platform dedicated to supporting bereaved customers through the estate settlement process.',
     deliverables: ['Intervention study design', 'Research methodology framework', 'Insights report'],
-    tags: ['tactical', 'qualitative', 'endtoend'],
+    tags: ['qualitative', 'endtoend'],
   },
   {
     id: 'td-02',
@@ -312,7 +312,7 @@ export const caseStudies = [
     recommendations: 'Frame products as complementary tools, build educational scaffolding, surface product-specific trust signals.',
     impact: 'Developed useful, usable, delightful products that resonated with users and addressed volatile market conditions.',
     deliverables: ['Interview findings', 'Co-design outputs', 'Product design recommendations'],
-    tags: ['qualitative', 'endtoend', 'tactical'],
+    tags: ['qualitative', 'endtoend'],
   },
   {
     id: 'td-03',
