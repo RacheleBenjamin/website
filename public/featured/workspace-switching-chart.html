@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Switching frequency by number of open Workspaces</title>
+  <style>
+    :root {
+      --bg:       #EDF2FA;
+      --ink:      #1a1a1a;
+      --muted:    #5a5550;
+      --font:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --red:      #CF6454;
+      --amber:    #DBA83C;
+      --teal:     #74B3C2;
+      --bar-h:    30px;
+      --row-gap:  7px;
+      --label-w:  210px;
+      --label-gap:20px;
+      --tip-bg:   #161310;
+      --tip-ink:  #F4ECD8;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--font); }
+
+    .slide { max-width: 920px; margin: 0 auto; padding: 40px 48px 56px; position: relative; }
+
+    /* ── Section header ──────────────────────────────────── */
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.25;
+      margin: 0 0 10px;
+      color: var(--ink);
+    }
+    .section-sub {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.45;
+      margin: 0 0 30px;
+      font-style: italic;
+    }
+
+    /* ── Survey question card ────────────────────────────── */
+    .survey-q {
+      border-left: 3px solid var(--ink);
+      padding: 4px 0 4px 16px;
+      margin: 0 0 26px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .survey-q .q-lbl {
+      display: block;
+      font-size: 10.5px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .survey-q .q-stem { font-weight: 600; margin-bottom: 8px; }
+    .survey-q ol { margin: 0; padding-left: 20px; }
+    .survey-q ol li { margin-bottom: 3px; }
+    .survey-q ol li b { font-weight: 600; }
+    .survey-q .q-foot { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 10px; }
+
+    /* ── Legend + integrated sort ─────────────────────────── */
+    .legend-hint {
+      padding-left: calc(var(--label-w) + var(--label-gap));
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .05em;
+      margin-bottom: 10px;
+    }
+    .legend-hint span { margin-right: 18px; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 0;
+      padding-left: calc(var(--label-w) + var(--label-gap));
+      margin-bottom: 22px;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      position: relative;
+      margin-right: 24px;
+    }
+
+    /* Swatch — click to hide */
+    .leg-swatch {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background .15s, border-color .15s;
+      margin-right: 7px;
+    }
+    .legend-item[data-seg="red"]   .leg-swatch { background: var(--red); }
+    .legend-item[data-seg="amber"] .leg-swatch { background: var(--amber); }
+    .legend-item[data-seg="teal"]  .leg-swatch { background: var(--teal); }
+    .legend-item.seg-off .leg-swatch {
+      background: transparent !important;
+      border-color: var(--muted);
+    }
+
+    /* Label — click to sort */
+    .leg-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .leg-label:hover { color: var(--ink); border-bottom-color: rgba(0,0,0,.3); }
+    .legend-item.sort-active .leg-label {
+      border-bottom-color: var(--ink);
+    }
+    .legend-item[data-seg="red"].sort-active   .leg-label { color: var(--red); border-bottom-color: var(--red); }
+    .legend-item[data-seg="amber"].sort-active .leg-label { color: #8c6a1a; border-bottom-color: #8c6a1a; }
+    .legend-item[data-seg="teal"].sort-active  .leg-label { color: #3a7e8e; border-bottom-color: #3a7e8e; }
+    .legend-item.seg-off .leg-label { color: var(--muted); }
+
+    /* Sort arrow */
+    .leg-arrow {
+      font-size: 11px;
+      margin-left: 4px;
+      opacity: 0;
+      color: var(--muted);
+      transition: opacity .15s;
+      pointer-events: none;
+    }
+    .legend-item.sort-active .leg-arrow { opacity: 1; }
+
+    /* Legend hover tooltip */
+    .leg-tip {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 280px;
+      background: var(--tip-bg);
+      color: var(--tip-ink);
+      padding: 12px 14px;
+      font-size: 12px;
+      line-height: 1.5;
+      box-shadow: 0 12px 28px rgba(0,0,0,.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .14s;
+      z-index: 30;
+    }
+    .leg-tip .lbl {
+      display: block;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #a89878;
+      margin-bottom: 5px;
+    }
+    .legend-item:hover .leg-tip { opacity: 1; pointer-events: none; }
+
+    /* ── Chart rows ─────────────────────────────────────── */
+    .chart { width: 100%; }
+
+    .row {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--row-gap);
+      gap: var(--label-gap);
+      position: relative;
+    }
+
+    /* ── Bar-hover statistical popover (positioned by JS) ── */
+    .stat-tip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      max-height: calc(100vh - 16px);
+      overflow-y: auto;
+      background: var(--tip-bg);
+      color: var(--tip-ink);
+      padding: 14px 16px;
+      font-size: 12px;
+      line-height: 1.55;
+      box-shadow: 0 14px 32px rgba(0,0,0,.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .14s;
+      z-index: 40;
+      text-align: left;
+    }
+    .stat-tip:hover { opacity: 1; }
+    .row.tip-active .stat-tip { opacity: 1; }
+    .bar-wrap { cursor: default; }
+
+    .stat-tip .lbl {
+      display: block;
+      font-size: 12.5px;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: #c9b78c;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .stat-tip .stat-block + .stat-block { margin-top: 10px; }
+    .stat-tip .stat-val {
+      font-size: 14px;
+      color: var(--tip-ink);
+      font-weight: 600;
+    }
+    .stat-tip .stat-line { color: #d8cdb5; margin-top: 3px; }
+    .stat-tip .stat-line .ds { color: #f4ecd8; font-weight: 600; }
+    .stat-tip .stat-line.none { color: #8a7e65; font-style: italic; }
+    .stat-tip .stat-n {
+      font-size: 10px;
+      color: #8a7e65;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(168,152,120,.25);
+    }
+
+    /* Row label — hover = survey tip, click = hide/show */
+    .row-label {
+      width: var(--label-w);
+      flex-shrink: 0;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.35;
+      color: var(--ink);
+      cursor: pointer;
+      position: relative;
+      padding-right: 0;
+      transition: opacity .2s;
+    }
+    .row-label:hover { opacity: .7; }
+    .row.row-off .row-label { opacity: .35; text-decoration: line-through; }
+
+    /* ── Red orb click affordance ─────────────────────── */
+    .click-demo {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+      left: 0; top: 0;
+      width: 0; height: 0;
+      transition: transform .22s cubic-bezier(.22,.61,.36,1);
+      will-change: transform;
+    }
+    .click-demo .ripple {
+      position: absolute;
+      left: 0; top: 0;
+      width: 14px; height: 14px;
+      margin: -7px 0 0 -7px;
+      border-radius: 50%;
+      background: rgba(207,100,84,.85);
+      box-shadow: 0 0 0 0 rgba(207,100,84,.55);
+      animation: orb-pulse 1.6s ease-out infinite;
+    }
+    @keyframes orb-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(207,100,84,.55); }
+      70%  { box-shadow: 0 0 0 18px rgba(207,100,84,0); }
+      100% { box-shadow: 0 0 0 0 rgba(207,100,84,0); }
+    }
+    body.demo-done .click-demo { display: none; }
+
+    /* Row label tooltip */
+    .row-tip {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      width: 300px;
+      background: var(--tip-bg);
+      color: var(--tip-ink);
+      padding: 12px 14px;
+      font-size: 12px;
+      line-height: 1.5;
+      box-shadow: 0 12px 28px rgba(0,0,0,.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .14s;
+      z-index: 30;
+      text-align: left;
+    }
+    .row-tip .lbl {
+      display: block;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #a89878;
+      margin-bottom: 5px;
+    }
+    .row-tip .q {
+      display: block;
+      font-size: 10px;
+      color: #8a7a5a;
+      margin-top: 6px;
+      font-style: italic;
+    }
+    .row-label:hover .row-tip { opacity: 1; }
+
+    /* Bar — collapses when row is hidden */
+    .bar-wrap {
+      flex: 1;
+      overflow: hidden;
+      max-height: 100px;
+      transition: max-height .3s ease, opacity .25s;
+    }
+    .row.row-off .bar-wrap { max-height: 0; opacity: 0; }
+
+    .bar {
+      display: flex;
+      height: var(--bar-h);
+      width: 100%;
+    }
+    .seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: flex-basis .45s ease, opacity .25s;
+    }
+    .seg.red   { background: var(--red);   color: #fff; }
+    .seg.amber { background: var(--amber); color: #1a1a1a; }
+    .seg.teal  { background: var(--teal);  color: #fff; }
+    .seg.seg-hidden { flex-basis: 0 !important; opacity: 0; }
+
+    /* ── Per-segment hover visual states ───────────────── */
+    .bar { position: relative; transition: filter .2s; }
+
+    .bar.hover-m1 .seg.teal {
+      box-shadow:
+        inset 2px 2px 0 0 var(--ink),
+        inset 0 -2px 0 0 var(--ink);
+    }
+    .bar.hover-m1 .seg.amber {
+      box-shadow: inset 0 2px 0 0 var(--ink), inset 0 -2px 0 0 var(--ink);
+    }
+    .bar.hover-m1 .seg.red {
+      box-shadow:
+        inset 2px 2px 0 0 var(--ink),
+        inset -2px -2px 0 0 var(--ink);
+    }
+    .bar.hover-m1 .seg.teal.seg-hidden + .seg.amber,
+    .bar.hover-m1 .seg.amber:first-child {
+      box-shadow:
+        inset 2px 2px 0 0 var(--ink),
+        inset 0 -2px 0 0 var(--ink);
+    }
+    .bar.hover-m1 .seg.amber:last-child {
+      box-shadow: inset 0 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink);
+    }
+    .bar.hover-m1 .seg.teal:only-child {
+      box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink);
+    }
+
+    .bar.hover-m2 .seg.teal {
+      box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink);
+    }
+    .bar.hover-m2 .seg.amber {
+      box-shadow: inset 0 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink);
+    }
+    .bar.hover-m2 .seg.teal.seg-hidden + .seg.amber,
+    .bar.hover-m2 .seg.amber:first-child {
+      box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink);
+    }
+
+    .bar-wrap { cursor: pointer; }
+
+    .row.peer-dim .bar-wrap { opacity: .25; }
+    .row.peer-dim .row-label { opacity: .4; }
+
+    /* ── X-axis ──────────────────────────────────────────── */
+    .axis-row { display: flex; align-items: flex-start; margin-top: 4px; }
+    .axis-spacer { width: calc(var(--label-w) + var(--label-gap)); flex-shrink: 0; }
+    .axis { flex: 1; position: relative; height: 28px; border-top: 1px solid rgba(0,0,0,.22); }
+    .tick {
+      position: absolute; top: 5px; transform: translateX(-50%);
+      font-size: 11px; color: var(--muted); white-space: nowrap;
+    }
+    .tick:last-child { transform: translateX(-80%); }
+
+    .n-note {
+      font-size: 12px; color: var(--muted); margin-top: 8px;
+      padding-left: calc(var(--label-w) + var(--label-gap));
+    }
+
+    /* ── Model annotation footer ───────────────────────── */
+    .model-note {
+      margin-top: 40px;
+      padding: 18px 22px;
+      border-top: 1px solid rgba(0,0,0,.15);
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .model-note h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 8px;
+      letter-spacing: .01em;
+    }
+    .model-note code {
+      font-family: 'Consolas', 'Menlo', monospace;
+      font-size: 11px;
+      background: rgba(0,0,0,.05);
+      padding: 1px 5px;
+      border-radius: 2px;
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+<div class="slide">
+
+  <h1 class="section-title">Switching frequency rises with the number of open Workspaces.</h1>
+
+  <!-- ── Legend with integrated sort ── -->
+  <div class="legend" id="legend">
+
+    <div class="legend-item" data-seg="teal">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% switch hourly or more</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        Switch between Workspaces multiple times per hour or once per hour.
+      </div>
+    </div>
+
+    <div class="legend-item" data-seg="amber">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% switch daily</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        Switch multiple times a day, once a day, or less than once a day.
+      </div>
+    </div>
+
+    <div class="legend-item" data-seg="red">
+      <span class="leg-swatch"></span>
+      <span class="leg-label">% switch weekly or less</span>
+      <span class="leg-arrow"></span>
+      <div class="leg-tip">
+        <span class="lbl">Survey wording</span>
+        Switch less than once a week, less than once a month, or never.
+      </div>
+    </div>
+
+  </div><!-- /legend -->
+
+  <div class="click-demo" id="clickDemo" aria-hidden="true">
+    <span class="ripple"></span>
+  </div>
+
+  <!-- ── Chart ── -->
+  <div class="chart" id="chart">
+
+    <div class="row" data-key="w6p" data-red="0.0" data-amber="35.7" data-teal="64.3">
+      <div class="row-label">6+ Workspaces open
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "6-10 Workspaces" and "More than 10 Workspaces" (merged)
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="64.3">64%</div>
+        <div class="seg amber" data-pct="35.7">36%</div>
+        <div class="seg red"   data-pct="0.0"></div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="w45" data-red="0.0" data-amber="40.0" data-teal="60.0">
+      <div class="row-label">4-5 Workspaces open
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "4-5 Workspaces"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="60.0">60%</div>
+        <div class="seg amber" data-pct="40.0">40%</div>
+        <div class="seg red"   data-pct="0.0"></div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="w23" data-red="1.7" data-amber="61.0" data-teal="37.3">
+      <div class="row-label">2-3 Workspaces open
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "2-3 Workspaces"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="37.3">37%</div>
+        <div class="seg amber" data-pct="61.0">61%</div>
+        <div class="seg red"   data-pct="1.7">2%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="row" data-key="w1" data-red="21.8" data-amber="55.6" data-teal="22.6">
+      <div class="row-label">1 Workspace open
+        <div class="row-tip">
+          <span class="lbl">Survey wording</span>
+          "1 Workspace"
+        </div>
+      </div>
+      <div class="bar-wrap"><div class="bar">
+        <div class="seg teal"  data-pct="22.6">23%</div>
+        <div class="seg amber" data-pct="55.6">56%</div>
+        <div class="seg red"   data-pct="21.8">22%</div>
+      </div></div>
+      <div class="stat-tip"></div>
+    </div>
+
+    <div class="axis-row">
+      <div class="axis-spacer"></div>
+      <div class="axis">
+        <span class="tick" style="left:0%">0%</span>
+        <span class="tick" style="left:10%">10%</span>
+        <span class="tick" style="left:20%">20%</span>
+        <span class="tick" style="left:30%">30%</span>
+        <span class="tick" style="left:40%">40%</span>
+        <span class="tick" style="left:50%">50%</span>
+        <span class="tick" style="left:60%">60%</span>
+        <span class="tick" style="left:70%">70%</span>
+        <span class="tick" style="left:80%">80%</span>
+        <span class="tick" style="left:90%">90%</span>
+        <span class="tick" style="left:100%">100%</span>
+      </div>
+    </div>
+  </div><!-- /chart -->
+
+  <p class="n-note">N = 285 Edge Workspace users who keep at least one Workspace open (15 who keep none excluded).</p>
+</div><!-- /slide -->
+
+<script>
+(function () {
+  const chart  = document.getElementById('chart');
+  const axisRow = chart.querySelector('.axis-row');
+  const rows   = Array.from(chart.querySelectorAll('.row'));
+  const items  = Array.from(document.querySelectorAll('.legend-item'));
+
+  const hiddenSegs = new Set();
+  let sortKey = null;   // null = original order
+  let sortDir = 'desc'; // 'desc' = high→low
+
+  rows.forEach((r, i) => r.dataset.origIdx = i);
+
+  function recalcRow(row, hidden) {
+    ['red','amber','teal'].forEach(k => {
+      const seg = row.querySelector('.seg.' + k);
+      if (hidden.has(k)) {
+        seg.classList.add('seg-hidden');
+      } else {
+        seg.classList.remove('seg-hidden');
+        seg.style.flex = `0 0 ${parseFloat(row.dataset[k]).toFixed(2)}%`;
+      }
+    });
+  }
+  function applySegs() {
+    const extra = globalMode === 'm2' ? new Set([...hiddenSegs, 'red']) : new Set(hiddenSegs);
+    rows.forEach(row => recalcRow(row, extra));
+  }
+
+  function applySort() {
+    let ordered;
+    if (!sortKey) {
+      ordered = rows.slice().sort((a, b) => +a.dataset.origIdx - +b.dataset.origIdx);
+    } else {
+      ordered = rows.slice().sort((a, b) => {
+        const d = parseFloat(b.dataset[sortKey]) - parseFloat(a.dataset[sortKey]);
+        return sortDir === 'desc' ? d : -d;
+      });
+    }
+    ordered.forEach(r => chart.insertBefore(r, axisRow));
+  }
+
+  function updateArrows() {
+    items.forEach(item => {
+      const arrow = item.querySelector('.leg-arrow');
+      if (item.dataset.seg === sortKey) {
+        arrow.textContent = sortDir === 'desc' ? ' ↓' : ' ↑';
+        item.classList.add('sort-active');
+      } else {
+        arrow.textContent = '';
+        item.classList.remove('sort-active');
+      }
+    });
+  }
+
+  items.forEach(item => {
+    const swatch = item.querySelector('.leg-swatch');
+    const label  = item.querySelector('.leg-label');
+    const seg    = item.dataset.seg;
+
+    swatch.addEventListener('click', e => {
+      e.stopPropagation();
+      if (seg === 'red' && globalMode === 'm2') {
+        setGlobalMode('m1');
+        rows.forEach(r => r._refreshHover && r._refreshHover());
+        return;
+      }
+      if (hiddenSegs.has(seg)) {
+        hiddenSegs.delete(seg);
+        item.classList.remove('seg-off');
+      } else if (hiddenSegs.size < 2) {
+        hiddenSegs.add(seg);
+        item.classList.add('seg-off');
+      }
+      applySegs();
+    });
+
+    label.addEventListener('click', e => {
+      e.stopPropagation();
+      if (sortKey === seg) {
+        sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+      } else {
+        sortKey = seg;
+        sortDir = 'desc';
+      }
+      updateArrows();
+      applySort();
+    });
+  });
+
+  rows.forEach(row => {
+    const label = row.querySelector('.row-label');
+    label.addEventListener('click', () => {
+      row.classList.toggle('row-off');
+    });
+  });
+
+  // ── Stat-tip data + render ────────────────────────────────
+  const SHORT = {
+    w1:  '1 Workspace',
+    w23: '2-3 Workspaces',
+    w45: '4-5 Workspaces',
+    w6p: '6+ Workspaces'
+  };
+  // Model 1: switches at least daily (hourly + daily) vs weekly-or-less.
+  // more = significantly higher % at-least-daily than these groups; less = the reverse.
+  const M1 = {
+    w6p: { more: [],     less: [] },
+    w45: { more: [],     less: [] },
+    w23: { more: ['w1'], less: [] },
+    w1:  { more: [],     less: ['w23'] }
+  };
+  // Model 2: hourly-or-more vs only-daily, among respondents who switch at least daily.
+  const M2 = {
+    w6p: { more: ['w1'], less: [] },
+    w45: { more: ['w1'], less: [] },
+    w23: { more: [],     less: [] },
+    w1:  { more: [],     less: ['w45','w6p'] }
+  };
+  // n in each group, and n who switch at least daily
+  const N_RATED = { w1: 133, w23: 118, w45: 20, w6p: 14 };
+  const N_DAILY = { w1: 104, w23: 116, w45: 20, w6p: 14 };
+  const N_HOURLY = { w1: 30,  w23: 44,  w45: 12, w6p: 9 };
+
+  function listNames(keys) {
+    return keys.map(k => `<span class="ds">${SHORT[k]}</span>`).join(', ');
+  }
+  function rowData(key) {
+    const r = document.querySelector(`.row[data-key="${key}"]`);
+    return {
+      red:   parseFloat(r.dataset.red),
+      amber: parseFloat(r.dataset.amber),
+      teal:  parseFloat(r.dataset.teal),
+    };
+  }
+  function renderM1Block(key) {
+    const m = M1[key];
+    const d = rowData(key);
+    const pct = d.amber + d.teal;
+    return `
+      <div class="stat-block">
+        <span class="lbl">Switches at least daily (${N_DAILY[key]} participants)</span>
+        <div class="stat-val">${Math.round(pct)}% of ${SHORT[key]} users switch at least daily</div>
+        ${m.more.length ? `<div class="stat-line">Significantly more than ${listNames(m.more)}</div>` : ''}
+        ${m.less.length ? `<div class="stat-line">Significantly less than ${listNames(m.less)}</div>` : ''}
+        ${(!m.more.length && !m.less.length) ? `<div class="stat-line none">No significant differences from other groups</div>` : ''}
+      </div>`;
+  }
+  function renderM2Block(key) {
+    const m = M2[key];
+    const d = rowData(key);
+    return `
+      <div class="stat-block">
+        <span class="lbl">Switches hourly or more (${N_HOURLY[key]} participants)</span>
+        <div class="stat-val">${Math.round(d.teal)}% of ${SHORT[key]} users switch hourly or more</div>
+        ${m.more.length ? `<div class="stat-line">Significantly more likely than ${listNames(m.more)}</div>` : ''}
+        ${m.less.length ? `<div class="stat-line">Significantly less likely than ${listNames(m.less)}</div>` : ''}
+        ${(!m.more.length && !m.less.length) ? `<div class="stat-line none">No significant differences from other groups</div>` : ''}
+      </div>`;
+  }
+  function renderNote(key) {
+    return `<div class="stat-n">n = ${N_RATED[key]} in this group · ${N_DAILY[key]} switch at least daily · Holm-adjusted pairwise (p &lt; .05)</div>`;
+  }
+  function renderStat(row, mode) {
+    const key = row.dataset.key;
+    const tip = row.querySelector('.stat-tip');
+    const parts = [];
+    if (mode === 'm1') {
+      parts.push(renderM1Block(key));
+    } else if (mode === 'm2') {
+      parts.push(renderM2Block(key));
+    } else {
+      parts.push(renderM1Block(key), renderM2Block(key));
+    }
+    parts.push(renderNote(key));
+    tip.innerHTML = parts.join('');
+  }
+  rows.forEach(r => renderStat(r, 'both'));
+
+  function positionTip(row) {
+    const bar = row.querySelector('.bar-wrap');
+    const tip = row.querySelector('.stat-tip');
+    const br  = bar.getBoundingClientRect();
+    const tw  = tip.offsetWidth  || 300;
+    const th  = tip.offsetHeight || 200;
+    const gap = 18;
+    const vw  = window.innerWidth;
+    const vh  = window.innerHeight;
+
+    let left = br.right + gap;
+    if (left + tw + 8 > vw) {
+      left = br.left - gap - tw;
+      if (left < 8) left = Math.max(8, vw - tw - 8);
+    }
+    let top = br.top + br.height / 2 - th / 2;
+    top = Math.max(8, Math.min(top, vh - th - 8));
+    if (top < 8) top = 8;
+
+    tip.style.left = left + 'px';
+    tip.style.top  = top  + 'px';
+  }
+  rows.forEach(row => {
+    const bar      = row.querySelector('.bar-wrap');
+    const barInner = row.querySelector('.bar');
+
+    function applyPeers(m) {
+      const key  = row.dataset.key;
+      const stat = (m === 'm2' ? M2 : M1)[key];
+      const sig  = new Set([...stat.more, ...stat.less]);
+      rows.forEach(r => {
+        if (r === row) return;
+        if (sig.has(r.dataset.key)) r.classList.add('peer-dim');
+      });
+    }
+    function clearPeers() {
+      rows.forEach(r => r.classList.remove('peer-dim'));
+    }
+
+    function hoverMode() {
+      const redVis   = !hiddenSegs.has('red')   && globalMode !== 'm2';
+      const amberVis = !hiddenSegs.has('amber');
+      const tealVis  = !hiddenSegs.has('teal');
+      if (redVis && amberVis && tealVis) return 'm1';
+      if (!redVis && amberVis && tealVis) return 'm2';
+      return null;
+    }
+
+    function applyHover() {
+      const m = hoverMode();
+      if (!m) { clearHover(); return; }
+      barInner.classList.remove('hover-m1', 'hover-m2');
+      barInner.classList.add('hover-' + m);
+      clearPeers();
+      applyPeers(m);
+      renderStat(row, m);
+      positionTip(row);
+      row.classList.add('tip-active');
+    }
+    function clearHover() {
+      barInner.classList.remove('hover-m1', 'hover-m2');
+      row.classList.remove('tip-active');
+      clearPeers();
+    }
+
+    bar.addEventListener('mouseenter', applyHover);
+    bar.addEventListener('mouseleave', clearHover);
+    bar.addEventListener('click', e => {
+      e.stopPropagation();
+      document.body.classList.add('demo-done');
+      if (hiddenSegs.size > 0 || globalMode === 'm2') {
+        hiddenSegs.forEach(s => {
+          const it = document.querySelector(`.legend-item[data-seg="${s}"]`);
+          if (it) it.classList.remove('seg-off');
+        });
+        hiddenSegs.clear();
+        setGlobalMode('m1');
+      } else {
+        setGlobalMode('m2');
+      }
+      applyHover();
+    });
+
+    row._refreshHover = () => {
+      if (row.classList.contains('tip-active')) applyHover();
+    };
+  });
+
+  let globalMode = 'm1';
+
+  function setGlobalMode(m) {
+    globalMode = m;
+    const relevant = m === 'm2' ? ['amber','teal'] : ['red','amber','teal'];
+    relevant.forEach(seg => {
+      if (hiddenSegs.has(seg)) {
+        hiddenSegs.delete(seg);
+        const it = document.querySelector(`.legend-item[data-seg="${seg}"]`);
+        if (it) it.classList.remove('seg-off');
+      }
+    });
+    const extra = m === 'm2' ? new Set([...hiddenSegs, 'red']) : new Set(hiddenSegs);
+    rows.forEach(r => recalcRow(r, extra));
+    if (m === 'm2') { sortKey = 'teal'; sortDir = 'desc'; }
+    else            { sortKey = null; }
+    updateArrows();
+    applySort();
+    const redItem = document.querySelector('.legend-item[data-seg="red"]');
+    if (redItem) redItem.classList.toggle('seg-off', m === 'm2');
+  }
+
+  // ── Red-orb click affordance ──
+  const demo  = document.getElementById('clickDemo');
+  const chartBox = document.getElementById('chart');
+  const PROXIMITY = 120;
+
+  function setOrb(x, y) {
+    demo.style.transform = `translate(${x}px, ${y}px)`;
+  }
+  function homePos() {
+    const bar = document.querySelector('.row[data-key="w1"] .bar-wrap');
+    if (!bar) return [0, 0];
+    const r = bar.getBoundingClientRect();
+    return [r.left + r.width * 0.38, r.top + r.height / 2];
+  }
+  function goHome() {
+    const [hx, hy] = homePos();
+    setOrb(hx, hy);
+  }
+  goHome();
+  setTimeout(goHome, 100);
+
+  document.addEventListener('mousemove', e => {
+    if (document.body.classList.contains('demo-done')) return;
+    const cr = chartBox.getBoundingClientRect();
+    if (e.clientY > cr.bottom + 20) { goHome(); return; }
+    const dx = Math.max(cr.left - e.clientX, 0, e.clientX - cr.right);
+    const dy = Math.max(cr.top  - e.clientY, 0, e.clientY - cr.bottom);
+    const dist = Math.hypot(dx, dy);
+    if (dist <= PROXIMITY) setOrb(e.clientX, e.clientY);
+    else                   goHome();
+  }, { passive: true });
+  window.addEventListener('resize', goHome);
+  window.addEventListener('scroll', goHome, { passive: true });
+
+  applySegs();
+  applySort();
+  updateArrows();
+})();
+</script>
+</body>
+</html>

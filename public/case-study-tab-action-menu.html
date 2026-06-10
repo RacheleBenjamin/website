@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>From Tab Overload to Tab Action Menu Â· Rachele Benjamin, PhD</title>
+<title>From Tab Overload to Tab Mastery · Rachele Benjamin, PhD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -1812,6 +1812,194 @@
       grid-template-columns: 1fr;
     }
   }
+
+  /* -- What Came Next: Workspace Switcher -- */
+  .wcn-section { background: var(--cream); }
+  .study-divider {
+    height: 1px;
+    background: var(--ink-10);
+    margin: 0;
+  }
+  .wcn-inner { max-width: 860px; margin: 0 auto; }
+  .wcn-segment-img {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    margin: 28px auto 40px;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    background: #fff;
+  }
+  .wcn-proto-label {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    font-weight: 700;
+  }
+
+  /* Workspace schematic wrapper -- perspective container */
+  .ws-schematic {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+  }
+  .ws-schematic:focus-visible {
+    outline: 2px solid var(--work);
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+  .ws-flipper {
+    position: relative;
+    width: 260px;
+    height: 186px;
+  }
+  .ws-face {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--ink-10);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .ws-face-back {
+    display: none;
+    background: #f0f2f5;
+  }
+  .ws-face-front { background: #fff; }
+  .ws-schematic.flipped .ws-face-front { display: none; }
+  .ws-schematic.flipped .ws-face-back { display: block; }
+
+  .ws-top {
+    height: 24px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid var(--ink-10);
+    background: #f7f9fd;
+  }
+  .ws-face-back .ws-top { background: #e8eaed; }
+
+  .ws-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: rgba(26,26,26,.25);
+  }
+  .ws-window-controls {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .ws-chevron-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(26,26,26,.35);
+    background: #fff;
+    position: relative;
+    margin-right: 2px;
+    pointer-events: none;
+  }
+  .ws-chevron-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-right: 1px solid rgba(26,26,26,.75);
+    border-bottom: 1px solid rgba(26,26,26,.75);
+    transform: translate(-50%, -65%) rotate(45deg);
+  }
+
+  .ws-folder-btn {
+    width: 14px;
+    height: 12px;
+    position: relative;
+    margin-left: 1px;
+    pointer-events: none;
+  }
+  .ws-folder-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 3px;
+    background: var(--work);
+    border-radius: 1.5px 1.5px 0 0;
+  }
+  .ws-folder-btn::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 14px;
+    height: 9px;
+    background: var(--work);
+    border-radius: 0 2px 2px 2px;
+  }
+
+  .ws-body {
+    height: 160px;
+    position: relative;
+    padding: 10px;
+  }
+  .ws-content-box {
+    height: 100%;
+    border: 1px dashed var(--ink-30);
+    border-radius: 4px;
+    background: linear-gradient(to bottom, rgba(26,26,26,.04), rgba(26,26,26,.02));
+  }
+  .ws-face-back .ws-content-box {
+    border-color: rgba(26,26,26,.15);
+    background: linear-gradient(to bottom, rgba(26,26,26,.06), rgba(26,26,26,.03));
+  }
+
+  .ws-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--work);
+  }
+  .ws-hint::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--work);
+  }
+
+  .ws-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--ink-40);
+    background: rgba(255,255,255,.65);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 4px;
+    line-height: 1;
+  }
+  .ws-face-front .ws-title { color: var(--ink-30); }
+
+  .ws-face-back .ws-body {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    padding: 10px;
+  }
+  .ws-face-back .ws-content-box { height: auto; }
 </style>
 </head>
 <body>
@@ -1819,7 +2007,7 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a class="home" href="https://RacheleBenjamin.github.io/website/">Rachele <span>Benjamin</span></a>
-    <span class="meta">Case Study Â· Edge Productivity</span>
+    <span class="meta">Case Study · Edge Productivity</span>
   </div>
 </header>
 
@@ -2380,7 +2568,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
 <section class="slide" id="slide-6">
   <div class="slide-inner">
-    <div class="slide-tag">Next stage of the study</div>
+    <div class="slide-tag">Next stage</div>
     <h2 class="section-title">We presented to Product Leaders and were approved to build. The next key decision point: <span class="italic">How much flexibility do our users need?</span></h2>
 
     <div class="direction-grid" aria-label="Two more concepts to pressure-test">
@@ -3180,7 +3368,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
 <section class="slide res-slide" id="slide-r2">
   <div class="slide-inner">
-    <div class="slide-tag">Results Â· Preference</div>
+    <div class="slide-tag">Study 2 Results · Preference</div>
     <h2 class="section-title">Participants were <span class="italic">split</span> between Switcher and Transient</h2>
 
     <div class="res-split">
@@ -3237,7 +3425,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
 
 <section class="slide res-slide" id="slide-r3">
   <div class="slide-inner">
-    <div class="slide-tag">Results Â· Satisfaction</div>
+    <div class="slide-tag">Study 2 Results · Satisfaction</div>
     <h2 class="section-title">Impressions of both variants were on average <span class="italic">positive</span></h2>
     <p class="res-sub">Daily satisfaction across the six-day diary (1=very negative, 5=very positive).</p>
 
@@ -3546,9 +3734,6 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
     <div class="slide-tag">Outcome</div>
     <h2 class="section-title">Another LT review, and the business made an <span class="italic">informed</span> choice (spoiler - it was the Transient menu)</h2>
 
-
-    </div>
-
     <div class="impact-banner">
       <div class="impact-banner-label">Product impact</div>
       <p>It's now in product, serving <strong>1.3M daily average users</strong>, helping people stay productive.</p>
@@ -3559,8 +3744,1230 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
         <source src="videos/tab-action-menu-today.mp4" type="video/mp4" />
       </video>
     </div>
+  </div>
+</section>
 
- 
+<section class="slide wcn-section" id="slide-study-3">
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3</div>
+    <h2 class="section-title">What came next: The Productivity team inherits <span class="italics">Workspaces</span>, an elegant but little-loved feature</h2>
+    <p style="margin-top:16px;font-size:15px;line-height:1.7;color:var(--ink-70);max-width:680px;">The team wanted to know whether to build a <strong>quick-switcher button</strong> that lets people toggle between workspaces without leaving their current window.</p>
+
+
+    <p class="wcn-proto-label">Quick Switcher</p>
+    <div class="ws-schematic" role="button" tabindex="0" aria-pressed="false" aria-label="Workspace quick-switcher prototype. Click the folder button to switch workspaces.">
+      <div class="ws-flipper">
+        <!-- Front face: Workspace A (white) -->
+        <div class="ws-face ws-face-front">
+          <div class="ws-top">
+            <span class="ws-chevron-btn"></span>
+            <span class="ws-folder-btn" aria-label="Workspace switcher"></span>
+            <span class="ws-title">Workspace A</span>
+            <span class="ws-window-controls" aria-hidden="true">
+              <span class="ws-dot"></span>
+              <span class="ws-dot"></span>
+              <span class="ws-dot"></span>
+            </span>
+          </div>
+          <div class="ws-body">
+            <div class="ws-content-box"></div>
+          </div>
+        </div>
+        <!-- Back face: Workspace B (gray) -->
+        <div class="ws-face ws-face-back">
+          <div class="ws-top">
+            <span class="ws-chevron-btn"></span>
+            <span class="ws-folder-btn" aria-label="Workspace switcher"></span>
+            <span class="ws-title">Workspace B</span>
+            <span class="ws-window-controls" aria-hidden="true">
+              <span class="ws-dot"></span>
+              <span class="ws-dot"></span>
+              <span class="ws-dot"></span>
+            </span>
+          </div>
+          <div class="ws-body">
+            <div class="ws-content-box"></div>
+            <div class="ws-content-box"></div>
+          </div>
+        </div>
+      </div>
+      <span class="ws-hint">Click the folder to switch</span>
+    </div>
+
+    <figure class="s3-ask-quote" id="s3-ask-container">
+      <p class="s3-ask-label">The design ask</p>
+      <blockquote>Our <span class="s3-ask-trigger" data-tip="why they keep coming back with small variations">leadership</span> wants us to figure out <span class="s3-ask-trigger" data-tip="a moment for me to influence leadership">what users like best</span> &mdash; quick switcher within the Tab Action Menu, or outside the Tab Action Menu.</blockquote>
+      <!-- floating ask tooltip -->
+      <div id="s3-ask-tip" class="s3-ask-tip"></div>
+    </figure>
+
+  </div>
+</section>
+
+<style>
+  /* ── Study 3 content (plan / results / carousel / kano) ── */
+  #slide-s3-plan .participant-row {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  #slide-s3-plan .participant-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  #slide-s3-plan .participant-stat {
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 700;
+    color: var(--work);
+    line-height: 1;
+    letter-spacing: -.02em;
+    flex-shrink: 0;
+  }
+  #slide-s3-plan .participant-label {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--ink-70);
+    max-width: 420px;
+  }
+  #slide-s3-plan .plan-rq ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  #slide-s3-plan .plan-rq li {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-70);
+  }
+  #slide-s3-plan .plan-rq li + li { margin-top: 12px; }
+  #slide-s3-plan .tension-toggle[aria-expanded="true"] + .tension-bullets {
+    max-height: 600px;
+  }
+
+  /* carousel of insights */
+  .s3-sub {
+    margin: 0 0 20px;
+    font-size: clamp(20px, 2.4vw, 26px);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -.01em;
+  }
+  .s3-carousel { margin-top: 40px; }
+  .s3-carousel-viewport { overflow: hidden; }
+  .s3-carousel-track {
+    display: flex;
+    transition: transform .45s cubic-bezier(.4,0,.2,1);
+  }
+  .s3-quote-card {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 36px 40px;
+    background: linear-gradient(90deg, rgba(0,93,170,.07), rgba(15,118,110,.05));
+    border-radius: 6px;
+    font-size: clamp(18px, 2.2vw, 24px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .s3-quote-card .s3-quote-attr {
+    display: block;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink-50);
+  }
+  .s3-carousel-nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .s3-carousel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--ink-20);
+    background: transparent;
+    color: var(--ink);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background .2s, border-color .2s;
+  }
+  .s3-carousel-btn:hover { background: var(--ink-05); border-color: var(--ink-30); }
+  .s3-carousel-dots {
+    display: flex;
+    gap: 8px;
+    margin-right: auto;
+  }
+  .s3-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ink-20);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+  }
+  .s3-dot.is-active { background: var(--work); transform: scale(1.3); }
+  .s3-carousel-note {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--ink-40);
+    font-style: italic;
+  }
+
+  /* kano diagram */
+  .s3-kano-wrap {
+    margin-top: 36px;
+    max-width: 720px;
+  }
+  .s3-kano-wrap svg { width: 100%; height: auto; display: block; }
+  .s3-painpoint strong { color: var(--ink); }
+
+  /* design-ask pull quote */
+  .s3-ask-quote {
+    margin: 56px 0 8px;
+    max-width: 900px;
+    border-left: 4px solid var(--work);
+    padding: 8px 0 8px 32px;
+    position: relative;
+  }
+  .s3-ask-label {
+    margin: 0 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--work);
+  }
+  .s3-ask-quote blockquote {
+    margin: 0;
+    font-size: clamp(24px, 3.4vw, 38px);
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--ink);
+  }
+  .s3-ask-quote blockquote .accent { color: var(--work); font-style: italic; }
+  
+  /* hover interactions for trigger phrases */
+  .s3-ask-trigger {
+    border-bottom: 2px dashed rgba(0, 93, 170, 0.4);
+    cursor: help;
+    transition: background-color 0.2s, color 0.2s, border-bottom-color 0.2s;
+  }
+  .s3-ask-trigger:hover {
+    background-color: rgba(0, 93, 170, 0.08);
+    color: #005DAA;
+    border-bottom-color: #005DAA;
+  }
+  
+  /* Ask quote floating callout */
+  .s3-ask-tip {
+    position: fixed;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.96) translate(10px, 10px);
+    transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #161310;
+    color: #F4ECD8;
+    padding: 8px 12px;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    border-left: 3px solid var(--work);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  .s3-ask-tip.visible {
+    opacity: 1;
+    transform: scale(1) translate(15px, 15px);
+  }
+
+  /* ── interactive switching-frequency chart (scoped under .wsc) ── */
+  .wsc {
+    --wsc-muted: #5a5550;
+    --wsc-red:   #CF6454;
+    --wsc-amber: #DBA83C;
+    --wsc-teal:  #74B3C2;
+    --wsc-bar-h: 30px;
+    --wsc-row-gap: 7px;
+    --wsc-label-w: 210px;
+    --wsc-label-gap: 20px;
+    --wsc-tip-bg: #161310;
+    --wsc-tip-ink: #F4ECD8;
+    margin-top: 40px;
+    position: relative;
+  }
+  .wsc-sub {
+    font-size: 14px;
+    color: var(--wsc-muted);
+    line-height: 1.45;
+    margin: 0 0 30px;
+    font-style: italic;
+  }
+  .wsc .survey-q {
+    border-left: 3px solid var(--ink);
+    padding: 4px 0 4px 16px;
+    margin: 0 0 26px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .wsc .survey-q .q-lbl {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--wsc-muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .wsc .survey-q .q-stem { font-weight: 600; margin-bottom: 8px; }
+  .wsc .survey-q ol { margin: 0; padding-left: 20px; }
+  .wsc .survey-q ol li { margin-bottom: 3px; }
+  .wsc .survey-q ol li b { font-weight: 600; }
+  .wsc .survey-q .q-foot { font-size: 12px; color: var(--wsc-muted); font-style: italic; margin-top: 10px; }
+  .wsc .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+    padding-left: calc(var(--wsc-label-w) + var(--wsc-label-gap));
+    margin-bottom: 22px;
+  }
+  .wsc .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    margin-right: 24px;
+  }
+  .wsc .leg-swatch {
+    width: 14px; height: 14px; flex-shrink: 0;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background .15s, border-color .15s;
+    margin-right: 7px;
+  }
+  .wsc .legend-item[data-seg="red"]   .leg-swatch { background: var(--wsc-red); }
+  .wsc .legend-item[data-seg="amber"] .leg-swatch { background: var(--wsc-amber); }
+  .wsc .legend-item[data-seg="teal"]  .leg-swatch { background: var(--wsc-teal); }
+  .wsc .legend-item.seg-off .leg-swatch {
+    background: transparent !important;
+    border-color: var(--wsc-muted);
+  }
+  .wsc .leg-label {
+    font-size: 13px; font-weight: 500; color: var(--ink);
+    cursor: pointer; padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color .15s, border-color .15s;
+  }
+  .wsc .leg-label:hover { color: var(--ink); border-bottom-color: rgba(0,0,0,.3); }
+  .wsc .legend-item.sort-active .leg-label { border-bottom-color: var(--ink); }
+  .wsc .legend-item[data-seg="red"].sort-active   .leg-label { color: var(--wsc-red); border-bottom-color: var(--wsc-red); }
+  .wsc .legend-item[data-seg="amber"].sort-active .leg-label { color: #8c6a1a; border-bottom-color: #8c6a1a; }
+  .wsc .legend-item[data-seg="teal"].sort-active  .leg-label { color: #3a7e8e; border-bottom-color: #3a7e8e; }
+  .wsc .legend-item.seg-off .leg-label { color: var(--wsc-muted); }
+  .wsc .leg-arrow {
+    font-size: 11px; margin-left: 4px; opacity: 0;
+    color: var(--wsc-muted); transition: opacity .15s; pointer-events: none;
+  }
+  .wsc .legend-item.sort-active .leg-arrow { opacity: 1; }
+  .wsc .leg-tip {
+    position: absolute; top: calc(100% + 8px); left: 0; width: 280px;
+    background: var(--wsc-tip-bg); color: var(--wsc-tip-ink);
+    padding: 12px 14px; font-size: 12px; line-height: 1.5;
+    box-shadow: 0 12px 28px rgba(0,0,0,.3);
+    opacity: 0; pointer-events: none; transition: opacity .14s; z-index: 30;
+  }
+  .wsc .leg-tip .lbl {
+    display: block; font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: #a89878; margin-bottom: 5px;
+  }
+  .wsc .legend-item:hover .leg-tip { opacity: 1; pointer-events: none; }
+  .wsc .chart { width: 100%; }
+  .wsc .row {
+    display: flex; align-items: center;
+    margin-bottom: var(--wsc-row-gap);
+    gap: var(--wsc-label-gap); position: relative;
+  }
+  .wsc .stat-tip {
+    position: fixed; top: 0; left: 0; width: 300px;
+    max-height: calc(100vh - 16px); overflow-y: auto;
+    background: var(--wsc-tip-bg); color: var(--wsc-tip-ink);
+    padding: 14px 16px; font-size: 12px; line-height: 1.55;
+    box-shadow: 0 14px 32px rgba(0,0,0,.35);
+    opacity: 0; pointer-events: none; transition: opacity .14s;
+    z-index: 40; text-align: left;
+  }
+  .wsc .stat-tip:hover { opacity: 1; }
+  .wsc .row.tip-active .stat-tip { opacity: 1; }
+  .wsc .stat-tip .lbl {
+    display: block; font-size: 12.5px; letter-spacing: .07em;
+    text-transform: uppercase; color: #c9b78c; margin-bottom: 5px; font-weight: 600;
+  }
+  .wsc .stat-tip .stat-block + .stat-block { margin-top: 10px; }
+  .wsc .stat-tip .stat-val { font-size: 14px; color: var(--wsc-tip-ink); font-weight: 600; }
+  .wsc .stat-tip .stat-line { color: #d8cdb5; margin-top: 3px; }
+  .wsc .stat-tip .stat-line .ds { color: #f4ecd8; font-weight: 600; }
+  .wsc .stat-tip .stat-line.none { color: #8a7e65; font-style: italic; }
+  .wsc .stat-tip .stat-n {
+    font-size: 10px; color: #8a7e65; margin-top: 10px; padding-top: 8px;
+    border-top: 1px solid rgba(168,152,120,.25);
+  }
+  .wsc .row-label {
+    width: var(--wsc-label-w); flex-shrink: 0; text-align: right;
+    font-size: 14px; line-height: 1.35; color: var(--ink);
+    cursor: pointer; position: relative; padding-right: 0; transition: opacity .2s;
+  }
+  .wsc .row-label:hover { opacity: .7; }
+  .wsc .row.row-off .row-label { opacity: .35; text-decoration: line-through; }
+  .wsc .click-demo {
+    position: fixed; pointer-events: none; z-index: 50;
+    left: 0; top: 0; width: 0; height: 0;
+    transition: transform .22s cubic-bezier(.22,.61,.36,1);
+    will-change: transform;
+  }
+  .wsc .click-demo .ripple {
+    position: absolute; left: 0; top: 0;
+    width: 14px; height: 14px; margin: -7px 0 0 -7px;
+    border-radius: 50%; background: rgba(207,100,84,.85);
+    box-shadow: 0 0 0 0 rgba(207,100,84,.55);
+    animation: wsc-orb-pulse 1.6s ease-out infinite;
+  }
+  @keyframes wsc-orb-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(207,100,84,.55); }
+    70%  { box-shadow: 0 0 0 18px rgba(207,100,84,0); }
+    100% { box-shadow: 0 0 0 0 rgba(207,100,84,0); }
+  }
+  .wsc.wsc-done .click-demo { display: none; }
+  .wsc .row-tip {
+    position: absolute; top: calc(100% + 6px); right: 0; width: 300px;
+    background: var(--wsc-tip-bg); color: var(--wsc-tip-ink);
+    padding: 12px 14px; font-size: 12px; line-height: 1.5;
+    box-shadow: 0 12px 28px rgba(0,0,0,.3);
+    opacity: 0; pointer-events: none; transition: opacity .14s; z-index: 30; text-align: left;
+  }
+  .wsc .row-tip .lbl {
+    display: block; font-size: 10px; letter-spacing: .1em;
+    text-transform: uppercase; color: #a89878; margin-bottom: 5px;
+  }
+  .wsc .row-tip .q {
+    display: block; font-size: 10px; color: #8a7a5a; margin-top: 6px; font-style: italic;
+  }
+  .wsc .row-label:hover .row-tip { opacity: 1; }
+  .wsc .bar-wrap {
+    flex: 1; overflow: hidden; max-height: 100px;
+    transition: max-height .3s ease, opacity .25s;
+    cursor: pointer;
+  }
+  .wsc .row.row-off .bar-wrap { max-height: 0; opacity: 0; }
+  .wsc .bar {
+    display: flex; height: var(--wsc-bar-h); width: 100%;
+    position: relative; transition: filter .2s;
+  }
+  .wsc .seg {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; overflow: hidden; white-space: nowrap;
+    transition: flex-basis .45s ease, opacity .25s;
+  }
+  .wsc .seg.red   { background: var(--wsc-red);   color: #fff; }
+  .wsc .seg.amber { background: var(--wsc-amber); color: #1a1a1a; }
+  .wsc .seg.teal  { background: var(--wsc-teal);  color: #fff; }
+  .wsc .seg.seg-hidden { flex-basis: 0 !important; opacity: 0; }
+  .wsc .bar.hover-m1 .seg.teal  { box-shadow: inset 2px 2px 0 0 var(--ink), inset 0 -2px 0 0 var(--ink); }
+  .wsc .bar.hover-m1 .seg.amber { box-shadow: inset 0 2px 0 0 var(--ink), inset 0 -2px 0 0 var(--ink); }
+  .wsc .bar.hover-m1 .seg.red   { box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink); }
+  .wsc .bar.hover-m1 .seg.teal.seg-hidden + .seg.amber,
+  .wsc .bar.hover-m1 .seg.amber:first-child { box-shadow: inset 2px 2px 0 0 var(--ink), inset 0 -2px 0 0 var(--ink); }
+  .wsc .bar.hover-m1 .seg.amber:last-child { box-shadow: inset 0 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink); }
+  .wsc .bar.hover-m1 .seg.teal:only-child  { box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink); }
+  .wsc .bar.hover-m2 .seg.teal  { box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink); }
+  .wsc .bar.hover-m2 .seg.amber { box-shadow: inset 0 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink); }
+  .wsc .bar.hover-m2 .seg.teal.seg-hidden + .seg.amber,
+  .wsc .bar.hover-m2 .seg.amber:first-child { box-shadow: inset 2px 2px 0 0 var(--ink), inset -2px -2px 0 0 var(--ink); }
+  .wsc .row.peer-dim .bar-wrap { opacity: .25; }
+  .wsc .row.peer-dim .row-label { opacity: .4; }
+  .wsc .axis-row { display: flex; align-items: flex-start; margin-top: 4px; }
+  .wsc .axis-spacer { width: calc(var(--wsc-label-w) + var(--wsc-label-gap)); flex-shrink: 0; }
+  .wsc .axis { flex: 1; position: relative; height: 28px; border-top: 1px solid rgba(0,0,0,.22); }
+  .wsc .tick {
+    position: absolute; top: 5px; transform: translateX(-50%);
+    font-size: 11px; color: var(--wsc-muted); white-space: nowrap;
+  }
+  .wsc .tick:last-child { transform: translateX(-80%); }
+  .wsc .n-note {
+    font-size: 12px; color: var(--wsc-muted); margin-top: 8px;
+    padding-left: calc(var(--wsc-label-w) + var(--wsc-label-gap));
+  }
+  .wsc .model-note {
+    margin-top: 40px; padding: 18px 22px;
+    border-top: 1px solid rgba(0,0,0,.15);
+    font-size: 12px; line-height: 1.6; color: var(--wsc-muted);
+  }
+  .wsc .model-note h3 {
+    font-size: 13px; font-weight: 600; color: var(--ink);
+    margin: 0 0 8px; letter-spacing: .01em;
+  }
+  .wsc .model-note code {
+    font-family: 'Consolas','Menlo',monospace; font-size: 11px;
+    background: rgba(0,0,0,.05); padding: 1px 5px; border-radius: 2px; color: var(--ink);
+  }
+
+  /* ── unique workspaces count donut (scoped under .wspc) ── */
+  .wspc {
+    margin-top: 40px;
+    margin-bottom: 56px;
+    border-bottom: 1px dashed var(--ink-20);
+    padding-bottom: 48px;
+    position: relative;
+  }
+  .wspc-sub-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 24px;
+    letter-spacing: -.01em;
+  }
+  .wspc-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 0;
+  }
+  .wspc-chart-wrap {
+    position: relative;
+    width: 360px;
+    height: 360px;
+    max-width: 100%;
+  }
+  .wspc-svg {
+    display: block;
+    overflow: visible;
+  }
+  .wspc-slice {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), filter 0.2s;
+    transform-origin: 150px 150px;
+    cursor: pointer;
+  }
+  .wspc-slice:hover, .wspc-slice.wspc-active {
+    transform: scale(1.04);
+    filter: brightness(1.05) drop-shadow(0 4px 12px rgba(0,0,0,0.08));
+  }
+  .wspc-callout {
+    position: fixed;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.96) translate(10px, 10px);
+    transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #161310; /* fully opaque background instead of variable */
+    color: #F4ECD8;
+    padding: 8px 12px;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    border-left: 3px solid var(--work);
+  }
+  .wspc-callout.wspc-visible {
+    opacity: 1;
+    transform: scale(1) translate(15px, 15px);
+  }
+  .wspc-callout-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: var(--wsc-tip-ink);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+  }
+  .wspc-callout-swatch {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  @media (max-width: 760px) {
+    .wspc-chart-wrap {
+      width: 290px;
+      height: 290px;
+    }
+  }
+
+  /* auto-scrolling quote marquee (jtbd style) */
+  .s3-quotes { margin-top: 44px; }
+  .s3-marquee-wrap { overflow: hidden; position: relative; margin-top: 24px; }
+  .s3-marquee-fade {
+    pointer-events: none;
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 90px;
+    z-index: 2;
+  }
+  .s3-marquee-fade-l { left: 0; background: linear-gradient(to right, var(--cream), transparent); }
+  .s3-marquee-fade-r { right: 0; background: linear-gradient(to left, var(--cream), transparent); }
+  .s3-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: s3-marquee-scroll 70s linear infinite;
+    will-change: transform;
+  }
+  .s3-marquee-wrap:hover .s3-marquee-track { animation-play-state: paused; }
+  @keyframes s3-marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .s3-marquee-set {
+    display: flex;
+    gap: 16px;
+    padding-right: 16px;
+    flex-shrink: 0;
+  }
+  .s3-q-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    width: 300px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid var(--ink-15);
+    border-radius: 6px;
+    padding: 22px 10px;
+    margin: 0;
+    white-space: normal;
+  }
+  .s3-q-card p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .s3-q-attr {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--ink-40);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .s3-marquee-track { animation: none; }
+    .s3-marquee-wrap { overflow-x: auto; }
+  }
+</style>
+
+<section class="slide" id="slide-s3-plan">
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3 Plan</div>
+    <h2 class="section-title">Survey to understand Workspace usage habits and attitudes, and <span class="italic">build for the longer term</span></h2>
+
+    <div class="plan-fold" style="margin-top: 40px;">
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Research questions</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="tension-bullets plan-rq">
+          <ul>
+            <li>What do Workspace users need and want to feel on top of tab clutter? What are the pain points? What are the opportunities?</li>
+            <li>How many Workspaces do our users have open at a time, and what are their existing Workspace switching habits?</li>
+            <li>What positive or negative impact could quick switcher have on their ability to manage multiple working tabs?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Sample</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="tension-bullets plan-participants">
+          <div class="participant-row">
+            <div class="participant-item">
+              <span class="participant-stat">300</span>
+              <p class="participant-label">Edge Workspace users sampled via Qualtrics Panels (at least half also use Tab Groups)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plan-fold-item">
+        <button class="tension-toggle" aria-expanded="false">
+          <h3 class="tension-card-title">Sections</h3>
+          <span class="toggle-chevron" aria-hidden="true"></span>
+        </button>
+        <ol class="tension-bullets prompt-list">
+          <li>Tab organizing habits</li>
+          <li>Feature usage (Workspaces, Tab groups, Vertical tabs)</li>
+          <li>Workspace habits (number of Workspaces, switching frequency)</li>
+          <li>Kano analysis to de-risk the quick switching concept</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <script>
+  document.querySelectorAll('#slide-s3-plan .tension-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var open = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', open?'false':'true');
+    });
+  });
+  </script>
+</section>
+
+<section class="slide" id="slide-s3-results">
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3 Results</div>
+    <h2 class="section-title">Our Workspace users typically have <span class="italic">1-3 Workspaces open at a time</span>, and they switch between them <span class="italic">daily</span></h2>
+
+    <div class="wspc" id="wspc">
+      <h3 class="wspc-sub-title">Distribution of typically open Workspaces (N = 300)</h3>
+      <div class="wspc-content">
+        <div class="wspc-chart-wrap">
+          <svg viewBox="0 0 300 300" width="100%" height="auto" class="wspc-svg">
+            <g class="wspc-group">
+              <!-- 1 Workspace -->
+              <path class="wspc-slice" d="M 150.00 50.00 A 100 100 0 0 1 184.86 243.73 L 170.91 206.24 A 60 60 0 0 0 150.00 90.00 Z" fill="#005DAA" data-key="w1" data-label="1 Workspace" data-pct="44.3%" data-count="133"></path>
+              <!-- 2-3 Workspaces -->
+              <path class="wspc-slice" d="M 184.86 243.73 A 100 100 0 0 1 64.46 98.20 L 98.68 118.92 A 60 60 0 0 0 170.91 206.24 Z" fill="#2A82C9" data-key="w23" data-label="2-3 Workspaces" data-pct="39.3%" data-count="118"></path>
+              <!-- 4-5 Workspaces -->
+              <path class="wspc-slice" d="M 64.46 98.20 A 100 100 0 0 1 92.93 67.89 L 115.76 100.73 A 60 60 0 0 0 98.68 118.92 Z" fill="#5CA6E5" data-key="w45" data-label="4-5 Workspaces" data-pct="6.7%" data-count="20"></path>
+              <!-- 6+ Workspaces -->
+              <path class="wspc-slice" d="M 92.93 67.89 A 100 100 0 0 1 119.10 54.89 L 131.46 92.94 A 60 60 0 0 0 115.76 100.73 Z" fill="#94C8FC" data-key="w6p" data-label="6+ Workspaces" data-pct="4.7%" data-count="14"></path>
+              <!-- None -->
+              <path class="wspc-slice" d="M 119.10 54.89 A 100 100 0 0 1 150.00 50.00 L 150.00 90.00 A 60 60 0 0 0 131.46 92.94 Z" fill="#D0DCE5" data-key="wnone" data-label="None" data-pct="5.0%" data-count="15"></path>
+            </g>
+            <!-- Center Text -->
+            <circle cx="150" cy="150" r="59" fill="#EDF2FA"></circle>
+            <!-- Default (No Hover) Text -->
+            <g id="wspc-text-default" style="transition: opacity 0.15s; pointer-events: none;">
+              <text x="150" y="146" text-anchor="middle" font-size="20" font-weight="800" fill="var(--ink)">300</text>
+              <text x="150" y="164" text-anchor="middle" font-size="11" font-weight="600" fill="var(--wsc-muted)" letter-spacing="0.05em" text-transform="uppercase">respondents</text>
+            </g>
+            <!-- Hovered Text -->
+            <g id="wspc-text-hover" style="opacity: 0; transition: opacity 0.15s; pointer-events: none;">
+              <text x="150" y="146" text-anchor="middle" font-size="20" font-weight="800" fill="var(--ink)" id="wspc-hover-val"></text>
+              <text x="150" y="164" text-anchor="middle" font-size="11" font-weight="600" fill="var(--wsc-muted)" letter-spacing="0.05em" text-transform="uppercase" id="wspc-hover-lbl-bottom"></text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <!-- Hover dynamic HTML callout label box -->
+      <div id="wspc-callout" class="wspc-callout">
+        <div class="wspc-callout-title" style="margin-bottom:0;">
+          <span class="wspc-callout-swatch" id="wspc-callout-swatch"></span>
+          <span id="wspc-callout-label" style="font-size: 14px; font-weight: 700; color: var(--wsc-tip-ink);"></span>
+        </div>
+      </div>
+    </div><!-- /wspc -->
+
+    <div class="wsc" id="wsc">
+
+      <div class="legend" id="wsc-legend">
+        <div class="legend-item" data-seg="teal">
+          <span class="leg-swatch"></span>
+          <span class="leg-label">% switch hourly or more</span>
+          <span class="leg-arrow"></span>
+          <div class="leg-tip"><span class="lbl">Survey wording</span>Switch between Workspaces multiple times per hour or once per hour.</div>
+        </div>
+        <div class="legend-item" data-seg="amber">
+          <span class="leg-swatch"></span>
+          <span class="leg-label">% switch daily</span>
+          <span class="leg-arrow"></span>
+          <div class="leg-tip"><span class="lbl">Survey wording</span>Switch multiple times a day, once a day, or less than once a day.</div>
+        </div>
+        <div class="legend-item" data-seg="red">
+          <span class="leg-swatch"></span>
+          <span class="leg-label">% switch weekly or less</span>
+          <span class="leg-arrow"></span>
+          <div class="leg-tip"><span class="lbl">Survey wording</span>Switch less than once a week, less than once a month, or never.</div>
+        </div>
+      </div>
+
+      <div class="click-demo" id="wsc-clickDemo" aria-hidden="true"><span class="ripple"></span></div>
+
+
+      <div class="chart" id="wsc-chart">
+        <div class="row" data-key="w6p" data-red="0.0" data-amber="35.7" data-teal="64.3">
+          <div class="row-label">6+ Workspaces open
+            <div class="row-tip"><span class="lbl">Survey wording</span>&ldquo;6-10 Workspaces&rdquo; and &ldquo;More than 10 Workspaces&rdquo; (merged)</div>
+          </div>
+          <div class="bar-wrap"><div class="bar">
+            <div class="seg teal" data-pct="64.3">64%</div>
+            <div class="seg amber" data-pct="35.7">36%</div>
+            <div class="seg red" data-pct="0.0"></div>
+          </div></div>
+          <div class="stat-tip"></div>
+        </div>
+        <div class="row" data-key="w45" data-red="0.0" data-amber="40.0" data-teal="60.0">
+          <div class="row-label">4-5 Workspaces open
+            <div class="row-tip"><span class="lbl">Survey wording</span>&ldquo;4-5 Workspaces&rdquo;</div>
+          </div>
+          <div class="bar-wrap"><div class="bar">
+            <div class="seg teal" data-pct="60.0">60%</div>
+            <div class="seg amber" data-pct="40.0">40%</div>
+            <div class="seg red" data-pct="0.0"></div>
+          </div></div>
+          <div class="stat-tip"></div>
+        </div>
+        <div class="row" data-key="w23" data-red="1.7" data-amber="61.0" data-teal="37.3">
+          <div class="row-label">2-3 Workspaces open
+            <div class="row-tip"><span class="lbl">Survey wording</span>&ldquo;2-3 Workspaces&rdquo;</div>
+          </div>
+          <div class="bar-wrap"><div class="bar">
+            <div class="seg teal" data-pct="37.3">37%</div>
+            <div class="seg amber" data-pct="61.0">61%</div>
+            <div class="seg red" data-pct="1.7">2%</div>
+          </div></div>
+          <div class="stat-tip"></div>
+        </div>
+        <div class="row" data-key="w1" data-red="21.8" data-amber="55.6" data-teal="22.6">
+          <div class="row-label">1 Workspace open
+            <div class="row-tip"><span class="lbl">Survey wording</span>&ldquo;1 Workspace&rdquo;</div>
+          </div>
+          <div class="bar-wrap"><div class="bar">
+            <div class="seg teal" data-pct="22.6">23%</div>
+            <div class="seg amber" data-pct="55.6">56%</div>
+            <div class="seg red" data-pct="21.8">22%</div>
+          </div></div>
+          <div class="stat-tip"></div>
+        </div>
+        <div class="axis-row">
+          <div class="axis-spacer"></div>
+          <div class="axis">
+            <span class="tick" style="left:0%">0%</span>
+            <span class="tick" style="left:20%">20%</span>
+            <span class="tick" style="left:40%">40%</span>
+            <span class="tick" style="left:60%">60%</span>
+            <span class="tick" style="left:80%">80%</span>
+            <span class="tick" style="left:100%">100%</span>
+          </div>
+        </div>
+      </div>
+      <p class="n-note">285 Workspace users keep at least one Workspace open.</p>
+     
+    </div>
+
+    <div class="s3-quotes">
+      <h3 class="s3-sub">What else I learned&hellip; the challenges they face today</h3>
+      <div class="s3-marquee-wrap">
+        <div class="s3-marquee-fade s3-marquee-fade-l" aria-hidden="true"></div>
+        <div class="s3-marquee-fade s3-marquee-fade-r" aria-hidden="true"></div>
+        <div class="s3-marquee-track">
+          <div class="s3-marquee-set">
+            <figure class="s3-q-card"><p>&ldquo;Annoying to switch between them.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Too much to keep track of.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Context fragmentation and overhead of switching.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Slow browser responsiveness when using multiple tabs.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;My pinned workspace at times freeze and takes a while to come up.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Sync issues across devices cause workflow delays.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Multiple workspaces with lots of tabs can slow down Edge or hog system memory.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Switching between them can feel a bit slow at times.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Sometimes it feels confusing to switch between workspaces and I forget which one has the tabs I need.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;My pinned workspace at times freeze and takes a while to come up.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Sync issues across devices cause workflow delays.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Multiple workspaces with lots of tabs can slow down Edge or hog system memory.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Switching between them can feel a bit slow at times.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Sometimes it feels confusing to switch between workspaces and I forget which one has the tabs I need.&rdquo;</p></figure>
+            <figure class="s3-q-card"><p>&ldquo;Managing too many tabs at once can be overwhelming, and switching between workspaces sometimes feels slow or confusing.&rdquo;</p></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      <div class="insight-bar s3-painpoint" style="margin-top:36px;">Though slow switching was an issue (~10%) the number one pain point was<strong> High CPU load and crashing.</strong></div>
+
+  <script>
+  // ── unique workspaces count donut (scoped under .wspc) ──
+  (function () {
+    const root = document.getElementById('wspc');
+    if (!root) return;
+    const slices = root.querySelectorAll('.wspc-slice');
+    const callout = root.querySelector('#wspc-callout');
+    const calloutSwatch = root.querySelector('#wspc-callout-swatch');
+    const calloutLabel = root.querySelector('#wspc-callout-label');
+    const textDef = root.querySelector('#wspc-text-default');
+    const textHov = root.querySelector('#wspc-text-hover');
+    const hovTop = root.querySelector('#wspc-hover-lbl-top');
+    const hovVal = root.querySelector('#wspc-hover-val');
+    const hovBottom = root.querySelector('#wspc-hover-lbl-bottom');
+
+    // ── Design Ask Quote Hovers ──
+    const askContainer = document.getElementById('s3-ask-container');
+    if (askContainer) {
+      const askTriggers = askContainer.querySelectorAll('.s3-ask-trigger');
+      const askTip = askContainer.querySelector('#s3-ask-tip');
+
+      function positionAskTip(e) {
+        if (!askTip || !askTip.classList.contains('visible')) return;
+        const width = askTip.offsetWidth || 180;
+        const height = askTip.offsetHeight || 38;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+
+        let left = e.clientX + 15;
+        let top = e.clientY + 15;
+
+        // Viewport boundaries checks
+        if (left + width + 15 > vw) {
+          left = e.clientX - width - 15;
+        }
+        if (top + height + 15 > vh) {
+          top = e.clientY - height - 15;
+        }
+        if (left < 15) left = 15;
+        if (top < 15) top = 15;
+
+        askTip.style.left = left + 'px';
+        askTip.style.top = top + 'px';
+      }
+
+      askTriggers.forEach(t => {
+        const text = t.getAttribute('data-tip');
+        t.addEventListener('mouseenter', (e) => {
+          if (askTip) {
+            askTip.textContent = text;
+            askTip.classList.add('visible');
+            positionAskTip(e);
+          }
+        });
+        t.addEventListener('mousemove', positionAskTip);
+        t.addEventListener('mouseleave', () => {
+          if (askTip) askTip.classList.remove('visible');
+        });
+      });
+    }
+
+    function setHover(key, event) {
+      if (!key) {
+        slices.forEach(s => s.classList.remove('wspc-active'));
+        if (callout) callout.classList.remove('wspc-visible');
+        if (textDef) textDef.style.opacity = '1';
+        if (textHov) textHov.style.opacity = '0';
+        return;
+      }
+      
+      const sliceEl = root.querySelector(`.wspc-slice[data-key="${key}"]`);
+      if (!sliceEl) return;
+
+      const label = sliceEl.getAttribute('data-label');
+      const pct = sliceEl.getAttribute('data-pct');
+      const count = sliceEl.getAttribute('data-count');
+      const fillColor = sliceEl.getAttribute('fill');
+
+      slices.forEach(s => {
+        if (s.getAttribute('data-key') === key) {
+          s.classList.add('wspc-active');
+        } else {
+          s.classList.remove('wspc-active');
+        }
+      });
+
+      // Display category name on floating callout box
+      if (calloutSwatch) calloutSwatch.style.backgroundColor = fillColor;
+      if (calloutLabel) calloutLabel.textContent = label;
+
+      // Center text morphs percentage and respondent count as original
+      if (hovVal) hovVal.textContent = count;
+      if (hovBottom) hovBottom.textContent = "respondents";
+
+      if (textDef) textDef.style.opacity = '0';
+      if (textHov) textHov.style.opacity = '1';
+
+      if (callout) {
+        callout.classList.add('wspc-visible');
+        positionCallout(event);
+      }
+    }
+
+    function positionCallout(e) {
+      if (!callout || !callout.classList.contains('wspc-visible')) return;
+      const cw = callout.offsetWidth || 180;
+      const ch = callout.offsetHeight || 38;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      // Find the visual chart container bounds to avoid overlapping the central circle or any slice
+      const chartWrap = root.querySelector('.wspc-chart-wrap');
+      let left = e.clientX + 15;
+      let top = e.clientY + 15;
+
+      if (chartWrap) {
+        const rect = chartWrap.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const radius = rect.width / 2; // outward boundary of the donut container
+        
+        // Compute distance from cursor to center of the donut circle
+        const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+        
+        // Push the callout tooltip completely outward outside the absolute radius of the circle
+        if (dist < radius + 10) {
+          const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+          // Position tooltip bubble floating cleanly along the outer perimeter boundary
+          const targetX = centerX + Math.cos(angle) * (radius + 20);
+          const targetY = centerY + Math.sin(angle) * (radius + 20);
+          
+          left = targetX;
+          top = targetY - ch / 2; // Vertically center alignment
+          
+          // Adjust if we exceed bounds of left/right
+          if (left < rect.left - 40) {
+            left = e.clientX - cw - 15;
+          }
+        }
+      }
+
+      // Final viewport boundary protection constraints
+      if (left + cw + 15 > vw) {
+        left = vw - cw - 15;
+      }
+      if (left < 15) {
+        left = 15;
+      }
+      if (top + ch + 15 > vh) {
+        top = vh - ch - 15;
+      }
+      if (top < 15) {
+        top = 15;
+      }
+
+      callout.style.left = left + 'px';
+      callout.style.top = top + 'px';
+    }
+
+    slices.forEach(s => {
+      const key = s.getAttribute('data-key');
+      s.addEventListener('mouseenter', (e) => setHover(key, e));
+      s.addEventListener('mousemove', (e) => positionCallout(e));
+      s.addEventListener('mouseleave', () => setHover(null));
+    });
+  })();
+
+  (function () {
+    const root   = document.getElementById('wsc');
+    const chart  = document.getElementById('wsc-chart');
+    const axisRow = chart.querySelector('.axis-row');
+    const rows   = Array.from(chart.querySelectorAll('.row'));
+    const items  = Array.from(root.querySelectorAll('.legend-item'));
+
+    const hiddenSegs = new Set();
+    let sortKey = null;
+    let sortDir = 'desc';
+    rows.forEach((r, i) => r.dataset.origIdx = i);
+
+    function recalcRow(row, hidden) {
+      ['red','amber','teal'].forEach(k => {
+        const seg = row.querySelector('.seg.' + k);
+        if (hidden.has(k)) { seg.classList.add('seg-hidden'); }
+        else { seg.classList.remove('seg-hidden'); seg.style.flex = '0 0 ' + parseFloat(row.dataset[k]).toFixed(2) + '%'; }
+      });
+    }
+    function applySegs() {
+      const extra = globalMode === 'm2' ? new Set([...hiddenSegs, 'red']) : new Set(hiddenSegs);
+      rows.forEach(row => recalcRow(row, extra));
+    }
+    function applySort() {
+      let ordered;
+      if (!sortKey) ordered = rows.slice().sort((a, b) => +a.dataset.origIdx - +b.dataset.origIdx);
+      else ordered = rows.slice().sort((a, b) => { const d = parseFloat(b.dataset[sortKey]) - parseFloat(a.dataset[sortKey]); return sortDir === 'desc' ? d : -d; });
+      ordered.forEach(r => chart.insertBefore(r, axisRow));
+    }
+    function updateArrows() {
+      items.forEach(item => {
+        const arrow = item.querySelector('.leg-arrow');
+        if (item.dataset.seg === sortKey) { arrow.textContent = sortDir === 'desc' ? ' \u2193' : ' \u2191'; item.classList.add('sort-active'); }
+        else { arrow.textContent = ''; item.classList.remove('sort-active'); }
+      });
+    }
+    items.forEach(item => {
+      const swatch = item.querySelector('.leg-swatch');
+      const label  = item.querySelector('.leg-label');
+      const seg    = item.dataset.seg;
+      swatch.addEventListener('click', e => {
+        e.stopPropagation();
+        if (seg === 'red' && globalMode === 'm2') { setGlobalMode('m1'); rows.forEach(r => r._refreshHover && r._refreshHover()); return; }
+        if (hiddenSegs.has(seg)) { hiddenSegs.delete(seg); item.classList.remove('seg-off'); }
+        else if (hiddenSegs.size < 2) { hiddenSegs.add(seg); item.classList.add('seg-off'); }
+        applySegs();
+      });
+      label.addEventListener('click', e => {
+        e.stopPropagation();
+        if (sortKey === seg) sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+        else { sortKey = seg; sortDir = 'desc'; }
+        updateArrows(); applySort();
+      });
+    });
+    rows.forEach(row => { row.querySelector('.row-label').addEventListener('click', () => { row.classList.toggle('row-off'); }); });
+
+    const SHORT = { w1:'1 Workspace', w23:'2-3 Workspaces', w45:'4-5 Workspaces', w6p:'6+ Workspaces' };
+    const M1 = { w6p:{more:[],less:[]}, w45:{more:[],less:[]}, w23:{more:['w1'],less:[]}, w1:{more:[],less:['w23']} };
+    const M2 = { w6p:{more:['w1'],less:[]}, w45:{more:['w1'],less:[]}, w23:{more:[],less:[]}, w1:{more:[],less:['w45','w6p']} };
+    const N_RATED = { w1:133, w23:118, w45:20, w6p:14 };
+    const N_DAILY = { w1:104, w23:116, w45:20, w6p:14 };
+    const N_HOURLY = { w1:30, w23:44, w45:12, w6p:9 };
+    function listNames(keys) { return keys.map(k => '<span class="ds">' + SHORT[k] + '</span>').join(', '); }
+    function rowData(key) { const r = chart.querySelector('.row[data-key="'+key+'"]'); return { red:parseFloat(r.dataset.red), amber:parseFloat(r.dataset.amber), teal:parseFloat(r.dataset.teal) }; }
+    function renderM1Block(key) {
+      const m=M1[key], d=rowData(key), pct=d.amber+d.teal;
+      return '<div class="stat-block"><span class="lbl">' + N_DAILY[key] + ' participants</span><div class="stat-val">'+Math.round(pct)+'% of '+SHORT[key]+' users switch at least daily</div>'
+        +'</div>';
+    }
+    function renderM2Block(key) {
+      const m=M2[key], d=rowData(key);
+      return '<div class="stat-block"><span class="lbl">(' + N_HOURLY[key] + ' participants)</span><div class="stat-val">'+Math.round(d.teal)+'% of '+SHORT[key]+' users switch hourly or more</div>'
+        +(m.more.length?'<div class="stat-line">Significantly more likely than '+listNames(m.more)+'</div>':'')
+        +(m.less.length?'<div class="stat-line">Significantly less likely than '+listNames(m.less)+'</div>':'')
+        +'</div>';
+    }
+    function renderNote(key) {}
+    function renderStat(row, mode) {
+      const key=row.dataset.key, tip=row.querySelector('.stat-tip'), parts=[];
+      if (mode==='m1') parts.push(renderM1Block(key));
+      else if (mode==='m2') parts.push(renderM2Block(key));
+      else { parts.push(renderM1Block(key), renderM2Block(key)); }
+      parts.push(renderNote(key)); tip.innerHTML=parts.join('');
+    }
+    rows.forEach(r => renderStat(r, 'both'));
+
+    function positionTip(row) {
+      const bar=row.querySelector('.bar-wrap'), tip=row.querySelector('.stat-tip');
+      const br=bar.getBoundingClientRect(), tw=tip.offsetWidth||300, th=tip.offsetHeight||200, gap=18, vw=window.innerWidth, vh=window.innerHeight;
+      let left=br.right+gap; if(left+tw+8>vw){left=br.left-gap-tw;if(left<8)left=Math.max(8,vw-tw-8);}
+      let top=br.top+br.height/2-th/2; top=Math.max(8,Math.min(top,vh-th-8));
+      tip.style.left=left+'px'; tip.style.top=top+'px';
+    }
+    rows.forEach(row => {
+      const bar=row.querySelector('.bar-wrap'), barInner=row.querySelector('.bar');
+      function applyPeers(m) {
+        const key=row.dataset.key, stat=(m==='m2'?M2:M1)[key], sig=new Set([...stat.more,...stat.less]);
+        rows.forEach(r => { if(r!==row && sig.has(r.dataset.key)) r.classList.add('peer-dim'); });
+      }
+      function clearPeers() { rows.forEach(r => r.classList.remove('peer-dim')); }
+      function hoverMode() {
+        const redVis=!hiddenSegs.has('red')&&globalMode!=='m2', amberVis=!hiddenSegs.has('amber'), tealVis=!hiddenSegs.has('teal');
+        if(redVis&&amberVis&&tealVis) return 'm1'; if(!redVis&&amberVis&&tealVis) return 'm2'; return null;
+      }
+      function applyHover() {
+        const m=hoverMode(); if(!m){clearHover();return;}
+        barInner.classList.remove('hover-m1','hover-m2'); barInner.classList.add('hover-'+m);
+        clearPeers(); applyPeers(m); renderStat(row,m); positionTip(row); row.classList.add('tip-active');
+      }
+      function clearHover() { barInner.classList.remove('hover-m1','hover-m2'); row.classList.remove('tip-active'); clearPeers(); }
+      bar.addEventListener('mouseenter', applyHover);
+      bar.addEventListener('mouseleave', clearHover);
+      bar.addEventListener('click', e => {
+        e.stopPropagation(); root.classList.add('wsc-done');
+        if(hiddenSegs.size>0||globalMode==='m2'){
+          hiddenSegs.forEach(s=>{const it=root.querySelector('.legend-item[data-seg="'+s+'"]');if(it)it.classList.remove('seg-off');});
+          hiddenSegs.clear(); setGlobalMode('m1');
+        } else { setGlobalMode('m2'); }
+        applyHover();
+      });
+      row._refreshHover = () => { if(row.classList.contains('tip-active')) applyHover(); };
+    });
+
+    let globalMode = 'm1';
+    function setGlobalMode(m) {
+      globalMode = m;
+      (m==='m2'?['amber','teal']:['red','amber','teal']).forEach(seg => {
+        if(hiddenSegs.has(seg)){hiddenSegs.delete(seg);const it=root.querySelector('.legend-item[data-seg="'+seg+'"]');if(it)it.classList.remove('seg-off');}
+      });
+      rows.forEach(r => recalcRow(r, m==='m2'?new Set([...hiddenSegs,'red']):new Set(hiddenSegs)));
+      if(m==='m2'){sortKey='teal';sortDir='desc';}else{sortKey=null;}
+      updateArrows(); applySort();
+      const redItem=root.querySelector('.legend-item[data-seg="red"]');
+      if(redItem)redItem.classList.toggle('seg-off',m==='m2');
+    }
+
+    const demo=document.getElementById('wsc-clickDemo'), PROXIMITY=120;
+    function setOrb(x,y){demo.style.transform='translate('+x+'px,'+y+'px)';}
+    function homePos(){const bar=chart.querySelector('.row[data-key="w1"] .bar-wrap');if(!bar)return[0,0];const r=bar.getBoundingClientRect();return[r.left+r.width*.38,r.top+r.height/2];}
+    function goHome(){const[hx,hy]=homePos();setOrb(hx,hy);}
+    goHome(); setTimeout(goHome,100);
+    document.addEventListener('mousemove', e => {
+      if(root.classList.contains('wsc-done'))return;
+      const cr=chart.getBoundingClientRect();
+      if(e.clientY>cr.bottom+20){goHome();return;}
+      const dx=Math.max(cr.left-e.clientX,0,e.clientX-cr.right), dy=Math.max(cr.top-e.clientY,0,e.clientY-cr.bottom);
+      if(Math.hypot(dx,dy)<=PROXIMITY)setOrb(e.clientX,e.clientY);else goHome();
+    },{passive:true});
+    window.addEventListener('resize',goHome);
+    window.addEventListener('scroll',goHome,{passive:true});
+    applySegs(); applySort(); updateArrows();
+  })();
+  </script>
+</section>
+
+
+<section class="slide" id="slide-s3-sentiment">
+  <div class="slide-inner">
+    <div class="slide-tag">Study 3 Results</div>
+    <h2 class="section-title">Kano analysis reveals quick switching is a win, but not a huge win.</h2>
+
+    <div class="s3-kano-wrap">
+      <svg viewBox="0 0 640 430" role="img" aria-label="Kano Better/Worse satisfaction grid. Quick Switching plots in the Attractive quadrant with a Better score of 0.69 and a Worse score of -0.19: a win, but not a huge win.">
+        <!-- attractive quadrant highlight -->
+        <rect x="80" y="60" width="260" height="140" fill="rgba(0,93,170,.07)"/>
+        <!-- plot frame -->
+        <rect x="80" y="60" width="520" height="280" fill="none" stroke="var(--ink-20)" stroke-width="1.5"/>
+        <!-- mid lines -->
+        <line x1="340" y1="60" x2="340" y2="340" stroke="var(--ink-20)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="80" y1="200" x2="600" y2="200" stroke="var(--ink-20)" stroke-width="1" stroke-dasharray="4 4"/>
+        <!-- quadrant labels -->
+        <text x="92" y="80" font-size="13" font-weight="700" fill="var(--work)">Attractive</text>
+        <text x="588" y="80" text-anchor="end" font-size="13" font-weight="700" fill="var(--ink-50)">Performance</text>
+        <text x="92" y="332" font-size="13" font-weight="700" fill="var(--ink-50)">Indifferent</text>
+        <text x="588" y="332" text-anchor="end" font-size="13" font-weight="700" fill="var(--ink-50)">Must-be</text>
+        <!-- axis tick labels -->
+        <text x="80" y="358" text-anchor="middle" font-size="11" fill="var(--ink-40)">0</text>
+        <text x="340" y="358" text-anchor="middle" font-size="11" fill="var(--ink-40)">0.5</text>
+        <text x="600" y="358" text-anchor="middle" font-size="11" fill="var(--ink-40)">1.0</text>
+        <text x="72" y="344" text-anchor="end" font-size="11" fill="var(--ink-40)">0</text>
+        <text x="72" y="204" text-anchor="end" font-size="11" fill="var(--ink-40)">0.5</text>
+        <text x="72" y="64" text-anchor="end" font-size="11" fill="var(--ink-40)">1.0</text>
+        <!-- axis titles -->
+        <text x="340" y="386" text-anchor="middle" font-size="12" fill="var(--ink-60)">Dissatisfaction if the feature is absent</text>
+        <text transform="translate(28,200) rotate(-90)" text-anchor="middle" font-size="12" fill="var(--ink-60)">Satisfaction if present</text>
+        <!-- plotted feature: Better +0.69 (y), Worse 0.19 (x) -->
+        <line x1="185" y1="146" x2="236" y2="132" stroke="var(--ink-30)" stroke-width="1"/>
+        <rect x="236" y="112" width="262" height="46" rx="6" fill="var(--cream)" stroke="var(--ink-20)"/>
+        <text x="248" y="132" font-size="13" fill="var(--ink)" font-weight="700">Quick Switching</text>
+        <text x="248" y="149" font-size="11.5" fill="var(--ink-60)">Attractive &middot; Better +0.69 &middot; Worse &minus;0.19</text>
+        <circle cx="177" cy="146" r="8" fill="var(--work)" stroke="#fff" stroke-width="2"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<section class="slide res-slide" id="slide-s3-reco">
+  <div class="slide-inner">
+    <div class="decision-callout reco-callout">
+      <p class="reco-switcher-label">Recommendation</p>
+      <p>Build Quick Switching if it won't compound other pain points (CPU load)</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-s3-outcome">
+  <div class="slide-inner">
+    <div class="slide-tag">Outcome</div>
+    <h2 class="section-title">The Engineer was in the room and knew beyond a doubt that the MVP for Quick Switching would <span class="italic">create higher CPU load.</span></h2>
+    <p style="margin-top:16px;font-size:15px;line-height:1.7;color:var(--ink-70);max-width:680px;">I highlighted a quick-switching risk, and laid the groundwork for future learnings.</p>
+  </div>
+</section>
+
 <script>
   (function () {
     var cycles = {
@@ -3573,7 +4980,7 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
       transient: {
         blank: 'Click the chevron to open',
         dropdown: 'Click again to pin to the side',
-        switcher: 'Pinned to the side â€” click to close'
+        switcher: 'Pinned to the side, click to close'
       },
       switcher: {
         blank: 'Click the chevron to open',
@@ -3614,5 +5021,24 @@ document.querySelectorAll('#slide-5 .tension-toggle').forEach(function(btn){
   })();
 </script>
 
+<script>
+  (function() {
+    document.querySelectorAll(".ws-schematic").forEach(function(el) {
+      function toggle() {
+        var flipped = el.classList.toggle("flipped");
+        el.setAttribute("aria-pressed", flipped ? "true" : "false");
+        var hint = el.querySelector(".ws-hint");
+        if (hint) hint.textContent = flipped ? "Click to switch back" : "Click the folder to switch";
+      }
+      el.addEventListener("click", toggle);
+      el.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+      });
+    });
+  })();
+
+</script>
+
 </body>
 </html>
+
