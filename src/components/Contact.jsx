@@ -115,8 +115,8 @@ export default function Contact() {
               className="hidden"
             />
 
-            <div className="sm:col-span-2 flex flex-wrap items-center justify-center gap-4 mt-2">
-              <div className="text-xs text-cream/50 min-h-[1rem] mx-auto text-center" aria-live="polite">
+            <div className="sm:col-span-2 flex flex-col items-center gap-4 mt-2">
+              <div className="text-xs text-cream/50 min-h-[1rem] text-center" aria-live="polite">
                 {status === 'success' && (
                   <span className="text-work">Thanks — your message is on its way.</span>
                 )}
@@ -125,7 +125,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="mx-auto inline-flex items-center gap-2 border border-cream/30 text-cream px-7 py-3.5 rounded-full text-xs tracking-wider-2 uppercase font-medium hover:bg-cream hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-2 border border-cream/30 text-cream px-7 py-3.5 rounded-full text-xs tracking-wider-2 uppercase font-medium hover:bg-cream hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {status === 'sending' ? 'Sending…' : 'Send message'}
               </button>
