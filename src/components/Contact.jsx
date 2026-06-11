@@ -115,7 +115,7 @@ export default function Contact() {
               className="hidden"
             />
 
-            <div className="sm:col-span-2 flex flex-wrap items-center justify-between gap-4 mt-2">
+            <div className="sm:col-span-2 flex flex-wrap items-center justify-center gap-4 mt-2">
               <div className="text-xs text-cream/50 min-h-[1rem] mx-auto text-center" aria-live="polite">
                 {status === 'success' && (
                   <span className="text-work">Thanks — your message is on its way.</span>
