@@ -2341,57 +2341,6 @@
   })();
 </script>
 
-<script>
-  /* ── Cartoon avatars for participant circles ───────────────────── */
-  (function () {
-    const HAIR_MAP = {
-      straightBun:          'bun',
-      curlyBun:             'bun',
-      bunUndercut:          'bun',
-      curly:                'curly',
-      shortCombover:        'shortFlat',
-      shortComboverChops:   'shortFlat',
-      extraLong:            'longButNotTooLong',
-      bald:                 'none',
-    };
-    const FACIAL_MAP = {
-      beardMustache: 'beardMedium',
-    };
-    const EYES_MAP = {
-      glasses: 'eyepatch',   // closest Avataaars accessory
-    };
-
-    document.querySelectorAll('.ur-ring[data-seed]').forEach(ring => {
-      const seed      = ring.dataset.seed      || '';
-      const skin      = ring.dataset.skin      || 'ffd5dc';
-      const hairKey   = ring.dataset.hair      || 'shortFlat';
-      const hairColor = ring.dataset.haircolor || '0e0e0e';
-      const facial    = ring.dataset.facial;
-      const eyes      = ring.dataset.eyes;
-
-      const hair     = HAIR_MAP[hairKey] || hairKey;
-      const params   = new URLSearchParams({
-        seed,
-        skinColor:        skin,
-        hair:             hair,
-        hairColor:        hairColor,
-        mouth:            'smile',
-        eyes:             eyes === 'glasses' ? 'squint' : 'default',
-        accessories:      eyes === 'glasses' ? 'prescription02' : 'blank',
-        facialHair:       facial ? FACIAL_MAP[facial] || 'blank' : 'blank',
-        backgroundColor:  'transparent',
-      });
-
-      const img = document.createElement('img');
-      img.src = `https://api.dicebear.com/9.x/avataaars/svg?${params}`;
-      img.alt = seed;
-      img.width  = 84;
-      img.height = 84;
-      ring.textContent = '';   // remove initial letter
-      ring.appendChild(img);
-    });
-  })();
-</script>
 
 </body>
 </html>
